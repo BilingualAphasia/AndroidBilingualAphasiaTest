@@ -46,9 +46,9 @@ public class OPrimeHomeActivity extends Activity implements TextToSpeech.OnInitL
 				// Greet the user.
 				// sayHello();
 				
-				mTts.speak("Welcome to the experiment dash board. You can edit the stimuli, watch a video of individual participants for quality control, run the experiment or check the over all results.",
-		    	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
-		    	        null);
+//				mTts.speak("Welcome to the experiment dash board. You can edit the stimuli, watch a video of individual participants for quality control, run the experiment or check the over all results.",
+//		    	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
+//		    	        null);
 //				MediaPlayer mp = MediaPlayer.create(this, R.raw.click_on_dog_coat);
 //			    mp.start();
 			}

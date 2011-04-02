@@ -18,13 +18,16 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.text.format.Time;
 
 public class RunExperimentActivity extends Activity implements TextToSpeech.OnInitListener {
 	private static final String TAG = "PDFtoAudioBookHomeActivity";
 	/** Talk to the user */
     private TextToSpeech mTts;
 
-    
+    private Time startTime = new Time();
+    private Time endTime = new Time();
+    private Time reactionTime = new Time();
     
   //implement on Init for the text to speech
 	public void onInit(int status) {
@@ -51,6 +54,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 //		    	        null);
 				MediaPlayer mp = MediaPlayer.create(this, R.raw.click_on_dog_coat);
 			    mp.start();
+			    startTime.setToNow();
 			}
 		} else {
 			// Initialization failed.
@@ -68,10 +72,13 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 
         gridview.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            	mTts.speak("The participant clicked on picture "+position+", in 400 milliseconds. This has been recorded in the Google Spreadsheet.",
+            	endTime.setToNow();
+            	
+            	Long reactionTimeMilliseconds = endTime.toMillis(false) - startTime.toMillis(false);									//http://developer.android.com/reference/android/text/format/Time.html#toMillis(boolean)
+            	mTts.speak("The participant clicked on picture "+position+", in "+reactionTimeMilliseconds+" milliseconds. This has been recorded in the Google Spreadsheet.",
             	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
             	        null);
-                Toast.makeText(RunExperimentActivity.this, "Picture" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RunExperimentActivity.this, "Picture" + position +", in "+reactionTimeMilliseconds+" milliseconds", Toast.LENGTH_LONG).show();
             }
         });
         mTts = new TextToSpeech(this, this);
