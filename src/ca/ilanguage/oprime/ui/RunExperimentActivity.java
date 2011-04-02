@@ -25,9 +25,12 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 	/** Talk to the user */
     private TextToSpeech mTts;
 
-    private Time startTime = new Time();
-    private Time endTime = new Time();
-    private Time reactionTime = new Time();
+//    private Time startTime = new Time();
+//    private Time endTime = new Time();
+//    private Time reactionTime = new Time();
+    private Long startTime;
+    private Long endTime;
+    private Long reactionTime;
     
   //implement on Init for the text to speech
 	public void onInit(int status) {
@@ -52,9 +55,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 //				mTts.speak("Click on the dog with a coat.",
 //		    	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
 //		    	        null);
-				MediaPlayer mp = MediaPlayer.create(this, R.raw.click_on_dog_coat);
-			    mp.start();
-			    startTime.setToNow();
+				
 			}
 		} else {
 			// Initialization failed.
@@ -72,9 +73,10 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 
         gridview.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            	endTime.setToNow();
-            	
-            	Long reactionTimeMilliseconds = endTime.toMillis(false) - startTime.toMillis(false);									//http://developer.android.com/reference/android/text/format/Time.html#toMillis(boolean)
+            	//endTime = System.currentTimeMillis();
+            	endTime = System.currentTimeMillis();
+            	//Long reactionTimeMilliseconds = endTime.normalize(false) - startTime.normalize(false);									//http://developer.android.com/reference/android/text/format/Time.html#toMillis(boolean)
+            	Long reactionTimeMilliseconds = endTime-startTime;
             	mTts.speak("The participant clicked on picture "+position+", in "+reactionTimeMilliseconds+" milliseconds. This has been recorded in the Google Spreadsheet.",
             	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
             	        null);
@@ -83,7 +85,24 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
         });
         mTts = new TextToSpeech(this, this);
         
+        playAudio();
         
+    }
+    
+    public void playAudio(){
+    	try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			Toast.makeText(RunExperimentActivity.this, "The experiment was interupted. Invalid reaction time.", Toast.LENGTH_LONG).show();
+
+		}
+        
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.click_on_dog_coat);
+	    mp.start();
+	    //startTime.setToNow();
+	    startTime = System.currentTimeMillis();
         
     }
 
