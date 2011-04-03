@@ -90,14 +90,14 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     }
     
     public void playAudio(){
-    	try {
-			//Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-			Toast.makeText(RunExperimentActivity.this, "The experiment was interupted. Invalid reaction time.", Toast.LENGTH_LONG).show();
-
-		}
+//    	try {
+//			//Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			//e.printStackTrace();
+//			Toast.makeText(RunExperimentActivity.this, "The experiment was interupted. Invalid reaction time.", Toast.LENGTH_LONG).show();
+//
+//		}
         
         MediaPlayer mp = MediaPlayer.create(this, R.raw.click_on_dog_coat);
 	    mp.start();
