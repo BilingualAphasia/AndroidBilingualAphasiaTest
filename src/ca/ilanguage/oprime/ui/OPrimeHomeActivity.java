@@ -79,6 +79,9 @@ public class OPrimeHomeActivity extends Activity implements TextToSpeech.OnInitL
                 if (position ==1){
                 	startActivity(new Intent(OPrimeHomeActivity.this, PresentAnImageStimuliActivity.class));
                 }
+                if (position ==0){
+                	startActivity(new Intent(OPrimeHomeActivity.this, MultiTouchVisualTestActivity.class));
+                }
             }
         });
         mTts = new TextToSpeech(this, this);
