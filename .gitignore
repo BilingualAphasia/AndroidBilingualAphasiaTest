@@ -2,6 +2,9 @@
 .settings
 .classpath
 
+bin
+gen
+
 # Compiled source #
 ###################
 target

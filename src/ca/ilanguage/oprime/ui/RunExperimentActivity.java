@@ -21,7 +21,7 @@ import android.widget.Toast;
 import android.text.format.Time;
 
 public class RunExperimentActivity extends Activity implements TextToSpeech.OnInitListener {
-	private static final String TAG = "PDFtoAudioBookHomeActivity";
+	private static final String TAG = "RunExperimentActivity";
 	/** Talk to the user */
     private TextToSpeech mTts;
 
@@ -87,6 +87,9 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
         
         playAudio();
         
+        //turn on video see APIDemos>Graphcis>camerapreview
+        //to display rotating rubix cube for mask look at APIDemo>(graphics?)Kubein cube
+        //to read and write external storage see apidemos>content>external storage
     }
     
     public void playAudio(){

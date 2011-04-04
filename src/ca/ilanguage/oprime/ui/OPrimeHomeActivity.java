@@ -46,9 +46,9 @@ public class OPrimeHomeActivity extends Activity implements TextToSpeech.OnInitL
 				// Greet the user.
 				// sayHello();
 				
-				mTts.speak("Welcome to the experiment dash board. You can edit the stimuli, watch a video of individual participants for quality control, run the experiment or check the over all results.",
-		    	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
-		    	        null);
+//				mTts.speak("Welcome to the experiment dash board. You can edit the stimuli, watch a video of individual participants for quality control, run the experiment or check the over all results.",
+//		    	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
+//		    	        null);
 //				MediaPlayer mp = MediaPlayer.create(this, R.raw.click_on_dog_coat);
 //			    mp.start();
 			}
@@ -76,6 +76,9 @@ public class OPrimeHomeActivity extends Activity implements TextToSpeech.OnInitL
                 	//Toast.makeText(OPrimeHomeActivity.this, "Launching the Experiment" + position, Toast.LENGTH_SHORT).show();
                 	startActivity(new Intent(OPrimeHomeActivity.this, RunExperimentActivity.class));
                 }
+                if (position ==1){
+                	startActivity(new Intent(OPrimeHomeActivity.this, PresentAnImageStimuliActivity.class));
+                }
             }
         });
         mTts = new TextToSpeech(this, this);
@@ -84,12 +87,18 @@ public class OPrimeHomeActivity extends Activity implements TextToSpeech.OnInitL
         
     }
 
+    //for participant video page, use the LayoutAnimation6 from APIDemo
+    //to display 3d graph use APIdemo>graphics>touch rotate
+    //to display an animation on top of the same screen see APIDemo>graphcis>translucentglsurfaceview activity
+    //to do set theory use apidemo>graphics>regions with Xfermodes for shading
+    
 	public void onRunExperimentClick(View v){
     	mTts.speak("This would run the experiment.",
         TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
         null);
     	startActivity(new Intent(this, RunExperimentActivity.class));
     }
+	
 
 	public class ImageAdapter extends BaseAdapter {
 	    private Context mContext;
