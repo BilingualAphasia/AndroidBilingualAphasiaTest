@@ -131,7 +131,7 @@ public class OPrimeHomeActivity extends Activity implements TextToSpeech.OnInitL
 	        ImageView imageView;
 	        if (convertView == null) {  // if it's not recycled, initialize some attributes
 	            imageView = new ImageView(mContext);
-	            imageView.setLayoutParams(new GridView.LayoutParams(385, 285));
+	            imageView.setLayoutParams(new GridView.LayoutParams(205, 205));
 	            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 	            imageView.setPadding(8, 8, 8, 8);
 	        } else {
