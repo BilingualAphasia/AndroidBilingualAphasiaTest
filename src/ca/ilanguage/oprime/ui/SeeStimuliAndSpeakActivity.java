@@ -44,10 +44,13 @@ public class SeeStimuliAndSpeakActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    
+	    mParticipantId="noone";
+	    mStimuliId="testing";
+	    
 	    setContentView(R.layout.activity_one_image_one_button);
-	    mImage = (ImageView) findViewById(R.id.oneimage);
+	    mImage = (ImageView) findViewById(R.id.mainimage);
 //	    mImage.setImageResource(R.drawable.sample_0);
-	    mImageFile ="/sdcard/OPrime/BilingualAphasiaTest/images/BAT-E1.png";    
+	    mImageFile ="/sdcard/OPrime/MorphologicalAwareness/images/magasin.jpg";    
 
 	    FileInputStream in;
         BufferedInputStream buf;
@@ -67,45 +70,45 @@ public class SeeStimuliAndSpeakActivity extends Activity {
         }
  
         
-//	    mAudioResultsFile ="/sdcard/OPrime/MorphologicalAwareness/results/"+System.currentTimeMillis()+"_"+mParticipantId+"_"+mStimuliId+".mp3";    
-//	    mRecorder = new MediaRecorder();
-////	    Environment.getExternalStorageDirectory().getAbsolutePath() + path;
-//	    String state = android.os.Environment.getExternalStorageState();
-//	    if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
-//	        try {
-//				throw new IOException("SD Card is not mounted.  It is " + state + ".");
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				//e.printStackTrace();
-//				Toast.makeText(SeeStimuliAndSpeakActivity.this, "The experiment cannot save audio, maybe the tablet is attached to a computer?", Toast.LENGTH_SHORT).show();
-//			}
-//	    }
+	    mAudioResultsFile ="/sdcard/OPrime/MorphologicalAwareness/results/"+System.currentTimeMillis()+"_"+mParticipantId+"_"+mStimuliId+".mp3";    
+	    mRecorder = new MediaRecorder();
+//	    Environment.getExternalStorageDirectory().getAbsolutePath() + path;
+	    String state = android.os.Environment.getExternalStorageState();
+	    if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
+	        try {
+				throw new IOException("SD Card is not mounted.  It is " + state + ".");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				Toast.makeText(SeeStimuliAndSpeakActivity.this, "The experiment cannot save audio, maybe the tablet is attached to a computer?", Toast.LENGTH_SHORT).show();
+			}
+	    }
 	    
-//	    try {
-//	    	//http://www.benmccann.com/dev-blog/android-audio-recording-tutorial/
-//	    	mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-//		    mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-//		    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-//		    mRecorder.setOutputFile(mAudioResultsFile);
-//		    mRecorder.prepare();
-//		} catch (IllegalStateException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	    mRecorder.start();
+	    try {
+	    	//http://www.benmccann.com/dev-blog/android-audio-recording-tutorial/
+	    	mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+		    mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+		    mRecorder.setOutputFile(mAudioResultsFile);
+		    mRecorder.prepare();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    mRecorder.start();
 	 
 	    
 	    
     }
-//	public void onNextClic(View v){
-//    	mRecorder.stop();
-//    	mRecorder.release();
-//    	Toast.makeText(SeeStimuliAndSpeakActivity.this, "The audio might be recorded, check the Oprime folder.", Toast.LENGTH_SHORT).show();
-//		//return to runexperimentactivity
-//    	//startActivity(new Intent(this, RunExperimentActivity.class));
-//    }
+	public void onNextClick(View v){
+    	mRecorder.stop();
+    	mRecorder.release();
+    	Toast.makeText(SeeStimuliAndSpeakActivity.this, "The audio might be recorded, check the Oprime folder.", Toast.LENGTH_SHORT).show();
+		//return to runexperimentactivity
+    	//startActivity(new Intent(this, RunExperimentActivity.class));
+    }
     
 }

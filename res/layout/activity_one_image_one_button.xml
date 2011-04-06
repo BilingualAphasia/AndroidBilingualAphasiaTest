@@ -5,19 +5,20 @@
     android:layout_width="match_parent" 
     android:layout_height="match_parent"> 
     
-    <ImageView android:id="@+id/oneimage"
+    <ImageView android:id="@+id/mainimage"
     	
-        
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
     />
-    <Button 
-    		android:id="@+id/next"
-            
-            android:onClick="onNextClick" 
-            android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_toLeftOf="@id/oneimage"
-	        android:text="Next"/>
+    <ImageButton android:src="@drawable/ic_fast_forward"
+	    android:layout_height="wrap_content" 
+	    android:layout_width="wrap_content" 
+	    android:id="@+id/button1" 
+	    android:layout_alignRight="@+id/mainimage"
+	    android:layout_alignParentBottom="true"
+	    android:onClick="onNextClick">
+	    
+    </ImageButton>
 </RelativeLayout>
