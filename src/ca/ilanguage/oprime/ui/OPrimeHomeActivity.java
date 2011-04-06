@@ -82,6 +82,10 @@ public class OPrimeHomeActivity extends Activity implements TextToSpeech.OnInitL
                 if (position ==0){
                 	startActivity(new Intent(OPrimeHomeActivity.this, ClearActivity.class));
                 }
+                if (position ==3){
+                	startActivity(new Intent(OPrimeHomeActivity.this, SeeStimuliAndSpeakActivity.class));
+                    	
+                }
             }
         });
         mTts = new TextToSpeech(this, this);
