@@ -100,7 +100,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 
     	}
     	//for(int k= 0; k++; k<mStimuliArray.size()){
-    		presentStimuli(0);
+    		presentStimuli(1);
     	//}
         
     }
@@ -134,13 +134,13 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     	Bundle bundle= new Bundle();
 		bundle.putString("participantCode", "noone");
 		bundle.putInt("stimuliCode",stimuliCode);
-		bundle.putString("imageFile", experimentPath+columns[1]);
-		try {
-			out.write(bundle.toString()+"\n\n");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		bundle.putString("imageFile", experimentPath+"images/"+columns[1].replaceAll("\"",""));
+//		try {
+//			out.write(bundle.toString()+"\n\n");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			Toast.makeText(RunExperimentActivity.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
+//		}
 
 		//send the bundle to the SeeStimuliAndSpeakActivity
 		Intent i = new Intent(RunExperimentActivity.this, SeeStimuliAndSpeakActivity.class);
@@ -152,12 +152,13 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		try {
-			out.write("Came back from stimuli");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			out.write("Came back from stimuli");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		Toast.makeText(RunExperimentActivity.this, "On resume", Toast.LENGTH_LONG).show();
 	}
 
 public void onNextClick(View v){

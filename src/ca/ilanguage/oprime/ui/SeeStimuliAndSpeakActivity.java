@@ -50,6 +50,7 @@ public class SeeStimuliAndSpeakActivity extends Activity {
 		    mParticipantId=bundle.getString("participantCode");
 		    mStimuliId=bundle.getString("stimuliCode");
 		    mImageFile=bundle.getString("imageFile");
+//		    mImageFile ="/sdcard/OPrime/MorphologicalAwareness/images/magasin.jpg";   
 	    }else{
 	    	mParticipantId="noone";
 	    	mStimuliId="error";
@@ -112,7 +113,7 @@ public class SeeStimuliAndSpeakActivity extends Activity {
 	public void onNextClick(View v){
     	mRecorder.stop();
     	mRecorder.release();
-    	Toast.makeText(SeeStimuliAndSpeakActivity.this, "The audio might be recorded, check the Oprime folder.", Toast.LENGTH_SHORT).show();
+    	Toast.makeText(SeeStimuliAndSpeakActivity.this, "The audio was successfully recorded, check the Oprime folder.", Toast.LENGTH_SHORT).show();
 		//return to runexperimentactivity
     	//startActivity(new Intent(this, RunExperimentActivity.class));
     }

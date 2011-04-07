@@ -12,6 +12,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
     />
+     <TextView 
+    	android:id="@+id/copyright"
+    	android:layout_height="wrap_content" 
+	    android:layout_width="wrap_content" 
+    	android:layout_alignRight="@+id/mainimage"
+    	android:layout_alignParentTop="true"
+    	android:text="© Alexandra Marquis et Phaedra Royle conception\n© Edith Lebel dessins\n© iLanguage.ca programmation\nTous droits réservés."
+    />
     <ImageButton android:src="@drawable/ic_fast_forward"
 	    android:layout_height="wrap_content" 
 	    android:layout_width="wrap_content" 
@@ -21,10 +29,5 @@
 	    android:onClick="onNextClick">
 	    
     </ImageButton>
-    <TextView 
-    	android:id="@+id/copyright"
-    	android:layout_alignRight="@+id/mainimage"
-    	android:layout_alignParentTop="true"
-    	android:text="© Alexandra Marquis et Phaedra Royle conception\n© Edith Lebel dessins\n© Gina Cook programmation\nTous droits réservés."
-    />
+
 </RelativeLayout>
