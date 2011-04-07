@@ -1,5 +1,17 @@
 package ca.ilanguage.oprime.ui;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.LinkedList;
 import java.util.Locale;
 
 import ca.ilanguage.oprime.R;
@@ -24,13 +36,14 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 	private static final String TAG = "RunExperimentActivity";
 	/** Talk to the user */
     private TextToSpeech mTts;
+    private ImageView mImage;
+    private String mStimuliFile;
+    private String mResultsFile;
+    private String mSimuliArray[] = new String[1000];
+    private int mStimuliPosition=0;
+    private BufferedWriter out;
+    
 
-//    private Time startTime = new Time();
-//    private Time endTime = new Time();
-//    private Time reactionTime = new Time();
-    private Long startTime;
-    private Long endTime;
-    private Long reactionTime;
     
   //implement on Init for the text to speech
 	public void onInit(int status) {
@@ -46,16 +59,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 				// Language data is missing or the language is not supported.
 				Log.e(TAG, "Language is not available.");
 			} else {
-
-				// mSpeakButton.setEnabled(true);
-				// mPauseButton.setEnabled(true);
-				// Greet the user.
-				// sayHello();
-				
-//				mTts.speak("Click on the dog with a coat.",
-//		    	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
-//		    	        null);
-				
+				//everything is working.
 			}
 		} else {
 			// Initialization failed.
@@ -67,103 +71,96 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
-
-        gridview.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            	//endTime = System.currentTimeMillis();
-            	endTime = System.currentTimeMillis();
-            	//Long reactionTimeMilliseconds = endTime.normalize(false) - startTime.normalize(false);									//http://developer.android.com/reference/android/text/format/Time.html#toMillis(boolean)
-            	Long reactionTimeMilliseconds = endTime-startTime;
-            	mTts.speak("The participant clicked on picture "+position+", in "+reactionTimeMilliseconds+" milliseconds. This has been recorded in the Google Spreadsheet.",
-            	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
-            	        null);
-                Toast.makeText(RunExperimentActivity.this, "Picture" + position +", in "+reactionTimeMilliseconds+" milliseconds", Toast.LENGTH_LONG).show();
-            }
-        });
+        setContentView(R.layout.activity_one_image_one_button);
+        mImage = (ImageView) findViewById(R.id.mainimage);
+        mImage.setImageResource(R.drawable.androids_experimenter_kids);
+        
         mTts = new TextToSpeech(this, this);
+        mTts.speak("The experiment is running.",
+    	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
+    	        null);
+
+        mStimuliFile="/sdcard/OPrime/MorphologicalAwareness/stimuli_new.csv";
+        mResultsFile="/sdcard/OPrime/MorphologicalAwareness/results/results.txt";
+        readInStimuli();
         
-        playAudio();
+        FileWriter fstream;
+    	try {
+    		fstream = new FileWriter(mResultsFile,true);
+    		BufferedWriter out = new BufferedWriter(fstream);
+
+    		
+    		
+    		
+    		out.flush();
+    		out.close();
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		Toast.makeText(RunExperimentActivity.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
+
+    	}
+    	//for(int k= 0; k++; k<mStimuliArray.size()){
+    		presentStimuli(0);
+    	//}
         
-        //turn on video see APIDemos>Graphcis>camerapreview
-        //to display rotating rubix cube for mask look at APIDemo>(graphics?)Kubein cube
-        //to read and write external storage see apidemos>content>external storage
     }
     
-    public void playAudio(){
-//    	try {
-//			//Thread.sleep(5000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			//e.printStackTrace();
-//			Toast.makeText(RunExperimentActivity.this, "The experiment was interupted. Invalid reaction time.", Toast.LENGTH_LONG).show();
-//
-//		}
-        
-        MediaPlayer mp = MediaPlayer.create(this, R.raw.click_on_dog_coat);
-	    mp.start();
-	    //startTime.setToNow();
-	    startTime = System.currentTimeMillis();
-        
+    private void readInStimuli(){
+    		BufferedReader in;
+			try {
+				in = new BufferedReader(new FileReader(mStimuliFile));
+	    		String line;
+	    		int count=0;
+	    		try {
+					while((line = in.readLine()) !=null){
+						mSimuliArray[count]= line;
+						count++;	
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(RunExperimentActivity.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				Toast.makeText(RunExperimentActivity.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
+			}
+
+   }
+    
+    private void presentStimuli(int number){
+    	String columns[] = mSimuliArray[number].split(",");
+    	String experimentPath="/sdcard/OPrime/MorphologicalAwareness/";
+		int stimuliCode=0;
+    	Bundle bundle= new Bundle();
+		bundle.putString("participantCode", "noone");
+		bundle.putInt("stimuliCode",stimuliCode);
+		bundle.putString("imageFile", experimentPath+columns[1]);
+		try {
+			out.write(bundle.toString()+"\n\n");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//send the bundle to the SeeStimuliAndSpeakActivity
+		Intent i = new Intent(RunExperimentActivity.this, SeeStimuliAndSpeakActivity.class);
+		i.putExtras(bundle);
+		startActivityForResult(i, 0);
     }
-
-	public void onRunExperimentClick(View v){
-    	mTts.speak("This would run the experiment.",
-        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
-        null);
-    	startActivity(new Intent(this, RunExperimentActivity.class));
-    }
-
-	public class ImageAdapter extends BaseAdapter {
-	    private Context mContext;
-
-	    public ImageAdapter(Context c) {
-	        mContext = c;
-	    }
-
-	    public int getCount() {
-	        return mThumbIds.length;
-	    }
-
-	    public Object getItem(int position) {
-	        return null;
-	    }
-
-	    public long getItemId(int position) {
-	        return 0;
-	    }
-
-	    // create a new ImageView for each item referenced by the Adapter
-	    public View getView(int position, View convertView, ViewGroup parent) {
-	        ImageView imageView;
-	        if (convertView == null) {  // if it's not recycled, initialize some attributes
-	            imageView = new ImageView(mContext);
-	            imageView.setLayoutParams(new GridView.LayoutParams(285, 285));
-	            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-	            imageView.setPadding(8, 8, 8, 8);
-	        } else {
-	            imageView = (ImageView) convertView;
-	        }
-
-	        imageView.setImageResource(mThumbIds[position]);
-	        return imageView;
-	    }
-
-	    // references to our images
-	    private Integer[] mThumbIds = {
-//	            R.drawable.sample_2, R.drawable.sample_3,
-//	            R.drawable.sample_4, R.drawable.sample_5,
-//	            R.drawable.sample_6, R.drawable.sample_7,
-//	            R.drawable.sample_0, R.drawable.sample_1,
-//	            R.drawable.sample_2, R.drawable.sample_3,
-//	            R.drawable.sample_4, R.drawable.sample_5,
-//	            R.drawable.sample_6, R.drawable.sample_7,
-	            R.drawable.sample_0, R.drawable.sample_1,
-	            R.drawable.sample_2, R.drawable.sample_3
-//	            R.drawable.sample_4, R.drawable.sample_5,
-//	            R.drawable.sample_6, R.drawable.sample_7
-	    };
+    
+   @Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		try {
+			out.write("Came back from stimuli");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+
+public void onNextClick(View v){
+   	//
+   }
 }

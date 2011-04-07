@@ -44,13 +44,19 @@ public class SeeStimuliAndSpeakActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    
-	    mParticipantId="noone";
-	    mStimuliId="testing";
-	    
+	   
+	    Bundle bundle = getIntent().getExtras();
+	    if (!(bundle.isEmpty())){
+		    mParticipantId=bundle.getString("participantCode");
+		    mStimuliId=bundle.getString("stimuliCode");
+		    mImageFile=bundle.getString("imageFile");
+	    }else{
+	    	mParticipantId="noone";
+	    	mStimuliId="error";
+	    	mImageFile ="/sdcard/OPrime/MorphologicalAwareness/images/magasin.jpg";    
+	    }
 	    setContentView(R.layout.activity_one_image_one_button);
 	    mImage = (ImageView) findViewById(R.id.mainimage);
-//	    mImage.setImageResource(R.drawable.sample_0);
-	    mImageFile ="/sdcard/OPrime/MorphologicalAwareness/images/magasin.jpg";    
 
 	    FileInputStream in;
         BufferedInputStream buf;

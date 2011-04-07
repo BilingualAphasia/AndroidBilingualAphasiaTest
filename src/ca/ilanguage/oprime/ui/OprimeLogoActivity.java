@@ -43,7 +43,7 @@ public class OprimeLogoActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    
-	    setContentView(R.layout.activity_one_image_one_button);
+	    setContentView(R.layout.logo_copyright);
 	    mImage = (ImageView) findViewById(R.id.mainimage);
 	    mImage.setImageResource(R.drawable.androids_experimenter_kids);
 	    
