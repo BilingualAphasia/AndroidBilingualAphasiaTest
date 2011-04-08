@@ -1,113 +1,156 @@
 package ca.ilanguage.oprime.ui;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-
-import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import ca.ilanguage.oprime.R;
-import ca.ilanguage.oprime.domain.Experiment;
+import ca.ilanguage.oprime.domain.*;
 
-public class ListofExperimentsActivity extends ListActivity {
+public class ListofExperimentsActivity extends ListActivity{
+
 	private ProgressDialog m_ProgressDialog = null; 
-	private ArrayList<Experiment> m_orders = null;
-	private OrderAdapter m_adapter;
-	private Runnable viewOrders;
+	private ArrayList<Experiment> m_experiments = null;
+	private ExperimentAdapter m_adapter;
+	private Runnable viewExperiments;
+	private String baseDir ="/sdcard/Oprime/";
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.experiments_list);
+		m_experiments = new ArrayList<Experiment>();
+		this.m_adapter = new ExperimentAdapter(this, R.layout.experiment_list_item, m_experiments);
+		setListAdapter(this.m_adapter);
 
-	 @Override
-	    public void onCreate(Bundle savedInstanceState) {
-	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.experiments_list);
-	        m_orders = new ArrayList<Experiment>();
-	        this.m_adapter = new OrderAdapter(this, R.layout.experiments_list, m_orders);
-	                setListAdapter(this.m_adapter);
-	        
-	        viewOrders = new Runnable(){
-	            @Override
-	            public void run() {
-	                getOrders();
-	            }
-	        };
-	    Thread thread =  new Thread(null, viewOrders, "MagentoBackground");
-	        thread.start();
-	        m_ProgressDialog = ProgressDialog.show(ListofExperimentsActivity.this,    
-	              "Please wait...", "Retrieving data ...", true);
-	    }
-	private void getOrders(){
-        try{
-            m_orders = new ArrayList<Experiment>();
-            Experiment o1 = new Experiment();
-            o1.setOrderName("SF services");
-            o1.setOrderStatus("Pending");
-            Experiment o2 = new Experiment();
-            o2.setOrderName("SF Advertisement");
-            o2.setOrderStatus("Completed");
-            m_orders.add(o1);
-            m_orders.add(o2);
-               Thread.sleep(2000);
-            Log.i("ARRAY", ""+ m_orders.size());
-          } catch (Exception e) { 
-            Log.e("BACKGROUND_PROC", e.getMessage());
-          }
-          runOnUiThread(returnRes);
-      }
-	
-	private class OrderAdapter extends ArrayAdapter<Experiment> {
+		viewExperiments = new Runnable(){
+			@Override
+			public void run() {
+				getExperiments();
+			}
+		};
+		Thread thread =  new Thread(null, viewExperiments, "MagentoBackground");
+		thread.start();
+		m_ProgressDialog = ProgressDialog.show(ListofExperimentsActivity.this,    
+				"Please wait...", "Retrieving data ...", true);
+	}
+	public void onPlayClick(View v){
 
-        private ArrayList<Experiment> items;
+		//startActivity(new Intent(this, OPrimeHomeActivity.class));
+		startActivity(new Intent(this, OprimeLogoActivity.class));
+	}
+	public void onSettingsClick(View v){
 
-        public OrderAdapter(Context context, int textViewResourceId, ArrayList<Experiment> items) {
-                super(context, textViewResourceId, items);
-                this.items = items;
-        }
+		//startActivity(new Intent(this, OPrimeHomeActivity.class));
+		startActivity(new Intent(this, OprimeLogoActivity.class));
+	}
+	public void onEditClick(View v){
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-                View v = convertView;
-                if (v == null) {
-                    LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    v = vi.inflate(R.layout.experiment_list_item, null);
-                }
-                Experiment o = items.get(position);
-                if (o != null) {
-                        TextView tt = (TextView) v.findViewById(R.id.toptext);
-                        TextView bt = (TextView) v.findViewById(R.id.bottomtext);
-                        if (tt != null) {
-                              tt.setText("Name: "+o.getOrderName());                            }
-                        if(bt != null){
-                              bt.setText("Status: "+ o.getOrderStatus());
-                        }
-                }
-                return v;
-        }
+		//startActivity(new Intent(this, OPrimeHomeActivity.class));
+		startActivity(new Intent(this, OprimeLogoActivity.class));
+	}
+	public void onVideoClick(View v){
+
+		//startActivity(new Intent(this, OPrimeHomeActivity.class));
+		startActivity(new Intent(this, OprimeLogoActivity.class));
+	}   
+	public void onListenClick(View v){
+
+		//startActivity(new Intent(this, OPrimeHomeActivity.class));
+		startActivity(new Intent(this, OprimeLogoActivity.class));
 	}
 	private Runnable returnRes = new Runnable() {
 
-        @Override
-        public void run() {
-            if(m_orders != null && m_orders.size() > 0){
-                m_adapter.notifyDataSetChanged();
-                for(int i=0;i<m_orders.size();i++)
-                m_adapter.add(m_orders.get(i));
-            }
-            m_ProgressDialog.dismiss();
-            m_adapter.notifyDataSetChanged();
-        }
-      };
+		@Override
+		public void run() {
+			if(m_experiments != null && m_experiments.size() > 0){
+				m_adapter.notifyDataSetChanged();
+				for(int i=0;i<m_experiments.size();i++)
+					m_adapter.add(m_experiments.get(i));
+			}
+			m_ProgressDialog.dismiss();
+			m_adapter.notifyDataSetChanged();
+		}
+	};
+	private void getExperiments(){
+		try{
+			m_experiments = new ArrayList<Experiment>();
+			Experiment o1 = new Experiment();
+			o1.setExperimentName("Experiment 1");
+			o1.setExperimentStatus("Smith et al");
+			Experiment o2 = new Experiment();
+			o2.setExperimentName("Experiment 2");
+			o2.setExperimentStatus("Jones et al");
+			m_experiments.add(o1);
+			m_experiments.add(o2);
+			
+			//get a list of files in a directory
+			File dir = new File(baseDir);
+
+			
+			String[] children = dir.list();
+			if (children == null) {
+			    // Either dir does not exist or is not a directory
+			} else {
+			    for (int i=0; i<children.length; i++) {
+			        // Get filename of file or directory
+			        String filename = children[i];
+			        o1.setExperimentName(filename);
+			        o1.setExperimentFolder(baseDir+filename+"/");
+			        o1.setExperimentStatus("stimuli_demo.csv");
+			        m_experiments.add(o1);
+			    }
+			}
+			
+			
+			Thread.sleep(1000);
+			Log.i("ARRAY", ""+ m_experiments.size());
+		} catch (Exception e) { 
+			Log.e("BACKGROUND_PROC", e.getMessage());
+		}
+		runOnUiThread(returnRes);
+	}
+	private class ExperimentAdapter extends ArrayAdapter<Experiment> {
+		//based on http://www.softwarepassion.com/android-series-custom-listview-items-and-adapters/
+		private ArrayList<Experiment> items;
+
+		public ExperimentAdapter(Context context, int textViewResourceId, ArrayList<Experiment> items) {
+			super(context, textViewResourceId, items);
+			this.items = items;
+		}
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View v = convertView;
+			if (v == null) {
+				LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				v = vi.inflate(R.layout.experiment_list_item, null);
+			}
+			Experiment o = items.get(position);
+			if (o != null) {
+				TextView tt = (TextView) v.findViewById(R.id.toptext);
+				TextView bt = (TextView) v.findViewById(R.id.bottomtext);
+				ImageView image = (ImageView) v.findViewById(R.id.experimentIcon);
+				if (tt != null) {
+					tt.setText("Title: "+o.getExperimentName());                            }
+				if(bt != null){
+					bt.setText("Authors: "+ o.getExperimentStatus());
+				}
+				if(image != null){
+					image.setImageResource(R.drawable.ic_oprime);
+
+				}
+			}
+			return v;
+		}
+	}
 }
