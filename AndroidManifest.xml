@@ -26,6 +26,9 @@
         <activity android:name="ca.ilanguage.oprime.ui.OPrimeHomeActivity"
                   android:label="@string/app_name">
         </activity>
+        <activity android:name="ca.ilanguage.oprime.ui.ThankYouActivity"
+                  android:label="@string/app_name">
+        </activity>
         <activity android:name="ca.ilanguage.oprime.ui.RunExperimentActivity"
                   android:label="@string/app_name">
         </activity>

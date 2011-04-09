@@ -53,7 +53,7 @@ public class ListofExperimentsActivity extends ListActivity{
 	}
 	protected void onListItemClick(ListView l, View v, int position, long id) 
     {
-		Toast.makeText(ListofExperimentsActivity.this, "Error "+position, Toast.LENGTH_LONG).show();
+		Toast.makeText(ListofExperimentsActivity.this, "This would run experiment "+position, Toast.LENGTH_LONG).show();
     }
 	public void onPlayClick(View v){
 
@@ -68,17 +68,23 @@ public class ListofExperimentsActivity extends ListActivity{
 	public void onEditClick(View v){
 
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
-		startActivity(new Intent(this, OprimeLogoActivity.class));
+		//startActivity(new Intent(this, OprimeLogoActivity.class));
+		Intent myActivity2 = 
+			new Intent("org.openintents.action.PICK_FILE");
+			startActivity(myActivity2);
+		
 	}
 	public void onVideoClick(View v){
 
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
-		startActivity(new Intent(this, OprimeLogoActivity.class));
+		//startActivity(new Intent(this, OprimeLogoActivity.class));
 	}   
 	public void onListenClick(View v){
 
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
-		startActivity(new Intent(this, OprimeLogoActivity.class));
+		Intent myActivity2 = 
+			new Intent("android.intent.action.MUSIC_PLAYER");
+			startActivity(myActivity2);
 	}
 	private Runnable returnRes = new Runnable() {
 
@@ -153,7 +159,7 @@ public class ListofExperimentsActivity extends ListActivity{
 //			
 
 			
-			//Thread.sleep(1000);
+			Thread.sleep(1000);
 			Log.i("ARRAY", ""+ m_experiments.size());
 		} catch (Exception e) { 
 			Log.e("BACKGROUND_PROC", e.getMessage());

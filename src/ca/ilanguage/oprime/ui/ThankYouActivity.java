@@ -52,6 +52,8 @@ public class ThankYouActivity extends Activity {
  
         TextView thankyou = (TextView) findViewById(R.id.copyright);
         thankyou.setText("Merci!");
+        Toast.makeText(ThankYouActivity.this, "\n\n\n\n\n     Fin    \n\n\n\n\n", Toast.LENGTH_LONG).show();
+
         
         ImageButton settings = (ImageButton) findViewById(R.id.nextButton);
         settings.setImageResource(R.drawable.ic_settings);

@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Locale;
 
@@ -34,6 +35,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.text.format.Time;
 
@@ -95,7 +97,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 //    	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
 //    	        null);
 
-        mStimuliFile="/sdcard/OPrime/MorphologicalAwareness/stimuli_demo.csv";
+        mStimuliFile="/sdcard/OPrime/MorphologicalAwareness/stimuli_april9.csv";
         mResultsFile="/sdcard/OPrime/MorphologicalAwareness/results/results.txt";
         readInStimuli();
         
@@ -166,10 +168,19 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 		i.putExtras(bundle);
 		//startActivityForResult(i, 0);
 		
+		
 		mParticipantId="testing";
 		mStimuliId="stimuli"+mStimuliPosition;
 		mImageFile=experimentPath+"images/"+columns[1].replaceAll("\"","");
 		setContentView(R.layout.activity_one_image_one_button);
+		
+		
+
+		TextView imagenumber = (TextView) findViewById(R.id.imagenumber);
+		String imagefilename = columns[1].replaceAll("\"","");
+		imagenumber.setText(imagefilename);
+		
+		
 	    mImage = (ImageView) findViewById(R.id.mainimage);
 
 	    FileInputStream in;
@@ -187,11 +198,19 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
             }
         } catch (Exception e) {
             Log.e("Error reading image file", e.toString());
+            Toast.makeText(RunExperimentActivity.this, "Error reading image file "+mImageFile, Toast.LENGTH_SHORT).show();
+			
         }
+        
  
         mStartTime=System.currentTimeMillis();
-	
-		mAudioResultsFile ="/sdcard/OPrime/MorphologicalAwareness/results/"+System.currentTimeMillis()+"_"+mParticipantId+"_"+mStimuliId+".mp3";    
+//        Time timestamp= new Time();//System.currentTimeMillis()
+//        timestamp.setToNow();
+        //Date date = new Date(location.getTime());
+        Date date = new Date();
+        java.text.DateFormat dateFormat =
+            android.text.format.DateFormat.getDateFormat(getApplicationContext());
+        mAudioResultsFile ="/sdcard/OPrime/MorphologicalAwareness/results/"+dateFormat.format(date).replaceAll("/","_")+"_"+System.currentTimeMillis()+"_"+mParticipantId+"_"+mStimuliId+".mp3";    
 	    mRecorder = new MediaRecorder();
 //	    Environment.getExternalStorageDirectory().getAbsolutePath() + path;
 	    String state = android.os.Environment.getExternalStorageState();

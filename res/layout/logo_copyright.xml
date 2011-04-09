@@ -19,6 +19,7 @@
     	android:layout_alignRight="@+id/mainimage"
     	android:layout_alignParentTop="true"
     	android:text=""
+    	android:textSize="20px"
     />
     <ImageButton android:src="@drawable/ic_fast_forward"
 	    android:layout_height="wrap_content" 

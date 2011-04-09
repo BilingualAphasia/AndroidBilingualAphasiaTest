@@ -52,7 +52,7 @@ public class OprimeLogoActivity extends Activity {
         try {
 			//mp.prepare();
 	        mp.start();
-	        Toast.makeText(OprimeLogoActivity.this, "Tested:\nAudio\nVideo\nTwo-finger touch.\n\nGood to go!", Toast.LENGTH_LONG).show();
+	        //Toast.makeText(OprimeLogoActivity.this, "Tested:\nAudio\nVideo\nTwo-finger touch.\n\nGood to go!", Toast.LENGTH_LONG).show();
 			
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block

@@ -64,9 +64,10 @@ public class CheckDeviceSensorsActivity extends Activity implements TextToSpeech
 		startActivity(new Intent(this, MultiTouchVisualTestActivity.class));
 	}
 	public void onDrawingClick(View v){
+		Toast.makeText(CheckDeviceSensorsActivity.this, "This hasn't been implemented yet.", Toast.LENGTH_LONG).show(); 
 
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
-		startActivity(new Intent(this, TranslucentUserDrawActivity.class));
+		//startActivity(new Intent(this, TranslucentUserDrawActivity.class));
 	}
 	public void onAccelerometerClick(View v){
 
@@ -87,65 +88,11 @@ public class CheckDeviceSensorsActivity extends Activity implements TextToSpeech
         null);
 	}
 	public void onTestRecordAudioClick(View v){
-		
-		ProgressDialog m_ProgressDialog = ProgressDialog.show(CheckDeviceSensorsActivity.this,    
-				"Please wait...", "Retrieving experiments ...", true);
-		
-		
-//		Time startTime = new Time();
-//		String mAudioResultsFile ="/sdcard/OPrime/"+startTime+"_testing_record_audio.mp3";    
-//	    MediaRecorder mRecorder = new MediaRecorder();
-////	    Environment.getExternalStorageDirectory().getAbsolutePath() + path;
-//	    String state = android.os.Environment.getExternalStorageState();
-//	    if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
-//	        try {
-//				throw new IOException("SD Card is not mounted.  It is " + state + ".");
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				//e.printStackTrace();
-//				Toast.makeText(CheckDeviceSensorsActivity.this, "The experiment cannot save audio, maybe the tablet is attached to a computer?", Toast.LENGTH_SHORT).show();
-//			}
-//	    }
-//	    
-//	    try {
-//	    	//http://www.benmccann.com/dev-blog/android-audio-recording-tutorial/
-//	    	mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-//		    mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-//		    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-//		    mRecorder.setOutputFile(mAudioResultsFile);
-//		    mRecorder.prepare();
-//		} catch (IllegalStateException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	    mRecorder.start();
-        //Toast.makeText(CheckDeviceSensorsActivity.this, "Now recording audio, speak and make noise for a few seconds. \n\nThe audio will be recorded in the /sdcard/OPrime/ folder.", Toast.LENGTH_LONG).show(); 
+		Toast.makeText(CheckDeviceSensorsActivity.this, "This hasn't been implemented yet.", Toast.LENGTH_LONG).show(); 
 
-        Runnable wasteTime = new Runnable(){
-			@Override
-			public void run() {
-				
-				
-			}
-		};
-        
-        Thread thread =  new Thread(null, wasteTime, "MagentoBackground");
-		thread.start();
-		try {
-			wasteTime.wait(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//		mRecorder.stop();
-		
-		m_ProgressDialog.dismiss();
-		
 	}
 	public void onTestRecordVideoClick(View v){
+		Toast.makeText(CheckDeviceSensorsActivity.this, "This hasn't been implemented yet.", Toast.LENGTH_LONG).show(); 
 
 		
 	}
