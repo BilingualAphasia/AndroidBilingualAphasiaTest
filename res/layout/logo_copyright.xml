@@ -18,12 +18,12 @@
 	    android:layout_width="wrap_content" 
     	android:layout_alignRight="@+id/mainimage"
     	android:layout_alignParentTop="true"
-    	android:text="© Alexandra Marquis et Phaedra Royle conception\n© Edith Lebel dessins\n© iLanguage.ca programmation\nTous droits réservés."
+    	android:text=""
     />
     <ImageButton android:src="@drawable/ic_fast_forward"
 	    android:layout_height="wrap_content" 
 	    android:layout_width="wrap_content" 
-	    android:id="@+id/button1" 
+	    android:id="@+id/nextButton" 
 	    android:layout_alignRight="@+id/mainimage"
 	    android:layout_alignParentBottom="true"
 	    android:onClick="onNextClick">

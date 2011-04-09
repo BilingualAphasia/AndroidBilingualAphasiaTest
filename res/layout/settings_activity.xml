@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:scrollbars="vertical">
+     	<TextView
+		    android:id="@+id/android:empty"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="On this screen you can test whether the tablet you are using has all the features you need for your experiment. \n\nYou can also make sure that the tablet can record audio and video so that you wont loose your data when testing a participant. "/>
+     	<Button 
+    		android:text="Test touch sensitivity"
+    		android:id="@+id/touchbutton"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"  	
+        	android:drawableLeft="@drawable/ic_settings"
+        	android:onClick="onTouchClick"
+        	></Button>
+        <Button 
+    		android:text="Test multi touch or two touch"
+    		android:id="@+id/multitouchbutton"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_settings"
+        	android:onClick="onMultiTouchClick"
+        	/>
+        <Button 
+    		android:text="Test drawing by touch"
+    		android:id="@+id/touchdrawing"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_settings"
+        	android:onClick="onDrawingClick"
+        	/>
+        <Button 
+    		android:text="Test accelerometer"
+    		android:id="@+id/accelerometerbutton"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_settings"
+        	android:onClick="onAccelerometerClick"
+        	/>
+        <Button 
+    		android:text="Test record audio"
+    		android:id="@+id/audobutton"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_listen"
+        	android:onClick="onTestRecordAudioClick"
+        	/>
+        <Button 
+    		android:text="Test play audio"
+    		android:id="@+id/audobutton"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_listen"
+        	android:onClick="onTestPlayAudioClick"
+        	/>
+         <Button 
+    		android:text="Test Text To Speech audio"
+    		android:id="@+id/audobutton"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_about"
+        	android:onClick="onTestTTSClick"
+        	/>
+        <Button 
+    		android:text="Test record video"
+    		android:id="@+id/videobutton"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_video"
+        	android:onClick="onTestRecordVideoClick"
+        	/>
+</LinearLayout>

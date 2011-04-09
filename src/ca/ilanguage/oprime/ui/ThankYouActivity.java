@@ -17,12 +17,14 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Gallery.LayoutParams;
 
-public class OprimeLogoActivity extends Activity {
+public class ThankYouActivity extends Activity {
 	private static final String TAG = "PresentAnImageStimuli";
 	
 	private Long mStartTime;
@@ -48,25 +50,13 @@ public class OprimeLogoActivity extends Activity {
 	    mImage.setImageResource(R.drawable.androids_experimenter_kids);
 	    
  
-        MediaPlayer mp = MediaPlayer.create(this, R.raw.clubcreate);
-        try {
-			//mp.prepare();
-	        mp.start();
-	        Toast.makeText(OprimeLogoActivity.this, "Tested:\nAudio\nVideo\nTwo-finger touch.\n\nGood to go!", Toast.LENGTH_LONG).show();
-			
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			Log.e("Error reading file", e.toString());
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			Log.e("Error reading file", e.toString());
-		}
-		
+        TextView thankyou = (TextView) findViewById(R.id.copyright);
+        thankyou.setText("Merci!");
         
+        ImageButton settings = (ImageButton) findViewById(R.id.nextButton);
+        settings.setImageResource(R.drawable.ic_settings);
         
 		
-	    
-	    
     }
     public void onNextClick(View v){
     	

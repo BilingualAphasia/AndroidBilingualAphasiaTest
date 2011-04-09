@@ -1,38 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-    <ListView android:layout_width="match_parent" 
-    android:layout_height="wrap_content" 
-    android:id="@+id/list2">
-	    <ImageView android:id="@+id/icon"
-	        android:layout_width="48dip"
-	        android:layout_height="48dip" />
-	    <TextView android:text="TextView" 
-		    android:id="@+id/experimentTitle" 
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content"></TextView>
-	    <Button android:text="Button" 
-		    android:id="@+id/button1" 
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content"></Button>
-	    <Button android:text="Button" 
-		    android:id="@+id/button2" 
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content"></Button>
-	    <Button android:text="Button" 
-		    android:id="@+id/button3" 
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content"></Button>
-	    <Button android:text="Button" 
-		    android:id="@+id/button5" 
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content"></Button>
-    	<TextView android:text="TextView" 
-		    android:id="@+id/description" 
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content"></TextView>
-    </ListView>
-    
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:orientation="vertical"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   >
+       <LinearLayout
+	   xmlns:android="http://schemas.android.com/apk/res/android"
+	   android:orientation="horizontal"
+	   android:layout_width="fill_parent"
+	   android:layout_height="wrap_content"
+	    >
+    	<ImageButton 
+    		android:text="Run"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:src="@drawable/ic_play"
+        	android:onClick="onPlayClick"
+        	/>
+    	<ImageButton 
+    		android:text="Test Tablet settings"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:src="@drawable/ic_settings"
+        	android:onClick="onSettingsClick"
+        	/>
+        <ImageButton 
+        	android:text="Edit"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:src="@drawable/ic_edit"
+        	android:onClick="onEditClick"
+        	/>
+        
+        <ImageButton 
+        	android:text="View participants videos"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:src="@drawable/ic_video"
+        	android:onClick="onVideoClick"
+        	/>
+        <ImageButton 
+        	android:text="Listen to participant recordings"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:src="@drawable/ic_listen"
+        	android:onClick="onListenClick"
+        	/>
+        <ImageButton 
+        	android:text="View stimuli images"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:src="@drawable/ic_images"
+        	android:onClick="onViewImagesClick"
+        	/>
+    </LinearLayout>
+<ListView
+    android:id="@+id/android:list"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    />
+<TextView
+    android:id="@+id/android:empty"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:text="No experiments found try the /sdcard/OPrime folder"/>
+
+
+
 </LinearLayout>

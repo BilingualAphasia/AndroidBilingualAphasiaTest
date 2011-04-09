@@ -1,6 +1,10 @@
 package ca.ilanguage.oprime.ui;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -13,9 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.ilanguage.oprime.R;
 import ca.ilanguage.oprime.domain.*;
+
 
 public class ListofExperimentsActivity extends ListActivity{
 
@@ -42,17 +49,21 @@ public class ListofExperimentsActivity extends ListActivity{
 		Thread thread =  new Thread(null, viewExperiments, "MagentoBackground");
 		thread.start();
 		m_ProgressDialog = ProgressDialog.show(ListofExperimentsActivity.this,    
-				"Please wait...", "Retrieving data ...", true);
+				"Please wait...", "Retrieving experiments ...", true);
 	}
+	protected void onListItemClick(ListView l, View v, int position, long id) 
+    {
+		Toast.makeText(ListofExperimentsActivity.this, "Error "+position, Toast.LENGTH_LONG).show();
+    }
 	public void onPlayClick(View v){
 
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
-		startActivity(new Intent(this, OprimeLogoActivity.class));
+		startActivity(new Intent(this, RunExperimentActivity.class));
 	}
 	public void onSettingsClick(View v){
 
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
-		startActivity(new Intent(this, OprimeLogoActivity.class));
+		startActivity(new Intent(this, CheckDeviceSensorsActivity.class));
 	}
 	public void onEditClick(View v){
 
@@ -85,35 +96,64 @@ public class ListofExperimentsActivity extends ListActivity{
 	private void getExperiments(){
 		try{
 			m_experiments = new ArrayList<Experiment>();
-			Experiment o1 = new Experiment();
-			o1.setExperimentName("Experiment 1");
-			o1.setExperimentStatus("Smith et al");
-			Experiment o2 = new Experiment();
-			o2.setExperimentName("Experiment 2");
-			o2.setExperimentStatus("Jones et al");
-			m_experiments.add(o1);
-			m_experiments.add(o2);
+//			Experiment o1 = new Experiment();
+//			o1.setExperimentName("Experiment 1");
+//			o1.setExperimentStatus("Smith et al");
+//			Experiment o2 = new Experiment();
+//			o2.setExperimentName("Experiment 2");
+//			o2.setExperimentStatus("Jones et al");
+//			m_experiments.add(o1);
+//			m_experiments.add(o2);
 			
-			//get a list of files in a directory
+			//get a list experiments  by putting one experiment per stimuli file, not per experiment direcotyr
+			// The list of files can also be retrieved as File objects
 			File dir = new File(baseDir);
+			File[] files = dir.listFiles();
 
-			
-			String[] children = dir.list();
-			if (children == null) {
+			// This filter only returns directories
+			FileFilter fileFilter = new FileFilter() {
+			    public boolean accept(File file) {
+			        return file.isDirectory();
+			    }
+			};
+			files = dir.listFiles(fileFilter);
+			if (files == null) {
 			    // Either dir does not exist or is not a directory
 			} else {
-			    for (int i=0; i<children.length; i++) {
+			    for (int i=0; i<files.length; i++) {
 			        // Get filename of file or directory
-			        String filename = children[i];
-			        o1.setExperimentName(filename);
-			        o1.setExperimentFolder(baseDir+filename+"/");
-			        o1.setExperimentStatus("stimuli_demo.csv");
-			        m_experiments.add(o1);
+			    	String filename = files[i].getPath();
+			    	String experimentname = filename.substring(filename.lastIndexOf('/')+1);
+			        //get stimuli files in that folder
+			        FilenameFilter filter = new FilenameFilter() {
+			            public boolean accept(File dir, String name) {
+			                return name.endsWith("csv");
+			            }
+			        };
+			        String[] subexperiments=files[i].list(filter);
+			        if (subexperiments == null) {
+			            // Either dir does not exist or is not a directory
+			        } else {
+			            for (int k=0; k<subexperiments.length; k++) {
+			                // Get filename of file or directory for the experiment
+			            	Experiment o3 = new Experiment();
+			            	o3.setExperimentName(experimentname);
+					        o3.setExperimentFolder(filename);
+					        //get the stimuli based on the inner loop
+					        o3.setExperimentStimuliFile(subexperiments[k]);
+					        o3.setReadme(readFileAsString(filename+"/README.txt"));
+					        m_experiments.add(o3);
+			            }
+			        }
+					
 			    }
 			}
+
 			
+//			
+
 			
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 			Log.i("ARRAY", ""+ m_experiments.size());
 		} catch (Exception e) { 
 			Log.e("BACKGROUND_PROC", e.getMessage());
@@ -138,12 +178,20 @@ public class ListofExperimentsActivity extends ListActivity{
 			Experiment o = items.get(position);
 			if (o != null) {
 				TextView tt = (TextView) v.findViewById(R.id.toptext);
-				TextView bt = (TextView) v.findViewById(R.id.bottomtext);
+				TextView bt = (TextView) v.findViewById(R.id.readme);
+				TextView folder = (TextView) v.findViewById(R.id.filelocation);
+				TextView stimuliName= (TextView) v.findViewById(R.id.stimulifile);
 				ImageView image = (ImageView) v.findViewById(R.id.experimentIcon);
 				if (tt != null) {
 					tt.setText("Title: "+o.getExperimentName());                            }
 				if(bt != null){
-					bt.setText("Authors: "+ o.getExperimentStatus());
+					bt.setText("\n\n \n"+ o.getReadme());
+				}
+				if (folder != null){
+					folder.setText("Experiment Location: "+o.getExperimentFolder());
+				}
+				if (stimuliName != null){
+					stimuliName.setText("Stimuli file: "+o.getExperimentStimuliFile());
 				}
 				if(image != null){
 					image.setImageResource(R.drawable.ic_oprime);
@@ -153,4 +201,19 @@ public class ListofExperimentsActivity extends ListActivity{
 			return v;
 		}
 	}
+    private static String readFileAsString(String filePath)
+    throws java.io.IOException{
+        StringBuffer fileData = new StringBuffer(1000);
+        BufferedReader reader = new BufferedReader(
+                new FileReader(filePath));
+        char[] buf = new char[1024];
+        int numRead=0;
+        while((numRead=reader.read(buf)) != -1){
+            String readData = String.valueOf(buf, 0, numRead);
+            fileData.append(readData);
+            buf = new char[1024];
+        }
+        reader.close();
+        return fileData.toString();
+    }
 }
