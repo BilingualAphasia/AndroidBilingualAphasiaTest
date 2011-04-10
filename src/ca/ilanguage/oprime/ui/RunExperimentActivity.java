@@ -148,7 +148,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
    }
     
     private void presentStimuli(int number){
-    	String columns[] = mStimuliArray[number].split(",");
+    	String columns[] = mStimuliArray[number].split("\",\"");
     	String experimentPath="/sdcard/OPrime/MorphologicalAwareness/";
 		int stimuliCode=0;
     	Bundle bundle= new Bundle();
