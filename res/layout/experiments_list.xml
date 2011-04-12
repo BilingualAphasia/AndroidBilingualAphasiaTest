@@ -53,6 +53,21 @@
         	android:src="@drawable/ic_images"
         	android:onClick="onViewImagesClick"
         	/>
+    
+    	<Button 
+    		android:text="Run BAT"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_play"
+        	android:onClick="onRunBATClick"
+        	/>
+        <Button 
+    		android:text="Run Morphological Awareness"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_play"
+        	android:onClick="onRunMorphoClick"
+        	/>
     </LinearLayout>
 <ListView
     android:id="@+id/android:list"

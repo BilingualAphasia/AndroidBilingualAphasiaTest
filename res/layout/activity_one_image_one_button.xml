@@ -28,5 +28,5 @@
 	    android:layout_height="wrap_content"
 	    android:layout_alignRight="@id/mainimage"
 	    android:layout_alignParentTop="true"
-	    android:text="Image number"/>
+	    android:text=""/>
 </RelativeLayout>

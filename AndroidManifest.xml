@@ -32,6 +32,9 @@
         <activity android:name="ca.ilanguage.oprime.ui.RunExperimentActivity"
                   android:label="@string/app_name">
         </activity>
+        <activity android:name="ca.ilanguage.oprime.ui.RunSeeHearClickExperiment"
+                  android:label="@string/app_name">
+        </activity>
         <activity android:name="ca.ilanguage.oprime.ui.CheckDeviceSensorsActivity"
                   android:label="@string/app_name">
         </activity>

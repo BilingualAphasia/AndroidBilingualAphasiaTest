@@ -55,6 +55,16 @@ public class ListofExperimentsActivity extends ListActivity{
     {
 		Toast.makeText(ListofExperimentsActivity.this, "This would run experiment "+position, Toast.LENGTH_LONG).show();
     }
+	public void onRunMorphoClick(View v){
+
+		//startActivity(new Intent(this, OPrimeHomeActivity.class));
+		startActivity(new Intent(this, RunExperimentActivity.class));
+	}
+	public void onRunBATClick(View v){
+
+		//startActivity(new Intent(this, OPrimeHomeActivity.class));
+		startActivity(new Intent(this, RunSeeHearClickExperiment.class));
+	}
 	public void onPlayClick(View v){
 
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
@@ -86,6 +96,13 @@ public class ListofExperimentsActivity extends ListActivity{
 			new Intent("android.intent.action.MUSIC_PLAYER");
 			startActivity(myActivity2);
 	}
+	public void onViewImagesClick(View v){
+
+		//startActivity(new Intent(this, OPrimeHomeActivity.class));
+		//startActivity(new Intent(this, OprimeLogoActivity.class));
+	}
+
+	
 	private Runnable returnRes = new Runnable() {
 
 		@Override
