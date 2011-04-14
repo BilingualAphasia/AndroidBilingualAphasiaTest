@@ -99,7 +99,7 @@ public class ListofExperimentsActivity extends ListActivity{
 	public void onViewImagesClick(View v){
 
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
-		//startActivity(new Intent(this, OprimeLogoActivity.class));
+		startActivity(new Intent(this, TranslucentUserDrawActivity.class));
 	}
 
 	

@@ -17,6 +17,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -283,7 +286,15 @@ public boolean onTouchEvent(MotionEvent event) {
 		   
 		   String touchPosition ="x="+event.getX()+",y="+event.getY();
 		 recordReaction(touchPosition);
+		   
+//		   Canvas canvas = new Canvas();
+//		   Paint paint = new Paint();
+//		   paint.setColor(Color.BLUE);
+//		   canvas.drawCircle(event.getX(), event.getY(), 40 * 1.0f, paint);
+		   
 	   }
+	   
+	   
 	   
 	return super.onTouchEvent(event);
 	
