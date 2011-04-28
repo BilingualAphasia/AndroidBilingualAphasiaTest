@@ -50,11 +50,14 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     private String mResultsFile;
     private String mStimuliArray[] = new String[1000];
     private int mStimuliPosition=1;
-    private BufferedWriter out;
+    private BufferedWriter mOut;
     
     private Long mStartTime;
     private Long mEndTime;
     private Long mTimeImageWasDisplayed;
+    
+    private String mDateString ="";
+    private String mResponse ="";
     
     private String mAudioResultsFile;
     private String mImageFile;
@@ -104,8 +107,11 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
         FileWriter fstream;
     	try {
     		fstream = new FileWriter(mResultsFile,true);
-    		BufferedWriter out = new BufferedWriter(fstream);
+    		mOut = new BufferedWriter(fstream);
 
+    		mOut.write("Date"+"\t"+"ParticipantID"+"\t"+"Stimuli"+"\t"+"ReactionTime\tResponse");
+    		mOut.newLine();
+    		
 //    		for(int k= 0; k<mSimuliArray.length; k++){
 //    			presentStimuli(k);
 //    		}
@@ -169,7 +175,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 		//startActivityForResult(i, 0);
 		
 		
-		mParticipantId="testing";
+		mParticipantId="TT";
 		mStimuliId="stimuli"+mStimuliPosition;
 		mImageFile=experimentPath+"images/"+columns[1].replaceAll("\"","");
 		setContentView(R.layout.activity_one_image_one_button);
@@ -204,13 +210,14 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
         
  
         mStartTime=System.currentTimeMillis();
-//        Time timestamp= new Time();//System.currentTimeMillis()
-//        timestamp.setToNow();
-        //Date date = new Date(location.getTime());
-        Date date = new Date();
-        java.text.DateFormat dateFormat =
-            android.text.format.DateFormat.getDateFormat(getApplicationContext());
-        mAudioResultsFile ="/sdcard/OPrime/MorphologicalAwareness/results/"+dateFormat.format(date).replaceAll("/","_")+"_"+System.currentTimeMillis()+"_"+mParticipantId+"_"+mStimuliId+".mp3";    
+        
+        
+        mDateString = (String) android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", new java.util.Date());
+       mDateString = mDateString.replaceAll("/","_").replaceAll(" ","_");
+        
+//        mDateString=dateFormat.format(date).replaceAll("/","_");
+        
+        mAudioResultsFile ="/sdcard/OPrime/MorphologicalAwareness/results/"+mDateString+"_"+System.currentTimeMillis()+"_"+mParticipantId+"_"+mStimuliId+".mp3";    
 	    mRecorder = new MediaRecorder();
 //	    Environment.getExternalStorageDirectory().getAbsolutePath() + path;
 	    String state = android.os.Environment.getExternalStorageState();
@@ -233,10 +240,12 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 		    mRecorder.prepare();
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Toast.makeText(RunExperimentActivity.this, "The experiment cannot save audio, maybe the tablet is attached to a computer?", Toast.LENGTH_SHORT).show();
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Toast.makeText(RunExperimentActivity.this, "The experiment cannot save audio, maybe the tablet is attached to a computer?", Toast.LENGTH_SHORT).show();
+
 		}
 	    mRecorder.start();
 	    
@@ -269,6 +278,21 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 //		// TODO Auto-generated catch block
 //		Toast.makeText(RunExperimentActivity.this, "On resume", Toast.LENGTH_LONG).show();
 //	}
+   	
+   	mEndTime=System.currentTimeMillis();
+	   mTimeImageWasDisplayed=mEndTime-mStartTime;
+	   try {
+		   mOut.write(mDateString+"\t"+mParticipantId+"\t"+mStimuliId+"\t\t"+mTimeImageWasDisplayed+"\t"+mResponse);
+		   
+		mOut.newLine();
+		
+		mOut.flush();
+	   } catch (IOException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(RunExperimentActivity.this, "Error saving to the results file", Toast.LENGTH_SHORT).show();
+			
+		}
+		
    	mStimuliPosition++;
    	if (mStimuliArray[mStimuliPosition] != null){
    		presentStimuli(mStimuliPosition);
@@ -279,4 +303,29 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 		//return to runexperimentactivity
    	//startActivity(new Intent(this, RunExperimentActivity.class));
    }
+
+   public void onBackClick(View v){
+	   mEndTime=System.currentTimeMillis();
+   	mRecorder.stop();
+   	mRecorder.release();
+   	//Toast.makeText(RunExperimentActivity.this, "The audio was successfully recorded, check the Oprime folder.", Toast.LENGTH_SHORT).show();
+//   	try {
+//   		mTimeImageWasDisplayed=mEndTime-mStartTime;
+//		out.write(mParticipantId+"\t"+mStimuliId+"\t"+mStartTime+"\t"+mEndTime+"\t"+mTimeImageWasDisplayed);
+//	} catch (IOException e) {
+//		// TODO Auto-generated catch block
+//		Toast.makeText(RunExperimentActivity.this, "On resume", Toast.LENGTH_LONG).show();
+//	}
+   	mStimuliPosition--;
+   	if (mStimuliArray[mStimuliPosition] != null && mStimuliPosition != 0){
+   		//do nothing
+   	}else{
+   		//Toast.makeText(RunExperimentActivity.this, "Merci!", Toast.LENGTH_LONG).show();
+   		mStimuliPosition++;
+   	}
+   	presentStimuli(mStimuliPosition);
+		//return to runexperimentactivity
+   	//startActivity(new Intent(this, RunExperimentActivity.class));
+   }
+
 }

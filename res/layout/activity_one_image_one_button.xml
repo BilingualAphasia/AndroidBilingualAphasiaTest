@@ -22,6 +22,15 @@
 	    android:onClick="onNextClick">
 	    
     </ImageButton>
+    <Button 
+    	android:text="Back"
+	    android:layout_height="wrap_content" 
+	    android:layout_width="wrap_content" 
+	    android:id="@+id/buttonback" 
+	    android:layout_alignRight="@id/mainimage"
+	    android:onClick="onBackClick">
+	    
+    </Button>
     <TextView
 	    android:id="@+id/imagenumber"
 	    android:layout_width="wrap_content"

@@ -117,5 +117,12 @@ public class SeeStimuliAndSpeakActivity extends Activity {
 		//return to runexperimentactivity
     	//startActivity(new Intent(this, RunExperimentActivity.class));
     }
+	public void onBackClick(View v){
+    	mRecorder.stop();
+    	mRecorder.release();
+    	Toast.makeText(SeeStimuliAndSpeakActivity.this, "The audio was successfully recorded, check the Oprime folder.", Toast.LENGTH_SHORT).show();
+		//return to runexperimentactivity
+    	//startActivity(new Intent(this, RunExperimentActivity.class));
+    }
     
 }
