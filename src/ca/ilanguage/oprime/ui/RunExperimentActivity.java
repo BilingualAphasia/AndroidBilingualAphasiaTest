@@ -212,7 +212,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
         mStartTime=System.currentTimeMillis();
         
         
-        mDateString = (String) android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", new java.util.Date());
+        mDateString = (String) android.text.format.DateFormat.format("yyyy-MM-dd_hh.mm", new java.util.Date());
        mDateString = mDateString.replaceAll("/","_").replaceAll(" ","_");
         
 //        mDateString=dateFormat.format(date).replaceAll("/","_");

@@ -222,8 +222,7 @@ public class RunSeeHearClickExperiment extends Activity implements TextToSpeech.
 //        timestamp.setToNow();
         //Date date = new Date(location.getTime());
         Date date = new Date();
-        java.text.DateFormat dateFormat =
-            android.text.format.DateFormat.getDateFormat(getApplicationContext());
+        java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance(java.text.DateFormat.LONG, Locale.US);
         
         mDateString=dateFormat.format(date).replaceAll("/","_");
         
