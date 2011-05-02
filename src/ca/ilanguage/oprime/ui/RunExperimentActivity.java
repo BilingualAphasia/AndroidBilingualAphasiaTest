@@ -17,9 +17,12 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Locale;
 
+
 import ca.ilanguage.oprime.R;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,11 +31,13 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -62,6 +67,8 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     private String mAudioResultsFile;
     private String mImageFile;
     private String mParticipantId;
+    private String mParticipantName;
+    private String mParticipantAge;
     private String mStimuliId;
     private MediaRecorder mRecorder;
     
@@ -104,6 +111,10 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
         mResultsFile="/sdcard/OPrime/MorphologicalAwareness/results/results.txt";
         readInStimuli();
         
+        showDialogAskParticipantDetails();
+        
+        
+        
         FileWriter fstream;
     	try {
     		fstream = new FileWriter(mResultsFile,true);
@@ -129,6 +140,41 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     	}
     	
         
+    }
+    private String showDialogAskParticipantDetails(){
+    	LayoutInflater factory = LayoutInflater.from(this);
+        final View textEntryView = factory.inflate(R.layout.alert_dialog_text_entry, null);
+        
+    	new AlertDialog.Builder(RunExperimentActivity.this)
+        
+        .setTitle(R.string.alert_dialog_text_entry)
+        .setView(textEntryView)
+        .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                /* User clicked OK so do some stuff */
+            	EditText edittext = (EditText) findViewById(R.id.participant_name_edit);
+            	mParticipantName = edittext.getText().toString();
+            	edittext = (EditText) findViewById(R.id.participant_age_edit);
+            	mParticipantAge = edittext.getText().toString();
+            	if(mParticipantName.contains(" ")){
+            		String[] names = mParticipantName.split(" ");
+            		mParticipantId = names[0].substring(0,1).toUpperCase()+ names[1].substring(0, 1).toUpperCase();
+            	}else{
+            		mParticipantId = mParticipantName.substring(0,2).toUpperCase();
+            	}
+            	Toast.makeText(RunExperimentActivity.this, "Participant ID: "+mParticipantId+"\nName: "+mParticipantName+"\nAge: "+mParticipantAge, Toast.LENGTH_LONG).show();
+
+            }
+        })
+        .setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                /* User clicked cancel so do some stuff */
+            }
+        })
+        .create();
+    	return "hi";
     }
     
     private void readInStimuli(){

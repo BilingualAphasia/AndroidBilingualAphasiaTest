@@ -2,4 +2,7 @@
 <resources>
    
     <string name="app_name">Experiment Home</string>
+    <string name="alert_dialog_cancel">Cancel</string>
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_text_entry">Participant details dialog</string>
 </resources>
