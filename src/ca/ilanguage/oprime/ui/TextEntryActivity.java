@@ -1,5 +1,7 @@
 package ca.ilanguage.oprime.ui;
-
+/*
+ * http://stackoverflow.com/questions/3061249/opening-a-dialog-with-text-input-from-within-a-view-in-android
+ */
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +12,8 @@ import android.widget.EditText;
 import ca.ilanguage.oprime.R;
 
 public class TextEntryActivity extends Activity {
-    private EditText et;
+    private EditText etName;
+    private EditText etAge;
 
     /*
      * (non-Javadoc)
@@ -34,8 +37,10 @@ public class TextEntryActivity extends Activity {
         // value
 
         try {
-            et = ((EditText) findViewById(R.id.participant_name_edit));
-            et.setText(getIntent().getExtras().getString("value"));
+            etName = ((EditText) findViewById(R.id.participant_name_edit));
+            etName.setText(getIntent().getExtras().getString("name"));
+            etAge = ((EditText) findViewById(R.id.participant_age_edit));
+            etAge.setText(getIntent().getExtras().getString("age"));
         } catch (Exception e) {
         }
         
@@ -65,7 +70,8 @@ public class TextEntryActivity extends Activity {
      */
     private void executeDone() {
         Intent resultIntent = new Intent();
-        resultIntent.putExtra("value", TextEntryActivity.this.et.getText().toString());
+        resultIntent.putExtra("name", TextEntryActivity.this.etName.getText().toString());
+        resultIntent.putExtra("age", TextEntryActivity.this.etAge.getText().toString());
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
     }

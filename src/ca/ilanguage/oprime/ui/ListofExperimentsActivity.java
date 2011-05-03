@@ -27,6 +27,7 @@ import ca.ilanguage.oprime.domain.*;
 public class ListofExperimentsActivity extends ListActivity{
 
 	private static final int EDIT_ACTION = 0;
+	private static final int GET_PARTICIPANT_DETAILS = 1;
 	private ProgressDialog m_ProgressDialog = null; 
 	private ArrayList<Experiment> m_experiments = null;
 	private ExperimentAdapter m_adapter;
@@ -59,8 +60,10 @@ public class ListofExperimentsActivity extends ListActivity{
 	public void onRunMorphoClick(View v){
 
 		Intent foo = new Intent(this, TextEntryActivity.class);
-		foo.putExtra("value", "Testing");
-		this.startActivityForResult(foo, EDIT_ACTION);
+		foo.putExtra("title","Enter Participant Details");
+		foo.putExtra("name", "Testing");
+		foo.putExtra("age", "0");
+		this.startActivityForResult(foo, GET_PARTICIPANT_DETAILS);
 		
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
 		//startActivity(new Intent(this, RunExperimentActivity.class));
@@ -68,14 +71,21 @@ public class ListofExperimentsActivity extends ListActivity{
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case EDIT_ACTION:
+            case GET_PARTICIPANT_DETAILS:
+            	Intent i = new Intent(this, RunExperimentActivity.class);
                 try {
-                    String value = data.getStringExtra("value");
-                    if (value != null && value.length() > 0) {
-                    	Toast.makeText(ListofExperimentsActivity.this, "This is the participants name"+value, Toast.LENGTH_LONG).show();
+                    String name = data.getStringExtra("name");
+                    if (name != null && name.length() > 0) {
+                    	i.putExtra("participantName", name);
+                    }
+                    String age = data.getStringExtra("age");
+                    if(age != null && age.length() > 0){
+                    	i.putExtra("participantAge", age);
                     }
                 } catch (Exception e) {
+                	Toast.makeText(ListofExperimentsActivity.this, "Had a problem getting data from the dialog "+e, Toast.LENGTH_LONG).show();
                 }
+                startActivity(i);
                 break;
             default:
                 break;
