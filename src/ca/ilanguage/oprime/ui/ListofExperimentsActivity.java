@@ -26,6 +26,7 @@ import ca.ilanguage.oprime.domain.*;
 
 public class ListofExperimentsActivity extends ListActivity{
 
+	private static final int EDIT_ACTION = 0;
 	private ProgressDialog m_ProgressDialog = null; 
 	private ArrayList<Experiment> m_experiments = null;
 	private ExperimentAdapter m_adapter;
@@ -57,9 +58,30 @@ public class ListofExperimentsActivity extends ListActivity{
     }
 	public void onRunMorphoClick(View v){
 
+		Intent foo = new Intent(this, TextEntryActivity.class);
+		foo.putExtra("value", "Testing");
+		this.startActivityForResult(foo, EDIT_ACTION);
+		
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
-		startActivity(new Intent(this, RunExperimentActivity.class));
+		//startActivity(new Intent(this, RunExperimentActivity.class));
 	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case EDIT_ACTION:
+                try {
+                    String value = data.getStringExtra("value");
+                    if (value != null && value.length() > 0) {
+                    	Toast.makeText(ListofExperimentsActivity.this, "This is the participants name"+value, Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                }
+                break;
+            default:
+                break;
+        }
+    }
+	
 	public void onRunBATClick(View v){
 
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
@@ -130,6 +152,9 @@ public class ListofExperimentsActivity extends ListActivity{
 			
 			//get a list experiments  by putting one experiment per stimuli file, not per experiment direcotyr
 			// The list of files can also be retrieved as File objects
+			
+			
+			
 			File dir = new File(baseDir);
 			File[] files = dir.listFiles();
 

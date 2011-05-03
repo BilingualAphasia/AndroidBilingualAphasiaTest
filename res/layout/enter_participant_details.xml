@@ -20,7 +20,7 @@
     android:orientation="vertical">
 
     <TextView 
-        android:id="@+id/text1_view"
+        android:id="@+id/participant_name_view"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_marginLeft="20dip"
@@ -30,7 +30,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
             
     <EditText
-        android:id="@+id/text1_edit"
+        android:id="@+id/participant_name_edit"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginLeft="20dip"
@@ -42,7 +42,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
      <TextView 
-        android:id="@+id/text2_view"
+        android:id="@+id/participant_age_view"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_marginLeft="20dip"
@@ -52,7 +52,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
             
     <EditText
-        android:id="@+id/text2_edit"
+        android:id="@+id/participant_age_edit"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginLeft="20dip"
@@ -62,5 +62,17 @@
         android:capitalize="none"
         android:gravity="fill_horizontal"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+        <Button 
+    		android:text="Okay"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:onClick="onOkayClick"
+        	/>
+        	<Button 
+    		android:text="Cancel"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:onClick="onCancelClick"
+        	/>
         
 </LinearLayout>

@@ -21,6 +21,7 @@ import java.util.Locale;
 import ca.ilanguage.oprime.R;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -66,9 +67,9 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     
     private String mAudioResultsFile;
     private String mImageFile;
-    private String mParticipantId;
-    private String mParticipantName;
-    private String mParticipantAge;
+    private String mParticipantId ="TT";
+    private String mParticipantName ="TT";
+    private String mParticipantAge ="0";
     private String mStimuliId;
     private MediaRecorder mRecorder;
     
@@ -111,8 +112,8 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
         mResultsFile="/sdcard/OPrime/MorphologicalAwareness/results/results.txt";
         readInStimuli();
         
-        showDialogAskParticipantDetails();
-        
+        //showDialogAskParticipantDetails();
+        showDialog(1);
         
         
         FileWriter fstream;
@@ -127,7 +128,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 //    			presentStimuli(k);
 //    		}
     		//while(mStimuliPosition<mSimuliArray.length){
-    			presentStimuli(mStimuliPosition);
+    			
     		//}
     		
     		
@@ -138,14 +139,21 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     		Toast.makeText(RunExperimentActivity.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
 
     	}
-    	
+    	if ( !(mParticipantName.equals("TT")) ){
+    		presentStimuli(mStimuliPosition);
+    	}else{
+    		Toast.makeText(RunExperimentActivity.this, "Participant name hasnt been set.", Toast.LENGTH_LONG).show();
+
+    	}
         
     }
-    private String showDialogAskParticipantDetails(){
+    protected Dialog onCreateDialog(int id) {
+    	switch (id) {
+        case 1:
     	LayoutInflater factory = LayoutInflater.from(this);
         final View textEntryView = factory.inflate(R.layout.alert_dialog_text_entry, null);
         
-    	new AlertDialog.Builder(RunExperimentActivity.this)
+    	return new AlertDialog.Builder(RunExperimentActivity.this)
         
         .setTitle(R.string.alert_dialog_text_entry)
         .setView(textEntryView)
@@ -153,16 +161,16 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 /* User clicked OK so do some stuff */
-            	EditText edittext = (EditText) findViewById(R.id.participant_name_edit);
-            	mParticipantName = edittext.getText().toString();
-            	edittext = (EditText) findViewById(R.id.participant_age_edit);
-            	mParticipantAge = edittext.getText().toString();
-            	if(mParticipantName.contains(" ")){
-            		String[] names = mParticipantName.split(" ");
-            		mParticipantId = names[0].substring(0,1).toUpperCase()+ names[1].substring(0, 1).toUpperCase();
-            	}else{
-            		mParticipantId = mParticipantName.substring(0,2).toUpperCase();
-            	}
+//            	EditText edittext = (EditText) findViewById(R.id.participant_name_edit);
+//            	mParticipantName = edittext.getText().toString();
+//            	EditText edittextage = (EditText) findViewById(R.id.participant_age_edit);
+//            	mParticipantAge = edittextage.getText().toString();
+//            	if(mParticipantName.contains(" ")){
+//            		String[] names = mParticipantName.split(" ");
+//            		mParticipantId = names[0].substring(0,1).toUpperCase()+ names[1].substring(0, 1).toUpperCase();
+//            	}else{
+//            		mParticipantId = mParticipantName.substring(0,2).toUpperCase();
+//            	}
             	Toast.makeText(RunExperimentActivity.this, "Participant ID: "+mParticipantId+"\nName: "+mParticipantName+"\nAge: "+mParticipantAge, Toast.LENGTH_LONG).show();
 
             }
@@ -174,6 +182,12 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
             }
         })
         .create();
+    	}//default case
+    	return null;
+    }//end dialog
+    
+    private String showDialogAskParticipantDetails(){
+    	
     	return "hi";
     }
     
@@ -221,7 +235,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 		//startActivityForResult(i, 0);
 		
 		
-		mParticipantId="TT";
+		
 		mStimuliId="stimuli"+mStimuliPosition;
 		mImageFile=experimentPath+"images/"+columns[1].replaceAll("\"","");
 		setContentView(R.layout.activity_one_image_one_button);
@@ -302,6 +316,8 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
    @Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
+	   //showDialogAskParticipantDetails();
+	   //showDialog(1);
 		super.onResume();
 //		try {
 //			out.write("Came back from stimuli");
@@ -341,6 +357,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 		
    	mStimuliPosition++;
    	if (mStimuliArray[mStimuliPosition] != null){
+   		showDialogAskParticipantDetails();
    		presentStimuli(mStimuliPosition);
    	}else{
    		//Toast.makeText(RunExperimentActivity.this, "Merci!", Toast.LENGTH_LONG).show();
