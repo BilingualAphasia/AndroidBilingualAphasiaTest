@@ -85,6 +85,10 @@ public class ListofExperimentsActivity extends ListActivity{
                 } catch (Exception e) {
                 	Toast.makeText(ListofExperimentsActivity.this, "Had a problem getting data from the dialog "+e, Toast.LENGTH_LONG).show();
                 }
+                
+                i.putExtra("stimuliFile","/sdcard/OPrime/MorphologicalAwareness/stimuli_april9.csv");
+                i.putExtra("resultsFile","/sdcard/OPrime/MorphologicalAwareness/results/results.txt");
+                i.putExtra("participantsListFile","/sdcard/OPrime/MorphologicalAwareness/results/participants.txt");
                 startActivity(i);
                 break;
             default:

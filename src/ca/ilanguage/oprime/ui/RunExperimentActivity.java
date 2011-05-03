@@ -53,6 +53,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     private ImageView mImage;
     private String mStimuliFile;
     private String mResultsFile;
+    private String mParticipantsListFile;
     private String mStimuliArray[] = new String[1000];
     private int mStimuliPosition=1;
     private BufferedWriter mOut;
@@ -111,12 +112,19 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
         mParticipantAge=getIntent().getExtras().getString("participantAge");
         mParticipantName=getIntent().getExtras().getString("participantName");
         
-        
-        mStimuliFile="/sdcard/OPrime/MorphologicalAwareness/stimuli_april9.csv";
-        mResultsFile="/sdcard/OPrime/MorphologicalAwareness/results/results.txt";
+        if(mParticipantName.contains(" ")){
+    		String[] names = mParticipantName.split(" ");
+    		mParticipantId = names[0].substring(0,1).toUpperCase()+ names[1].substring(0, 1).toUpperCase();
+    	}else{
+    		mParticipantId = mParticipantName.substring(0,2).toUpperCase();
+    	}
+        mStimuliFile=getIntent().getExtras().getString("stimuliFile");
+        mResultsFile=getIntent().getExtras().getString("resultsFile");
+        mParticipantsListFile=getIntent().getExtras().getString("participantsListFile");
         readInStimuli();
         
-        
+        mDateString = (String) android.text.format.DateFormat.format("yyyy-MM-dd_hh.mm", new java.util.Date());
+	       mDateString = mDateString.replaceAll("/","_").replaceAll(" ","_");
         
         
         FileWriter fstream;
@@ -124,9 +132,19 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     		fstream = new FileWriter(mResultsFile,true);
     		mOut = new BufferedWriter(fstream);
 
-    		mOut.write("Date"+"\t"+"ParticipantID"+"\t"+"Stimuli"+"\t"+"ReactionTime\tResponse");
+    		mOut.write("Date"+"\t"+"ParticipantID"+"\t"+"Stimuli"+"\t"+"ReactionTime");
     		mOut.newLine();
     		
+    		/*
+    		 * Save the participant details in the participant list
+    		 */
+    		fstream = new FileWriter(mParticipantsListFile,true);
+    		BufferedWriter participantOut = new BufferedWriter(fstream);
+    		participantOut.write("Date"+"\t"+"Participant Name"+"\t"+"ID"+"\t"+"Age");
+    		participantOut.newLine();
+    		participantOut.write(mDateString+"\t"+mParticipantName+"\t"+mParticipantId+"\t"+mParticipantAge);
+    		participantOut.flush();
+    		participantOut.close();
 //    		for(int k= 0; k<mSimuliArray.length; k++){
 //    			presentStimuli(k);
 //    		}
@@ -177,10 +195,10 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     		setContentView(R.layout.logo_copyright);
     	    mImage = (ImageView) findViewById(R.id.mainimage);
     	    mImage.setImageResource(R.drawable.androids_experimenter_kids);
-    	    this.setTitle("Touch the arrows when you're ready.");
+    	    this.setTitle("Touchez les flches pour commencer.");
     	    //mParticipantName=getIntent().getExtras().getString("participantName");
-    	    Toast.makeText(RunExperimentActivity.this, "Hi "+mParticipantName
-    	    		+"!\n\nTouch the arrows when you're ready!", Toast.LENGTH_LONG).show();
+    	    Toast.makeText(RunExperimentActivity.this, ""+mParticipantName
+    	    		+" serait ID: "+mParticipantId+"\n\nTouchez les flches pour commencer.", Toast.LENGTH_LONG).show();
 
     	    
     	    
@@ -215,9 +233,9 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 			
 	
 			TextView imagenumber = (TextView) findViewById(R.id.imagenumber);
-			String imagefilename = columns[1].replaceAll("\"","");
+			String imagefilename = columns[1].replaceAll("\"","").replaceAll(".jpg","");
 			imagenumber.setText(imagefilename);
-			
+			this.setTitle("En cours... "+imagefilename);
 			
 		    mImage = (ImageView) findViewById(R.id.mainimage);
 	
