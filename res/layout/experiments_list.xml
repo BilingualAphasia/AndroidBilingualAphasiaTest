@@ -78,7 +78,7 @@
     android:id="@+id/android:empty"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:text="No experiments found try the /sdcard/OPrime folder"/>
+    android:text="No experiments found, Use the File Browser to find your experiments, you could try the /sdcard/OPrime or your DropBox folder"/>
 
 
 

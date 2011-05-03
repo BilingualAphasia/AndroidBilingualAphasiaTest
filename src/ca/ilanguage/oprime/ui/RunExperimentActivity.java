@@ -69,6 +69,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     private String mImageFile;
     private String mParticipantId ="TT";
     private String mParticipantName="Testing";
+    private String mExperimentDirectory="";
     private String mParticipantAge="0";
     private String mStimuliId;
     private MediaRecorder mRecorder;
@@ -121,6 +122,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
         mStimuliFile=getIntent().getExtras().getString("stimuliFile");
         mResultsFile=getIntent().getExtras().getString("resultsFile");
         mParticipantsListFile=getIntent().getExtras().getString("participantsListFile");
+        mExperimentDirectory=getIntent().getExtras().getString("experimentDir");
         readInStimuli();
         
         mDateString = (String) android.text.format.DateFormat.format("yyyy-MM-dd_hh.mm", new java.util.Date());
@@ -140,9 +142,10 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     		 */
     		fstream = new FileWriter(mParticipantsListFile,true);
     		BufferedWriter participantOut = new BufferedWriter(fstream);
-    		participantOut.write("Date"+"\t"+"Participant Name"+"\t"+"ID"+"\t"+"Age");
-    		participantOut.newLine();
+//    		participantOut.write("Date"+"\t"+"Participant Name"+"\t"+"ID"+"\t"+"Age");
+//    		participantOut.newLine();
     		participantOut.write(mDateString+"\t"+mParticipantName+"\t"+mParticipantId+"\t"+mParticipantAge);
+    		participantOut.newLine();
     		participantOut.flush();
     		participantOut.close();
 //    		for(int k= 0; k<mSimuliArray.length; k++){
@@ -205,7 +208,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     	}else if (mPauseScreen == false){
     	
 	    	String columns[] = mStimuliArray[number].split("\",\"");
-	    	String experimentPath="/sdcard/OPrime/MorphologicalAwareness/";
+	    	String experimentPath=mExperimentDirectory;
 			int stimuliCode=0;
 	    	Bundle bundle= new Bundle();
 			bundle.putString("participantCode", "noone");
@@ -267,7 +270,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 	        
 	//        mDateString=dateFormat.format(date).replaceAll("/","_");
 	        
-	        mAudioResultsFile ="/sdcard/OPrime/MorphologicalAwareness/results/"+mDateString+"_"+System.currentTimeMillis()+"_"+mParticipantId+"_"+mStimuliId+".mp3";    
+	        mAudioResultsFile =mExperimentDirectory+"results/"+mDateString+"_"+System.currentTimeMillis()+"_"+mParticipantId+"_"+mStimuliId+".mp3";    
 		    mRecorder = new MediaRecorder();
 	//	    Environment.getExternalStorageDirectory().getAbsolutePath() + path;
 		    String state = android.os.Environment.getExternalStorageState();
@@ -288,6 +291,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 			    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			    mRecorder.setOutputFile(mAudioResultsFile);
 			    mRecorder.prepare();
+			    mRecorder.start();
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
 				Toast.makeText(RunExperimentActivity.this, "The experiment cannot save audio, maybe the tablet is attached to a computer?", Toast.LENGTH_SHORT).show();
@@ -297,7 +301,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 				Toast.makeText(RunExperimentActivity.this, "The experiment cannot save audio, maybe the tablet is attached to a computer?", Toast.LENGTH_SHORT).show();
 	
 			}
-		    mRecorder.start();
+		   
 		    
     	}
 	    

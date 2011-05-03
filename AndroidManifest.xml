@@ -26,6 +26,9 @@
         <activity android:name="ca.ilanguage.oprime.ui.ListofExperimentsActivity"
                   android:label="@string/app_name">
         </activity>
+        <activity android:name="ca.ilanguage.oprime.ui.DisplayListofAvailibleExperimentsActivity"
+                  android:label="Liste des expériences trouvées sur votre Androide">
+        </activity>
         <activity android:name="ca.ilanguage.oprime.ui.OPrimeHomeActivity"
                   android:label="@string/app_name">
         </activity>
@@ -57,6 +60,9 @@
                   android:label="@string/app_name">
         </activity>
        <activity android:name="ca.ilanguage.oprime.ui.TextEntryActivity"
+                  android:label="@string/app_name">
+        </activity>
+        <activity android:name="ca.ilanguage.oprime.ui.ExperimentsDirectoryEntryActivity"
                   android:label="@string/app_name">
         </activity>
     </application>

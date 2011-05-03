@@ -35,6 +35,7 @@ public class OprimeLogoActivity extends Activity {
     private String mAudioFile;
     private ImageView mImage;
     private String mMaskImageFile;
+    private Boolean french=true;
     
     
     //to have participant draw on images look at APIDemo>graphics>fingerprint
@@ -71,7 +72,11 @@ public class OprimeLogoActivity extends Activity {
     public void onNextClick(View v){
     	
     	//startActivity(new Intent(this, OPrimeHomeActivity.class));
-    	startActivity(new Intent(this, ListofExperimentsActivity.class));
+    	if (french == false){
+    		startActivity(new Intent(this, ListofExperimentsActivity.class));
+    	}else{
+    		startActivity(new Intent(this, DisplayListofAvailibleExperimentsActivity.class));
+    	}
     }
     
 }
