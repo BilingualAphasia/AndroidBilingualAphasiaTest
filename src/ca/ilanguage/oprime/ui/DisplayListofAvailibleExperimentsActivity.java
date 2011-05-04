@@ -61,14 +61,19 @@ public class DisplayListofAvailibleExperimentsActivity extends ListActivity{
 	
 	protected void onListItemClick(ListView l, View v, int position, long id) 
     {
-		Toast.makeText(DisplayListofAvailibleExperimentsActivity.this, "This would run experiment "+position, Toast.LENGTH_LONG).show();
+		Intent foo = new Intent(this, TextEntryActivity.class);
+		foo.putExtra("title","Enter Participant Details");
+		foo.putExtra("name", "00f");
+		foo.putExtra("age", "x");
+		this.startActivityForResult(foo, GET_PARTICIPANT_DETAILS);
+		//Toast.makeText(DisplayListofAvailibleExperimentsActivity.this, "This would run experiment "+position, Toast.LENGTH_LONG).show();
     }
 	public void onRunMorphoClick(View v){
 
 		Intent foo = new Intent(this, TextEntryActivity.class);
 		foo.putExtra("title","Enter Participant Details");
-		foo.putExtra("name", "Testing");
-		foo.putExtra("age", "0");
+		foo.putExtra("name", "00f");
+		foo.putExtra("age", "x");
 		this.startActivityForResult(foo, GET_PARTICIPANT_DETAILS);
 		
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
@@ -126,7 +131,7 @@ public class DisplayListofAvailibleExperimentsActivity extends ListActivity{
                 	mStimuliFile= stim;
                 	
                 }
-            		Toast.makeText(DisplayListofAvailibleExperimentsActivity.this, "Refreshing ", Toast.LENGTH_LONG).show();
+            		//Toast.makeText(DisplayListofAvailibleExperimentsActivity.this, "Refreshing ", Toast.LENGTH_LONG).show();
             	 
                 break;
             default:

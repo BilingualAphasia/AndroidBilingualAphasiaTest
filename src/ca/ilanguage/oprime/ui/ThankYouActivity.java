@@ -63,7 +63,8 @@ public class ThankYouActivity extends Activity {
     public void onNextClick(View v){
     	
     	//startActivity(new Intent(this, OPrimeHomeActivity.class));
-    	startActivity(new Intent(this, ListofExperimentsActivity.class));
+    	//startActivity(new Intent(this, DisplayListofAvailibleExperimentsActivity.class));
+    	finish();
     }
     
 }

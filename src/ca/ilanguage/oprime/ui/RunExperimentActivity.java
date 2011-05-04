@@ -113,12 +113,14 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
         mParticipantAge=getIntent().getExtras().getString("participantAge");
         mParticipantName=getIntent().getExtras().getString("participantName");
         
-        if(mParticipantName.contains(" ")){
-    		String[] names = mParticipantName.split(" ");
-    		mParticipantId = names[0].substring(0,1).toUpperCase()+ names[1].substring(0, 1).toUpperCase();
-    	}else{
-    		mParticipantId = mParticipantName.substring(0,2).toUpperCase();
-    	}
+//        if(mParticipantName.contains(" ")){
+//    		String[] names = mParticipantName.split(" ");
+//    		mParticipantId = names[0].substring(0,1).toUpperCase()+ names[1].substring(0, 1).toUpperCase();
+//    	}else{
+//    		mParticipantId = mParticipantName.substring(0,2).toUpperCase();
+//    	}
+        mParticipantId=mParticipantName;
+        
         mStimuliFile=getIntent().getExtras().getString("stimuliFile");
         mResultsFile=getIntent().getExtras().getString("resultsFile");
         mParticipantsListFile=getIntent().getExtras().getString("participantsListFile");
@@ -200,9 +202,10 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
     	    mImage.setImageResource(R.drawable.androids_experimenter_kids);
     	    this.setTitle("Touchez les flèches pour commencer.");
     	    //mParticipantName=getIntent().getExtras().getString("participantName");
-    	    Toast.makeText(RunExperimentActivity.this, ""+mParticipantName
-    	    		+" serait ID: "+mParticipantId+"\n\nTouchez les flèches pour commencer.", Toast.LENGTH_LONG).show();
+//    	    Toast.makeText(RunExperimentActivity.this, ""+mParticipantName
+//    	    		+" serait ID: "+mParticipantId+"\n\nTouchez les flèches pour commencer.", Toast.LENGTH_LONG).show();
 
+    	    Toast.makeText(RunExperimentActivity.this, "Touchez les flèches pour commencer.", Toast.LENGTH_LONG).show();
     	    
     	    
     	}else if (mPauseScreen == false){
@@ -361,6 +364,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 	   	}else{
 	   		//Toast.makeText(RunExperimentActivity.this, "Merci!", Toast.LENGTH_LONG).show();
 	   		startActivity(new Intent(this, ThankYouActivity.class));
+	   		finish();
 	   	}
    	}
 		//return to runexperimentactivity
