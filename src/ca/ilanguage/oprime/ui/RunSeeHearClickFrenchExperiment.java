@@ -31,7 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RunSeeHearClickExperiment extends Activity implements TextToSpeech.OnInitListener {
+public class RunSeeHearClickFrenchExperiment extends Activity implements TextToSpeech.OnInitListener {
 	private static final String TAG = "RunExperimentActivity";
 	/** Talk to the user */
     private TextToSpeech mTts;
@@ -88,8 +88,8 @@ public class RunSeeHearClickExperiment extends Activity implements TextToSpeech.
 //    	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
 //    	        null);
 
-        mStimuliFile="/sdcard/dropbox/BilingualAphasiaTest/stimuli_english.csv";
-        mResultsFile="/sdcard/dropbox/BilingualAphasiaTest/results/english_results.txt";
+        mStimuliFile="/sdcard/dropbox/BilingualAphasiaTest/stimuli_french.csv";
+        mResultsFile="/sdcard/dropbox/BilingualAphasiaTest/results/french_results.txt";
         readInStimuli();
         
         FileWriter fstream;
@@ -112,7 +112,7 @@ public class RunSeeHearClickExperiment extends Activity implements TextToSpeech.
 //    		out.close();
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
-    		Toast.makeText(RunSeeHearClickExperiment.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
+    		Toast.makeText(RunSeeHearClickFrenchExperiment.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
 
     	}
     	
@@ -132,11 +132,11 @@ public class RunSeeHearClickExperiment extends Activity implements TextToSpeech.
 					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					Toast.makeText(RunSeeHearClickExperiment.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
+					Toast.makeText(RunSeeHearClickFrenchExperiment.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
 				}
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
-				Toast.makeText(RunSeeHearClickExperiment.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
+				Toast.makeText(RunSeeHearClickFrenchExperiment.this, "Error "+e.toString(), Toast.LENGTH_LONG).show();
 			}
 
    }
@@ -158,7 +158,7 @@ public class RunSeeHearClickExperiment extends Activity implements TextToSpeech.
 //		}
 
 		//send the bundle to the SeeStimuliAndSpeakActivity
-		Intent i = new Intent(RunSeeHearClickExperiment.this, SeeStimuliAndSpeakActivity.class);
+		Intent i = new Intent(RunSeeHearClickFrenchExperiment.this, SeeStimuliAndSpeakActivity.class);
 		i.putExtras(bundle);
 		//startActivityForResult(i, 0);
 		
@@ -192,7 +192,7 @@ public class RunSeeHearClickExperiment extends Activity implements TextToSpeech.
             }
         } catch (Exception e) {
             Log.e("Error reading image file", e.toString());
-            Toast.makeText(RunSeeHearClickExperiment.this, "Error reading image file "+mImageFile, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RunSeeHearClickFrenchExperiment.this, "Error reading image file "+mImageFile, Toast.LENGTH_SHORT).show();
 			
         }
         
@@ -315,7 +315,7 @@ public boolean onTouchEvent(MotionEvent event) {
 		mOut.flush();
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
-		Toast.makeText(RunSeeHearClickExperiment.this, "Error saving to the results file", Toast.LENGTH_SHORT).show();
+		Toast.makeText(RunSeeHearClickFrenchExperiment.this, "Error saving to the results file", Toast.LENGTH_SHORT).show();
 		
 	}
 //   	mRecorder.stop();

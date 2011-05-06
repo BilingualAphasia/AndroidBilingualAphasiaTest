@@ -25,6 +25,20 @@
         	android:drawableLeft="@drawable/ic_play"
         	android:onClick="onRunMorphoClick"
         	/>
+        <Button 
+    		android:text="BAT English Syntax Sample"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_play"
+        	android:onClick="onRunBATClick"
+        	/>
+        <Button 
+    		android:text="Exemplaire de BAT - Français"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:drawableLeft="@drawable/ic_play"
+        	android:onClick="onRunFrenchBATClick"
+        	/>
     </LinearLayout>
 <ListView
     android:id="@+id/android:list"

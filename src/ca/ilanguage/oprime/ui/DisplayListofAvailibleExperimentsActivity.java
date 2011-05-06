@@ -144,6 +144,11 @@ public class DisplayListofAvailibleExperimentsActivity extends ListActivity{
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
 		startActivity(new Intent(this, RunSeeHearClickExperiment.class));
 	}
+	public void onRunFrenchBATClick(View v){
+
+		//startActivity(new Intent(this, OPrimeHomeActivity.class));
+		startActivity(new Intent(this, RunSeeHearClickFrenchExperiment.class));
+	}
 	public void onPlayClick(View v){
 
 		//startActivity(new Intent(this, OPrimeHomeActivity.class));
