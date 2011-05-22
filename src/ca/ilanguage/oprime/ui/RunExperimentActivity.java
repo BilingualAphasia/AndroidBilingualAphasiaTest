@@ -344,7 +344,7 @@ public class RunExperimentActivity extends Activity implements TextToSpeech.OnIn
 	//		Toast.makeText(RunExperimentActivity.this, "On resume", Toast.LENGTH_LONG).show();
 	//	}
 	   	
-	   	mEndTime=System.currentTimeMillis();
+	   	//mEndTime=System.currentTimeMillis();
 		   mTimeImageWasDisplayed=mEndTime-mStartTime;
 		   try {
 			   mOut.write(mDateString+"\t"+mParticipantId+"\t"+mStimuliId+"\t\t"+mTimeImageWasDisplayed+"\t"+mResponse);

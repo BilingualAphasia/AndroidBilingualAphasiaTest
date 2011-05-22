@@ -49,7 +49,7 @@
     android:id="@+id/android:empty"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:text="No experiments, use The File Browser to look in your dropbox (probably /sdcard/dropbox)"/>
+    android:text="No experiments, click on the Settings (Chercher) button above to tell OPrime where to look for the Experiments."/>
 
 
 

@@ -5,4 +5,17 @@
     <string name="alert_dialog_cancel">Cancel</string>
     <string name="alert_dialog_ok">OK</string>
     <string name="alert_dialog_text_entry">Participant details dialog</string>
+    
+    
+
+	<string name="preference_about">About</string>
+	<string name="preference_about_title">About OPrime</string>
+	<string name="preference_about_summary">OPrime was made by iLanguage Lab.</string>
+	<string name="preference_visit_site">Go to the OPrime web site</string>
+	<string name="preference_thanks_title">Special Thanks</string>
+	<string name="preference_thanks_summary">Special Thanks to the Montreal Computational Linguistics community, and the Android Open Source developers for their work which directly or indirectly contributed to this project.</string>
+	<string name="preference_licence_title">License</string>
+	<string name="preference_licence_summary">The Experiments are copyright their original authors, see the Experiment Home screen for details for each Experiment. Portions of this OPrime are modifications based on work created and shared by Google and used according to terms described in the Apache 2.0 License.</string>
+	<string name="preference_misc">More Information</string>
+   
 </resources>

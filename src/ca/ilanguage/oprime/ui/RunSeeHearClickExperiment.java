@@ -12,9 +12,11 @@ import java.util.Date;
 import java.util.Locale;
 
 import ca.ilanguage.oprime.R;
+import ca.ilanguage.oprime.preferences.PreferenceConstants;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -52,6 +54,7 @@ public class RunSeeHearClickExperiment extends Activity implements TextToSpeech.
     private String mParticipantId;
     private String mStimuliId;
     private MediaRecorder mRecorder;
+    private String mBaseDir;
     
   //implement on Init for the text to speech
 	public void onInit(int status) {
@@ -87,9 +90,12 @@ public class RunSeeHearClickExperiment extends Activity implements TextToSpeech.
 //        mTts.speak("The experiment is running.",
 //    	        TextToSpeech.QUEUE_FLUSH,  // Drop all pending entries in the playback queue.
 //    	        null);
-
-        mStimuliFile="/sdcard/dropbox/BilingualAphasiaTest/stimuli_english.csv";
-        mResultsFile="/sdcard/dropbox/BilingualAphasiaTest/results/english_results.txt";
+        SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+		mBaseDir = prefs.getString(PreferenceConstants.PREFERENCE_EXPERIMENTS_DIR, "/sdcard/dropbox");
+		
+        
+        mStimuliFile=mBaseDir+"/BilingualAphasiaTest/stimuli_english.csv";
+        mResultsFile=mBaseDir+"/BilingualAphasiaTest/results/english_results.txt";
         readInStimuli();
         
         FileWriter fstream;
@@ -143,7 +149,7 @@ public class RunSeeHearClickExperiment extends Activity implements TextToSpeech.
     
     private void presentStimuli(int number){
     	String columns[] = mStimuliArray[number].split("\",\"");
-    	String experimentPath="/sdcard/dropbox/BilingualAphasiaTest/";
+    	String experimentPath=mBaseDir+"/BilingualAphasiaTest/";
 		int stimuliCode=0;
     	Bundle bundle= new Bundle();
 		bundle.putString("participantCode", "noone");
