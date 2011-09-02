@@ -1,0 +1,189 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script>
+
+var randomColor = function(){
+  //return 'hs1('+Math.floor(Math.random() * 360) + ',100%,50%)';
+	return '#'+Math.floor(Math.random() * 360);
+}
+var randomBlueGreenColor = function(){
+  return 'hs1('+Math.floor(Math.random() * 100 + 100) + ',100%,50%)';
+}
+var srandom = function() {
+  return Math.random() * 2-1;
+}
+
+//draw particles
+//http://www.youtube.com/watch?v=v8ikTvQWfoc&feature=player_embedded
+Particle = function(){
+  this.x = 0;//location
+  this.y = 0;
+  this.vx = 0;//vector for movement
+  this.vy = 0;
+  this.r = 0;//radius
+  this.dt = 0.1; //delta, a small step of movement
+  this.color = "hs1(35,100%,50%)";
+	this.init = function(){
+		this.color = randomColor();
+    this.x = Math.random() * ctx.canvas.width;
+    this.y = Math.random() * ctx.canvas.height;
+    this.vx = srandom() * 30;
+    this.vy = srandom() * 30;
+    this.r = Math.random() * 20 + 5;
+  }
+  this.draw = function(){
+    ctx.fillStyle = this.color;
+		ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI *2, false);
+    ctx.closePath();
+    ctx.fill();
+  }
+  this.update = function(){
+    //this.interact();
+		this.x += this.vx * this.dt;
+    this.y += this.vy * this.dt;
+  	this.bound();
+	}
+  this.bound = function(){
+    if(this.x < 0) { this.x = 0; this.vx *= -1; }
+    if(this.y < 0) { this.y = 0; this.vy *= -1; }
+    if(this.x > ctx.canvas.width - 1) {
+      this.x = ctx.canvas.width - 1; 
+      this.vx *= -1;
+    }
+    if(this.y > ctx.canvas.height -1){
+      this.y = ctx.canvas.height -1;
+      this.vy *= -1;
+    }
+  }
+	this.interact = function(){
+		for(var i = 0; i < particles.length; i++){
+			var other = particles[i];
+			if (this != other){
+				//compare the distance between the centers of the two
+				var dx = this.x - other.x;
+				var dy = this.y - other.y;
+				var d = Math.sqrt(dx*dx + dy*dy);
+				if(d > 0){
+					//R = the combined thickness of the two circles
+					var R = this.r + other.r;
+					if(d < R){
+						//if the distance between the circles is smaller 
+						//than their thickness, then they overlap
+						var dR = R - d;
+						var ux = dx / d;
+						var uy = dy / d;
+						//repel the particles from eachother
+						this.vx += ux * dR * 0.1;
+						this.vy += uy * dR * 0.1;
+						other.vx += -ux * dR * 0.1;
+						other.vy += -uy * dR * 0.1;
+					}
+				}
+			}	
+		}
+	}
+}//end Particle
+
+var particles =[];
+function addParticles(n){
+  for (var i=0; i < n; i++){
+    var p = new Particle();
+    p.init();
+    particles.push(p);
+  }
+}
+function clearParticles(){
+  var n = particles.length;
+  for(var i = 0; i < n; i++) {
+    particles.pop();
+  }
+}
+var pause = false;
+function loopParticles(){
+  if(pause) return;
+  ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
+  for (var i=0; i < particles.length; i++) particles[i].update();
+  for (var i=0; i < particles.length; i++) particles[i].draw();
+}
+function loopDelegate() {loopParticles();}
+
+
+
+//Getting window size:
+  //this works in chrome and on android.
+  //http://stackoverflow.com/questions/1152203/centering-a-canvas/1646370#1646370
+window.onload = window.onresize = function() {
+    var C = 0.8;        // canvas width to viewport width ratio
+    var W_TO_H = 2/1;   // canvas width to canvas height ratio
+    var el = document.getElementById("a");
+
+    // For IE compatibility http://www.google.com/search?q=get+viewport+size+js
+    var viewportWidth = window.innerWidth;
+    var viewportHeight = window.innerHeight;
+
+    var canvasWidth = viewportWidth * C;
+    var canvasHeight = viewportHeight * C;//canvasWidth / W_TO_H;
+    el.style.position = "fixed";
+    el.setAttribute("width", canvasWidth);
+    el.setAttribute("height", canvasHeight);
+    el.style.top = (viewportHeight - canvasHeight) / 2;
+    el.style.left = (viewportWidth - canvasWidth) / 2;
+
+    window.ctx = el.getContext("2d");
+    ctx.clearRect(0,0,canvasWidth,canvasHeight);
+    //draw yellow diamond
+    /* ctx.fillStyle = 'yellow';
+    ctx.moveTo(0, canvasHeight/2);
+    ctx.lineTo(canvasWidth/2, 0);
+    ctx.lineTo(canvasWidth, canvasHeight/2);
+    ctx.lineTo(canvasWidth/2, canvasHeight);
+    ctx.lineTo(0, canvasHeight/2);
+    ctx.fill() */
+    
+    
+    //draw arc
+    //http://www.html5canvastutorials.com/tutorials/html5-canvas-arcs/
+    var centerX = viewportWidth / 2;
+    var centerY = viewportHeight / 2;
+    var radius = viewportHeight / 2.5;
+    var startingAngle = 1.5 * Math.PI;
+    var endingAngle = 0.1 * Math.PI;
+    var counterclockwise = false;
+    ctx.arc(centerX, centerY, radius, startingAngle, 
+            endingAngle, counterclockwise);
+    //ctx.lineWidth = 5;
+    //ctx.strokeStyle = "black";
+    ctx.stroke();
+    
+  /*  
+  //-------------- draw two circles
+    ctx.beginPath();
+    ctx.fillStyle = "blue";
+    ctx.arc(30, 30, 20, 0, Math.PI*2, true);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.fillStyle = "red";
+    ctx.arc(100, 100, 40, 0, Math.PI*2, true);
+    ctx.fill();
+    ctx.closePath();
+   */
+ 
+	//draw particles
+	addParticles(50);
+	var timer = setInterval(loopDelegate, 1000 / 60);
+  for (var i =0 ; i < particles.length; i++){ particles[i].color = randomColor();}
+}
+</script>
+
+</head>
+<body>
+
+
+</body>
+<!-- <canvas id="homeCanvas"> </canvas>-->
+<canvas id="a" style="background: #bbb">
+</canvas>
+</html>

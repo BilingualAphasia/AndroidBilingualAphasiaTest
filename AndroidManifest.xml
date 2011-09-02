@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="ca.ilanguage.oprime"
+      package="ca.ilanguage.oprime.bilingualaphasiatest"
       android:versionCode="1"
       android:versionName="1.0"
       android:installLocation="preferExternal">
@@ -16,7 +16,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
 
     <application android:icon="@drawable/ic_oprime" android:label="@string/app_name">
-        <activity android:name="ca.ilanguage.oprime.ui.OprimeLogoActivity"
+        <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.BilingualAphasiaTestHome"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,55 +24,7 @@
             </intent-filter>
         </activity>
         
-        
-		<activity android:name="ca.ilanguage.oprime.preferences.SetPreferencesActivity"
-				   />
 		     		
-		     		
-        <activity android:name="ca.ilanguage.oprime.ui.ListofExperimentsActivity"
-                  android:label="@string/app_name">
-        </activity>
-        <activity android:name="ca.ilanguage.oprime.ui.DisplayListofAvailibleExperimentsActivity"
-                  android:label="Liste des expériences trouvées sur votre Androide">
-        </activity>
-        <activity android:name="ca.ilanguage.oprime.ui.OPrimeHomeActivity"
-                  android:label="@string/app_name">
-        </activity>
-        <activity android:name="ca.ilanguage.oprime.ui.ThankYouActivity"
-                  android:label="@string/app_name">
-        </activity>
-        <activity android:name="ca.ilanguage.oprime.ui.RunExperimentActivity"
-                  android:label="Experiment Running">
-        </activity>
-        <activity android:name="ca.ilanguage.oprime.ui.RunSeeHearClickExperiment"
-                  android:label="@string/app_name">
-        </activity>
-        <activity android:name="ca.ilanguage.oprime.ui.RunSeeHearClickFrenchExperiment"
-                  android:label="@string/app_name">
-        </activity>
-        <activity android:name="ca.ilanguage.oprime.ui.CheckDeviceSensorsActivity"
-                  android:label="@string/app_name">
-        </activity>
-        <activity android:name="ca.ilanguage.oprime.ui.PresentAnImageStimuliActivity"
-                  android:label="@string/app_name">
-        </activity>
-        <activity android:name="ca.ilanguage.oprime.ui.SeeStimuliAndSpeakActivity"
-                  android:label="@string/app_name">
-        </activity>
-  		<activity android:name="ca.ilanguage.oprime.ui.MultiTouchVisualTestActivity"
-                  android:label="@string/app_name">
-        </activity>
-		<activity android:name="ca.ilanguage.oprime.ui.ClearActivity"
-                  android:label="@string/app_name">
-        </activity>
-		<activity android:name="ca.ilanguage.oprime.ui.TranslucentUserDrawActivity"
-                  android:label="@string/app_name">
-        </activity>
-       <activity android:name="ca.ilanguage.oprime.ui.TextEntryActivity"
-                  android:label="@string/app_name">
-        </activity>
-        <activity android:name="ca.ilanguage.oprime.ui.ExperimentsDirectoryEntryActivity"
-                  android:label="@string/app_name">
-        </activity>
+		 
     </application>
 </manifest>
