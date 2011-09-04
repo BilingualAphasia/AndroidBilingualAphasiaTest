@@ -13,6 +13,8 @@ var randomBlueGreenColor = function(){
 var srandom = function() {
   return Math.random() * 2-1;
 }
+var particles =[];
+var positions = [];
 
 //draw particles
 //http://www.youtube.com/watch?v=v8ikTvQWfoc&feature=player_embedded
@@ -41,6 +43,7 @@ Particle = function(){
   }
   this.update = function(){
     //this.interact();
+		this.fallIntoPosition();
 		this.x += this.vx * this.dt;
     this.y += this.vy * this.dt;
   	this.bound();
@@ -57,6 +60,21 @@ Particle = function(){
       this.vy *= -1;
     }
   }
+	this.fallIntoPosition = function(){
+		for(var i = 0; i < positions.length; i++){
+			var position = positions[i];
+			var dx = this.x - position.x;
+			var dy = this.y - position.y;
+			var d = Math.sqrt(dx*dx + dy*dy);
+			var R = this.r + position.r;
+			if(d < R){
+  			positions[i].color = this.color;
+				position.r = this.r;
+				//delete this particle
+			}
+		}
+		
+	}
 	this.interact = function(){
 		for(var i = 0; i < particles.length; i++){
 			var other = particles[i];
@@ -86,13 +104,37 @@ Particle = function(){
 	}
 }//end Particle
 
-var particles =[];
 function addParticles(n){
   for (var i=0; i < n; i++){
     var p = new Particle();
     p.init();
     particles.push(p);
   }
+}
+function addPositions(n){
+	/*if(n %2 ===0){
+		n=n-1;
+	}*/
+	var xoffset = ctx.canvas.width/3.5;
+	var xunits = ctx.canvas.width / n-1;
+	var yunits = ctx.canvas.height / n-1 ;
+  var previousy =  25;
+	var theta = Math.PI /2 /n; //the angle between dots
+	var xcenter = xoffset;
+	var ycenter = ctx.canvas.height - ctx.canvas.height/10;
+	var radius = ctx.canvas.width;
+	if (radius > ctx.canvas.height*0.8){
+		radius = ctx.canvas.height*0.8;
+	}
+	for (var i = 0; i < n; i++){
+		var p = new Particle();
+		p.init();
+		p.x = xcenter + (Math.cos(theta*i) * radius) *1.2 ;
+		p.y = ycenter + Math.sin(-theta*i) * radius ; 
+		p.color = "black";
+		p.r = 20;
+		positions.push(p);
+	}
 }
 function clearParticles(){
   var n = particles.length;
@@ -104,7 +146,8 @@ var pause = false;
 function loopParticles(){
   if(pause) return;
   ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
-  for (var i=0; i < particles.length; i++) particles[i].update();
+  for(var i = 0; i<positions.length; i++){positions[i].draw();}
+	for (var i=0; i < particles.length; i++) particles[i].update();
   for (var i=0; i < particles.length; i++) particles[i].draw();
 }
 function loopDelegate() {loopParticles();}
@@ -170,11 +213,15 @@ window.onload = window.onresize = function() {
     ctx.fill();
     ctx.closePath();
    */
- 
-	//draw particles
-	addParticles(50);
+	addPositions(8);
+	for(var i = 0; i<positions.length; i++){positions[i].draw();}
+	
+	//draw a reasonable number of particles 
+	var screenSize = ctx.canvas.width;
+	if (screenSize < ctx.canvas.height){ screenSize = ctx.canvas.height; }
+	addParticles(screenSize/50);
 	var timer = setInterval(loopDelegate, 1000 / 60);
-  for (var i =0 ; i < particles.length; i++){ particles[i].color = randomColor();}
+  //for (var i =0 ; i < particles.length; i++){ particles[i].color = randomColor();}
 }
 </script>
 
