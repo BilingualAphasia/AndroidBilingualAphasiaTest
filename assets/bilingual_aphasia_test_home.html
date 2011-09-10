@@ -5,7 +5,9 @@
 
 var randomColor = function(){
   //return 'hs1('+Math.floor(Math.random() * 360) + ',100%,50%)';
-	return '#'+Math.floor(Math.random() * 360);
+  //return '#'+Math.floor(Math.random() * 360);
+  return '#000000'.replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);})
+  //return '#'+Math.floor(Math.random()*16777215).toString(16);
 }
 var randomBlueGreenColor = function(){
   return 'hs1('+Math.floor(Math.random() * 100 + 100) + ',100%,50%)';
@@ -13,12 +15,14 @@ var randomBlueGreenColor = function(){
 var srandom = function() {
   return Math.random() * 2-1;
 }
-var particles =[];
+var particles = [];
 var positions = [];
-
+var positionsFilled = [];
+var disapear = false;
 //draw particles
 //http://www.youtube.com/watch?v=v8ikTvQWfoc&feature=player_embedded
 Particle = function(){
+  this.id = 0;
   this.x = 0;//location
   this.y = 0;
   this.vx = 0;//vector for movement
@@ -26,7 +30,8 @@ Particle = function(){
   this.r = 0;//radius
   this.dt = 0.1; //delta, a small step of movement
   this.color = "hs1(35,100%,50%)";
-	this.init = function(){
+  this.init = function(i){
+    this.id =i;
 		this.color = randomColor();
     this.x = Math.random() * ctx.canvas.width;
     this.y = Math.random() * ctx.canvas.height;
@@ -49,13 +54,31 @@ Particle = function(){
   	this.bound();
 	}
   this.bound = function(){
-    if(this.x < 0) { this.x = 0; this.vx *= -1; }
-    if(this.y < 0) { this.y = 0; this.vy *= -1; }
+    if(this.x < 0) { 
+      if (disapear === true){ 
+        particles.splice(particles.indexOf(this),1);
+      }
+      this.x = 0; 
+      this.vx *= -1; 
+    }
+    if(this.y < 0) { 
+      if (disapear === true){ 
+        particles.splice(particles.indexOf(this),1);
+      }
+      this.y = 0; 
+      this.vy *= -1; 
+    }
     if(this.x > ctx.canvas.width - 1) {
+      if (disapear === true){ 
+        particles.splice(particles.indexOf(this),1);
+      }
       this.x = ctx.canvas.width - 1; 
       this.vx *= -1;
     }
     if(this.y > ctx.canvas.height -1){
+       if (disapear === true){ 
+        particles.splice(particles.indexOf(this),1);
+      }
       this.y = ctx.canvas.height -1;
       this.vy *= -1;
     }
@@ -66,11 +89,27 @@ Particle = function(){
 			var dx = this.x - position.x;
 			var dy = this.y - position.y;
 			var d = Math.sqrt(dx*dx + dy*dy);
-			var R = this.r + position.r;
-			if(d < R){
-  			positions[i].color = this.color;
+			var R = this.r + position.r + 10;//added 10 pixles to make them jump into place
+      if(d < R){
+  			position.color = this.color;
 				position.r = this.r;
-				//delete this particle
+        //delete this particle
+        positionid = position.id;
+        particles.splice(particles.indexOf(this),1);
+        //push this position into the positionsFilled array
+        var filledPosition = positions.splice(i,1);
+        positionsFilled.push(position);
+        console.log(filledPosition+ " " +position);
+        var ids = "";
+        for (var j = 0; j <particles.length; j++){
+          ids =ids+" "+particles[j].id;
+        }
+        if(positions.length > 0){
+          console.log("Positions filled:"+positionid+ "distance:"+d+" overlap:"+R+" \nParticle "+this.id+" became position:"+position.id+" at array index:"+i+" Particles left:"+ids);
+        }else{
+          disapear = true;
+        //pause=true;
+        }
 			}
 		}
 		
@@ -107,7 +146,7 @@ Particle = function(){
 function addParticles(n){
   for (var i=0; i < n; i++){
     var p = new Particle();
-    p.init();
+    p.init(i);
     particles.push(p);
   }
 }
@@ -128,10 +167,10 @@ function addPositions(n){
 	}
 	for (var i = 0; i < n; i++){
 		var p = new Particle();
-		p.init();
+		p.init(i);
 		p.x = xcenter + (Math.cos(theta*i) * radius) *1.2 ;
 		p.y = ycenter + Math.sin(-theta*i) * radius ; 
-		p.color = "black";
+		p.color = "white";
 		p.r = 20;
 		positions.push(p);
 	}
@@ -147,8 +186,15 @@ function loopParticles(){
   if(pause) return;
   ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
   for(var i = 0; i<positions.length; i++){positions[i].draw();}
-	for (var i=0; i < particles.length; i++) particles[i].update();
-  for (var i=0; i < particles.length; i++) particles[i].draw();
+  if(positionsFilled.length >0){
+    for(var i = 0; i<positionsFilled.length; i++){positionsFilled[i].draw();}
+  }
+  if(particles.length > 0){
+    for (var i=0; i < particles.length; i++) particles[i].update();
+    for (var i=0; i < particles.length; i++) particles[i].draw();
+  }else{
+    pause = true;
+  }
 }
 function loopDelegate() {loopParticles();}
 
