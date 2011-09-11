@@ -99,13 +99,13 @@ Particle = function(){
         //push this position into the positionsFilled array
         var filledPosition = positions.splice(i,1);
         positionsFilled.push(position);
-        console.log(filledPosition+ " " +position);
+        //console.log(filledPosition+ " " +position);
         var ids = "";
         for (var j = 0; j <particles.length; j++){
           ids =ids+" "+particles[j].id;
         }
         if(positions.length > 0){
-          console.log("Positions filled:"+positionid+ "distance:"+d+" overlap:"+R+" \nParticle "+this.id+" became position:"+position.id+" at array index:"+i+" Particles left:"+ids);
+          //console.log("Positions filled:"+positionid+ "distance:"+d+" overlap:"+R+" \nParticle "+this.id+" became position:"+position.id+" at array index:"+i+" Particles left:"+ids);
         }else{
           disapear = true;
         //pause=true;
@@ -182,6 +182,13 @@ function clearParticles(){
   }
 }
 var pause = false;
+var timer;
+var stopLooping = function(){
+  clearInterval(timer);
+}
+var pushButton = function(id){
+//to be defined later
+}
 function loopParticles(){
   if(pause) return;
   ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
@@ -194,9 +201,12 @@ function loopParticles(){
     for (var i=0; i < particles.length; i++) particles[i].draw();
   }else{
     pause = true;
+		stopLooping();
   }
 }
-function loopDelegate() {loopParticles();}
+function loopDelegate() {
+	loopParticles();
+}
 
 
 
@@ -204,7 +214,7 @@ function loopDelegate() {loopParticles();}
   //this works in chrome and on android.
   //http://stackoverflow.com/questions/1152203/centering-a-canvas/1646370#1646370
 window.onload = window.onresize = function() {
-    var C = 0.8;        // canvas width to viewport width ratio
+    var C = 0.95;        // canvas width to viewport width ratio
     var W_TO_H = 2/1;   // canvas width to canvas height ratio
     var el = document.getElementById("a");
 
@@ -266,15 +276,47 @@ window.onload = window.onresize = function() {
 	var screenSize = ctx.canvas.width;
 	if (screenSize < ctx.canvas.height){ screenSize = ctx.canvas.height; }
 	addParticles(screenSize/50);
-	var timer = setInterval(loopDelegate, 1000 / 60);
-  	
+	window.timer = setInterval(loopDelegate, 1000 / 60);
+
+	var getPositionAsButton = function(x,y){
+		for(var k = 0; k < positionsFilled.length; k++){
+			var dx = x - positionsFilled[k].x;
+      var dy = y - positionsFilled[k].y;
+      var d = Math.sqrt(dx*dx + dy*dy);
+      var R = 35;// positionsFilled[k].r + 5;//added 10 pixles to click around the buton
+      if(d < R){
+				positionsFilled[k].color = "#aaaaaa";
+				positionsFilled[k].r = R;
+				alert("Clicked "+positionsFilled[k].id);
+				window.pressButton(positionsFilled[k].id);
+			}else{
+				//alert(" distance to this position "+d);
+				//alert("Position filled is at "+positionsFilled[k].x+" "+positionsFilled[k].y);
+			}
+		}
+	}
+	ctx.canvas.addEventListener('touchstart', function(e){
+		alert(e.changedTouches[0].pageX + " " + e.changedTouches[0].pageY);
+	});	
+  ctx.canvas.addEventListener('mousedown', function(e){
+    console.log(e);
+		alert(e.pageX + " " + e.pageY);
+ 		getPositionAsButton(e.pageX,e.pageY);
+	 }); 
+	
+
 	function isNativeApp() {
 	    return /BilingualAphasiaTest\/[0-9\.]+$/.test(navigator.userAgent);
 	}
 	if(isNativeApp()){
-		Android.launchSubExperimentJS(1);
+		window.pressButton = function(id){
+			Android.launchSubExperimentJS(id);
+		}
 	}else{
-		alert("in a browser");
+		//alert("in a browser");
+		window.pressButton = function(id){
+			alert("pressed experiment button "+id);
+		}
 	}
 
 }
