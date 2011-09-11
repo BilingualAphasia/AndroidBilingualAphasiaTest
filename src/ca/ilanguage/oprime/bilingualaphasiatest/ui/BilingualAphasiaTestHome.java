@@ -2,6 +2,7 @@ package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebSettings;
@@ -11,6 +12,12 @@ import ca.ilanguage.oprime.bilingualaphasiatest.R;
 
 public class BilingualAphasiaTestHome extends Activity {
 	private WebView mWebView;
+	private int mSubExperiments = 5;
+	private static final int ENGLISH = 0;
+	private static final int FRENCH = 1;
+	public static final String LANGUAGE ="language";
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +33,8 @@ public class BilingualAphasiaTestHome extends Activity {
 		webSettings.setUserAgentString(webSettings.getUserAgentString() + " "
 				+ getString(R.string.user_agent_suffix));
 
+		
+		
 		mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
 
 	}
@@ -44,6 +53,26 @@ public class BilingualAphasiaTestHome extends Activity {
 		JavaScriptInterface(Context c) {
 			mContext = c;
 
+		}
+		public void launchSubExperimentJS(int subExperimentId){
+			if(subExperimentId == 1){
+				
+			}else if(subExperimentId == 1){
+				
+			}else if(subExperimentId == 2){
+				
+			}else if(subExperimentId == 3){
+				
+			}else if(subExperimentId == 4){
+				
+			}else if(subExperimentId == 5){
+				
+			}else if(subExperimentId == 6){
+				
+			}else{
+				
+			}
+			//startActivity(new Intent(mContext, BilingualAphasiaTestHome.class));
 		}
 
 		public void showToast(String toast) {

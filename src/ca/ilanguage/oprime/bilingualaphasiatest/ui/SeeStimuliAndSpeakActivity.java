@@ -1,11 +1,11 @@
-package ca.ilanguage.oprime.ui;
+package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import ca.ilanguage.oprime.R;
+import ca.ilanguage.oprime.bilingualaphasiatest.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;

@@ -267,7 +267,16 @@ window.onload = window.onresize = function() {
 	if (screenSize < ctx.canvas.height){ screenSize = ctx.canvas.height; }
 	addParticles(screenSize/50);
 	var timer = setInterval(loopDelegate, 1000 / 60);
-  //for (var i =0 ; i < particles.length; i++){ particles[i].color = randomColor();}
+  	
+	function isNativeApp() {
+	    return /BilingualAphasiaTest\/[0-9\.]+$/.test(navigator.userAgent);
+	}
+	if(isNativeApp()){
+		Android.launchSubExperimentJS(1);
+	}else{
+		alert("in a browser");
+	}
+
 }
 </script>
 
