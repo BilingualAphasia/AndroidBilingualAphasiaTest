@@ -19,6 +19,7 @@ var particles = [];
 var positions = [];
 var positionsFilled = [];
 var disapear = false;
+var buttonLabels = new Array("History of Bilingualism","English Background","Spontaneous Speech","Verbal Comprehension","Pointing","Simple and Semi-complex Commands","Complex Commands","Verbal Auditory Discrimination","Syntactic Comprehension","Semantic Categories","Synonyms","Antonyms","Grammaticality Judgement","Semantic Acceptability","Lexical Decision","Series","Verbal Fluency","Naming","Sentence Construction","Semantic Opposites","Derivational Morphology","Morphological Opposites","Description","Mental Arithmetic","Listening Comprehension","Reading","Copying","Dictation","Reading Comprehension for Words","Reading Comprehension for Sentences","Writing");
 //draw particles
 //http://www.youtube.com/watch?v=v8ikTvQWfoc&feature=player_embedded
 Particle = function(){
@@ -98,12 +99,13 @@ Particle = function(){
         particles.splice(particles.indexOf(this),1);
         //push this position into the positionsFilled array
         var filledPosition = positions.splice(i,1);
-        positionsFilled.push(position);
-        //console.log(filledPosition+ " " +position);
-        var ids = "";
-        for (var j = 0; j <particles.length; j++){
-          ids =ids+" "+particles[j].id;
-        }
+        position.label=buttonLabels[position.id];
+				positionsFilled.push(position);
+				//console.log(filledPosition+ " " +position);
+        //var ids = "";
+        //for (var j = 0; j <particles.length; j++){
+        //  ids =ids+" "+particles[j].id;
+        //}
         if(positions.length > 0){
           //console.log("Positions filled:"+positionid+ "distance:"+d+" overlap:"+R+" \nParticle "+this.id+" became position:"+position.id+" at array index:"+i+" Particles left:"+ids);
         }else{
@@ -168,8 +170,13 @@ function addPositions(n){
 	for (var i = 0; i < n; i++){
 		var p = new Particle();
 		p.init(i);
-		p.x = xcenter + (Math.cos(theta*i) * radius) *1.2 ;
-		p.y = ycenter + Math.sin(-theta*i) * radius ; 
+		//set start of circle at 3/2PI (the top of the circle)
+		var angleTopToBottom = 3*Math.PI/2+theta*i;
+		//add the cosine of the angle times the radius of the menu circle (elipse 1.2)
+		p.angleOnCircleMenu = angleTopToBottom;
+		p.x = xcenter + (Math.cos(angleTopToBottom) * radius) *1.2 ;
+		//add the sin (height) of the negative angle to go up times the radius 
+		p.y = ycenter + Math.sin(angleTopToBottom) * radius ; 
 		p.color = "white";
 		p.r = 20;
 		positions.push(p);
@@ -194,7 +201,13 @@ function loopParticles(){
   ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
   for(var i = 0; i<positions.length; i++){positions[i].draw();}
   if(positionsFilled.length >0){
-    for(var i = 0; i<positionsFilled.length; i++){positionsFilled[i].draw();}
+    for(var i = 0; i<positionsFilled.length; i++){
+			positionsFilled[i].draw();
+		  ctx.fillStyle = "black";	
+			var labelx = positionsFilled[i].x +20 *Math.cos( positionsFilled[i].angleOnCircleMenu );
+			var labely = positionsFilled[i].y + 20*Math.sin( positionsFilled[i].angleOnCircleMenu );
+			ctx.fillText(positionsFilled[i].label,labelx, labely);
+		}
   }
   if(particles.length > 0){
     for (var i=0; i < particles.length; i++) particles[i].update();
@@ -240,7 +253,11 @@ window.onload = window.onresize = function() {
     ctx.lineTo(canvasWidth/2, canvasHeight);
     ctx.lineTo(0, canvasHeight/2);
     ctx.fill() */
-    
+   
+		//Write the label next to the button
+    ctx.font = "bold 12px sans-serif";
+    ctx.fillText("Bilingual Aphasia Test - English",100,100);
+ 
     
     //draw arc
     //http://www.html5canvastutorials.com/tutorials/html5-canvas-arcs/
