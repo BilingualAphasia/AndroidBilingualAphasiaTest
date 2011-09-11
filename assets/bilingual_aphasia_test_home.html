@@ -29,7 +29,7 @@ Particle = function(){
   this.vx = 0;//vector for movement
   this.vy = 0;
   this.r = 0;//radius
-  this.dt = 0.1; //delta, a small step of movement
+  this.dt = 0.15; //delta, a small step of movement
   this.color = "hs1(35,100%,50%)";
   this.init = function(i){
     this.id =i;
@@ -286,13 +286,13 @@ window.onload = window.onresize = function() {
     ctx.fill();
     ctx.closePath();
    */
-	addPositions(8);
+	addPositions(buttonLabels.length);
 	for(var i = 0; i<positions.length; i++){positions[i].draw();}
 	
 	//draw a reasonable number of particles 
 	var screenSize = ctx.canvas.width;
 	if (screenSize < ctx.canvas.height){ screenSize = ctx.canvas.height; }
-	addParticles(screenSize/50);
+	addParticles(Math.max(buttonLabels.length*2 , screenSize/50));
 	window.timer = setInterval(loopDelegate, 1000 / 60);
 
 	var getPositionAsButton = function(x,y){
@@ -304,7 +304,7 @@ window.onload = window.onresize = function() {
       if(d < R){
 				positionsFilled[k].color = "#aaaaaa";
 				positionsFilled[k].r = R;
-				alert("Clicked "+positionsFilled[k].id);
+				//alert("Clicked "+positionsFilled[k].id);
 				window.pressButton(positionsFilled[k].id);
 			}else{
 				//alert(" distance to this position "+d);
@@ -313,11 +313,11 @@ window.onload = window.onresize = function() {
 		}
 	}
 	ctx.canvas.addEventListener('touchstart', function(e){
-		alert(e.changedTouches[0].pageX + " " + e.changedTouches[0].pageY);
+		//alert(e.changedTouches[0].pageX + " " + e.changedTouches[0].pageY);
 	});	
   ctx.canvas.addEventListener('mousedown', function(e){
     console.log(e);
-		alert(e.pageX + " " + e.pageY);
+		//alert(e.pageX + " " + e.pageY);
  		getPositionAsButton(e.pageX,e.pageY);
 	 }); 
 	
@@ -332,7 +332,7 @@ window.onload = window.onresize = function() {
 	}else{
 		//alert("in a browser");
 		window.pressButton = function(id){
-			alert("pressed experiment button "+id);
+			//alert("pressed experiment button "+id);
 		}
 	}
 
