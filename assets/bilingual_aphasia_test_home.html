@@ -104,6 +104,52 @@ Particle = function(){
         //push this position into the positionsFilled array
         var filledPosition = positions.splice(i,1);
         position.label=buttonLabels[position.id];
+				
+				position.labelx = position.x + 25*Math.cos( position.angleOnCircleMenu );
+      	position.labely = position.y + 25*Math.sin( position.angleOnCircleMenu );
+      	position.textAlign = "right";
+				if(menuShape ==="arc"){
+        	position.textAlign = "right";
+      	}else{
+					//its a circle shape
+					//put the labels on the right if the node is on the right of the center
+					//put the labels on the left if the node is on the left of the center
+        	if(position.x > ctx.canvas.width/2){
+          	position.textAlign = "left";
+        	}else{
+          	position.textAlign = "right";
+        	}
+        	//if its the topmost position, put the label in the center
+					if(position.id === 0){
+          	position.textAlign = "center";
+          	position.labely = position.labely -5;
+        	}else if(buttonLabels.length % 2 === 0){
+            //if the circle has an even number of nodes
+						if (position.id === buttonLabels.length/2 - 1){
+              //if its in the bottom middle
+							position.textAlign = "center";
+              position.labely = position.labely +5;
+            } 
+          }else{
+            //if the circle has an odd number of nodes
+            if (position.id === (buttonLabels.length - 1)/2){
+              position.textAlign = "center";
+              position.labely = position.labely +5;
+            }
+						if (position.id === (buttonLabels.length - 1)/2){
+              position.textAlign = "center";
+              position.labelx = position.labelx +10
+							position.labely = position.labely +5;
+            }
+						if (position.id === (buttonLabels.length + 1)/2){
+              position.textAlign = "center";
+              position.labelx = position.labelx -10
+              position.labely = position.labely +5;
+            }
+
+          }
+      	}//end circle label logic
+
 				positionsFilled.push(position);
 				//console.log(filledPosition+ " " +position);
         //var ids = "";
@@ -222,22 +268,8 @@ function loopParticles(){
     for(var i = 0; i<positionsFilled.length; i++){
 			positionsFilled[i].draw();
 		  ctx.fillStyle = "black";	
-			var labelx = positionsFilled[i].x +25 *Math.cos( positionsFilled[i].angleOnCircleMenu );
-			var labely = positionsFilled[i].y + 25*Math.sin( positionsFilled[i].angleOnCircleMenu );
-			if(menuShape ==="arc"){
-				//ctx.textAlign = "center";
-			}else{
-				if(positionsFilled[i].x > ctx.canvas.width/2){
-					ctx.textAlign = "left";
-				}else{
-					ctx.textAlign = "right";
-				}
-				if(positionsFilled[i].id === 0){
-					ctx.textAlign = "center";
-					labely = labely -5;
-				}
-			}
-			ctx.fillText(positionsFilled[i].label,labelx, labely);
+			ctx.textAlign = positionsFilled[i].textAlign;
+			ctx.fillText(positionsFilled[i].label,positionsFilled[i].labelx, positionsFilled[i].labely);
 		}
   }
   if(particles.length > 0){
@@ -319,6 +351,8 @@ window.onload = window.onresize = function() {
    */
 	var minScreenSize = ctx.canvas.width;
   if (minScreenSize > ctx.canvas.height){ minScreenSize = ctx.canvas.height; }
+	var buttonRadiusForClicking = 2*Math.PI * minScreenSize/ buttonLabels.length /4//button size is relative to number of buttons and circumference
+ 	console.log(buttonRadiusForClicking);
 
 	addPositions(buttonLabels.length,minScreenSize);
 	for(var i = 0; i<positions.length; i++){positions[i].draw();}
@@ -332,7 +366,7 @@ window.onload = window.onresize = function() {
 			var dx = x - positionsFilled[k].x;
       var dy = y - positionsFilled[k].y;
       var d = Math.sqrt(dx*dx + dy*dy);
-      var R = 35;// positionsFilled[k].r + 5;//added 10 pixles to click around the buton
+      var R = buttonRadiusForClicking;// positionsFilled[k].r + 5;//added 10 pixles to click around the buton
       if(d < R){
 				positionsFilled[k].color = "#aaaaaa";
 				positionsFilled[k].r = R;
