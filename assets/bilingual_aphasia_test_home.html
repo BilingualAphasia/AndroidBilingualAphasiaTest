@@ -19,7 +19,11 @@ var particles = [];
 var positions = [];
 var positionsFilled = [];
 var disapear = false;
+var menuShape = "arc"; //arc or circle
 var buttonLabels = new Array("History of Bilingualism","English Background","Spontaneous Speech","Verbal Comprehension","Pointing","Simple and Semi-complex Commands","Complex Commands","Verbal Auditory Discrimination","Syntactic Comprehension","Semantic Categories","Synonyms","Antonyms","Grammaticality Judgement","Semantic Acceptability","Lexical Decision","Series","Verbal Fluency","Naming","Sentence Construction","Semantic Opposites","Derivational Morphology","Morphological Opposites","Description","Mental Arithmetic","Listening Comprehension","Reading","Copying","Dictation","Reading Comprehension for Words","Reading Comprehension for Sentences","Writing");
+if (buttonLabels.length > 8){
+	menuShape = "circle";
+}
 //draw particles
 //http://www.youtube.com/watch?v=v8ikTvQWfoc&feature=player_embedded
 Particle = function(){
@@ -152,26 +156,40 @@ function addParticles(n){
     particles.push(p);
   }
 }
-function addPositions(n){
+function addPositions(n,screenSize){
 	/*if(n %2 ===0){
 		n=n-1;
 	}*/
-	var xoffset = ctx.canvas.width/3.5;
-	var xunits = ctx.canvas.width / n-1;
-	var yunits = ctx.canvas.height / n-1 ;
-  var previousy =  25;
-	var theta = Math.PI /2 /n; //the angle between dots
-	var xcenter = xoffset;
-	var ycenter = ctx.canvas.height - ctx.canvas.height/10;
-	var radius = ctx.canvas.width;
+	if (window.menuShape === "arc"){
+		var xunits = ctx.canvas.width / n-1;
+		var yunits = ctx.canvas.height / n-1 ;
+  	var previousy =  25;
+		var theta = 2 * Math.PI /4 /n; //the angle between dots on a 1/4 circle
+		var xcenter = ctx.canvas.width/3.5;
+		var ycenter = ctx.canvas.height - ctx.canvas.height/10;
+		var radius = ctx.canvas.width;
+	}else{
+    var xunits = ctx.canvas.width / n-1;
+    var yunits = ctx.canvas.height / n-1 ;
+    var previousy =  25;
+    var theta = 2 * Math.PI /n; //the angle between dots on a full circle
+    var xcenter = ctx.canvas.width/2;
+    var ycenter = ctx.canvas.height/2;
+    var radius = screenSize/2 - screenSize/10;
+	}
 	if (radius > ctx.canvas.height*0.8){
 		radius = ctx.canvas.height*0.8;
 	}
 	for (var i = 0; i < n; i++){
+		if ( window.menuShape === "arc"){
+			//set start of circle at 3/2PI (the top of the circle)
+	    var angleTopToBottom = 3*Math.PI/2+theta*i;
+		}else{
+			//set start of circle at 3/2PI (the top of the circle)
+  	  var angleTopToBottom = 3*Math.PI/2+theta*i;
+		}
 		var p = new Particle();
 		p.init(i);
-		//set start of circle at 3/2PI (the top of the circle)
-		var angleTopToBottom = 3*Math.PI/2+theta*i;
 		//add the cosine of the angle times the radius of the menu circle (elipse 1.2)
 		p.angleOnCircleMenu = angleTopToBottom;
 		p.x = xcenter + (Math.cos(angleTopToBottom) * radius) *1.2 ;
@@ -204,8 +222,21 @@ function loopParticles(){
     for(var i = 0; i<positionsFilled.length; i++){
 			positionsFilled[i].draw();
 		  ctx.fillStyle = "black";	
-			var labelx = positionsFilled[i].x +20 *Math.cos( positionsFilled[i].angleOnCircleMenu );
-			var labely = positionsFilled[i].y + 20*Math.sin( positionsFilled[i].angleOnCircleMenu );
+			var labelx = positionsFilled[i].x +25 *Math.cos( positionsFilled[i].angleOnCircleMenu );
+			var labely = positionsFilled[i].y + 25*Math.sin( positionsFilled[i].angleOnCircleMenu );
+			if(menuShape ==="arc"){
+				//ctx.textAlign = "center";
+			}else{
+				if(positionsFilled[i].x > ctx.canvas.width/2){
+					ctx.textAlign = "left";
+				}else{
+					ctx.textAlign = "right";
+				}
+				if(positionsFilled[i].id === 0){
+					ctx.textAlign = "center";
+					labely = labely -5;
+				}
+			}
 			ctx.fillText(positionsFilled[i].label,labelx, labely);
 		}
   }
@@ -286,13 +317,14 @@ window.onload = window.onresize = function() {
     ctx.fill();
     ctx.closePath();
    */
-	addPositions(buttonLabels.length);
+	var minScreenSize = ctx.canvas.width;
+  if (minScreenSize > ctx.canvas.height){ minScreenSize = ctx.canvas.height; }
+
+	addPositions(buttonLabels.length,minScreenSize);
 	for(var i = 0; i<positions.length; i++){positions[i].draw();}
 	
 	//draw a reasonable number of particles 
-	var screenSize = ctx.canvas.width;
-	if (screenSize < ctx.canvas.height){ screenSize = ctx.canvas.height; }
-	addParticles(Math.max(buttonLabels.length*2 , screenSize/50));
+	addParticles(Math.max(buttonLabels.length*2 , minScreenSize/50));
 	window.timer = setInterval(loopDelegate, 1000 / 60);
 
 	var getPositionAsButton = function(x,y){
