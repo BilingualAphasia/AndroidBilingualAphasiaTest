@@ -1,6 +1,22 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Including the Lobster font from Google's Font Directory -->
 
+<STYLE type="text/css">
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Lobster'), url('google_lobster_font.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Lobster'), url('http://themes.googleusercontent.com/static/fonts/lobster/v3/NIaFDq6p6eLpSvtV2DTNDQLUuEpTyoUstqEm5AMlJo4.woff') format('woff');
+}
+</STYLE>
+<link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
 <script>
 
 var randomColor = function(){
@@ -18,6 +34,7 @@ var srandom = function() {
 var particles = [];
 var positions = [];
 var positionsFilled = [];
+var startPostion;
 var disapear = false;
 var menuShape = "arc"; //arc or circle
 var buttonLabels = new Array("History of Bilingualism","English Background","Spontaneous Speech","Verbal Comprehension","Pointing","Simple and Semi-complex Commands","Complex Commands","Verbal Auditory Discrimination","Syntactic Comprehension","Semantic Categories","Synonyms","Antonyms","Grammaticality Judgement","Semantic Acceptability","Lexical Decision","Series","Verbal Fluency","Naming","Sentence Construction","Semantic Opposites","Derivational Morphology","Morphological Opposites","Description","Mental Arithmetic","Listening Comprehension","Reading","Copying","Dictation","Reading Comprehension for Words","Reading Comprehension for Sentences","Writing");
@@ -33,16 +50,17 @@ Particle = function(){
   this.vx = 0;//vector for movement
   this.vy = 0;
   this.r = 0;//radius
-  this.dt = 0.15; //delta, a small step of movement
+  this.dt = 0.25; //delta, a small step of movement
   this.color = "hs1(35,100%,50%)";
   this.init = function(i){
     this.id =i;
-		this.color = randomColor();
+	this.color = randomColor();
     this.x = Math.random() * ctx.canvas.width;
     this.y = Math.random() * ctx.canvas.height;
     this.vx = srandom() * 30;
     this.vy = srandom() * 30;
-    this.r = Math.random() * 20 + 5;
+    var maxButtonSize = Math.max(buttonRadiusForClicking - 10, 3);
+    this.r = Math.random() * (8) + maxButtonSize;
   }
   this.draw = function(){
     ctx.fillStyle = this.color;
@@ -104,9 +122,8 @@ Particle = function(){
         //push this position into the positionsFilled array
         var filledPosition = positions.splice(i,1);
         position.label=buttonLabels[position.id];
-				
-				position.labelx = position.x + 25*Math.cos( position.angleOnCircleMenu );
-      	position.labely = position.y + 25*Math.sin( position.angleOnCircleMenu );
+		position.labelx = position.x + buttonRadiusForClicking*Math.cos( position.angleOnCircleMenu );
+      	position.labely = position.y + buttonRadiusForClicking*Math.sin( position.angleOnCircleMenu );
       	position.textAlign = "right";
 				if(menuShape ==="arc"){
         	position.textAlign = "right";
@@ -206,26 +223,29 @@ function addPositions(n,screenSize){
 	/*if(n %2 ===0){
 		n=n-1;
 	}*/
+	var elipse = ctx.canvas.width*.80/ctx.canvas.height*.90;
+	console.log(elipse);
 	if (window.menuShape === "arc"){
 		var xunits = ctx.canvas.width / n-1;
 		var yunits = ctx.canvas.height / n-1 ;
-  	var previousy =  25;
+  		var previousy =  25;
 		var theta = 2 * Math.PI /4 /n; //the angle between dots on a 1/4 circle
 		var xcenter = ctx.canvas.width/3.5;
 		var ycenter = ctx.canvas.height - ctx.canvas.height/10;
 		var radius = ctx.canvas.width;
 	}else{
-    var xunits = ctx.canvas.width / n-1;
-    var yunits = ctx.canvas.height / n-1 ;
-    var previousy =  25;
-    var theta = 2 * Math.PI /n; //the angle between dots on a full circle
-    var xcenter = ctx.canvas.width/2;
-    var ycenter = ctx.canvas.height/2;
-    var radius = screenSize/2 - screenSize/10;
+	    var xunits = ctx.canvas.width / n-1;
+	    var yunits = ctx.canvas.height / n-1 ;
+	    var previousy =  25;
+	    var theta = 2 * Math.PI /n; //the angle between dots on a full circle
+	    var xcenter = ctx.canvas.width/2;
+	    var ycenter = ctx.canvas.height/2;
+	    var radius = screenSize/2 - screenSize/10;
 	}
 	if (radius > ctx.canvas.height*0.8){
-		radius = ctx.canvas.height*0.8;
+			radius = ctx.canvas.height*0.8;
 	}
+	
 	for (var i = 0; i < n; i++){
 		if ( window.menuShape === "arc"){
 			//set start of circle at 3/2PI (the top of the circle)
@@ -237,8 +257,9 @@ function addPositions(n,screenSize){
 		var p = new Particle();
 		p.init(i);
 		//add the cosine of the angle times the radius of the menu circle (elipse 1.2)
+		
 		p.angleOnCircleMenu = angleTopToBottom;
-		p.x = xcenter + (Math.cos(angleTopToBottom) * radius) *1.2 ;
+		p.x = xcenter + (Math.cos(angleTopToBottom) * radius) *elipse ;
 		//add the sin (height) of the negative angle to go up times the radius 
 		p.y = ycenter + Math.sin(angleTopToBottom) * radius ; 
 		p.color = "white";
@@ -257,161 +278,200 @@ var timer;
 var stopLooping = function(){
   clearInterval(timer);
 }
+var buttonRadiusForClicking;
 var pushButton = function(id){
 //to be defined later
 }
+var getPositionAsButton = function(x, y){
+	//to be defined later
+}
+var titleFont;
+var labelFont;
 function loopParticles(){
-  if(pause) return;
-  ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
-  for(var i = 0; i<positions.length; i++){positions[i].draw();}
-  if(positionsFilled.length >0){
-    for(var i = 0; i<positionsFilled.length; i++){
-			positionsFilled[i].draw();
-		  ctx.fillStyle = "black";	
-			ctx.textAlign = positionsFilled[i].textAlign;
-			ctx.fillText(positionsFilled[i].label,positionsFilled[i].labelx, positionsFilled[i].labely);
-		}
-  }
-  if(particles.length > 0){
-    for (var i=0; i < particles.length; i++) particles[i].update();
-    for (var i=0; i < particles.length; i++) particles[i].draw();
-  }else{
-    pause = true;
-		stopLooping();
-  }
-}
-function loopDelegate() {
-	loopParticles();
-}
-
-
-
-//Getting window size:
-  //this works in chrome and on android.
-  //http://stackoverflow.com/questions/1152203/centering-a-canvas/1646370#1646370
-window.onload = window.onresize = function() {
-    var C = 0.95;        // canvas width to viewport width ratio
-    
-    // For IE compatibility http://www.google.com/search?q=get+viewport+size+js
-    var viewportWidth = window.innerWidth;
-    var viewportHeight = window.innerHeight;
-
-    var canvasWidth = viewportWidth * C;
-    var canvasHeight = viewportHeight * C;
-    
-    var maxScreenSize = viewportWidth;
-    if (viewportWidth < viewportHeight){
-	   maxScreenSize = viewportHeight;
-    }
-    //If its a phone sized screen, make the canvas bigger than the screen and let the user zoom in and out. 
-    if (maxScreenSize < 850){
-    	if(viewportWidth < viewportHeight){
-	    	canvasWidth = 500;
-	    	canvasHeight = 900;
-    	}else{
-    		canvasWidth = 900;
-	    	canvasHeight = 500;
-    	}
-    }
-    var minScreenSize = canvasWidth;
-    if (minScreenSize > canvasHeight){ minScreenSize = canvasHeight; }
-    
-    window.ctx = el.getContext("2d");
-    ctx.clearRect(0,0,canvasWidth,canvasHeight);
-    //draw yellow diamond
-    /* ctx.fillStyle = 'yellow';
-    ctx.moveTo(0, canvasHeight/2);
-    ctx.lineTo(canvasWidth/2, 0);
-    ctx.lineTo(canvasWidth, canvasHeight/2);
-    ctx.lineTo(canvasWidth/2, canvasHeight);
-    ctx.lineTo(0, canvasHeight/2);
-    ctx.fill() */
-   
-		//Write the label next to the button
-    ctx.font = "bold 12px sans-serif";
-    ctx.fillText("Bilingual Aphasia Test - English",100,100);
  
-    
-    //draw arc
-    //http://www.html5canvastutorials.com/tutorials/html5-canvas-arcs/
-    var centerX = viewportWidth / 2;
-    var centerY = viewportHeight / 2;
-    var radius = viewportHeight / 2.5;
-    var startingAngle = 1.5 * Math.PI;
-    var endingAngle = 0.1 * Math.PI;
-    var counterclockwise = false;
-    ctx.arc(centerX, centerY, radius, startingAngle, 
-            endingAngle, counterclockwise);
-    //ctx.lineWidth = 5;
-    //ctx.strokeStyle = "black";
-    ctx.stroke();
-    
-  /*  
-  //-------------- draw two circles
-    ctx.beginPath();
-    ctx.fillStyle = "blue";
-    ctx.arc(30, 30, 20, 0, Math.PI*2, true);
-    ctx.fill();
-    ctx.closePath();
-    ctx.beginPath();
-    ctx.fillStyle = "red";
-    ctx.arc(100, 100, 40, 0, Math.PI*2, true);
-    ctx.fill();
-    ctx.closePath();
-   */
+	if (pause)
+			return;
 	
-	var buttonRadiusForClicking = 2*Math.PI * minScreenSize/ buttonLabels.length /4//button size is relative to number of buttons and circumference
- 	console.log(buttonRadiusForClicking);
+		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+		
+		//Write the Experiment title
+		ctx.font = titleFont;
+		ctx.fillStyle = "#369";
+		ctx.textAlign = "center";
+		ctx.fillText("Bilingual Aphasia Test - English", ctx.canvas.width/2, ctx.canvas.height/2);
 
-	addPositions(buttonLabels.length,minScreenSize);
-	for(var i = 0; i<positions.length; i++){positions[i].draw();}
-	
-	//draw a reasonable number of particles 
-	addParticles(Math.max(buttonLabels.length*2 , minScreenSize/50));
-	window.timer = setInterval(loopDelegate, 1000 / 60);
-
-	var getPositionAsButton = function(x,y){
-		for(var k = 0; k < positionsFilled.length; k++){
-			var dx = x - positionsFilled[k].x;
-      var dy = y - positionsFilled[k].y;
-      var d = Math.sqrt(dx*dx + dy*dy);
-      var R = buttonRadiusForClicking;// positionsFilled[k].r + 5;//added 10 pixles to click around the buton
-      if(d < R){
-				positionsFilled[k].color = "#aaaaaa";
-				positionsFilled[k].r = R;
-				//alert("Clicked "+positionsFilled[k].id);
-				window.pressButton(positionsFilled[k].id);
-			}else{
-				//alert(" distance to this position "+d);
-				//alert("Position filled is at "+positionsFilled[k].x+" "+positionsFilled[k].y);
+		//reset font for labels
+		ctx.font= labelFont;
+		
+		for ( var i = 0; i < positions.length; i++) {
+			positions[i].draw();
+		}
+		if (positionsFilled.length > 0) {
+			for ( var i = 0; i < positionsFilled.length; i++) {
+				positionsFilled[i].draw();
+				//ctx.fillStyle = "black";
+				ctx.textAlign = positionsFilled[i].textAlign;
+				ctx.fillText(positionsFilled[i].label,
+						positionsFilled[i].labelx, positionsFilled[i].labely);
 			}
 		}
-	}
-	ctx.canvas.addEventListener('touchstart', function(e){
-		//alert(e.changedTouches[0].pageX + " " + e.changedTouches[0].pageY);
-	});	
-  ctx.canvas.addEventListener('mousedown', function(e){
-    console.log(e);
-		//alert(e.pageX + " " + e.pageY);
- 		getPositionAsButton(e.pageX,e.pageY);
-	 }); 
-	
-
-	function isNativeApp() {
-	    return /BilingualAphasiaTest\/[0-9\.]+$/.test(navigator.userAgent);
-	}
-	if(isNativeApp()){
-		window.pressButton = function(id){
-			Android.launchSubExperimentJS(id);
-		}
-	}else{
-		//alert("in a browser");
-		window.pressButton = function(id){
-			//alert("pressed experiment button "+id);
+		if (particles.length > 0) {
+			for ( var i = 0; i < particles.length; i++)
+				particles[i].update();
+			for ( var i = 0; i < particles.length; i++)
+				particles[i].draw();
+		} else {
+			pause = true;
+			stopLooping();
 		}
 	}
+	function loopDelegate() {
+		loopParticles();
+	}
 
-}
+	//Getting window size:
+	//this works in chrome and on android.
+	//http://stackoverflow.com/questions/1152203/centering-a-canvas/1646370#1646370
+	//window.onload = window.onresize = function() {
+	window.onload  = function() {
+		var C = 0.99; // canvas width to viewport width ratio
+
+		// For IE compatibility http://www.google.com/search?q=get+viewport+size+js
+		var viewportWidth = window.innerWidth;
+		var viewportHeight = window.innerHeight;
+
+		var canvasWidth = viewportWidth * C;
+		var canvasHeight = viewportHeight * C;
+
+		var maxScreenSize = viewportWidth;
+		if (viewportWidth < viewportHeight) {
+			maxScreenSize = viewportHeight;
+		}
+
+		var minScreenSize = canvasWidth;
+		if (minScreenSize > canvasHeight) {
+			minScreenSize = canvasHeight;
+		}
+		//ctx.font= "14 pt Lobster, Helvetica, sans-serif";
+		if(minScreenSize < 500){
+			titleFont = "10 pt 'Merienda One', cursive"
+			labelFont = "6 pt Helvetica, sans-serif";
+		}else{
+			titleFont = "14 pt 'Merienda One', cursive"
+			labelFont = "10 pt Helvetica, sans-serif";
+		}
+		
+		var el = document.getElementById("a");
+		el.style.position = "fixed";
+		el.setAttribute("width", canvasWidth);
+		el.setAttribute("height", canvasHeight);
+		el.style.top = (viewportHeight - canvasHeight) / 2;
+		el.style.left = (viewportWidth - canvasWidth) / 2;
+
+		window.ctx = el.getContext("2d");
+		ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+		//draw yellow diamond
+		/* ctx.fillStyle = 'yellow';
+		ctx.moveTo(0, canvasHeight/2);
+		ctx.lineTo(canvasWidth/2, 0);
+		ctx.lineTo(canvasWidth, canvasHeight/2);
+		ctx.lineTo(canvasWidth/2, canvasHeight);
+		ctx.lineTo(0, canvasHeight/2);
+		ctx.fill() */
+
+		//draw arc
+		//http://www.html5canvastutorials.com/tutorials/html5-canvas-arcs/
+		/*     var centerX = viewportWidth / 2;
+		 var centerY = viewportHeight / 2;
+		 var radius = viewportHeight / 2.5;
+		 var startingAngle = 1.5 * Math.PI;
+		 var endingAngle = 0.1 * Math.PI;
+		 var counterclockwise = false;
+		 ctx.arc(centerX, centerY, radius, startingAngle, 
+		 endingAngle, counterclockwise);
+		 //ctx.lineWidth = 5;
+		 //ctx.strokeStyle = "black";
+		 ctx.stroke();
+		 */
+		/*  
+		//-------------- draw two circles
+		  ctx.beginPath();
+		  ctx.fillStyle = "blue";
+		  ctx.arc(30, 30, 20, 0, Math.PI*2, true);
+		  ctx.fill();
+		  ctx.closePath();
+		  ctx.beginPath();
+		  ctx.fillStyle = "red";
+		  ctx.arc(100, 100, 40, 0, Math.PI*2, true);
+		  ctx.fill();
+		  ctx.closePath();
+		 */
+
+		buttonRadiusForClicking = 2 * Math.PI * minScreenSize / buttonLabels.length / 5//button size is relative to number of buttons and circumference
+		console.log(buttonRadiusForClicking);
+
+		addPositions(buttonLabels.length, minScreenSize);
+		startPosition = new Particle();
+		startPosition.init(0);
+		startPosition.label="Start";
+		startPosition.y = ctx.canvas.height/2+ctx.canvas.height/8;
+		startPosition.x = ctx.canvas.width/2;
+		startPosition.textAlign = "center";
+		startPosition.labelx =startPosition.x;
+		startPosition.labely =startPosition.y+buttonRadiusForClicking*1.5;
+		positionsFilled.push(startPosition);
+		
+		//draw a reasonable number of particles 
+		addParticles(Math.max(buttonLabels.length * 2, minScreenSize / 50));
+		window.timer = setInterval(loopDelegate, 1000 / 60);
+
+		getPositionAsButton = function(x, y) {
+			
+			for ( var k = 0; k < positionsFilled.length; k++) {
+				var dx = x - positionsFilled[k].x;
+				var dy = y - positionsFilled[k].y;
+				var d = Math.sqrt(dx * dx + dy * dy);
+				var R = buttonRadiusForClicking;// positionsFilled[k].r + 5;//added 10 pixles to click around the buton
+				if (d < R) {
+					positionsFilled[k].color = "#aaaaaa";
+					positionsFilled[k].r = buttonRadiusForClicking;
+					positionsFilled[k].draw();
+					ctx.textAlign = positionsFilled[k].textAlign;
+					ctx.fillText(positionsFilled[k].label,
+							positionsFilled[k].labelx, positionsFilled[k].labely);
+					//alert("Clicked "+positionsFilled[k].id);
+					setTimeout("window.pressButton(positionsFilled["+k+"].id);",1000);
+				} else {
+					//alert(" distance to this position "+d);
+					//alert("Position filled is at "+positionsFilled[k].x+" "+positionsFilled[k].y);
+				}
+			}
+		}
+		ctx.canvas.addEventListener('touchstart', function(e) {
+			//alert(e.changedTouches[0].pageX + " " + e.changedTouches[0].pageY);
+			getPositionAsButton(e.pageX, e.pageY);
+		});
+		ctx.canvas.addEventListener('mousedown', function(e) {
+			console.log(e);
+			//alert(e.pageX + " " + e.pageY);
+			getPositionAsButton(e.pageX, e.pageY);
+		});
+
+		function isNativeApp() {
+			return /BilingualAphasiaTest\/[0-9\.]+$/.test(navigator.userAgent);
+		}
+		if (isNativeApp()) {
+			window.pressButton = function(id) {
+				Android.launchSubExperimentJS(id);
+			}
+		} else {
+			//alert("in a browser");
+			window.pressButton = function(id) {
+				//alert("pressed experiment button "+id);
+			}
+		}
+
+	}
 </script>
 
 </head>
@@ -420,6 +480,6 @@ window.onload = window.onresize = function() {
 
 </body>
 <!-- <canvas id="homeCanvas"> </canvas>-->
-<canvas id="a" style="background: #bbb">
+<canvas id="a" style="background: #fff">
 </canvas>
 </html>

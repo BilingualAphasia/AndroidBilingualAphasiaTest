@@ -9,6 +9,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
+import ca.ilanguage.oprime.bilingualaphasiatest.preferences.SetPreferencesActivity;
 
 public class BilingualAphasiaTestHome extends Activity {
 	private WebView mWebView;
@@ -27,8 +28,10 @@ public class BilingualAphasiaTestHome extends Activity {
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.addJavascriptInterface(new JavaScriptInterface(this),
 				"Android");
+		//mWebView.loadUrl("file:///android_asset/google_lobster_font.woff");
 
 		WebSettings webSettings = mWebView.getSettings();
+		webSettings.setBuiltInZoomControls(true);
 		webSettings.setJavaScriptEnabled(true);
 		webSettings.setUserAgentString(webSettings.getUserAgentString() + " "
 				+ getString(R.string.user_agent_suffix));
@@ -55,6 +58,8 @@ public class BilingualAphasiaTestHome extends Activity {
 
 		}
 		public void launchSubExperimentJS(int subExperimentId){
+			startActivity(new Intent(mContext, SetPreferencesActivity.class));
+
 			if(subExperimentId == 1){
 				
 			}else if(subExperimentId == 1){

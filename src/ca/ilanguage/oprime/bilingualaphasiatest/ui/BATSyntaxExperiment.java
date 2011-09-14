@@ -93,7 +93,7 @@ public class BATSyntaxExperiment extends Activity implements TextToSpeech.OnInit
 
         
        
-		mBaseDir = "/sdcard/dropbox";
+		mBaseDir = "/sdcard/OPrime";
 		
         
         mStimuliFile=mBaseDir+"/BilingualAphasiaTest/stimuli_french.csv";
