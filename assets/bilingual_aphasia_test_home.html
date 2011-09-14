@@ -291,21 +291,31 @@ function loopDelegate() {
   //http://stackoverflow.com/questions/1152203/centering-a-canvas/1646370#1646370
 window.onload = window.onresize = function() {
     var C = 0.95;        // canvas width to viewport width ratio
-    var W_TO_H = 2/1;   // canvas width to canvas height ratio
-    var el = document.getElementById("a");
-
+    
     // For IE compatibility http://www.google.com/search?q=get+viewport+size+js
     var viewportWidth = window.innerWidth;
     var viewportHeight = window.innerHeight;
 
     var canvasWidth = viewportWidth * C;
-    var canvasHeight = viewportHeight * C;//canvasWidth / W_TO_H;
-    el.style.position = "fixed";
-    el.setAttribute("width", canvasWidth);
-    el.setAttribute("height", canvasHeight);
-    el.style.top = (viewportHeight - canvasHeight) / 2;
-    el.style.left = (viewportWidth - canvasWidth) / 2;
-
+    var canvasHeight = viewportHeight * C;
+    
+    var maxScreenSize = viewportWidth;
+    if (viewportWidth < viewportHeight){
+	   maxScreenSize = viewportHeight;
+    }
+    //If its a phone sized screen, make the canvas bigger than the screen and let the user zoom in and out. 
+    if (maxScreenSize < 850){
+    	if(viewportWidth < viewportHeight){
+	    	canvasWidth = 500;
+	    	canvasHeight = 900;
+    	}else{
+    		canvasWidth = 900;
+	    	canvasHeight = 500;
+    	}
+    }
+    var minScreenSize = canvasWidth;
+    if (minScreenSize > canvasHeight){ minScreenSize = canvasHeight; }
+    
     window.ctx = el.getContext("2d");
     ctx.clearRect(0,0,canvasWidth,canvasHeight);
     //draw yellow diamond
@@ -349,8 +359,7 @@ window.onload = window.onresize = function() {
     ctx.fill();
     ctx.closePath();
    */
-	var minScreenSize = ctx.canvas.width;
-  if (minScreenSize > ctx.canvas.height){ minScreenSize = ctx.canvas.height; }
+	
 	var buttonRadiusForClicking = 2*Math.PI * minScreenSize/ buttonLabels.length /4//button size is relative to number of buttons and circumference
  	console.log(buttonRadiusForClicking);
 
