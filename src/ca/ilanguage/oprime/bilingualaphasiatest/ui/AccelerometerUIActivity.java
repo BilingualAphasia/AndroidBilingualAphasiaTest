@@ -139,14 +139,7 @@ public class AccelerometerUIActivity extends Activity {
 		mStimuliIndex=0;
 		playNext();
 		
-		// on completion listener to play next audio
-		mAudioFinishedListener = new OnCompletionListener() {
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				mStimuliIndex++;
-				playNext();
-			}
-		};
+		
 	}
 
 	
@@ -160,26 +153,30 @@ public class AccelerometerUIActivity extends Activity {
 		if (mStimuliIndex >= mStimuliAudio.size()) {
 			return;
 		}
-		AssetFileDescriptor afd = this.getResources().openRawResourceFd(
-				mStimuliAudio.get(mStimuliIndex));
 		try {
-			mp.reset();
-			mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),
-					afd.getDeclaredLength());
-			mp.prepare();
+			if (mp != null) {
+				mp.release();
+				mp = null;
+			}
+			mp = MediaPlayer.create(getApplicationContext(), mStimuliAudio.get(mStimuliIndex));
+		
+			// on completion listener to play next audio
+			mp.setOnCompletionListener(new OnCompletionListener() {
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					mStimuliIndex++;
+					playNext();
+				}
+			});
 			mp.start();
-			mp.setOnCompletionListener(mAudioFinishedListener);
-			afd.close();
+			
 		} catch (IllegalArgumentException e) {
 			Log.e(TAG,
 					"Unable to play audio queue do to exception: " + e.getMessage(), e);
 		} catch (IllegalStateException e) {
 			Log.e(TAG,
 					"Unable to play audio queue do to exception: " + e.getMessage(), e);
-		} catch (IOException e) {
-			Log.e(TAG,
-					"Unable to play audio queue do to exception: " + e.getMessage(), e);
-		}
+		} 
 	}
 	public void playNext(){
 		playSample();
