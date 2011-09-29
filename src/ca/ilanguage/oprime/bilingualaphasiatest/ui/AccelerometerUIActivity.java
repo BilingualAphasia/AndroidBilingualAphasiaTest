@@ -18,12 +18,15 @@ package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
 import ca.ilanguage.oprime.bilingualaphasiatest.service.AudioRecorderService;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,15 +39,18 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.speech.RecognizerIntent;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 /**
  * This is an example of using the accelerometer to integrate the device's
@@ -81,6 +87,10 @@ public class AccelerometerUIActivity extends Activity {
 	private static final String TAG = "AccelerometerUIActivity";
 	private ArrayList<Integer> mStimuliAudio;
 	private int mStimuliIndex =0;
+	
+	private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
+	Context mContext;
+	Boolean mSpeechRecognitionOkay;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -112,11 +122,43 @@ public class AccelerometerUIActivity extends Activity {
 		// intent.setData(mUri);
 		intent.putExtra(AudioRecorderService.EXTRA_AUDIOFILE_FULL_PATH,
 				mAudioResultsFile);
-		startService(intent);
-		
+		//startService(intent);
+
+		PackageManager pm = getPackageManager();
+		List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(
+				RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+		if (activities.size() != 0) {
+			mSpeechRecognitionOkay = true;
+			// speakButton.setOnClickListener(this);
+		} else {
+			Toast
+					.makeText(
+							AccelerometerUIActivity.this,
+							"Speech recognizer is not present. Taking you to the market and install it. ",
+							Toast.LENGTH_LONG).show();
+			Intent goToMarket = new Intent(Intent.ACTION_VIEW).setData(Uri
+					.parse("market://details?id=com.google.android.voicesearch"));
+			startActivity(goToMarket);
+			mSpeechRecognitionOkay = false;
+		}
 		
 	}
 
+	private void startVoiceRecognitionActivity() {
+		if (mp != null) {
+			mp.release();
+			mp = null;
+		}
+		if (mSpeechRecognitionOkay) {
+			Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+			intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+					RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+			// intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "no prompt");
+			startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+		} else {
+			finish();
+		}
+	}
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -141,7 +183,30 @@ public class AccelerometerUIActivity extends Activity {
 		
 		
 	}
-
+	/**
+   * Handle the results from the recognition activity.
+   */
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+      if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
+          // Fill the list view with the strings the recognizer thought it could have heard
+          ArrayList<String> matches = data.getStringArrayListExtra(
+                  RecognizerIntent.EXTRA_RESULTS);
+          Toast.makeText(AccelerometerUIActivity.this, "Possible recognitions: "+matches.toString(), Toast.LENGTH_LONG).show();
+//          mList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+//                  matches));
+          //finish();
+          
+          /*
+           * Play next stimuli without waiting
+           */
+//        	mStimuliIndex++;
+//					playNext();
+      }
+      
+      super.onActivityResult(requestCode, resultCode, data);
+      return;
+  }
 	
 	/**
 	 * Play a sample with the Android MediaPLayer.
@@ -164,8 +229,12 @@ public class AccelerometerUIActivity extends Activity {
 			mp.setOnCompletionListener(new OnCompletionListener() {
 				@Override
 				public void onCompletion(MediaPlayer mp) {
-					mStimuliIndex++;
-					playNext();
+					
+					/*get response*/
+					startVoiceRecognitionActivity();
+					
+					
+				
 				}
 			});
 			mp.start();
