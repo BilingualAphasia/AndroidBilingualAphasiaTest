@@ -17,18 +17,16 @@ public class BilingualAphasiaTestHome extends Activity {
 	private static final int ENGLISH = 0;
 	private static final int FRENCH = 1;
 	public static final String LANGUAGE ="language";
-	
+	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BAT/results/";
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_webview);
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.addJavascriptInterface(new JavaScriptInterface(this),
 				"Android");
-		//mWebView.loadUrl("file:///android_asset/google_lobster_font.woff");
 
 		WebSettings webSettings = mWebView.getSettings();
 		webSettings.setBuiltInZoomControls(true);
@@ -45,20 +43,14 @@ public class BilingualAphasiaTestHome extends Activity {
 	public class JavaScriptInterface {
 		Context mContext;
 
-		/*
-		 * TODO add some hooks in the javascript interface to the space tree to
-		 * track user interaction with the tree, how often did they drag it,
-		 * what is their prefered layout can set tehir prefered layout in the
-		 * settings if that is a popular change in the draft tree.
-		 */
-
 		/** Instantiate the interface and set the context */
 		JavaScriptInterface(Context c) {
 			mContext = c;
 
 		}
 		public void launchSubExperimentJS(int subExperimentId){
-			startActivity(new Intent(mContext, SetPreferencesActivity.class));
+			//startActivity(new Intent(mContext, SynonymsSubExperiment.class));
+			startActivity(new Intent(mContext, AccelerometerUIActivity.class));
 
 			if(subExperimentId == 1){
 				
