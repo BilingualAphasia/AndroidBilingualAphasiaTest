@@ -16,7 +16,6 @@
 
 package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -41,12 +39,14 @@ import android.media.MediaRecorder;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.speech.RecognizerIntent;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
@@ -75,9 +75,21 @@ public class AccelerometerUIActivity extends Activity {
 
 	private static final int ENGLISH = 0;
 	private static final int FRENCH = 1;
-	//wait between stimuli, if 999 then wait until user input.
-	private static int waitBetweenStimuli = 5;
+	private static final int REWIND = 3;
+	private static final int ADVANCE = 4;
+	private int nextAction=ADVANCE;
+	
+	// wait between stimuli, if 999 then wait until user input.
+	private static int mWaitBetweenStimuli = 5;
+	private static Boolean mAdvanceByTouchOnly = true;
+	private Boolean mTouched = false;
+	private Boolean mListeningForTouch = false;
+	private Boolean mfirstResponse = true;
 	public static final String LANGUAGE = "language";
+
+	private Long mStartTime;
+	private Long mEndTime;
+	private ArrayList<Long> mReactionTimes;
 	String mAudioResultsFile;
 	MediaRecorder mRecorder;
 	private String mParticipantId = "12";
@@ -86,11 +98,15 @@ public class AccelerometerUIActivity extends Activity {
 	OnCompletionListener mAudioFinishedListener;
 	private static final String TAG = "AccelerometerUIActivity";
 	private ArrayList<Integer> mStimuliAudio;
-	private int mStimuliIndex =0;
-	
+	private ArrayList<String> mStimuliResponses;
+	private int mStimuliIndex = 0;
+	private Boolean mRewindable = false;
+	private Boolean mRewind = false;
+	private Boolean mRewindHandled = false;
 	private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 	Context mContext;
 	Boolean mSpeechRecognitionOkay;
+	private Handler mHandlerDelayStimuli = new Handler();
 
 	/** Called when the activity is first created. */
 	@Override
@@ -122,7 +138,7 @@ public class AccelerometerUIActivity extends Activity {
 		// intent.setData(mUri);
 		intent.putExtra(AudioRecorderService.EXTRA_AUDIOFILE_FULL_PATH,
 				mAudioResultsFile);
-		//startService(intent);
+		// startService(intent);
 
 		PackageManager pm = getPackageManager();
 		List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(
@@ -141,24 +157,25 @@ public class AccelerometerUIActivity extends Activity {
 			startActivity(goToMarket);
 			mSpeechRecognitionOkay = false;
 		}
+
+		mStimuliResponses = new ArrayList<String>();
+		mStimuliAudio = new ArrayList<Integer>();
+		mReactionTimes = new ArrayList<Long>();
+		for (int n=0;n<15;n++){
+			mStimuliResponses.add(n, "");
+			//mStimuliAudio.add(n,R.raw.e165);
+			mReactionTimes.add(n,System.currentTimeMillis());
+		}
 		
+		mStimuliAudio.add(R.raw.e_synonyms_instructions);
+		mStimuliAudio.add(R.raw.e165);
+		mStimuliAudio.add(R.raw.e166);
+		mStimuliAudio.add(R.raw.e167);
+		mStimuliIndex = 0;
+		playSample();
+
 	}
 
-	private void startVoiceRecognitionActivity() {
-		if (mp != null) {
-			mp.release();
-			mp = null;
-		}
-		if (mSpeechRecognitionOkay) {
-			Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-			intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-					RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-			// intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "no prompt");
-			startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
-		} else {
-			finish();
-		}
-	}
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -171,86 +188,172 @@ public class AccelerometerUIActivity extends Activity {
 
 		// Start the simulation
 		mSimulationView.startSimulation();
-
-
-		mStimuliAudio = new ArrayList<Integer>();
-		mStimuliAudio.add(R.raw.e_synonyms_instructions);
-		mStimuliAudio.add(R.raw.e165);
-		mStimuliAudio.add(R.raw.e166);
-		mStimuliAudio.add(R.raw.e167);
-		mStimuliIndex=0;
-		playNext();
-		
-		
 	}
-	/**
-   * Handle the results from the recognition activity.
-   */
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-      if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
-          // Fill the list view with the strings the recognizer thought it could have heard
-          ArrayList<String> matches = data.getStringArrayListExtra(
-                  RecognizerIntent.EXTRA_RESULTS);
-          Toast.makeText(AccelerometerUIActivity.this, "Possible recognitions: "+matches.toString(), Toast.LENGTH_LONG).show();
-//          mList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-//                  matches));
-          //finish();
-          
-          /*
-           * Play next stimuli without waiting
-           */
-//        	mStimuliIndex++;
-//					playNext();
-      }
-      
-      super.onActivityResult(requestCode, resultCode, data);
-      return;
-  }
-	
+
 	/**
 	 * Play a sample with the Android MediaPLayer.
-	 * http://stackoverflow.com/questions/2969242/problems-with-mediaplayer-raw-resources-stop-and-start
-	 * @param resid Resource ID of the sample to play.
+	 * http://stackoverflow.com/questions
+	 * /2969242/problems-with-mediaplayer-raw-resources-stop-and-start
+	 * 
+	 * @param resid
+	 *          Resource ID of the sample to play.
 	 */
 	private void playSample() {
 		// if the index is outside of the array of stimuli
-		if (mStimuliIndex >= mStimuliAudio.size()) {
+		if (mStimuliIndex >= mStimuliAudio.size() || mStimuliIndex < 0) {
+			finish();// end the subexperiment
 			return;
 		}
 		try {
 			if (mp != null) {
+				if (mp.isPlaying()) {
+					mp.stop();
+				}
 				mp.release();
 				mp = null;
 			}
-			mp = MediaPlayer.create(getApplicationContext(), mStimuliAudio.get(mStimuliIndex));
-		
-			// on completion listener to play next audio
+			mp = MediaPlayer.create(getApplicationContext(),
+					mStimuliAudio.get(mStimuliIndex));
 			mp.setOnCompletionListener(new OnCompletionListener() {
 				@Override
 				public void onCompletion(MediaPlayer mp) {
-					
-					/*get response*/
-					startVoiceRecognitionActivity();
-					
-					
-				
+					getStimulusResponse(true);
 				}
 			});
 			mp.start();
-			
+			nextAction = ADVANCE;
+			mfirstResponse =true;
+			mListeningForTouch = true;
+			mStartTime = System.currentTimeMillis();
 		} catch (IllegalArgumentException e) {
 			Log.e(TAG,
 					"Unable to play audio queue do to exception: " + e.getMessage(), e);
 		} catch (IllegalStateException e) {
 			Log.e(TAG,
 					"Unable to play audio queue do to exception: " + e.getMessage(), e);
-		} 
+		}
 	}
-	public void playNext(){
-		playSample();
+
+	public boolean onTouchEvent(MotionEvent event) {
+		float positionX = event.getX();
+		float positionY = event.getY();
+
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			// Screen is pressed for the first time
+			break;
+		case MotionEvent.ACTION_MOVE:
+			// Screen is still pressed, float have been updated
+			break;
+		case MotionEvent.ACTION_UP:
+			// Screen is not anymore touched
+			// If touch is used to advance, and the app is listening for a touch
+			if (mAdvanceByTouchOnly && mListeningForTouch) {
+				if (positionX < 300) {
+					//mStimuliIndex--;
+					nextAction = REWIND;
+					mTouched = true;
+				} else {
+					nextAction = ADVANCE;
+					mTouched = true;
+				}
+				getStimulusResponse(false);
+			}
+			break;
+		}
+		return super.onTouchEvent(event);
 	}
-	
+
+	/**
+	 * Only processes the first return of a call to record the participant's
+	 * reaction
+	 * 
+	 * @param audioEnd
+	 */
+	public void getStimulusResponse(Boolean audioEnd) {
+		if (mp.isPlaying()) {
+			mp.stop();
+		}
+		if (mfirstResponse) {
+			mEndTime = System.currentTimeMillis();
+			Long reactionTime = mEndTime - mStartTime;
+			mReactionTimes.add(mStimuliIndex, reactionTime);
+			mListeningForTouch = false;
+			mfirstResponse=false;
+			if(nextAction == ADVANCE && mStimuliIndex != 0){
+				startVoiceRecognitionActivity();
+			}else{
+				advanceStimuli();
+			}
+			
+		}else{
+			advanceStimuli();
+		}
+	}
+
+	private void startVoiceRecognitionActivity() {
+		if (mSpeechRecognitionOkay) {
+			Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+			intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+					RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+			// intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "no prompt");
+			startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+		} else {
+			finish();
+		}
+	}
+
+	/**
+	 * Handle the results from the recognition activity.
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == VOICE_RECOGNITION_REQUEST_CODE
+				&& resultCode == RESULT_OK) {
+			ArrayList<String> matches = data
+					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			mStimuliResponses.add(mStimuliIndex, matches.toString());
+			Toast.makeText(AccelerometerUIActivity.this,
+					"I heard: " + matches.toString(), Toast.LENGTH_LONG).show();
+			mListeningForTouch = true;
+			advanceStimuli();
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+		return;
+	}
+
+	/**
+	 * This method is called after the response has been handled
+	 */
+	public void advanceStimuli() {
+		if (mRewindable && mRewind && !mRewindHandled) {
+			mStimuliIndex--;
+			mRewindHandled = true;
+		} else if (mRewindable && mRewind && mRewindHandled) {
+			mRewindHandled = false;
+		}
+
+		/*
+		 * Play next stimuli after the delay, otherwise it will play when the user
+		 * touches
+		 */
+		if (!mAdvanceByTouchOnly) {
+			mStimuliIndex++;
+			mHandlerDelayStimuli.postDelayed(new Runnable() {
+				public void run() {
+					playSample();
+				}
+			}, mWaitBetweenStimuli * 1000);
+		} else if (mTouched) {
+			mTouched = false;
+			if(nextAction == ADVANCE){
+				mStimuliIndex++;
+			}
+			playSample();
+		}//else wait for a touch
+
+	}
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -268,15 +371,17 @@ public class AccelerometerUIActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		/*if(mp.isPlaying()){
-			mp.stop();
-		}*/
+		/*
+		 * if(mp.isPlaying()){ mp.stop(); }
+		 */
 		if (mp != null) {
 			mp.release();
 			mp = null;
 		}
 		Intent intent = new Intent(this, AudioRecorderService.class);
 		stopService(intent);
+		Toast.makeText(AccelerometerUIActivity.this,
+				"Results: " + mStimuliResponses.toString(), Toast.LENGTH_LONG).show();
 		super.onDestroy();
 	}
 
@@ -297,7 +402,7 @@ public class AccelerometerUIActivity extends Activity {
 		private float mMetersToPixelsX;
 		private float mMetersToPixelsY;
 		private Bitmap mBitmap;
-		private Bitmap mWood;
+		// private Bitmap mWood;
 		private float mXOrigin;
 		private float mYOrigin;
 		private float mSensorX;
@@ -377,8 +482,10 @@ public class AccelerometerUIActivity extends Activity {
 				final float y = mPosY;
 				if (x > xmax) {
 					mPosX = xmax;
+					mRewind = false;
 				} else if (x < -xmax) {
 					mPosX = -xmax;
+					mRewind = true;
 				}
 				if (y > ymax) {
 					mPosY = ymax;
@@ -392,7 +499,7 @@ public class AccelerometerUIActivity extends Activity {
 		 * A particle system is just a collection of particles
 		 */
 		class ParticleSystem {
-			static final int NUM_PARTICLES = 15;
+			static final int NUM_PARTICLES = 1;
 			private Particle mBalls[] = new Particle[NUM_PARTICLES];
 
 			ParticleSystem() {
@@ -529,8 +636,8 @@ public class AccelerometerUIActivity extends Activity {
 			Options opts = new Options();
 			opts.inDither = true;
 			opts.inPreferredConfig = Bitmap.Config.RGB_565;
-			mWood = BitmapFactory.decodeResource(getResources(), R.drawable.wood,
-					opts);
+			// mWood = BitmapFactory.decodeResource(getResources(), R.drawable.wood,
+			// opts);
 		}
 
 		@Override
@@ -586,7 +693,7 @@ public class AccelerometerUIActivity extends Activity {
 			 * draw the background
 			 */
 
-			canvas.drawBitmap(mWood, 0, 0, null);
+			// canvas.drawBitmap(mWood, 0, 0, null);
 
 			/*
 			 * compute the new position of our object, based on accelerometer data and

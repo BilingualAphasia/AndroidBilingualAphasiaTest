@@ -1,5 +1,7 @@
 package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +36,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		webSettings.setUserAgentString(webSettings.getUserAgentString() + " "
 				+ getString(R.string.user_agent_suffix));
 
+		new File(OUTPUT_DIRECTORY).mkdirs();
 		
 		
 		mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
