@@ -415,6 +415,7 @@ var ctx;
 					//alert("Clicked "+positionsFilled[k].id);
 					setTimeout("window.pressButton(positionsFilled[" + k
 							+ "].id);", 0);
+					return;//dont click on multiple buttons
 				} else {
 					//alert(" distance to this position "+d);
 					//alert("Position filled is at "+positionsFilled[k].x+" "+positionsFilled[k].y);
