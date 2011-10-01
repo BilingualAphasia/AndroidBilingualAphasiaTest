@@ -1,6 +1,8 @@
 package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,15 +14,20 @@ import android.webkit.WebView;
 import android.widget.Toast;
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
 import ca.ilanguage.oprime.bilingualaphasiatest.preferences.SetPreferencesActivity;
+import ca.ilanguage.oprime.bilingualaphasiatest.service.AudioRecorderService;
 
 public class BilingualAphasiaTestHome extends Activity {
 	private WebView mWebView;
-	private int mSubExperiments = 5;
-	private static final int ENGLISH = 0;
-	private static final int FRENCH = 1;
-	public static final String LANGUAGE ="language";
-	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BAT/results/";
+	//private int mSubExperiments = 5;
+	public static final String ENGLISH = "en";
+	public static final String FRENCH = "fr";
+	public static final String EXTRA_LANGUAGE ="language";
+	public static final String EXTRA_PARTICIPANT_ID ="participant";
+	public static final String EXTRA_SUB_EXPERIMENT_TITLE = "subexperimenttitle";
+	private String mParticipantId = "0000en"; //day00,participantnumber00,firstlanguage
 	
+	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BAT/results/";
+	private ArrayList<String> mSubExperiments;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,8 @@ public class BilingualAphasiaTestHome extends Activity {
 
 		new File(OUTPUT_DIRECTORY).mkdirs();
 		
+		String subExperiments = "History of Bilingualism,English Background,Spontaneous Speech,Verbal Comprehension,Pointing,Simple and Semi-complex Commands,Complex Commands,Verbal Auditory Discrimination,Syntactic Comprehension,Semantic Categories,Synonyms,Antonyms,Grammaticality Judgement,Semantic Acceptability,Lexical Decision,Series,Verbal Fluency,Naming,Sentence Construction,Semantic Opposites,Derivational Morphology,Morphological Opposites,Description,Mental Arithmetic,Listening Comprehension,Reading,Copying,Dictation,Reading Comprehension for Words,Reading Comprehension for Sentences,Writing";
+		mSubExperiments =  new ArrayList(Arrays.asList(subExperiments.split(",")));
 		
 		mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
 
@@ -51,30 +60,27 @@ public class BilingualAphasiaTestHome extends Activity {
 			mContext = c;
 
 		}
-		public void launchSubExperimentJS(int subExperimentId){
-			//startActivity(new Intent(mContext, SynonymsSubExperiment.class));
-			startActivity(new Intent(mContext, AccelerometerUIActivity.class));
-
-			if(subExperimentId == 1){
-				
-			}else if(subExperimentId == 1){
-				
-			}else if(subExperimentId == 2){
-				
-			}else if(subExperimentId == 3){
-				
-			}else if(subExperimentId == 4){
-				
-			}else if(subExperimentId == 5){
-				
-			}else if(subExperimentId == 6){
-				
-			}else{
-				
+		public String fetchSubExperimentsArrayJS(){
+			String javascriptArray = "";
+			if(mSubExperiments != null){
+				for(int i = 0; i < mSubExperiments.size() - 1; i++){
+					javascriptArray = javascriptArray+"\""+ mSubExperiments.get(i) +"\",";
+				}
+				javascriptArray = javascriptArray+"\""+ mSubExperiments.get(mSubExperiments.size()-1) +"\"";
+			
 			}
-			//startActivity(new Intent(mContext, BilingualAphasiaTestHome.class));
+			String temp = mSubExperiments.toString();			
+			return temp;
 		}
-
+		public void launchSubExperimentJS(int subExperimentId){
+				Intent intent = new Intent(mContext, SubExperiment.class);
+				// intent.setData(mUri);
+				intent.putExtra(EXTRA_LANGUAGE,ENGLISH);
+				intent.putExtra(EXTRA_PARTICIPANT_ID, mParticipantId);
+				intent.putExtra(EXTRA_SUB_EXPERIMENT_TITLE, subExperimentId+mSubExperiments.get(subExperimentId));
+				startActivity(intent);
+				//startActivity(new Intent(mContext, AccelerometerUIActivity.class));
+		}
 		public void showToast(String toast) {
 			Toast.makeText(mContext, toast, Toast.LENGTH_LONG).show();
 		}

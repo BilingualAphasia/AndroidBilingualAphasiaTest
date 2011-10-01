@@ -1,41 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:background="#ffffff"
     android:layout_width="match_parent" 
     android:layout_height="match_parent"> 
-    
     <ImageView android:id="@+id/mainimage"
-    	
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
     />
-    
-    <ImageButton android:src="@drawable/ic_fast_forward"
-	    android:layout_height="wrap_content" 
-	    android:layout_width="wrap_content" 
-	    android:id="@+id/button1" 
-	    android:layout_alignRight="@id/mainimage"
-	    android:layout_alignParentBottom="true"
-	    android:onClick="onNextClick">
-	    
-    </ImageButton>
-    <Button 
-    	android:text="Back"
-	    android:layout_height="wrap_content" 
-	    android:layout_width="wrap_content" 
-	    android:id="@+id/buttonback" 
-	    android:layout_alignRight="@id/mainimage"
-	    android:onClick="onBackClick">
-	    
-    </Button>
-    <TextView
-	    android:id="@+id/imagenumber"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignRight="@id/mainimage"
-	    android:layout_alignParentTop="true"
-	    android:text=""/>
-</RelativeLayout>
+</LinearLayout>
