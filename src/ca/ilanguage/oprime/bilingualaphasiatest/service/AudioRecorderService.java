@@ -54,7 +54,7 @@ public class AudioRecorderService extends Service {
 	private String mAudioResultsFileStatus = "";
 	public static final String EXTRA_AUDIOFILE_FULL_PATH = "audioFilePath";
 	public static final String EXTRA_AUDIOFILE_STATUS = "audioFileStatus";
-	public static final String EXTRA_DELEGATE_KILL_AUBLOG_TO_YOU = "killAublog";
+	public static final String EXTRA_DELEGATE_KILL_OPrime_TO_YOU = "killOPrime";
 	public static final String EXTRA_DEVICE_INFO = "deviceInfo";
 
 	private Long mStartTime;
@@ -90,9 +90,9 @@ public class AudioRecorderService extends Service {
 		//i.setData(mUri);
 		mContentIntent = PendingIntent.getActivity(this, 0, i, 0);
 
-		mNotification = new Notification(mIconId, "AuBlog Dictation in progress",
+		mNotification = new Notification(mIconId, "OPrime recording in progress",
 				System.currentTimeMillis());
-		mNotification.setLatestEventInfo(this, "AuBlog Dictation", "Recording...",
+		mNotification.setLatestEventInfo(this, "OPrime ", "Recording...",
 				mContentIntent);
 		mNotification.flags |= Notification.FLAG_AUTO_CANCEL;
 
@@ -138,7 +138,7 @@ public class AudioRecorderService extends Service {
 		} else {
 			mAudioResultsFile = "/sdcard/temp.mp3";
 			mAudioResultsFileStatus = mAudioResultsFileStatus + ":::"
-					+ "Audio file name: No file recieved from AuBlog using: "
+					+ "Audio file name: No file recieved from OPrime using: "
 					+ mAudioResultsFile;
 		}
 

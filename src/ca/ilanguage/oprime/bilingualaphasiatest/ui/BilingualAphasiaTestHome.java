@@ -24,11 +24,12 @@ public class BilingualAphasiaTestHome extends Activity {
 	public static final String EXTRA_LANGUAGE ="language";
 	public static final String EXTRA_PARTICIPANT_ID ="participant";
 	public static final String EXTRA_SUB_EXPERIMENT_TITLE = "subexperimenttitle";
-	private String mParticipantId = "0000en"; //day00,participantnumber00,firstlanguage
-	
-	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BAT/results/";
+	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BAT/video/";
 	private ArrayList<String> mSubExperiments;
-
+	private String mParticipantId = "0000en"; //day00,participantnumber00,firstlanguage
+	private long mExperimentLaunch;
+	private long mExperimentQuit;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,7 +48,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		
 		String subExperiments = "History of Bilingualism,English Background,Spontaneous Speech,Verbal Comprehension,Pointing,Simple and Semi-complex Commands,Complex Commands,Verbal Auditory Discrimination,Syntactic Comprehension,Semantic Categories,Synonyms,Antonyms,Grammaticality Judgement,Semantic Acceptability,Lexical Decision,Series,Verbal Fluency,Naming,Sentence Construction,Semantic Opposites,Derivational Morphology,Morphological Opposites,Description,Mental Arithmetic,Listening Comprehension,Reading,Copying,Dictation,Reading Comprehension for Words,Reading Comprehension for Sentences,Writing";
 		mSubExperiments =  new ArrayList(Arrays.asList(subExperiments.split(",")));
-		
+		mExperimentLaunch = System.currentTimeMillis();
 		mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
 
 	}
@@ -61,16 +62,8 @@ public class BilingualAphasiaTestHome extends Activity {
 
 		}
 		public String fetchSubExperimentsArrayJS(){
-			String javascriptArray = "";
-			if(mSubExperiments != null){
-				for(int i = 0; i < mSubExperiments.size() - 1; i++){
-					javascriptArray = javascriptArray+"\""+ mSubExperiments.get(i) +"\",";
-				}
-				javascriptArray = javascriptArray+"\""+ mSubExperiments.get(mSubExperiments.size()-1) +"\"";
+			return mSubExperiments.toString();			
 			
-			}
-			String temp = mSubExperiments.toString();			
-			return temp;
 		}
 		public void launchSubExperimentJS(int subExperimentId){
 				Intent intent = new Intent(mContext, SubExperiment.class);
@@ -88,25 +81,22 @@ public class BilingualAphasiaTestHome extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
+		mExperimentQuit=System.currentTimeMillis();
 		super.onDestroy();
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
 		return super.onKeyDown(keyCode, event);
 	}
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 
