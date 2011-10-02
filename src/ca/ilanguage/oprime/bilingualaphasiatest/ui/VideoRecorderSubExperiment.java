@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
 /**
@@ -67,7 +68,9 @@ public class VideoRecorderSubExperiment extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video_recorder);
 		mVideoView = (VideoView) this.findViewById(R.id.videoView);
-
+		ImageView image = (ImageView) findViewById(R.id.mainimage);
+		image.setImageResource(R.drawable.androids_experimenter_kids);
+		
 
 		mParticipantId = getIntent().getExtras().getString(
 				BilingualAphasiaTestHome.EXTRA_PARTICIPANT_ID);
@@ -80,9 +83,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 		if (mSubExperimentShortTitle.length() >= 50) {
 			mSubExperimentShortTitle = mSubExperimentShortTitle.substring(0, 49);
 		}
-		mAudioResultsFile = BilingualAphasiaTestHome.OUTPUT_DIRECTORY
-				+ System.currentTimeMillis() + "_" + mParticipantId + "_"
-				+ mLanguageOfSubExperiment + mSubExperimentShortTitle + ".3gp";
+		
 
 		this.setTitle(mSubExperimentTitle);
 
@@ -217,6 +218,9 @@ public class VideoRecorderSubExperiment extends Activity implements
 			mCamera = null;
 		}
 
+		mAudioResultsFile = BilingualAphasiaTestHome.OUTPUT_DIRECTORY
+		+ System.currentTimeMillis() + "_" + mParticipantId + "_"
+		+ mLanguageOfSubExperiment + mSubExperimentShortTitle + ".3gp";
 
 		try {
 			if (mUseFrontFacingCamera) {

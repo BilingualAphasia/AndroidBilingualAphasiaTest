@@ -397,8 +397,34 @@ var ctx;
 		addParticles(Math.max(buttonLabels.length * 2, minScreenSize / 50));
 		window.timer = setInterval(loopDelegate, 1000 / 60);
 
-		getPositionAsButton = function(x, y) {
-
+		getPositionAsButton = function(x, y, buttonid) {
+			/*
+			If recieved a button id, flash that button
+			and press it 500ms later
+			*/
+			if(buttonid != null){
+				for ( var k = 0; k < positionsFilled.length; k++) {
+					if (positionsFilled[k].id === buttonid) {
+						positionsFilled[k].color = "#999999";
+						positionsFilled[k].r = buttonRadiusForClicking;
+						positionsFilled[k].draw()
+						ctx.textAlign = positionsFilled[k].textAlign;
+						ctx.fillText(positionsFilled[k].label,
+								positionsFilled[k].labelx,
+								positionsFilled[k].labely);
+						//alert("Clicked "+positionsFilled[k].id);
+						setTimeout("window.pressButton(positionsFilled[" + k
+								+ "].id);", 500);
+						return;//dont click on multiple buttons
+					} else {
+						//alert(" distance to this position "+d);
+						//alert("Position filled is at "+positionsFilled[k].x+" "+positionsFilled[k].y);
+					}
+				}
+			}
+			/*
+			Otherwise check to see if the x,y match a button
+			*/
 			for ( var k = 0; k < positionsFilled.length; k++) {
 				var dx = x - positionsFilled[k].x;
 				var dy = y - positionsFilled[k].y;
