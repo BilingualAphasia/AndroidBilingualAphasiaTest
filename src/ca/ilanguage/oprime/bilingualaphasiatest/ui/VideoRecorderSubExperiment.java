@@ -3,8 +3,6 @@ package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
 
-
-import java.io.File;
 import android.app.Activity;
 import android.hardware.Camera;
 import android.media.MediaRecorder;
@@ -49,7 +47,6 @@ import android.widget.VideoView;
 public class VideoRecorderSubExperiment extends Activity implements
 		SurfaceHolder.Callback {
 	public static final String EXTRA_USE_FRONT_FACING_CAMERA ="frontcamera";
-	private static final String OUTPUT_FILE = "/sdcard/videooutput";
 	private static final String TAG = "RecordVideo";
 	private Boolean mRecording = false;
 	private Boolean mUseFrontFacingCamera = false;
@@ -57,11 +54,37 @@ public class VideoRecorderSubExperiment extends Activity implements
 	private MediaRecorder mVideoRecorder = null;
 	private Camera mCamera;
 	
+	
+	String mLanguageOfSubExperiment;
+	private String mParticipantId = "0000en";
+	// private int mSubExperimentId = 0;
+	private String mSubExperimentShortTitle = "";
+	private String mSubExperimentTitle = "";
+	String mAudioResultsFile;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video_recorder);
 		mVideoView = (VideoView) this.findViewById(R.id.videoView);
+
+
+		mParticipantId = getIntent().getExtras().getString(
+				BilingualAphasiaTestHome.EXTRA_PARTICIPANT_ID);
+		mLanguageOfSubExperiment = getIntent().getExtras().getString(
+				BilingualAphasiaTestHome.EXTRA_LANGUAGE);
+		mSubExperimentTitle = getIntent().getExtras().getString(
+				BilingualAphasiaTestHome.EXTRA_SUB_EXPERIMENT_TITLE);
+		mSubExperimentShortTitle = mSubExperimentTitle.replaceAll(
+				"[^\\w\\.\\-\\_]", "_");
+		if (mSubExperimentShortTitle.length() >= 50) {
+			mSubExperimentShortTitle = mSubExperimentShortTitle.substring(0, 49);
+		}
+		mAudioResultsFile = BilingualAphasiaTestHome.OUTPUT_DIRECTORY
+				+ System.currentTimeMillis() + "_" + mParticipantId + "_"
+				+ mLanguageOfSubExperiment + mSubExperimentShortTitle + ".3gp";
+
+		this.setTitle(mSubExperimentTitle);
 
 		mUseFrontFacingCamera = getIntent().getExtras().getBoolean(
 				EXTRA_USE_FRONT_FACING_CAMERA, true);
@@ -194,11 +217,6 @@ public class VideoRecorderSubExperiment extends Activity implements
 			mCamera = null;
 		}
 
-		String uniqueOutFile = OUTPUT_FILE + System.currentTimeMillis() + ".3gp";
-		File outFile = new File(uniqueOutFile);
-		if (outFile.exists()) {
-			outFile.delete();
-		}
 
 		try {
 			if (mUseFrontFacingCamera) {
@@ -260,7 +278,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 			}
 			mVideoRecorder.setMaxDuration(30000); // limit to 30 seconds
 			mVideoRecorder.setPreviewDisplay(holder.getSurface());
-			mVideoRecorder.setOutputFile(uniqueOutFile);
+			mVideoRecorder.setOutputFile(mAudioResultsFile);
 			mVideoRecorder.prepare();
 			mVideoRecorder.start();
 			mRecording = true;
