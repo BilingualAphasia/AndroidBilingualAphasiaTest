@@ -43,6 +43,9 @@
         <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.VideoSubExperimentSimple"
                   android:label="@string/app_name">
         </activity>
+        <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.VideoRecorderSubExperimentSimple"
+                  android:label="@string/app_name">
+        </activity>
         <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.AccelerometerUIActivity"
                   android:label="@string/app_name">
         </activity>
