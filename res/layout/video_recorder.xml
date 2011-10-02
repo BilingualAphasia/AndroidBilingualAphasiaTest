@@ -4,11 +4,7 @@
 	    android:orientation="vertical" android:layout_width="fill_parent"
 	    android:layout_height="fill_parent">
 
-	    <Button android:id="@+id/bgnBtn" android:layout_width="fill_parent"
-	    	    android:layout_height="wrap_content" android:text="Begin Recording"
-	    	    android:enabled="false" />
-
-	  
+	    
 
     <RelativeLayout android:layout_width="fill_parent"
         android:layout_height="fill_parent"
