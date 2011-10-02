@@ -66,7 +66,12 @@ public class BilingualAphasiaTestHome extends Activity {
 			
 		}
 		public void launchSubExperimentJS(int subExperimentId){
-				Intent intent = new Intent(mContext, SubExperiment.class);
+			Intent intent;
+			if(subExperimentId< 10){
+				intent = new Intent(mContext, SubExperiment.class);
+			}else{
+				intent = new Intent(mContext, VideoSubExperiment.class);
+			}
 				// intent.setData(mUri);
 				intent.putExtra(EXTRA_LANGUAGE,ENGLISH);
 				intent.putExtra(EXTRA_PARTICIPANT_ID, mParticipantId);
