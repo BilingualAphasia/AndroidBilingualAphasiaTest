@@ -6,6 +6,7 @@ import ca.ilanguage.oprime.bilingualaphasiatest.R;
 
 import java.io.File;
 import android.app.Activity;
+import android.hardware.Camera;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,17 @@ import android.widget.VideoView;
  * 2. Video starts and stops on any touch
  * 
  * To control recording in other ways see the try blocks of the onTouchEvent 
+ * 
+ * 
+ * To incorporate into project add these features and permissions to manifest.xml:
+ * <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="11"/>
+    
+	<uses-feature android:name="android.hardware.camera"/>
+	<uses-feature android:name="android.hardware.camera.autofocus"/>
+	
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
  * 
  * @author cesine
  *
@@ -134,6 +146,15 @@ public class VideoRecorderSubExperiment extends Activity implements
 
 	}
 
+	/**
+	 * Uses the surface from video_recorder.xml
+	 * Tested using
+	 *  2.2 (HTC Desire/Hero phone) -> Use all defaults works, records forward camera with AMR_NB audio
+	 *  3.0 (Motorola Xoom tablet)  -> Use all defaults doesn't work.
+	 * 
+	 * @param holder
+	 * @throws Exception
+	 */
 	private void beginRecording(SurfaceHolder holder) throws Exception {
 		if (recorder != null) {
 			recorder.stop();
@@ -149,14 +170,24 @@ public class VideoRecorderSubExperiment extends Activity implements
 
 		try {
 			recorder = new MediaRecorder();
-			recorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-			recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-			recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+			recorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);//CAMERA
+			recorder.setAudioSource(MediaRecorder.AudioSource.MIC);//MIC
+			recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);//MPEG_4
 			recorder.setVideoSize(640, 480);// YouTube recommended size 320x240,
 																			// OpenGazer eye tracker: 640x480 mode.
 			recorder.setVideoFrameRate(15);
-			recorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
-			recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+			recorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);//MPEG_4_SP
+			int sdk = android.os.Build.VERSION.SDK_INT;
+			// gingerbread and up can have wide band ie 16,000 hz recordings (much
+			// better human voice)
+			if (sdk >= 10) {
+				recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
+				recorder.setAudioSamplingRate(16000);
+			} else {
+				// other devices will have to use narrow band, ie 8,000 hz (same quality
+				// as a phone call which means /f/ and /th/ are indistinguishable)
+				recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+			}
 			recorder.setMaxDuration(30000); // limit to 30 seconds
 			recorder.setPreviewDisplay(holder.getSurface());
 			recorder.setOutputFile(uniqueOutFile);
