@@ -23,6 +23,7 @@ import android.hardware.Camera.Size;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -40,6 +41,7 @@ public class VideoSubExperiment extends Activity {
 	String mAudioResultsFile;
 
 	private Preview mPreview;
+	private Boolean mRecording=false;
 	
 
 	@Override
@@ -75,6 +77,32 @@ public class VideoSubExperiment extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 	}
+
+	public boolean onTouchEvent(MotionEvent event) {
+		float positionX = event.getX();
+		float positionY = event.getY();
+
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			// Screen is pressed for the first time
+			break;
+		case MotionEvent.ACTION_MOVE:
+			// Screen is still pressed, float have been updated
+			break;
+		case MotionEvent.ACTION_UP:
+			// Screen is not anymore touched
+			// If touch is used to advance, and the app is listening for a touch
+			if (mRecording){
+				mPreview.stopRecording();
+				finish();
+			}else{
+				mPreview.startTheMediaRecorder();
+				mRecording = true;
+			}
+			break;
+		}
+		return super.onTouchEvent(event);
+	}
 }
 
 // ----------------------------------------------------------------------
@@ -106,7 +134,7 @@ class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	
 				mediaRecorder = new MediaRecorder();
 	
-//				mediaRecorder.setCamera(mCamera);
+				mediaRecorder.setCamera(mCamera);
 				mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 				mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 	
@@ -126,8 +154,7 @@ class Preview extends SurfaceView implements SurfaceHolder.Callback {
 				mediaRecorder.setMaxFileSize(maxFileSizeInBytes);
 	
 	      mediaRecorder.prepare();
-				mediaRecorder.start();
-	
+				
 				return true;
 			} catch (IllegalStateException e) {
 				Log.e(TAG,e.getMessage());
@@ -135,14 +162,37 @@ class Preview extends SurfaceView implements SurfaceHolder.Callback {
 				return false;
 			} catch (IOException e) {
 				Log.e(TAG,e.getMessage());
+					try {
+						mediaRecorder.prepare();
+					} catch (IllegalStateException e1) {
+						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+					}
 	//			e.printStackTrace();
 //				mCamera.release();
 //				mCamera = null;
 				return false;
 			}
 	 }
+	 void startTheMediaRecorder(){
+		 try {
+				mediaRecorder.prepare();
+				mediaRecorder.start();
+			} catch (IllegalStateException e1) {
+				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+			}
+		 
+	 }
 	 boolean stopRecording(){
 		if(mediaRecorder != null){
+			mediaRecorder.stop();
 			mediaRecorder.release();
 			mediaRecorder = null;
 		}
