@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This file is /res/layout/video_recorder.xml based on listing 9-6 in Pro Android 2 -->
+<!-- This file is /res/layout/video_recorder.xml based on listing 9-6 in 
+	Pro Android 2 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:orientation="vertical" android:layout_width="fill_parent"
-	    android:layout_height="fill_parent">
-
-    <RelativeLayout android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center">
-        
-	        <VideoView android:id="@+id/videoView" android:layout_width="1px"
-	    	        android:layout_height="1px" />
-		    
-    </RelativeLayout>
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<VideoView android:id="@+id/videoView" android:layout_width="1px"
+		android:layout_height="1px" />
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical" android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+		<ImageView android:id="@+id/mainimage" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</LinearLayout>
+	
 </LinearLayout>
 
