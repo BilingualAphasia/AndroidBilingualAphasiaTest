@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 /**
@@ -53,6 +54,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 	private static final String TAG = "RecordVideo";
 	private VideoView videoView = null;
 	private Boolean mRecording = false;
+	private Boolean useFrontFacingCamera = false;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -62,6 +64,17 @@ public class VideoRecorderSubExperiment extends Activity implements
 
 		videoView = (VideoView) this.findViewById(R.id.videoView);
 
+		
+//		int cameraCount = 0;
+//		cameraCount = Camera.getNumberOfCameras();
+//		//Hard coded to only open front facing camera on xoom is model MZ604
+		String deviceModel = android.os.Build.MODEL;
+		if(deviceModel.contains("MZ604")){
+			useFrontFacingCamera = true;
+		}else{
+			Toast.makeText(getApplicationContext(), "The App can't use the Front facing camera.\n The device model is : "+deviceModel, Toast.LENGTH_LONG).show();
+			useFrontFacingCamera=false;
+		}
 		final SurfaceHolder holder = videoView.getHolder();
 		holder.addCallback(this);
 		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -182,11 +195,9 @@ public class VideoRecorderSubExperiment extends Activity implements
 		}
 
 		try {
-			//Based on http://stackoverflow.com/questions/2779002/how-to-open-front-camera-on-android-platform
-			int cameraCount = 0;
-			cameraCount = Camera.getNumberOfCameras();
-			if (cameraCount > 1){
+			if (useFrontFacingCamera){
 				mCamera = Camera.open(1);
+//			Based on http://stackoverflow.com/questions/2779002/how-to-open-front-camera-on-android-platform
 //				Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
 //				for ( int camIdx = 0; camIdx < cameraCount; camIdx++ ) {
 //					Camera.getCameraInfo( camIdx, cameraInfo );
