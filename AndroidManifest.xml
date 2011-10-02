@@ -43,7 +43,7 @@
         <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.VideoSubExperimentSimple"
                   android:label="@string/app_name">
         </activity>
-        <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.VideoRecorderSubExperimentSimple"
+        <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.VideoRecorderSubExperiment"
                   android:label="@string/app_name">
         </activity>
         <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.AccelerometerUIActivity"

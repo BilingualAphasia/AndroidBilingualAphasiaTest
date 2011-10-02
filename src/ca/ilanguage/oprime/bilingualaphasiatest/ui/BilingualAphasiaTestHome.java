@@ -70,7 +70,7 @@ public class BilingualAphasiaTestHome extends Activity {
 			if(subExperimentId< 10){
 				intent = new Intent(mContext, SubExperiment.class);
 			}else{
-				intent = new Intent(mContext, VideoSubExperiment.class);
+				intent = new Intent(mContext, VideoRecorderSubExperiment.class);
 			}
 				// intent.setData(mUri);
 				intent.putExtra(EXTRA_LANGUAGE,ENGLISH);

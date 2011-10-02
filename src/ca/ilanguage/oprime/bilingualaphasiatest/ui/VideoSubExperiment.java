@@ -115,7 +115,7 @@ class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	private MediaRecorder mediaRecorder;
 	private final int maxDurationInMs = 20000;
 	private final long maxFileSizeInBytes = 500000;
-	private final int videoFramesPerSecond = 20;
+	private final int videoFramesPerSecond = 15;
 
 
 	Preview(Context context, String audioResultsFile) {
