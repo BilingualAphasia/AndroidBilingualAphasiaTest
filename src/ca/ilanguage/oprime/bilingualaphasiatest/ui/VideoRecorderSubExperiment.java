@@ -14,71 +14,77 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.widget.Toast;
 import android.widget.VideoView;
-
 /**
- * Android video recorder with "no" preview (the preview is a 1x1 pixel which 
- * simulates an unobtrusive recording led). Based on Pro Android 2 2010 (Hashimi et al) 
- * source code in Listing 9-6. 
+ * Android video recorder with "no" preview (the preview is a 1x1 pixel which
+ * simulates an unobtrusive recording led). Based on Pro Android 2 2010 (Hashimi
+ * et al) source code in Listing 9-6. 
  * 
- * Suitable use cases:
- *  A: eye gaze tracking to let users use eyes to navigate a page
- *  B: use tablet camera(s) to replace video camera in lab experiments 
- *     (psycholingusitics or other experiments)
+ * Also demonstrates how to use the front-facing and back-facing cameras. 
+ * A calling Intent can pass an Extra to use the front facing camera if available.
  * 
- * Video is recording is controlled in two ways:
- * 1. Video starts and stops with the activity
+ * Suitable use cases: 
+ * A: eye gaze tracking library to let users use eyes as a mouse to navigate a web page 
+ * B: use tablet camera(s) to replace video camera in lab experiments
+ * (psycholingusitics or other experiments)
+ * 
+ * Video is recording is controlled in two ways: 
+ * 1. Video starts and stops with the activity 
  * 2. Video starts and stops on any touch
  * 
- * To control recording in other ways see the try blocks of the onTouchEvent 
+ * To control recording in other ways see the try blocks of the onTouchEvent
  * 
+ * To incorporate into project add these features and permissions to
+ * manifest.xml:
  * 
- * To incorporate into project add these features and permissions to manifest.xml:
+ * <uses-feature android:name="android.hardware.camera"/> 
+ * <uses-feature android:name="android.hardware.camera.autofocus"/>
+ * 
+ * <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+ * <uses-permission android:name="android.permission.CAMERA" /> 
+ * <uses-permission android:name="android.permission.RECORD_AUDIO" />
+ * 
+ * Tested Date: October 2 2011 with manifest.xml 
  * <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="11"/>
-    
-	<uses-feature android:name="android.hardware.camera"/>
-	<uses-feature android:name="android.hardware.camera.autofocus"/>
-	
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.CAMERA" />
-	<uses-permission android:name="android.permission.RECORD_AUDIO" />
- * 
- * @author cesine
- *
  */
 public class VideoRecorderSubExperiment extends Activity implements
 		SurfaceHolder.Callback {
-
-	private MediaRecorder recorder = null;
-	private Camera mCamera;
+	public static final String EXTRA_USE_FRONT_FACING_CAMERA ="frontcamera";
 	private static final String OUTPUT_FILE = "/sdcard/videooutput";
 	private static final String TAG = "RecordVideo";
-	private VideoView videoView = null;
 	private Boolean mRecording = false;
-	private Boolean useFrontFacingCamera = false;
-
-	/** Called when the activity is first created. */
+	private Boolean mUseFrontFacingCamera = false;
+	private VideoView mVideoView = null;
+	private MediaRecorder mVideoRecorder = null;
+	private Camera mCamera;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video_recorder);
+		mVideoView = (VideoView) this.findViewById(R.id.videoView);
 
-		videoView = (VideoView) this.findViewById(R.id.videoView);
-
-		
-//		int cameraCount = 0;
-//		cameraCount = Camera.getNumberOfCameras();
-//		//Hard coded to only open front facing camera on xoom is model MZ604
-		String deviceModel = android.os.Build.MODEL;
-		if(deviceModel.contains("MZ604")){
-			useFrontFacingCamera = true;
-		}else{
-			Toast.makeText(getApplicationContext(), "The App can't use the Front facing camera.\n The device model is : "+deviceModel, Toast.LENGTH_LONG).show();
-			useFrontFacingCamera=false;
+		mUseFrontFacingCamera = getIntent().getExtras().getBoolean(
+				EXTRA_USE_FRONT_FACING_CAMERA, true);
+		if(mUseFrontFacingCamera){
+			// If caller wants to use front facing camera, then make sure the device has one...
+			// Hard coded to only open front facing camera on Xoom (model MZ604)
+			// For more universal solution try: 
+			// http://stackoverflow.com/questions/2779002/how-to-open-front-camera-on-android-platform
+			String deviceModel = android.os.Build.MODEL;
+			if (deviceModel.contains("MZ604")) {
+				mUseFrontFacingCamera = true;
+			} else {
+				Toast.makeText(
+						getApplicationContext(),
+						"The App isn't designed to use this Android's front facing camera.\n " +
+						"The device model is : " + deviceModel, Toast.LENGTH_LONG).show();
+				mUseFrontFacingCamera = false;
+			}
 		}
-		final SurfaceHolder holder = videoView.getHolder();
+		
+		final SurfaceHolder holder = mVideoView.getHolder();
 		holder.addCallback(this);
 		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
@@ -108,7 +114,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 				// To begin recording attach this try block to another event listener,
 				// button etc
 				try {
-					beginRecording(videoView.getHolder());
+					beginRecording(mVideoView.getHolder());
 				} catch (Exception e) {
 					Log.e(TAG, e.toString());
 					e.printStackTrace();
@@ -141,12 +147,12 @@ public class VideoRecorderSubExperiment extends Activity implements
 
 	private void stopRecording() throws Exception {
 		mRecording = false;
-		if (recorder != null) {
-			recorder.stop();
-			recorder.release();
-			recorder = null;
+		if (mVideoRecorder != null) {
+			mVideoRecorder.stop();
+			mVideoRecorder.release();
+			mVideoRecorder = null;
 		}
-		if(mCamera != null){
+		if (mCamera != null) {
 			mCamera.reconnect();
 			mCamera.stopPreview();
 			mCamera.release();
@@ -167,85 +173,96 @@ public class VideoRecorderSubExperiment extends Activity implements
 	}
 
 	/**
-	 * Uses the surface from video_recorder.xml
-	 * Tested using
-	 *  2.2 (HTC Desire/Hero phone) -> Use all defaults works, records forward camera with AMR_NB audio
-	 *  3.0 (Motorola Xoom tablet)  -> Use all defaults doesn't work.
+	 * Uses the surface defined in video_recorder.xml 
+	 * Tested using 
+	 * 2.2 (HTC Desire/Hero phone) -> Use all defaults works, records back facing camera with AMR_NB audio
+	 * 3.0 (Motorola Xoom tablet) -> Use all defaults doesn't work, works with these specs, might work with others
 	 * 
-	 * @param holder
+	 * @param holder The surfaceholder from the videoview of the layout
 	 * @throws Exception
 	 */
 	private void beginRecording(SurfaceHolder holder) throws Exception {
-		if (recorder != null) {
-			recorder.stop();
-			recorder.release();
-			recorder = null;
+		if (mVideoRecorder != null) {
+			mVideoRecorder.stop();
+			mVideoRecorder.release();
+			mVideoRecorder = null;
 		}
-		if(mCamera != null){
+		if (mCamera != null) {
 			mCamera.reconnect();
 			mCamera.stopPreview();
 			mCamera.release();
 			mCamera = null;
 		}
-		
-		String uniqueOutFile = OUTPUT_FILE + System.currentTimeMillis() + ".mp4";
+
+		String uniqueOutFile = OUTPUT_FILE + System.currentTimeMillis() + ".3gp";
 		File outFile = new File(uniqueOutFile);
 		if (outFile.exists()) {
 			outFile.delete();
 		}
 
 		try {
-			if (useFrontFacingCamera){
+			if (mUseFrontFacingCamera) {
+				//hard coded assuming 1 is the front facing camera
 				mCamera = Camera.open(1);
-//			Based on http://stackoverflow.com/questions/2779002/how-to-open-front-camera-on-android-platform
-//				Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
-//				for ( int camIdx = 0; camIdx < cameraCount; camIdx++ ) {
-//					Camera.getCameraInfo( camIdx, cameraInfo );
-//					if ( cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT  ) {
-//						mCamera = Camera.open(camIdx);
-//						frontFacingFound = true;
-//						break;
-//					}
-//				}
-			}else{
+			} else {
 				mCamera = Camera.open();
 			}
-			
-		//Based on API demos
+
+			// Camera setup is based on the API Camera Preview demo
 			mCamera.setPreviewDisplay(holder);
 			Camera.Parameters parameters = mCamera.getParameters();
 			parameters.setPreviewSize(640, 480);
 			mCamera.setParameters(parameters);
 			mCamera.startPreview();
 			mCamera.unlock();
-			
-			recorder = new MediaRecorder();
-			recorder.setCamera(mCamera);
-			
-			
-			recorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);//CAMERA
-			recorder.setAudioSource(MediaRecorder.AudioSource.MIC);//MIC
-			recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);//MPEG_4
-			recorder.setVideoSize(640, 480);// YouTube recommended size 320x240,
-																			// OpenGazer eye tracker: 640x480 mode.
-			recorder.setVideoFrameRate(15);
-			recorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);//MPEG_4_SP
+
+			mVideoRecorder = new MediaRecorder();
+			mVideoRecorder.setCamera(mCamera);
+
+			// Media recorder setup is based on Listing 9-6, Hashimi et all 2010
+			// values based on best practices and good quality, 
+			// tested via upload to YouTube and played in QuickTime on Mac Snow Leopard
+			mVideoRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+			mVideoRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+			mVideoRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);// THREE_GPP
+																																			// is big-endian,
+																																			// storing and
+																																			// transferring
+																																			// the most
+																																			// significant
+																																			// bytes first.
+																																			// MPEG_4 as another option
+			mVideoRecorder.setVideoSize(640, 480);// YouTube recommended size: 320x240,
+																			// OpenGazer eye tracker: 640x480
+																			// YouTube HD: 1280x720
+			mVideoRecorder.setVideoFrameRate(20); //might be auto-determined due to lighting
+			mVideoRecorder.setVideoEncodingBitRate(3000000);// 3 megapixel, or the max of
+																								// the camera
+			mVideoRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);// MPEG_4_SP
+																																// Simple Profile is
+																																// for low bit
+																																// rate and low
+																																// resolution
+																																// H264 is MPEG-4 Part 10 
+																																//is commonly referred to
+																																// as H.264 or AVC
 			int sdk = android.os.Build.VERSION.SDK_INT;
-			// gingerbread and up can have wide band ie 16,000 hz recordings (much
-			// better human voice)
+			// Gingerbread and up can have wide band ie 16,000 hz recordings 
+			// (Okay quality for human voice)
 			if (sdk >= 10) {
-				recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
-				recorder.setAudioSamplingRate(16000);
+				mVideoRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
+				mVideoRecorder.setAudioSamplingRate(16000);
 			} else {
-				// other devices will have to use narrow band, ie 8,000 hz (same quality
-				// as a phone call which means /f/ and /th/ are indistinguishable)
-				recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+				// Other devices only have narrow band, ie 8,000 hz 
+				// (Same quality as a phone call, not really good quality for any purpose. 
+				// For human voice 8,000 hz means /f/ and /th/ are indistinguishable)
+				mVideoRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			}
-			recorder.setMaxDuration(30000); // limit to 30 seconds
-			recorder.setPreviewDisplay(holder.getSurface());
-			recorder.setOutputFile(uniqueOutFile);
-			recorder.prepare();
-			recorder.start();
+			mVideoRecorder.setMaxDuration(30000); // limit to 30 seconds
+			mVideoRecorder.setPreviewDisplay(holder.getSurface());
+			mVideoRecorder.setOutputFile(uniqueOutFile);
+			mVideoRecorder.prepare();
+			mVideoRecorder.start();
 			mRecording = true;
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
