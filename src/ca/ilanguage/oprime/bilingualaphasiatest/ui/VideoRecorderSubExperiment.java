@@ -48,6 +48,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 		SurfaceHolder.Callback {
 
 	private MediaRecorder recorder = null;
+	private Camera mCamera;
 	private static final String OUTPUT_FILE = "/sdcard/videooutput";
 	private static final String TAG = "RecordVideo";
 	private VideoView videoView = null;
@@ -132,6 +133,12 @@ public class VideoRecorderSubExperiment extends Activity implements
 			recorder.release();
 			recorder = null;
 		}
+		if(mCamera != null){
+			mCamera.reconnect();
+			mCamera.stopPreview();
+			mCamera.release();
+			mCamera = null;
+		}
 	}
 
 	@Override
@@ -161,7 +168,13 @@ public class VideoRecorderSubExperiment extends Activity implements
 			recorder.release();
 			recorder = null;
 		}
-
+		if(mCamera != null){
+			mCamera.reconnect();
+			mCamera.stopPreview();
+			mCamera.release();
+			mCamera = null;
+		}
+		
 		String uniqueOutFile = OUTPUT_FILE + System.currentTimeMillis() + ".mp4";
 		File outFile = new File(uniqueOutFile);
 		if (outFile.exists()) {
@@ -169,7 +182,36 @@ public class VideoRecorderSubExperiment extends Activity implements
 		}
 
 		try {
+			//Based on http://stackoverflow.com/questions/2779002/how-to-open-front-camera-on-android-platform
+			int cameraCount = 0;
+			cameraCount = Camera.getNumberOfCameras();
+			if (cameraCount > 1){
+				mCamera = Camera.open(1);
+//				Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+//				for ( int camIdx = 0; camIdx < cameraCount; camIdx++ ) {
+//					Camera.getCameraInfo( camIdx, cameraInfo );
+//					if ( cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT  ) {
+//						mCamera = Camera.open(camIdx);
+//						frontFacingFound = true;
+//						break;
+//					}
+//				}
+			}else{
+				mCamera = Camera.open();
+			}
+			
+		//Based on API demos
+			mCamera.setPreviewDisplay(holder);
+			Camera.Parameters parameters = mCamera.getParameters();
+			parameters.setPreviewSize(640, 480);
+			mCamera.setParameters(parameters);
+			mCamera.startPreview();
+			mCamera.unlock();
+			
 			recorder = new MediaRecorder();
+			recorder.setCamera(mCamera);
+			
+			
 			recorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);//CAMERA
 			recorder.setAudioSource(MediaRecorder.AudioSource.MIC);//MIC
 			recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);//MPEG_4
