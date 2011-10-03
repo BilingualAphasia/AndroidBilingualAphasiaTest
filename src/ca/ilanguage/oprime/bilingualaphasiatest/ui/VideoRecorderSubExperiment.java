@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
 
 import android.app.Activity;
+import android.content.Context;
 import android.hardware.Camera;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -49,36 +51,74 @@ import android.widget.VideoView;
  */
 public class VideoRecorderSubExperiment extends Activity implements
 		SurfaceHolder.Callback {
+	/*
+	 * Recording variables
+	 */
 	public static final String EXTRA_USE_FRONT_FACING_CAMERA ="frontcamera";
-	private static final String TAG = "RecordVideo";
+	private static final String TAG = "VideoRecorderSubExperiment";
 	private Boolean mRecording = false;
 	private Boolean mUseFrontFacingCamera = false;
 	private VideoView mVideoView = null;
 	private MediaRecorder mVideoRecorder = null;
 	private Camera mCamera;
+	Context mContext;
 	
-	
-	String mLanguageOfSubExperiment;
-	private String mParticipantId = "0000en";
+	/*
+	 * Sub experiment variables
+	 */
+	String mLanguageOfSubExperiment = BilingualAphasiaTestHome.ENGLISH;
+	private String mParticipantId = BilingualAphasiaTestHome.PARTICIPANT_ID_DEFAULT;
 	// private int mSubExperimentId = 0;
 	private String mSubExperimentShortTitle = "";
 	private String mSubExperimentTitle = "";
-	String mAudioResultsFile;
-	private ArrayList<Integer> mStimuliImages;
-	private ArrayList<String> mStimuliResponses;
+	String mAudioResultsFile = "";
+	private ArrayList<Integer> mStimuliImages  = new ArrayList<Integer>();;
+	private ArrayList<String> mStimuliResponses = new ArrayList<String>();
+	private ArrayList<Long> mReactionTimes = new ArrayList<Long>();;
 	private int mStimuliIndex = 0;
+	private Long mStartTime = System.currentTimeMillis();
+	private Long mEndTime = System.currentTimeMillis();
+	private ImageView mImage;
+
+	
+	/*
+	 * Stimuli flow variables
+	 */
+		private static final int REWIND = 3;
+		private static final int ADVANCE = 4;
+		private int nextAction = ADVANCE;
+		private Handler mHandlerDelayStimuli = new Handler();
+		private Boolean mTouched = false;
+		private Boolean mListeningForTouch = true;	//sub experiment starts by user touch
+		private Boolean mfirstResponse = true;
+		private Boolean mRewind = false;
+		private Boolean mRewindHandled = false;
+	  /*
+	   * Change these to fine tune experiment (rewindable, auto advance, display time)
+	   */
+		private Boolean mRewindable = false;
+		private static Boolean mAdvanceByTouchOnly = true;
+		private static int mWaitBetweenStimuli = 5;// wait between stimuli, if 999 then wait until user input.
+
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video_recorder);
 		mVideoView = (VideoView) this.findViewById(R.id.videoView);
-		ImageView image = (ImageView) findViewById(R.id.mainimage);
-		image.setImageResource(R.drawable.androids_experimenter_kids);
+		mImage = (ImageView) findViewById(R.id.mainimage);
+		//mImage.setImageResource(R.drawable.androids_experimenter_kids);
 		
-
-		mStimuliImages = getIntent().getExtras().getIntegerArrayList(
-				BilingualAphasiaTestHome.EXTRA_STIMULI);
+		/*
+		 * Get extras from the Experiment Home screen
+		 */
+//		mStimuliImages = getIntent().getExtras().getIntegerArrayList(
+//				BilingualAphasiaTestHome.EXTRA_STIMULI);
+		mStimuliImages.add(R.drawable.e048_0);
+		mStimuliImages.add(R.drawable.e048);
+		mStimuliImages.add(R.drawable.e049);
+		mStimuliImages.add(R.drawable.e050);
+		mStimuliImages.add(R.drawable.e051);
 		mParticipantId = getIntent().getExtras().getString(
 				BilingualAphasiaTestHome.EXTRA_PARTICIPANT_ID);
 		mLanguageOfSubExperiment = getIntent().getExtras().getString(
@@ -91,8 +131,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 			mSubExperimentShortTitle = mSubExperimentShortTitle.substring(0, 49);
 		}
 		
-
-		this.setTitle(mSubExperimentTitle +mStimuliImages.size());
+		this.setTitle(mSubExperimentTitle +"-"+ mStimuliImages.size());
 
 		mUseFrontFacingCamera = getIntent().getExtras().getBoolean(
 				EXTRA_USE_FRONT_FACING_CAMERA, true);
@@ -105,19 +144,29 @@ public class VideoRecorderSubExperiment extends Activity implements
 			if (deviceModel.contains("MZ604")) {
 				mUseFrontFacingCamera = true;
 			} else {
-				Toast.makeText(
-						getApplicationContext(),
-						"The App isn't designed to use this Android's front facing camera.\n " +
-						"The device model is : " + deviceModel, Toast.LENGTH_LONG).show();
+//				Toast.makeText(
+//						getApplicationContext(),
+//						"The App isn't designed to use this Android's front facing camera.\n " +
+//						"The device model is : " + deviceModel, Toast.LENGTH_LONG).show();
 				mUseFrontFacingCamera = false;
 			}
+			
 		}
 		
 		final SurfaceHolder holder = mVideoView.getHolder();
 		holder.addCallback(this);
 		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		
+		presentStimuli();
+		
 	}
 
+	/*
+	 * If not using auto-advance, wait until user touches the screen.
+	 * 
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onTouchEvent(android.view.MotionEvent)
+	 */
 	public boolean onTouchEvent(MotionEvent event) {
 		// can use the xy of the touch to start and stop recording
 		float positionX = event.getX();
@@ -131,32 +180,54 @@ public class VideoRecorderSubExperiment extends Activity implements
 			// Screen is still pressed, float have been updated
 			break;
 		case MotionEvent.ACTION_UP:
-			// Screen is not touched anymore
-			if (mRecording) {
-				// To stop recording attach this try block to another event listener,
-				// button etc
-				try {
-					stopRecording();
-				} catch (Exception e) {
-					Log.e(TAG, e.toString());
-					e.printStackTrace();
-				}
-			} else {
-				// To begin recording attach this try block to another event listener,
-				// button etc
-				try {
-					beginRecording(mVideoView.getHolder());
-				} catch (Exception e) {
-					Log.e(TAG, e.toString());
-					e.printStackTrace();
-				}
+		// Screen is not anymore touched
+			// If touch is used to advance, and the app is listening for a touch
+			if (mListeningForTouch) {
+					getStimulusResponse(positionX, positionY);
+					mTouched = true;
 			}
 			break;
 		}
 		return super.onTouchEvent(event);
 	}
 
-	@Override
+	
+	public void getStimulusResponse(float x, float y) {
+			mEndTime = System.currentTimeMillis();
+			Long reactionTime = mEndTime - mStartTime;
+			mReactionTimes.add(mStimuliIndex, reactionTime);
+			mStimuliResponses.add(mStimuliIndex,x+":::"+y);
+			advanceStimuli();
+	}
+
+	/**
+	 * This method is called after the response has been handled
+	 */
+	public void advanceStimuli() {	
+		mStimuliIndex++;
+		// if the index is outside of the array of stimuli
+		if (mStimuliIndex >= mStimuliImages.size() || mStimuliIndex < 0) {
+			writeResultsTable();
+			finish();// end the sub experiment
+			return;
+		}
+		presentStimuli();
+	}
+	public void presentStimuli(){
+		nextAction = ADVANCE;
+		mfirstResponse =true;
+		mListeningForTouch = true;
+		mStartTime = System.currentTimeMillis();
+		this.setTitle(mSubExperimentTitle +" "+mStimuliIndex+"/"+ mStimuliImages.size());
+		int imageId = mStimuliImages.get(mStimuliIndex);
+		mImage.setImageResource(R.drawable.e048_0);
+		if(mStimuliIndex ==2){
+			mImage.setImageResource(R.drawable.e049);
+		}
+	}
+	public void writeResultsTable(){
+		
+	}
 	public void surfaceCreated(SurfaceHolder holder) {
 		try {
 			beginRecording(holder);
@@ -166,11 +237,9 @@ public class VideoRecorderSubExperiment extends Activity implements
 		}
 	}
 
-	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 	}
 
-	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
 		Log.v(TAG, "Width x Height = " + width + "x" + height);
@@ -265,7 +334,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 																			// OpenGazer eye tracker: 640x480
 																			// YouTube HD: 1280x720
 			mVideoRecorder.setVideoFrameRate(20); //might be auto-determined due to lighting
-			mVideoRecorder.setVideoEncodingBitRate(3000000);// 3 megapixel, or the max of
+			//mVideoRecorder.setVideoEncodingBitRate(3000000);// 3 megapixel, or the max of
 																								// the camera
 			mVideoRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);// MPEG_4_SP
 																																// Simple Profile is

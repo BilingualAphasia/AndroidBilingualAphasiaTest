@@ -167,10 +167,10 @@ public class AccelerometerUIActivity extends Activity {
 			mReactionTimes.add(n,System.currentTimeMillis());
 		}
 		
-		mStimuliAudio.add(R.raw.e_synonyms_instructions);
-		mStimuliAudio.add(R.raw.e165);
-		mStimuliAudio.add(R.raw.e166);
-		mStimuliAudio.add(R.raw.e167);
+//		mStimuliAudio.add(R.raw.e_synonyms_instructions);
+//		mStimuliAudio.add(R.raw.e165);
+//		mStimuliAudio.add(R.raw.e166);
+//		mStimuliAudio.add(R.raw.e167);
 		mStimuliIndex = 0;
 		playSample();
 
@@ -215,7 +215,6 @@ public class AccelerometerUIActivity extends Activity {
 			mp = MediaPlayer.create(getApplicationContext(),
 					mStimuliAudio.get(mStimuliIndex));
 			mp.setOnCompletionListener(new OnCompletionListener() {
-				@Override
 				public void onCompletion(MediaPlayer mp) {
 					getStimulusResponse(true);
 				}
@@ -650,7 +649,6 @@ public class AccelerometerUIActivity extends Activity {
 			mVerticalBound = ((h / mMetersToPixelsY - sBallDiameter) * 0.5f);
 		}
 
-		@Override
 		public void onSensorChanged(SensorEvent event) {
 			if (event.sensor.getType() != Sensor.TYPE_ACCELEROMETER)
 				return;
@@ -729,7 +727,6 @@ public class AccelerometerUIActivity extends Activity {
 			invalidate();
 		}
 
-		@Override
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		}
 	}
