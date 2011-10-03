@@ -1,6 +1,8 @@
 package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
 
+import java.util.ArrayList;
+
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
 
 import android.app.Activity;
@@ -62,6 +64,9 @@ public class VideoRecorderSubExperiment extends Activity implements
 	private String mSubExperimentShortTitle = "";
 	private String mSubExperimentTitle = "";
 	String mAudioResultsFile;
+	private ArrayList<Integer> mStimuliImages;
+	private ArrayList<String> mStimuliResponses;
+	private int mStimuliIndex = 0;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +77,8 @@ public class VideoRecorderSubExperiment extends Activity implements
 		image.setImageResource(R.drawable.androids_experimenter_kids);
 		
 
+		mStimuliImages = getIntent().getExtras().getIntegerArrayList(
+				BilingualAphasiaTestHome.EXTRA_STIMULI);
 		mParticipantId = getIntent().getExtras().getString(
 				BilingualAphasiaTestHome.EXTRA_PARTICIPANT_ID);
 		mLanguageOfSubExperiment = getIntent().getExtras().getString(
@@ -85,7 +92,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 		}
 		
 
-		this.setTitle(mSubExperimentTitle);
+		this.setTitle(mSubExperimentTitle +mStimuliImages.size());
 
 		mUseFrontFacingCamera = getIntent().getExtras().getBoolean(
 				EXTRA_USE_FRONT_FACING_CAMERA, true);

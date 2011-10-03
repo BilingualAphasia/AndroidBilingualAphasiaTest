@@ -13,8 +13,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
-import ca.ilanguage.oprime.bilingualaphasiatest.preferences.SetPreferencesActivity;
-import ca.ilanguage.oprime.bilingualaphasiatest.service.AudioRecorderService;
 
 public class BilingualAphasiaTestHome extends Activity {
 	private WebView mWebView;
@@ -24,6 +22,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	public static final String EXTRA_LANGUAGE ="language";
 	public static final String EXTRA_PARTICIPANT_ID ="participant";
 	public static final String EXTRA_SUB_EXPERIMENT_TITLE = "subexperimenttitle";
+	public static final String EXTRA_STIMULI = "stimuli";
 	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BAT/video/";
 	private ArrayList<String> mSubExperiments;
 	private ArrayList<String> mSubExperimentTypes;
@@ -33,6 +32,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	private int mCurrentSubExperiment = 0;
 	private Boolean mAutoAdvance= false;
 	private static final int AUTO_ADVANCE_NEXT_SUB_EXPERIMENT = 2;
+	private Boolean devMode= true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +52,13 @@ public class BilingualAphasiaTestHome extends Activity {
 		
 		String subExperiments = 
 			  "History of Bilingualism," +
-				"English Background," +
+				"English Background," + //1
 				"Spontaneous Speech," +
-				"Pointing," +
+				"Pointing," + //3
 				"Simple and Semi-complex Commands," +
-				"Complex Commands," +
+				"Complex Commands," + //5
 				"Verbal Auditory Discrimination," +
-				"Syntactic Comprehension," +
+				"Syntactic Comprehension," + //7
 				"Semantic Categories," +
 				"Synonyms," +
 				"Antonyms," +
@@ -149,6 +149,112 @@ public class BilingualAphasiaTestHome extends Activity {
 		}
 	}
 	public void launchSubExperiment(int subExperimentId){
+		ArrayList<Integer> stimiliImages = new ArrayList<Integer>();
+		if(subExperimentId == 6 ){
+			stimiliImages.add(R.drawable.x);
+			stimiliImages.add(R.drawable.e048_0);
+			stimiliImages.add(R.drawable.androids_experimenter_kids);
+		}else{
+//			stimiliImages.add(R.drawable.e048);
+//			stimiliImages.add(R.drawable.e048_0);
+//			stimiliImages.add(R.drawable.e049);
+//			stimiliImages.add(R.drawable.e050);
+//			stimiliImages.add(R.drawable.e051);
+//			stimiliImages.add(R.drawable.e052);
+//			stimiliImages.add(R.drawable.e053);
+//			stimiliImages.add(R.drawable.e054);
+//			stimiliImages.add(R.drawable.e055);
+//			stimiliImages.add(R.drawable.e056);
+//			stimiliImages.add(R.drawable.e057);
+//			stimiliImages.add(R.drawable.e058);
+//			stimiliImages.add(R.drawable.e059);
+//			stimiliImages.add(R.drawable.e060);
+//			stimiliImages.add(R.drawable.e061);
+//			stimiliImages.add(R.drawable.e062);
+//			stimiliImages.add(R.drawable.e063);
+//			stimiliImages.add(R.drawable.e064);
+//			stimiliImages.add(R.drawable.e065);
+//			stimiliImages.add(R.drawable.e066_0);
+//			stimiliImages.add(R.drawable.e066);
+//			stimiliImages.add(R.drawable.e071);
+//			stimiliImages.add(R.drawable.e077);
+//			stimiliImages.add(R.drawable.e081);
+//			stimiliImages.add(R.drawable.e089);
+//			stimiliImages.add(R.drawable.e097);
+//			stimiliImages.add(R.drawable.e105);
+//			stimiliImages.add(R.drawable.e111);
+//			stimiliImages.add(R.drawable.e115);
+//			stimiliImages.add(R.drawable.e121);
+//			stimiliImages.add(R.drawable.e125);
+//			stimiliImages.add(R.drawable.e129);
+//			stimiliImages.add(R.drawable.e133);
+//			stimiliImages.add(R.drawable.e137);
+//			stimiliImages.add(R.drawable.e138);
+//			stimiliImages.add(R.drawable.e139);
+//			stimiliImages.add(R.drawable.e140);
+//			stimiliImages.add(R.drawable.e141);
+//			stimiliImages.add(R.drawable.e142);
+//			stimiliImages.add(R.drawable.e143);
+//			stimiliImages.add(R.drawable.e144);
+//			stimiliImages.add(R.drawable.e145);
+//			stimiliImages.add(R.drawable.e146);
+//			stimiliImages.add(R.drawable.e147);
+//			stimiliImages.add(R.drawable.e148);
+//			stimiliImages.add(R.drawable.e149);
+//			stimiliImages.add(R.drawable.e150);
+//			stimiliImages.add(R.drawable.e151);
+//			stimiliImages.add(R.drawable.e152);
+//			stimiliImages.add(R.drawable.e344);
+//			stimiliImages.add(R.drawable.e367);
+//			stimiliImages.add(R.drawable.e372);
+//			stimiliImages.add(R.drawable.e377);
+//			stimiliImages.add(R.drawable.e379);
+//			stimiliImages.add(R.drawable.e381);
+//			stimiliImages.add(R.drawable.e383);
+//			stimiliImages.add(R.drawable.e385);
+//			stimiliImages.add(R.drawable.e387_0);
+//			stimiliImages.add(R.drawable.e393);
+//			stimiliImages.add(R.drawable.e408);
+//			stimiliImages.add(R.drawable.e408_0);
+//			stimiliImages.add(R.drawable.e409);
+//			stimiliImages.add(R.drawable.e409_0);
+//			stimiliImages.add(R.drawable.e410);
+//			stimiliImages.add(R.drawable.e410_0);
+//			stimiliImages.add(R.drawable.e411);
+//			stimiliImages.add(R.drawable.e411_0);
+//			stimiliImages.add(R.drawable.e412);
+//			stimiliImages.add(R.drawable.e412_0);
+//			stimiliImages.add(R.drawable.e413);
+//			stimiliImages.add(R.drawable.e413_0);
+//			stimiliImages.add(R.drawable.e414);
+//			stimiliImages.add(R.drawable.e414_0);
+//			stimiliImages.add(R.drawable.e415);
+//			stimiliImages.add(R.drawable.e415_0);
+//			stimiliImages.add(R.drawable.e416);
+//			stimiliImages.add(R.drawable.e416_0);
+//			stimiliImages.add(R.drawable.e417);
+//			stimiliImages.add(R.drawable.e417_0);
+//			stimiliImages.add(R.drawable.e418);
+//			stimiliImages.add(R.drawable.e418_0);
+//			stimiliImages.add(R.drawable.e419);
+//			stimiliImages.add(R.drawable.e419_0);
+//			stimiliImages.add(R.drawable.e420);
+//			stimiliImages.add(R.drawable.e420_0);
+//			stimiliImages.add(R.drawable.e421);
+//			stimiliImages.add(R.drawable.e421_0);
+//			stimiliImages.add(R.drawable.e422);
+//			stimiliImages.add(R.drawable.e422_0);
+//			stimiliImages.add(R.drawable.e423);
+//			stimiliImages.add(R.drawable.e423_0);
+//			stimiliImages.add(R.drawable.e424);
+//			stimiliImages.add(R.drawable.e424_0);
+//			stimiliImages.add(R.drawable.e425);
+//			stimiliImages.add(R.drawable.e425_0);
+//			stimiliImages.add(R.drawable.e426);
+//			stimiliImages.add(R.drawable.e426_0);
+//			stimiliImages.add(R.drawable.e427);
+//			stimiliImages.add(R.drawable.e427_0);
+		}
 		Intent intent;
 		if(mSubExperimentTypes.get(subExperimentId).contains("frontvideo")){
 			intent = new Intent(getApplicationContext(), VideoRecorderSubExperiment.class);
@@ -163,9 +269,10 @@ public class BilingualAphasiaTestHome extends Activity {
 		}else{
 			intent = new Intent(getApplicationContext(), AccelerometerUIActivity.class);
 		}
+		intent.putExtra(EXTRA_STIMULI, stimiliImages);
 		intent.putExtra(EXTRA_LANGUAGE,ENGLISH);
 		intent.putExtra(EXTRA_PARTICIPANT_ID, mParticipantId);
-		intent.putExtra(EXTRA_SUB_EXPERIMENT_TITLE, subExperimentId+mSubExperiments.get(subExperimentId));
+		intent.putExtra(EXTRA_SUB_EXPERIMENT_TITLE, subExperimentId+" "+mSubExperiments.get(subExperimentId));
 		if(!mAutoAdvance){
 			startActivity(intent);
 		}else{
@@ -177,11 +284,13 @@ public class BilingualAphasiaTestHome extends Activity {
 		switch (requestCode) {
 		case AUTO_ADVANCE_NEXT_SUB_EXPERIMENT:
 			mCurrentSubExperiment++;
-			if (mCurrentSubExperiment >= mSubExperiments.size()){
+			if (mCurrentSubExperiment >= mSubExperiments.size() ){
 				Toast.makeText(getApplicationContext(), "Experiment completed!", Toast.LENGTH_LONG).show();
 			}else{
-				//launchSubExperiment(mCurrentSubExperiment);
-				mWebView.loadUrl("javascript:getPositionAsButton(0,0,"+mCurrentSubExperiment+")");
+				if(!devMode){
+					//launchSubExperiment(mCurrentSubExperiment);
+					mWebView.loadUrl("javascript:getPositionAsButton(0,0,"+mCurrentSubExperiment+")");
+				}
 			}
 			break;
 		default:
