@@ -72,36 +72,9 @@ public class VideoRecorderSubExperiment extends Activity implements
 	private String mSubExperimentShortTitle = "";
 	private String mSubExperimentTitle = "";
 	String mAudioResultsFile = "";
-	private ArrayList<Integer> mStimuliImages = new ArrayList<Integer>();;
-	private ArrayList<String> mStimuliResponses = new ArrayList<String>();
-	private ArrayList<Long> mReactionTimes = new ArrayList<Long>();;
-	private int mStimuliIndex = 0;
-	private Long mStartTime = System.currentTimeMillis();
-	private Long mEndTime = System.currentTimeMillis();
 	private ImageView mImage;
 
-	/*
-	 * Stimuli flow variables
-	 */
-	private static final int REWIND = 3;
-	private static final int ADVANCE = 4;
-	private static final int STIMULI_RESULT = 0;
-	private int nextAction = ADVANCE;
-	private Handler mHandlerDelayStimuli = new Handler();
-	private Boolean mTouched = false;
-	private Boolean mListeningForTouch = true; // sub experiment starts by user
-												// touch
-	private Boolean mfirstResponse = true;
-	private Boolean mRewind = false;
-	private Boolean mRewindHandled = false;
-	/*
-	 * Change these to fine tune experiment (rewindable, auto advance, display
-	 * time)
-	 */
-	private Boolean mRewindable = false;
-	private static Boolean mAdvanceByTouchOnly = true;
-	private static int mWaitBetweenStimuli = 5;// wait between stimuli, if 999
-												// then wait until user input.
+										// then wait until user input.
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -114,8 +87,6 @@ public class VideoRecorderSubExperiment extends Activity implements
 		/*
 		 * Get extras from the Experiment Home screen
 		 */
-		mStimuliImages = getIntent().getExtras().getIntegerArrayList(
-				BilingualAphasiaTestHome.EXTRA_STIMULI);
 		mParticipantId = getIntent().getExtras().getString(
 				BilingualAphasiaTestHome.EXTRA_PARTICIPANT_ID);
 		mLanguageOfSubExperiment = getIntent().getExtras().getString(
@@ -129,7 +100,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 					.substring(0, 49);
 		}
 
-		this.setTitle(mSubExperimentTitle + "-" + mStimuliImages.size());
+		this.setTitle(mSubExperimentTitle);
 
 		mUseFrontFacingCamera = getIntent().getExtras().getBoolean(
 				EXTRA_USE_FRONT_FACING_CAMERA, true);
@@ -162,64 +133,6 @@ public class VideoRecorderSubExperiment extends Activity implements
 
 	}
 
-	public boolean onTouchEvent(MotionEvent event) {
-		// can use the xy of the touch to start and stop recording
-		float positionX = event.getX();
-		float positionY = event.getY();
-
-		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN:
-			// Screen is pressed for the first time
-			break;
-		case MotionEvent.ACTION_MOVE:
-			// Screen is still pressed, float have been updated
-			break;
-		case MotionEvent.ACTION_UP:
-			presentStimuli();
-			break;
-		}
-		return super.onTouchEvent(event);
-	}
-
-	public void presentStimuli() {
-		Intent intent;
-		intent = new Intent(getApplicationContext(),
-				SeeStimuliAndSpeakActivity.class);
-		intent.putExtra(EXTRA_STIMULI_IMAGE_ID,
-				mStimuliImages.get(mStimuliIndex));
-		intent.putExtra(BilingualAphasiaTestHome.EXTRA_SUB_EXPERIMENT_TITLE,
-				mSubExperimentTitle + " " + mStimuliIndex + "/"
-						+ mStimuliImages.size());
-		startActivityForResult(intent, STIMULI_RESULT);
-	}
-
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (requestCode) {
-		case STIMULI_RESULT:
-			advanceStimuli();
-			break;
-		default:
-			break;
-		}
-	}
-
-	/**
-	 * This method is called after the response has been handled
-	 */
-	public void advanceStimuli() {
-		mStimuliIndex++;
-		// if the index is outside of the array of stimuli
-		if (mStimuliIndex >= 5 || mStimuliIndex < 0) {
-			writeResultsTable();
-			finish();// end the sub experiment
-			return;
-		}
-		presentStimuli();
-	}
-
-	public void writeResultsTable() {
-
-	}
 
 	public void surfaceCreated(SurfaceHolder holder) {
 		if (mRecording) {

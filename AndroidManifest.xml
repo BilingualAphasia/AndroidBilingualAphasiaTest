@@ -37,6 +37,9 @@
         <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.SubExperiment"
                   android:label="@string/app_name">
         </activity>
+        <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.PresentStimuliActivity"
+                  android:label="@string/app_name">
+        </activity>
         <activity android:name="ca.ilanguage.oprime.bilingualaphasiatest.ui.VideoSubExperiment"
                   android:label="@string/app_name">
         </activity>

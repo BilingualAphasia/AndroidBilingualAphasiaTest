@@ -294,7 +294,7 @@ public class BilingualAphasiaTestHome extends Activity {
 
 		Intent intent;
 		if(mSubExperimentTypes.get(subExperimentId).contains("frontvideo")){
-			intent = new Intent(getApplicationContext(), VideoRecorderSubExperiment.class);
+			intent = new Intent(getApplicationContext(), PresentStimuliActivity.class);
 			intent.putExtra(VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA, true);
 		}else if(mSubExperimentTypes.get(subExperimentId).contains("backvideo")){
 			intent = new Intent(getApplicationContext(), VideoRecorderSubExperiment.class);
