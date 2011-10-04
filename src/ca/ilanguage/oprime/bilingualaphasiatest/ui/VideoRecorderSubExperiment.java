@@ -99,10 +99,10 @@ public class VideoRecorderSubExperiment extends Activity implements
 	 * time)
 	 */
 	private Boolean mRewindable = false;
-	private Boolean mAdvanceByTouchOnly = true;
+	private Boolean mAutoAdvanceAfterWait = false;
 	private int mWaitBetweenStimuli = 1;// wait between stimuli, if 999
 												// then wait until user input.
-	private Boolean mUseExternalStimuliActivity = true;
+	private Boolean mUseExternalStimuliActivity = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -159,7 +159,9 @@ public class VideoRecorderSubExperiment extends Activity implements
 		holder.addCallback(this);
 		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-		// presentStimuli();
+		if (! mUseExternalStimuliActivity){
+			presentStimuli();
+		}
 
 	}
 
@@ -168,18 +170,18 @@ public class VideoRecorderSubExperiment extends Activity implements
 		float positionX = event.getX();
 		float positionY = event.getY();
 
-		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN:
-			// Screen is pressed for the first time
-			break;
-		case MotionEvent.ACTION_MOVE:
-			// Screen is still pressed, float have been updated
-			break;
-		case MotionEvent.ACTION_UP:
-			if (mListeningForTouch){
-				advanceStimuli();
+		if (mListeningForTouch) {
+			// if the touches are too close together, ignore it
+			mEndTime = System.currentTimeMillis();
+			long timeImageWasDisplayed = mEndTime - mStartTime;
+			if (timeImageWasDisplayed > 300) {
+				mListeningForTouch = false;
+				if (mUseExternalStimuliActivity) {
+					advanceStimuli();
+				} else {
+					getStimulusResponse(positionX, positionY);
+				}
 			}
-			break;
 		}
 		return super.onTouchEvent(event);
 	}
@@ -198,9 +200,18 @@ public class VideoRecorderSubExperiment extends Activity implements
 			startActivityForResult(intent, STIMULI_RESULT);
 		}else{
 			mImage.setImageResource(mStimuliImages.get(mStimuliIndex));
+			mStartTime = System.currentTimeMillis();
+			mListeningForTouch = true;
 		}
 	}
 
+	public void getStimulusResponse(float x, float y) {
+		//mEndTime = System.currentTimeMillis();
+		Long reactionTime = mEndTime - mStartTime;
+		mReactionTimes.add(mStimuliIndex, reactionTime);
+		mStimuliResponses.add(mStimuliIndex,x+":::"+y);
+		advanceStimuli();
+	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case STIMULI_RESULT:
@@ -217,16 +228,20 @@ public class VideoRecorderSubExperiment extends Activity implements
 	public void advanceStimuli() {
 		mStimuliIndex++;
 		// if the index is outside of the array of stimuli
-		if (mStimuliIndex >= 5 || mStimuliIndex < 0) {
+		if (mStimuliIndex >= mStimuliImages.size() || mStimuliIndex < 0) {
 			writeResultsTable();
 			finish();// end the sub experiment
 			return;
 		}
-		mHandlerDelayStimuli.postDelayed(new Runnable() {
-			public void run() {
-				presentStimuli();
-			}
-		}, mWaitBetweenStimuli * 1000);
+		if (mAutoAdvanceAfterWait){
+			mHandlerDelayStimuli.postDelayed(new Runnable() {
+				public void run() {
+					presentStimuli();
+				}
+			}, mWaitBetweenStimuli * 1000);
+		}else{
+			presentStimuli();
+		}
 	}
 
 	public void writeResultsTable() {
