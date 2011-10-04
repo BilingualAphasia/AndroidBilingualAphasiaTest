@@ -7,6 +7,7 @@ import ca.ilanguage.oprime.bilingualaphasiatest.R;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -55,6 +56,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 	 * Recording variables
 	 */
 	public static final String EXTRA_USE_FRONT_FACING_CAMERA ="frontcamera";
+	public static final String EXTRA_STIMULI_IMAGE_ID ="stimuliimageid";
 	private static final String TAG = "VideoRecorderSubExperiment";
 	private Boolean mRecording = false;
 	private Boolean mUseFrontFacingCamera = false;
@@ -86,6 +88,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 	 */
 		private static final int REWIND = 3;
 		private static final int ADVANCE = 4;
+		private static final int STIMULI_RESULT = 0;
 		private int nextAction = ADVANCE;
 		private Handler mHandlerDelayStimuli = new Handler();
 		private Boolean mTouched = false;
@@ -107,18 +110,13 @@ public class VideoRecorderSubExperiment extends Activity implements
 		setContentView(R.layout.video_recorder);
 		mVideoView = (VideoView) this.findViewById(R.id.videoView);
 		mImage = (ImageView) findViewById(R.id.mainimage);
-		//mImage.setImageResource(R.drawable.androids_experimenter_kids);
+		mImage.setImageResource(R.drawable.androids_experimenter_kids);
 		
 		/*
 		 * Get extras from the Experiment Home screen
 		 */
-//		mStimuliImages = getIntent().getExtras().getIntegerArrayList(
-//				BilingualAphasiaTestHome.EXTRA_STIMULI);
-		mStimuliImages.add(R.drawable.e048_0);
-		mStimuliImages.add(R.drawable.e048);
-		mStimuliImages.add(R.drawable.e049);
-		mStimuliImages.add(R.drawable.e050);
-		mStimuliImages.add(R.drawable.e051);
+		mStimuliImages = getIntent().getExtras().getIntegerArrayList(
+				BilingualAphasiaTestHome.EXTRA_STIMULI);
 		mParticipantId = getIntent().getExtras().getString(
 				BilingualAphasiaTestHome.EXTRA_PARTICIPANT_ID);
 		mLanguageOfSubExperiment = getIntent().getExtras().getString(
@@ -157,16 +155,9 @@ public class VideoRecorderSubExperiment extends Activity implements
 		holder.addCallback(this);
 		holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		
-		presentStimuli();
+		//presentStimuli();
 		
 	}
-
-	/*
-	 * If not using auto-advance, wait until user touches the screen.
-	 * 
-	 * (non-Javadoc)
-	 * @see android.app.Activity#onTouchEvent(android.view.MotionEvent)
-	 */
 	public boolean onTouchEvent(MotionEvent event) {
 		// can use the xy of the touch to start and stop recording
 		float positionX = event.getX();
@@ -180,55 +171,51 @@ public class VideoRecorderSubExperiment extends Activity implements
 			// Screen is still pressed, float have been updated
 			break;
 		case MotionEvent.ACTION_UP:
-		// Screen is not anymore touched
-			// If touch is used to advance, and the app is listening for a touch
-			if (mListeningForTouch) {
-					getStimulusResponse(positionX, positionY);
-					mTouched = true;
-			}
+			presentStimuli();
 			break;
 		}
 		return super.onTouchEvent(event);
 	}
-
 	
-	public void getStimulusResponse(float x, float y) {
-			mEndTime = System.currentTimeMillis();
-			Long reactionTime = mEndTime - mStartTime;
-			mReactionTimes.add(mStimuliIndex, reactionTime);
-			mStimuliResponses.add(mStimuliIndex,x+":::"+y);
-			advanceStimuli();
+	public void presentStimuli(){
+		mListeningForTouch = true;
+		Intent intent;
+		intent = new Intent(getApplicationContext(), SeeStimuliAndSpeakActivity.class);
+		intent.putExtra(EXTRA_STIMULI_IMAGE_ID, mStimuliImages.get(mStimuliIndex));
+		intent.putExtra(BilingualAphasiaTestHome.EXTRA_SUB_EXPERIMENT_TITLE,
+				mSubExperimentTitle + " " + mStimuliIndex + "/" + mStimuliImages.size());
+		startActivityForResult(intent, STIMULI_RESULT);
 	}
 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case STIMULI_RESULT:
+			advanceStimuli();
+			break;
+		default:
+			break;
+		}
+	}
 	/**
 	 * This method is called after the response has been handled
 	 */
 	public void advanceStimuli() {	
 		mStimuliIndex++;
 		// if the index is outside of the array of stimuli
-		if (mStimuliIndex >= mStimuliImages.size() || mStimuliIndex < 0) {
+		if (mStimuliIndex >= 3 || mStimuliIndex < 0) {
 			writeResultsTable();
 			finish();// end the sub experiment
 			return;
 		}
 		presentStimuli();
 	}
-	public void presentStimuli(){
-		nextAction = ADVANCE;
-		mfirstResponse =true;
-		mListeningForTouch = true;
-		mStartTime = System.currentTimeMillis();
-		this.setTitle(mSubExperimentTitle +" "+mStimuliIndex+"/"+ mStimuliImages.size());
-		int imageId = mStimuliImages.get(mStimuliIndex);
-		mImage.setImageResource(R.drawable.e048_0);
-		if(mStimuliIndex ==2){
-			mImage.setImageResource(R.drawable.e049);
-		}
-	}
 	public void writeResultsTable(){
 		
 	}
 	public void surfaceCreated(SurfaceHolder holder) {
+		if (mRecording){
+			return;
+		}
 		try {
 			beginRecording(holder);
 		} catch (Exception e) {

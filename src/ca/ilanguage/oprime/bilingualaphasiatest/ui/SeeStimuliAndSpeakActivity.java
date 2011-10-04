@@ -1,128 +1,111 @@
 package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.ArrayList;
 
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.os.Environment;
-import android.speech.tts.TextToSpeech;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.widget.ImageSwitcher;
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.widget.ImageView;
-import android.widget.Toast;
-import android.widget.Gallery.LayoutParams;
 
 public class SeeStimuliAndSpeakActivity extends Activity {
 	private static final String TAG = "PresentAnImageStimuli";
 	
-	private Long mStartTime;
-    private Long mEndTime;
-    private Long mTimeImageWasDisplayed;
-    private Long mTimeDisplayMask;
-    private String mAudioResultsFile;
-    private String mImageFile;
-    private ImageView mImage;
-    private String mParticipantId;
-    private String mStimuliId;
-    private MediaRecorder mRecorder;
+	/*
+	 * Sub experiment variables
+	 */
+	String mLanguageOfSubExperiment = BilingualAphasiaTestHome.ENGLISH;
+	private String mParticipantId = BilingualAphasiaTestHome.PARTICIPANT_ID_DEFAULT;
+	// private int mSubExperimentId = 0;
+	private String mSubExperimentShortTitle = "";
+	private String mSubExperimentTitle = "";
+	String mAudioResultsFile = "";
+	private ArrayList<Integer> mStimuliImages  = new ArrayList<Integer>();;
+	private ArrayList<String> mStimuliResponses = new ArrayList<String>();
+	private ArrayList<Long> mReactionTimes = new ArrayList<Long>();;
+	private int mStimuliIndex = 0;
+	private Long mStartTime = System.currentTimeMillis();
+	private Long mEndTime = System.currentTimeMillis();
+	private ImageView mImage;
+
+	
+	/*
+	 * Stimuli flow variables
+	 */
+		private static final int REWIND = 3;
+		private static final int ADVANCE = 4;
+		private int nextAction = ADVANCE;
+		private Handler mHandlerDelayStimuli = new Handler();
+		private Boolean mTouched = false;
+		private Boolean mListeningForTouch = true;	//sub experiment starts by user touch
+		private Boolean mfirstResponse = true;
+		private Boolean mRewind = false;
+		private Boolean mRewindHandled = false;
+	  /*
+	   * Change these to fine tune experiment (rewindable, auto advance, display time)
+	   */
+		private Boolean mRewindable = false;
+		private static Boolean mAdvanceByTouchOnly = true;
+		private static int mWaitBetweenStimuli = 5;// wait between stimuli, if 999 then wait until user input.
+
+	
     
     //to have participant draw on images look at APIDemo>graphics>fingerprint
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    
-	   
-	    Bundle bundle = getIntent().getExtras();
-	    if (!(bundle.isEmpty())){
-		    mParticipantId=bundle.getString("participantCode");
-		    mStimuliId=bundle.getString("stimuliCode");
-		    mImageFile=bundle.getString("imageFile");
-//		    mImageFile ="/sdcard/OPrime/MorphologicalAwareness/images/magasin.jpg";   
-	    }else{
-	    	mParticipantId="noone";
-	    	mStimuliId="error";
-	    	mImageFile ="/sdcard/OPrime/MorphologicalAwareness/images/magasin.jpg";    
-	    }
-	    setContentView(R.layout.activity_one_image_one_button);
+	    setContentView(R.layout.video_recorder);
 	    mImage = (ImageView) findViewById(R.id.mainimage);
+	    int stimuli =getIntent().getExtras().getInt(
+				VideoRecorderSubExperiment.EXTRA_STIMULI_IMAGE_ID);
+	    mImage.setImageResource(stimuli);
+		mSubExperimentTitle = getIntent().getExtras().getString(
+				BilingualAphasiaTestHome.EXTRA_SUB_EXPERIMENT_TITLE);
+		this.setTitle(mSubExperimentTitle +"-"+ mStimuliImages.size());
+	    mStartTime = System.currentTimeMillis();
+    }
+    /*
+	 * If not using auto-advance, wait until user touches the screen.
+	 * 
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onTouchEvent(android.view.MotionEvent)
+	 */
+	public boolean onTouchEvent(MotionEvent event) {
+		// can use the xy of the touch to start and stop recording
+		float positionX = event.getX();
+		float positionY = event.getY();
 
-	    FileInputStream in;
-        BufferedInputStream buf;
-        try {
-       	    in = new FileInputStream(mImageFile);
-            buf = new BufferedInputStream(in);
-            Bitmap bMap = BitmapFactory.decodeStream(buf);
-            mImage.setImageBitmap(bMap);
-            if (in != null) {
-         	in.close();
-            }
-            if (buf != null) {
-         	buf.close();
-            }
-        } catch (Exception e) {
-            Log.e("Error reading image file", e.toString());
-        }
- 
-        
-	    mAudioResultsFile ="/sdcard/OPrime/MorphologicalAwareness/results/"+System.currentTimeMillis()+"_"+mParticipantId+"_"+mStimuliId+".mp3";    
-	    mRecorder = new MediaRecorder();
-//	    Environment.getExternalStorageDirectory().getAbsolutePath() + path;
-	    String state = android.os.Environment.getExternalStorageState();
-	    if(!state.equals(android.os.Environment.MEDIA_MOUNTED))  {
-	        try {
-				throw new IOException("SD Card is not mounted.  It is " + state + ".");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-				Toast.makeText(SeeStimuliAndSpeakActivity.this, "The experiment cannot save audio, maybe the tablet is attached to a computer?", Toast.LENGTH_SHORT).show();
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			// Screen is pressed for the first time
+			break;
+		case MotionEvent.ACTION_MOVE:
+			// Screen is still pressed, float have been updated
+			break;
+		case MotionEvent.ACTION_UP:
+		// Screen is not anymore touched
+			// If touch is used to advance, and the app is listening for a touch
+			if (mListeningForTouch) {
+					getStimulusResponse(positionX, positionY);
+					mTouched = true;
 			}
-	    }
-	    
-	    try {
-	    	//http://www.benmccann.com/dev-blog/android-audio-recording-tutorial/
-	    	mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-		    mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-		    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-		    mRecorder.setOutputFile(mAudioResultsFile);
-		    mRecorder.prepare();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			break;
 		}
-	    mRecorder.start();
-	 
-	    
-	    
-    }
-	public void onNextClick(View v){
-    	mRecorder.stop();
-    	mRecorder.release();
-    	Toast.makeText(SeeStimuliAndSpeakActivity.this, "The audio was successfully recorded, check the Oprime folder.", Toast.LENGTH_SHORT).show();
-		//return to runexperimentactivity
-    	//startActivity(new Intent(this, RunExperimentActivity.class));
-    }
-	public void onBackClick(View v){
-    	mRecorder.stop();
-    	mRecorder.release();
-    	Toast.makeText(SeeStimuliAndSpeakActivity.this, "The audio was successfully recorded, check the Oprime folder.", Toast.LENGTH_SHORT).show();
-		//return to runexperimentactivity
-    	//startActivity(new Intent(this, RunExperimentActivity.class));
-    }
+		return super.onTouchEvent(event);
+	}
+
+	
+	public void getStimulusResponse(float x, float y) {
+	
+			mEndTime = System.currentTimeMillis();
+			Long reactionTime = mEndTime - mStartTime;
+			mReactionTimes.add(mStimuliIndex, reactionTime);
+			mStimuliResponses.add(mStimuliIndex,x+":::"+y);
+			//advanceStimuli();
+			finish();
+	}
+	
     
 }
