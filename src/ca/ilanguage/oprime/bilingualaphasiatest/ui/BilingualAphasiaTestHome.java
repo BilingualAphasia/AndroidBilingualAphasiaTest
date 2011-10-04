@@ -151,7 +151,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	}
 	public void launchSubExperiment(int subExperimentId){
 		ArrayList<Integer> stimuliImages = new ArrayList<Integer>();
-		stimuliImages.add(R.drawable.androids_experimenter_kids);
+		//stimuliImages.add(R.drawable.androids_experimenter_kids);
 		
 			if ("History of Bilingualism".equals(mSubExperiments.get(subExperimentId))){}
 			if ("English Background".equals(mSubExperiments.get(subExperimentId))){}
@@ -295,7 +295,8 @@ public class BilingualAphasiaTestHome extends Activity {
 
 		Intent intent;
 		if(mSubExperimentTypes.get(subExperimentId).contains("frontvideo")){
-			intent = new Intent(getApplicationContext(), PresentStimuliActivity.class);
+//			intent = new Intent(getApplicationContext(), PresentStimuliActivity.class);//no video
+			intent = new Intent(getApplicationContext(), VideoRecorderSubExperiment.class); //yes video
 			intent.putExtra(VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA, true);
 		}else if(mSubExperimentTypes.get(subExperimentId).contains("backvideo")){
 			intent = new Intent(getApplicationContext(), VideoRecorderSubExperiment.class);

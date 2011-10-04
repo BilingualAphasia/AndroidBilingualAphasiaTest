@@ -109,11 +109,6 @@ public class PresentStimuliActivity extends Activity {
 
 	public void presentStimuli() {
 		mListeningForTouch =false;
-//		mEndTime = System.currentTimeMillis();
-//		long reactionTime = mEndTime -mStartTime ;
-//		if(reactionTime < 1000){
-//			return;
-//		}
 		Intent intent;
 		intent = new Intent(getApplicationContext(),
 				SeeStimuliAndSpeakActivity.class);
