@@ -53,14 +53,16 @@ public class PresentStimuliActivity extends Activity {
 	 */
 	private Boolean mRewindable = false;
 	private static Boolean mAdvanceByTouchOnly = true;
-	private static int mWaitBetweenStimuli = 5;// wait between stimuli, if 999
+	private static int mWaitBetweenStimuli = 2
+	;// wait between stimuli, if 999
 		
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ImageView image = (ImageView) findViewById(R.id.mainimage);
-		image.setImageResource(R.drawable.androids_experimenter_kids);
+		setContentView(R.layout.stimuli_image);
+		ImageView image = (ImageView) findViewById(R.id.stimuliimage);
+		//image.setImageResource(R.drawable.androids_experimenter_kids);
 		/*
 		 * Get extras from the Experiment Home screen
 		 */
@@ -96,7 +98,9 @@ public class PresentStimuliActivity extends Activity {
 			// Screen is still pressed, float have been updated
 			break;
 		case MotionEvent.ACTION_UP:
-			presentStimuli();
+			if (mListeningForTouch){
+				presentStimuli();
+			}
 			break;
 		}
 		return super.onTouchEvent(event);
@@ -104,6 +108,12 @@ public class PresentStimuliActivity extends Activity {
 
 
 	public void presentStimuli() {
+		mListeningForTouch =false;
+//		mEndTime = System.currentTimeMillis();
+//		long reactionTime = mEndTime -mStartTime ;
+//		if(reactionTime < 1000){
+//			return;
+//		}
 		Intent intent;
 		intent = new Intent(getApplicationContext(),
 				SeeStimuliAndSpeakActivity.class);
@@ -113,6 +123,7 @@ public class PresentStimuliActivity extends Activity {
 				mSubExperimentTitle + " " + mStimuliIndex + "/"
 						+ mStimuliImages.size());
 		startActivityForResult(intent, STIMULI_RESULT);
+		mStartTime = System.currentTimeMillis();
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,7 +147,12 @@ public class PresentStimuliActivity extends Activity {
 			finish();// end the sub experiment
 			return;
 		}
-		presentStimuli();
+		mHandlerDelayStimuli.postDelayed(new Runnable() {
+			public void run() {
+				presentStimuli();
+			}
+		}, mWaitBetweenStimuli * 1000);
+		
 	}
 
 	public void writeResultsTable() {

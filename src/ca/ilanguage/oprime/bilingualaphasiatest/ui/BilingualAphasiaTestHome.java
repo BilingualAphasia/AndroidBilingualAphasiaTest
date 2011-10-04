@@ -195,22 +195,23 @@ public class BilingualAphasiaTestHome extends Activity {
 				stimuliImages.add(R.drawable.e125);
 				stimuliImages.add(R.drawable.e129);
 				stimuliImages.add(R.drawable.e133);
-				stimuliImages.add(R.drawable.e137);
-				stimuliImages.add(R.drawable.e138);
-				stimuliImages.add(R.drawable.e139);
-				stimuliImages.add(R.drawable.e140);
-				stimuliImages.add(R.drawable.e141);
-				stimuliImages.add(R.drawable.e142);
-				stimuliImages.add(R.drawable.e143);
-				stimuliImages.add(R.drawable.e144);
-				stimuliImages.add(R.drawable.e145);
-				stimuliImages.add(R.drawable.e146);
-				stimuliImages.add(R.drawable.e147);
-				stimuliImages.add(R.drawable.e148);
-				stimuliImages.add(R.drawable.e149);
-				stimuliImages.add(R.drawable.e150);
-				stimuliImages.add(R.drawable.e151);
-				stimuliImages.add(R.drawable.e152);
+				stimuliImages.add(R.drawable.e137_e145);
+				stimuliImages.add(R.drawable.e138_e146);
+				stimuliImages.add(R.drawable.e139_e147);
+				stimuliImages.add(R.drawable.e140_e148);
+				stimuliImages.add(R.drawable.e141_e149);
+				stimuliImages.add(R.drawable.e142_e150);
+				stimuliImages.add(R.drawable.e143_e151);
+				stimuliImages.add(R.drawable.e144_e152);
+				
+				stimuliImages.add(R.drawable.e137_e145);
+				stimuliImages.add(R.drawable.e138_e146);
+				stimuliImages.add(R.drawable.e139_e147);
+				stimuliImages.add(R.drawable.e140_e148);
+				stimuliImages.add(R.drawable.e140_e148);
+				stimuliImages.add(R.drawable.e142_e150);
+				stimuliImages.add(R.drawable.e143_e151);
+				stimuliImages.add(R.drawable.e144_e152);
 			}
 			if ("Semantic Categories".equals(mSubExperiments.get(subExperimentId))){}
 			if ("Synonyms".equals(mSubExperiments.get(subExperimentId))){}
