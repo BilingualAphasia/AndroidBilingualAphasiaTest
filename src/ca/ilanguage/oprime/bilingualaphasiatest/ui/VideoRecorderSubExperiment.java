@@ -79,6 +79,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 	private Long mStartTime = System.currentTimeMillis();
 	private Long mEndTime = System.currentTimeMillis();
 	private ImageView mImage;
+	private Boolean mTakePictureAtEnd = false;
 
 	/*
 	 * Stimuli flow variables
@@ -103,25 +104,30 @@ public class VideoRecorderSubExperiment extends Activity implements
 	private int mWaitBetweenStimuli = 1;// wait between stimuli, if 999
 												// then wait until user input.
 	private Boolean mUseExternalStimuliActivity = false;
+	private String mImageResultFileName = "";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.video_recorder);
-		mVideoView = (VideoView) this.findViewById(R.id.videoView);
-		mImage = (ImageView) findViewById(R.id.mainimage);
 		
 		/*
-		 * Get extras from the Experiment Home screen
+		 * Get extras from the Experiment Home screen and set up layout depending on extras
 		 */
 		mStimuliImages = getIntent().getExtras().getIntegerArrayList(
 				BilingualAphasiaTestHome.EXTRA_STIMULI);
 		int xImageId = getIntent().getExtras().getInt(BilingualAphasiaTestHome.EXTRA_X_IMAGE,0);
 		if(xImageId>0){
+			setContentView(R.layout.video_recorder_two_images);
 			ImageView xImage = (ImageView) findViewById(R.id.extraimage);
 			xImage.setImageResource(xImageId);
+		}else{
+			setContentView(R.layout.video_recorder);
 		}
+		mVideoView = (VideoView) this.findViewById(R.id.videoView);
+		mImage = (ImageView) findViewById(R.id.mainimage);
 		
+		
+		mTakePictureAtEnd = getIntent().getExtras().getBoolean(BilingualAphasiaTestHome.EXTRA_TAKE_PICTURE_AT_END, false);
 		mParticipantId = getIntent().getExtras().getString(
 				BilingualAphasiaTestHome.EXTRA_PARTICIPANT_ID);
 		mLanguageOfSubExperiment = getIntent().getExtras().getString(
@@ -237,6 +243,16 @@ public class VideoRecorderSubExperiment extends Activity implements
 		// if the index is outside of the array of stimuli
 		if (mStimuliIndex >= mStimuliImages.size() || mStimuliIndex < 0) {
 			writeResultsTable();
+			if(mTakePictureAtEnd){
+				mImageResultFileName = BilingualAphasiaTestHome.OUTPUT_DIRECTORY
+						+ System.currentTimeMillis() + "_" + mParticipantId + "_"
+						+ mLanguageOfSubExperiment + mSubExperimentShortTitle + ".jpg";
+				Intent intent;
+				intent = new Intent(getApplicationContext(),
+						TakePictureSubExperiment.class); // yes video
+				intent.putExtra(BilingualAphasiaTestHome.EXTRA_RESULT_FILENAME,mImageResultFileName);
+				startActivity(intent);
+			}
 			finish();// end the sub experiment
 			return;
 		}

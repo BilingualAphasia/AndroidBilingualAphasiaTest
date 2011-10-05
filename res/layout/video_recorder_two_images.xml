@@ -14,8 +14,10 @@
 		</TableRow>
 		<TableRow android:id="@+id/tableRow1" android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
+			<ImageView android:id="@+id/extraimage"
+				android:layout_weight=".5" android:gravity="center"  android:layout_width="0px" android:layout_height="fill_parent" />
 			<ImageView android:id="@+id/mainimage"
-				android:layout_weight="1" android:gravity="center" android:layout_width="0px"  android:layout_height="fill_parent"  />
+				android:layout_weight=".5" android:gravity="center" android:layout_width="0px"  android:layout_height="fill_parent"  />
 		</TableRow>
 	</TableLayout>
 </LinearLayout>

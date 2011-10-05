@@ -24,7 +24,9 @@ public class BilingualAphasiaTestHome extends Activity {
 	public static final String EXTRA_PARTICIPANT_ID ="participant";
 	public static final String EXTRA_X_IMAGE = "xiamge";
 	public static final String EXTRA_SUB_EXPERIMENT_TITLE = "subexperimenttitle";
+	public static final String EXTRA_RESULT_FILENAME = "resultfilename";
 	public static final String EXTRA_STIMULI = "stimuli";
+	public static final String EXTRA_TAKE_PICTURE_AT_END = "takepictureatend";
 	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BAT/video/";
 	private ArrayList<String> mSubExperiments;
 	private ArrayList<String> mSubExperimentTypes;
@@ -79,7 +81,8 @@ public class BilingualAphasiaTestHome extends Activity {
 				"Listening Comprehension," +
 				"Reading," +
 				"Copying," +
-				"Dictation," +
+				"Dictation for Words," +
+				"Dictation for Sentences," +
 				"Reading Comprehension for Words," +
 				"Reading Comprehension for Sentences," +
 				"Writing";
@@ -113,6 +116,7 @@ public class BilingualAphasiaTestHome extends Activity {
 			"frontvideo," +
 			"frontvideo," +
 			"readingpictures:frontvideo," +
+			"writing:frontvideo:takepicture," +
 			"writing:frontvideo:takepicture," +
 			"writing:frontvideo:takepicture," +
 			"picturepicture:frontvideo," +
@@ -221,19 +225,91 @@ public class BilingualAphasiaTestHome extends Activity {
 		if ("Syntactic Comprehension".equals(mSubExperiments
 				.get(subExperimentId))) {
 			stimuliImages.add(R.drawable.e066_0);
+			
 			stimuliImages.add(R.drawable.e066);
+			stimuliImages.add(R.drawable.e066);
+			stimuliImages.add(R.drawable.e066);
+			stimuliImages.add(R.drawable.e066);
+			stimuliImages.add(R.drawable.e066);
+
 			stimuliImages.add(R.drawable.e071);
+			stimuliImages.add(R.drawable.e071);
+			stimuliImages.add(R.drawable.e071);
+			stimuliImages.add(R.drawable.e071);
+			stimuliImages.add(R.drawable.e071);
+			stimuliImages.add(R.drawable.e071);
+
 			stimuliImages.add(R.drawable.e077);
+			stimuliImages.add(R.drawable.e077);
+			stimuliImages.add(R.drawable.e077);
+			stimuliImages.add(R.drawable.e077);
+			
 			stimuliImages.add(R.drawable.e081);
+			stimuliImages.add(R.drawable.e081);
+			stimuliImages.add(R.drawable.e081);
+			stimuliImages.add(R.drawable.e081);
+			stimuliImages.add(R.drawable.e081);
+			stimuliImages.add(R.drawable.e081);
+			stimuliImages.add(R.drawable.e081);
+			stimuliImages.add(R.drawable.e081);
+			
 			stimuliImages.add(R.drawable.e089);
+			stimuliImages.add(R.drawable.e089);
+			stimuliImages.add(R.drawable.e089);
+			stimuliImages.add(R.drawable.e089);
+			stimuliImages.add(R.drawable.e089);
+			stimuliImages.add(R.drawable.e089);
+			stimuliImages.add(R.drawable.e089);
+			stimuliImages.add(R.drawable.e089);
+			
 			stimuliImages.add(R.drawable.e097);
+			stimuliImages.add(R.drawable.e097);
+			stimuliImages.add(R.drawable.e097);
+			stimuliImages.add(R.drawable.e097);
+			stimuliImages.add(R.drawable.e097);
+			stimuliImages.add(R.drawable.e097);
+			stimuliImages.add(R.drawable.e097);
+			stimuliImages.add(R.drawable.e097);
+			
 			stimuliImages.add(R.drawable.e105);
+			stimuliImages.add(R.drawable.e105);
+			stimuliImages.add(R.drawable.e105);
+			stimuliImages.add(R.drawable.e105);
+			stimuliImages.add(R.drawable.e105);
+			stimuliImages.add(R.drawable.e105);
+			
 			stimuliImages.add(R.drawable.e111);
+			stimuliImages.add(R.drawable.e111);
+			stimuliImages.add(R.drawable.e111);
+			stimuliImages.add(R.drawable.e111);
+			
 			stimuliImages.add(R.drawable.e115);
+			stimuliImages.add(R.drawable.e115);
+			stimuliImages.add(R.drawable.e115);
+			stimuliImages.add(R.drawable.e115);
+			stimuliImages.add(R.drawable.e115);
+			stimuliImages.add(R.drawable.e115);
+			
 			stimuliImages.add(R.drawable.e121);
+			stimuliImages.add(R.drawable.e121);
+			stimuliImages.add(R.drawable.e121);
+			stimuliImages.add(R.drawable.e121);
+			
 			stimuliImages.add(R.drawable.e125);
+			stimuliImages.add(R.drawable.e125);
+			stimuliImages.add(R.drawable.e125);
+			stimuliImages.add(R.drawable.e125);
+			
 			stimuliImages.add(R.drawable.e129);
+			stimuliImages.add(R.drawable.e129);
+			stimuliImages.add(R.drawable.e129);
+			stimuliImages.add(R.drawable.e129);
+			
 			stimuliImages.add(R.drawable.e133);
+			stimuliImages.add(R.drawable.e133);
+			stimuliImages.add(R.drawable.e133);
+			stimuliImages.add(R.drawable.e133);
+			
 			stimuliImages.add(R.drawable.e137_e145);
 			stimuliImages.add(R.drawable.e138_e146);
 			stimuliImages.add(R.drawable.e139_e147);
@@ -306,8 +382,13 @@ public class BilingualAphasiaTestHome extends Activity {
 		}
 		if ("Copying".equals(mSubExperiments.get(subExperimentId))) {
 			stimuliImages.add(R.drawable.e393);
+			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
 		}
-		if ("Dictation".equals(mSubExperiments.get(subExperimentId))) {
+		if ("Dictation for Words".equals(mSubExperiments.get(subExperimentId))) {
+			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
+		}
+		if ("Dictation for Sentences".equals(mSubExperiments.get(subExperimentId))) {
+			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
 		}
 		if ("Reading Comprehension for Words".equals(mSubExperiments
 				.get(subExperimentId))) {
@@ -356,6 +437,7 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.e427);
 		}
 		if ("Writing".equals(mSubExperiments.get(subExperimentId))) {
+			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
 		}
 
 		intent.putExtra(EXTRA_STIMULI, stimuliImages);
