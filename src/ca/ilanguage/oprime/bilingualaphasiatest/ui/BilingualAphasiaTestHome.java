@@ -3,10 +3,13 @@ package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -59,9 +62,7 @@ public class BilingualAphasiaTestHome extends Activity {
 				+ getString(R.string.user_agent_suffix));
 
 		
-		/*
-		 * TODO get values from settings
-		 */
+		
 		
 		new File(OUTPUT_DIRECTORY).mkdirs();
 		
@@ -138,6 +139,12 @@ public class BilingualAphasiaTestHome extends Activity {
 		mSubExperimentTypes =  new ArrayList(Arrays.asList(subExperimentTypes.split(",")));
 		mExperimentLaunch = System.currentTimeMillis();
 		mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
+		
+		/*
+		 * TODO get values from settings
+		 * start settings activity
+		 * on result read settings
+		 */
 
 	}
 
@@ -483,6 +490,9 @@ public class BilingualAphasiaTestHome extends Activity {
 	@Override
 	protected void onDestroy() {
 		mExperimentQuit=System.currentTimeMillis();
+		/*
+		 * TODO save particpant details to outfile
+		 */
 		super.onDestroy();
 	}
 
@@ -528,6 +538,31 @@ public class BilingualAphasiaTestHome extends Activity {
 					SetPreferencesActivity.class);
 			startActivity(inte);
 			return true;
+		case R.id.result_folder:
+			final boolean fileManagerAvailable = isIntentAvailable(this,
+					"org.openintents.action.PICK_FILE");
+			if (!fileManagerAvailable) {
+				Toast.makeText(
+						getApplicationContext(),
+						"To open and export recorded files or "
+								+ "draft data you can install the OI File Manager, "
+								+ "it allows you to browse your SDCARD directly on your mobile device.",
+						Toast.LENGTH_LONG).show();
+				Intent goToMarket = new Intent(Intent.ACTION_VIEW)
+						.setData(Uri
+								.parse("market://details?id=org.openintents.filemanager"));
+			} else {
+				Intent openResults = new Intent(
+						"org.openintents.action.PICK_FILE");
+				openResults.setData(Uri.parse("file://"+OUTPUT_DIRECTORY));
+				startActivity(openResults);
+			}
+			return true;
+		case R.id.backup_results:
+			Intent backupIntent = new Intent(getBaseContext(),
+					SetPreferencesActivity.class);
+			startActivity(backupIntent);
+			return true;
 		case R.id.issue_tracker:
 
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW,
@@ -542,5 +577,13 @@ public class BilingualAphasiaTestHome extends Activity {
 
 		return false;
 	}
+		public static boolean isIntentAvailable(Context context, String action) {
+		      final PackageManager packageManager = context.getPackageManager();
+		      final Intent intent = new Intent(action);
+		      List<ResolveInfo> list =
+		              packageManager.queryIntentActivities(intent,
+		                      PackageManager.MATCH_DEFAULT_ONLY);
+		      return list.size() > 0;
+		  }
 
 }

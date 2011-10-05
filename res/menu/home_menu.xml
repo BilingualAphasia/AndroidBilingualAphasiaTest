@@ -22,5 +22,9 @@
         android:title="French/English" />
     <item android:id="@+id/issue_tracker"
         android:title="Bugs" />
+    <item android:id="@+id/result_folder"
+        android:title="Open Results Folder" />
+    <item android:id="@+id/backup_results"
+        android:title="Backup Results to Server" />        
 
 </menu>

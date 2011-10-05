@@ -1,5 +1,8 @@
 package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
@@ -268,6 +271,49 @@ public class VideoRecorderSubExperiment extends Activity implements
 	}
 
 	public void writeResultsTable() {
+		 //write the current contents to the client file which will be sent.
+		Integer subtitleNumber=1;
+	      File outSRTFileClient =  new File(mAudioResultsFile.replace(".3gp",".srt"));
+	      FileOutputStream outSRT;
+	      try {
+	        outSRT = new FileOutputStream(outSRTFileClient,false);//false for dont append
+	        outSRT.write((subtitleNumber.toString()+"\n").getBytes());
+	        subtitleNumber++;
+	        outSRT.write("00:00:02,329 --> 00:00:07,419\n".getBytes());
+	        outSRT.write(mReactionTimes.toString().getBytes());
+	        outSRT.write("\n\n".getBytes());
+
+	        outSRT.write((subtitleNumber.toString()+"\n").getBytes());
+	        subtitleNumber++;
+	        outSRT.write("00:00:07,942 --> 00:00:13,783\n".getBytes());
+	        outSRT.write(mStimuliResponses.toString().getBytes());
+	        outSRT.write("\n\n".getBytes());
+	        outSRT.flush();
+	        outSRT.close();
+	      } catch (IOException e) {
+	    	 Toast.makeText(
+				 getApplicationContext(),
+				 "The App couldn't write out the subtitle results.\n ",
+				 Toast.LENGTH_LONG).show();
+	      }
+	      /*
+	       * 1
+00:00:02,329 --> 00:00:07,419
+Speech recognition, (also known as automatic speech recognition or computer speech recognition)
+
+2
+00:00:07,942 --> 00:00:13,783
+converts spoken words to text. The term "voice recognition" is sometimes used to refer to
+
+3
+00:00:14,515 --> 00:00:17,539
+recognition systems that must be trained to a particular speaker,
+
+4
+00:00:18,027 --> 00:00:20,813
+as is the case for most desktop recognition software.
+
+	       */
 
 	}
 
