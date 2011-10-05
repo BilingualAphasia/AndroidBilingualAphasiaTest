@@ -20,35 +20,65 @@
 	<PreferenceCategory
             android:title="Experiment settings">
             <CheckBoxPreference
-       			android:key="experimentIsReady"
-                android:title="Check if Experiment is ready"
-                android:summaryOn="Check if Experiment is ready"
-                android:summaryOff="Check if Experiment is ready"
-                android:defaultValue="false"
+       			android:key="experimentlanguage"
+                android:title="Which Language is First?"
+                android:summaryOn="English is first"
+                android:summaryOff="French is first"
+                android:defaultValue="true"
                 android:persistent="true"
                 />
-      
-    		<EditTextPreference 
-    			android:title="Experiments directory"
-				android:key="experimentsDir" 
-				android:summary="Enter the experiments directory on your Android, it might be /sdcard/OPrime or /sdcard/dropbox" android:dialogTitle="Enter the experiments directory"
-				android:defaultValue="/sdcard/OPrime"
-				android:persistent="true"/>
-			
-			<EditTextPreference 
-				android:title="Default stimuli file"
-				android:key="defaultStimuli" 
-				android:summary="Enter the default stimuli file (it usually ends in .csv)" android:dialogTitle="Enter the default stimuli file"
-				android:defaultValue=""
-				android:persistent="true"/>
+      <!-- 
+    public static final String PREFERENCE_NAME = "BilingualAphasiaPrefs";
+    public static final String PREFERENCE_PARTICIPANT_ID = "participantId";
+    public static final String PREFERENCE_PARTICIPANT_FIRSTNAME = "participantfirstname";
+    public static final String PREFERENCE_PARTICIPANT_LASTNAME = "participantlastname";
+    public static final String PREFERENCE_PARTICIPANT_STARTTIME = "participantstarttime";
+    public static final String PREFERENCE_PARTICIPANT_ENDTIME = "participantendtime";
+    public static final String PREFERENCE_EXPERIEMENTER_CODE= "experimenterCode";
+    public static final String PREFERENCE_EXPERIMENT_IS_READY= "experimentIsReady"; -->
 			
             <EditTextPreference 
-				android:title="Default experimenter code"
-				android:key="defaultExperimenterCode"  
-				android:summary="You can put a default experimenter code if you want" android:dialogTitle="Enter Your experimenter code"
-				android:defaultValue="AA"
+				android:title="Participant First Name"
+				android:key="participantfirstname"  
+				android:summary="" android:dialogTitle="Enter the participant's first name"
+				android:defaultValue="Albert"
 				android:persistent="true"/>
         
+            <EditTextPreference 
+				android:title="Participant Last Name"
+				android:key="participantlastname"  
+				android:summary="" android:dialogTitle="Enter the participant's last name"
+				android:defaultValue="Adams"
+				android:persistent="true"/>
+				
+            <EditTextPreference 
+				android:title="Participant ID"
+				android:key="participantId"  
+				android:summary="" android:dialogTitle="The participant code is auto-generated"
+				android:defaultValue="10001AA"
+				android:persistent="true"/>
+				
+            <EditTextPreference 
+				android:title="Participant start time"
+				android:key="participantstarttime"  
+				android:summary="" android:dialogTitle=""
+				android:defaultValue="000"
+				android:persistent="true"/>
+				
+            <EditTextPreference 
+				android:title="Participant end time"
+				android:key="participantendtime"  
+				android:summary="" android:dialogTitle=""
+				android:defaultValue="000"
+				android:persistent="true"/>
+				
+            <EditTextPreference 
+				android:title="Experimenter code"
+				android:key="experimenterCode"  
+				android:summary="Experimenter who tested participant" android:dialogTitle="Enter your experimenter code"
+				android:defaultValue="AA"
+				android:persistent="true"/>
+				
     </PreferenceCategory>
     
     

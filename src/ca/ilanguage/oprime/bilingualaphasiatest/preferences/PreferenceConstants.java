@@ -19,10 +19,16 @@ package ca.ilanguage.oprime.bilingualaphasiatest.preferences;
 public class PreferenceConstants {
 	
     
-    public static final String PREFERENCE_NAME = "OPrimePrefs";
-    public static final String PREFERENCE_EXPERIMENTS_DIR = "experimentsDir";
-    public static final String PREFERENCE_DEFAULT_STIMULI = "defaultStimuli";
-    public static final String PREFERENCE_DEFAULT_EXPERIEMENTER_CODE= "defaultExperimenterCode";
+	public static final String PREFERENCE_NAME = "BilingualAphasiaPrefs";
+	public static final String PREFERENCE_EXPERIMENT_LANGUAGE = "experimentlanguage";
+    public static final String PREFERENCE_PARTICIPANT_ID = "participantId";
+    public static final String PREFERENCE_PARTICIPANT_FIRSTNAME = "participantfirstname";
+    public static final String PREFERENCE_PARTICIPANT_LASTNAME = "participantlastname";
+    public static final String PREFERENCE_PARTICIPANT_BESTLANGUAGE = "participantbestlanguage";
+    
+    public static final String PREFERENCE_PARTICIPANT_STARTTIME = "participantstarttime";
+    public static final String PREFERENCE_PARTICIPANT_ENDTIME = "participantendtime";
+    public static final String PREFERENCE_EXPERIEMENTER_CODE= "experimenterCode";
     public static final String PREFERENCE_EXPERIMENT_IS_READY= "experimentIsReady";
 	
 	

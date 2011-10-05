@@ -72,7 +72,7 @@ public class TakePictureSubExperiment extends Activity {
 					}
 				}
 				Toast.makeText(getApplicationContext(),
-						"Saving as " + getPath(myPicture), Toast.LENGTH_LONG)
+						"Saving as " + mImageFilename, Toast.LENGTH_LONG)
 						.show();
 			} catch (Exception e) {
 				Toast.makeText(getApplicationContext(),

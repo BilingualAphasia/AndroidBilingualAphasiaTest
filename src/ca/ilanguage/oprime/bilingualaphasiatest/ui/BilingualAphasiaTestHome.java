@@ -7,14 +7,20 @@ import java.util.Arrays;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
+import ca.ilanguage.oprime.bilingualaphasiatest.preferences.SetPreferencesActivity;
 
 public class BilingualAphasiaTestHome extends Activity {
+	private Menu mMenu;
 	private WebView mWebView;
 	//private int mSubExperiments = 5;
 	public static final String ENGLISH = "en";
@@ -52,6 +58,11 @@ public class BilingualAphasiaTestHome extends Activity {
 		webSettings.setUserAgentString(webSettings.getUserAgentString() + " "
 				+ getString(R.string.user_agent_suffix));
 
+		
+		/*
+		 * TODO get values from settings
+		 */
+		
 		new File(OUTPUT_DIRECTORY).mkdirs();
 		
 		String subExperiments = 
@@ -488,6 +499,48 @@ public class BilingualAphasiaTestHome extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+	}
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Hold on to this
+		mMenu = menu;
+
+		// Inflate the currently selected menu XML resource.
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.home_menu, menu);
+
+		return true;
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		// For "Title only": Examples of matching an ID with one assigned in
+		// the XML
+		case R.id.open_settings:
+
+			Intent i = new Intent(getBaseContext(),
+					SetPreferencesActivity.class);
+			startActivity(i);
+			return true;
+		case R.id.language_settings:
+
+			Intent inte = new Intent(getBaseContext(),
+					SetPreferencesActivity.class);
+			startActivity(inte);
+			return true;
+		case R.id.issue_tracker:
+
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse("http://code.google.com/p/aublog/issues/entry"));
+			startActivity(browserIntent);
+			return true;
+		default:
+			// Do nothing
+
+			break;
+		}
+
+		return false;
 	}
 
 }
