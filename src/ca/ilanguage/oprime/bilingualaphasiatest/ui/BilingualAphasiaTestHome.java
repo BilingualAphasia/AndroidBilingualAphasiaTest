@@ -52,7 +52,11 @@ public class BilingualAphasiaTestHome extends Activity {
 	private Boolean mAutoAdvance= false; //if user clicks on start or History then it will automatically go into auto advance mode, unless dev mode is on. 
 	private static final int AUTO_ADVANCE_NEXT_SUB_EXPERIMENT = 2;
 	private static final int PREPARE_TRIAL = 0;
+	private static final int SWITCH_LANGUAGE = 1;
 	
+	String subExperiments ="";
+	String subExperimentsFrench ="";
+	String subExperimentTypes ="";
 	/*
 	 * List of things to do to run in testing mode:
 	 * *devmode false(will run through all experiments iwth out stopping, maybebetter to keep devmode always true to alow for experimenter control
@@ -83,7 +87,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		
 		new File(OUTPUT_DIRECTORY).mkdirs();
 		
-		String subExperiments = 
+		 subExperiments = 
 			  "History of Bilingualism," +
 				"English Background," + //1
 				"Spontaneous Speech," +
@@ -115,11 +119,44 @@ public class BilingualAphasiaTestHome extends Activity {
 				"Reading Comprehension for Words," +
 				"Reading Comprehension for Sentences," +
 				"Writing";
+		 subExperimentsFrench = 
+			  "Histoire du bilinguisme," +
+				"Contexte d'apprentissage et d'utilisation du français," + //1
+				"Langage spontane," +
+				"Désignation," + //3
+				"Ordres simple et semi-complexes," +
+				"Ordres complexes," + //5
+				"Discrimination auditive verbale," +
+				"Compréhension de structures syntaxiques," + //7
+				"Compatibilité sémantique," +
+				"Synonyms," +
+				"Antonyms," +
+				"Jugement d'acceptabilité," +
+				"Acceptabilité sémantique," +
+				"Décision lexicale," +
+				"Séries," +
+				"Fluence verbale," +
+				"Dénomination," +
+				"Constuction de phrases," +
+				"Contraires sémantiques," +
+				"Morphologie," +
+				"Contraires morphologiques," +
+				"Description," +
+				"Calcul mental," +
+				"Compréhension auditive," +
+				"Lecture," +// à haute voix
+				"Copie," +
+				"Dictée mots," +
+				"Dictée phrases," +
+				"Lecture silencieuse des mots," +
+				"Lecture silencieuse des phrases," +
+				"Écriture spontanée";
+		
 		/*
 		 * frontvideo creates backup audio to be analysied with subtitles and annotations
 		 * and records an array of touches and time touched. for scoring later video in video
 		 */
-		String subExperimentTypes = 
+		 subExperimentTypes = 
 			"frontvideo," +
 			"frontvideo," +
 			"frontvideo," +
@@ -152,10 +189,7 @@ public class BilingualAphasiaTestHome extends Activity {
 			"picturepicture:frontvideo," +
 			"writing:frontvideo:timer:takepicture";
 
-		mSubExperiments =  new ArrayList(Arrays.asList(subExperiments.split(",")));
-		mSubExperimentTypes =  new ArrayList(Arrays.asList(subExperimentTypes.split(",")));
-		mExperimentLaunch = System.currentTimeMillis();
-		mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
+		
 		
 		/*
 		 * TODO get values from settings
@@ -223,6 +257,9 @@ public class BilingualAphasiaTestHome extends Activity {
 					AccelerometerUIActivity.class);
 		}
 
+		/*
+		 * English sub experiments
+		 */
 		if ("History of Bilingualism".equals(mSubExperiments
 				.get(subExperimentId))) {
 		}
@@ -480,6 +517,300 @@ public class BilingualAphasiaTestHome extends Activity {
 			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
 		}
 
+		/*
+		 * French Sub Experiments
+		 *  "Histoire du bilinguisme," +
+				"Contexte d'apprentissage et d'utilisation du français," + //1
+				"Langage spontane," +
+				"Désignation," + //3
+				"Ordres simple et semi-complexes," +
+				"Ordres complexes," + //5
+				"Discrimination auditive verbale," +
+				"Compréhension de structures syntaxiques," + //7
+				"Compatibilité sémantique," +
+				"Synonyms," +
+				"Antonyms," +
+				"Jugement d'acceptabilité," +
+				"Acceptabilité sémantique," +
+				"Décision lexicale," +
+				"Séries," +
+				"Fluence verbale," +
+				"Dénomination," +
+				"Constuction de phrases," +
+				"Contraires sémantiques," +
+				"Morphologie," +
+				"Contraires morphologiques," +
+				"Description," +
+				"Calcul mental," +
+				"Compréhension auditive," +
+				"Lecture," +// à haute voix
+				"Copie," +
+				"Dictée mots," +
+				"Dictée phrases," +
+				"Lecture silencieuse des mots," +
+				"Lecture silencieuse des phrases," +
+				"Écriture spontanée";
+		 */
+
+		if ("Contexte d'apprentissage et d'utilisation du français".equals(mSubExperiments
+				.get(subExperimentId))) {
+		}
+		if ("Contexte d'apprentissage et d'utilisation du français".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Langage spontane".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Désignation".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Ordres simple et semi-complexes".equals(mSubExperiments
+				.get(subExperimentId))) {
+		}
+		if ("Ordres complexes".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Discrimination auditive verbale".equals(mSubExperiments
+				.get(subExperimentId))) {
+			stimuliImages.add(R.drawable.f048_0_and_f413);
+			stimuliImages.add(R.drawable.f048);
+			stimuliImages.add(R.drawable.f049);
+			stimuliImages.add(R.drawable.ef050);
+			stimuliImages.add(R.drawable.f051);
+			stimuliImages.add(R.drawable.f052_f410);
+			stimuliImages.add(R.drawable.e053_e411);
+			stimuliImages.add(R.drawable.f054_f411);
+			stimuliImages.add(R.drawable.f055_f408);
+			stimuliImages.add(R.drawable.f056_f414);
+			stimuliImages.add(R.drawable.ef057);
+			stimuliImages.add(R.drawable.f058);
+			stimuliImages.add(R.drawable.f059_f0409);
+			stimuliImages.add(R.drawable.f060_f0416);
+			stimuliImages.add(R.drawable.ef061);
+			stimuliImages.add(R.drawable.f062_f0415);
+			stimuliImages.add(R.drawable.f063);
+			stimuliImages.add(R.drawable.f064);
+			stimuliImages.add(R.drawable.f065);
+			intent.putExtra(EXTRA_X_IMAGE, R.drawable.x);
+		}
+		if ("Compréhension de structures syntaxiques".equals(mSubExperiments
+				.get(subExperimentId))) {
+			stimuliImages.add(R.drawable.ef066_0);
+			
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
+			
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			
+			stimuliImages.add(R.drawable.f097_a_f104);
+			stimuliImages.add(R.drawable.f097_a_f104);
+			stimuliImages.add(R.drawable.f097_a_f104);
+			stimuliImages.add(R.drawable.f097_a_f104);
+			stimuliImages.add(R.drawable.f097_a_f104);
+			stimuliImages.add(R.drawable.f097_a_f104);
+			stimuliImages.add(R.drawable.f097_a_f104);
+			stimuliImages.add(R.drawable.f097_a_f104);
+			
+			stimuliImages.add(R.drawable.f105_a_f110);
+			stimuliImages.add(R.drawable.f105_a_f110);
+			stimuliImages.add(R.drawable.f105_a_f110);
+			stimuliImages.add(R.drawable.f105_a_f110);
+			stimuliImages.add(R.drawable.f105_a_f110);
+			stimuliImages.add(R.drawable.f105_a_f110);
+			
+			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
+			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
+			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
+			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
+			
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			
+			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
+			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
+			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
+			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
+			
+			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
+			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
+			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
+			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
+			
+			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
+			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
+			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
+			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
+			
+			stimuliImages.add(R.drawable.ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.ef0133_to_ef0136);
+			
+			stimuliImages.add(R.drawable.e137_e145);
+			stimuliImages.add(R.drawable.f138_et_f146);
+			stimuliImages.add(R.drawable.f139_et_f147);
+			stimuliImages.add(R.drawable.f140_et_f148);
+			stimuliImages.add(R.drawable.e141_e149);
+			stimuliImages.add(R.drawable.e142_e150);
+			stimuliImages.add(R.drawable.e143_e151);
+			stimuliImages.add(R.drawable.e144_e152_f0141_et_f0149);
+
+			stimuliImages.add(R.drawable.e137_e145);
+			stimuliImages.add(R.drawable.e138_e146);
+			stimuliImages.add(R.drawable.e139_e147);
+			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
+			stimuliImages.add(R.drawable.e141_e149);
+			stimuliImages.add(R.drawable.f142_et_f150);
+			stimuliImages.add(R.drawable.f143_et_f151);
+			stimuliImages.add(R.drawable.f144_et_f152);
+		}
+		if ("Compatibilité sémantique".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Synonyms".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Antonyms".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Jugement d'acceptabilité".equals(mSubExperiments
+				.get(subExperimentId))) {
+		}
+		if ("Acceptabilité sémantique".equals(mSubExperiments
+				.get(subExperimentId))) {
+		}
+		if ("Décision lexicale".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Séries".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Fluence verbale".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Dénomination".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Constuction de phrases"
+				.equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Contraires sémantiques".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Morphologie".equals(mSubExperiments
+				.get(subExperimentId))) {
+		}
+		if ("Contraires morphologiques".equals(mSubExperiments
+				.get(subExperimentId))) {
+		}
+		if ("Description".equals(mSubExperiments.get(subExperimentId))) {
+			stimuliImages.add(R.drawable.e344_f0344);
+		}
+		if ("Calcul mental".equals(mSubExperiments.get(subExperimentId))) {
+		}
+		if ("Compréhension auditive".equals(mSubExperiments
+				.get(subExperimentId))) {
+		}
+		if ("Lecture".equals(mSubExperiments.get(subExperimentId))) {
+			stimuliImages.add(R.drawable.f367_a_f371);
+			stimuliImages.add(R.drawable.f372_a_f376);
+			stimuliImages.add(R.drawable.androids_experimenter_kids);
+			stimuliImages.add(R.drawable.f377_f378);
+			stimuliImages.add(R.drawable.f379_et_f380);
+			stimuliImages.add(R.drawable.f381_f382);
+			stimuliImages.add(R.drawable.f383_f384);
+			stimuliImages.add(R.drawable.f385_f386);
+			stimuliImages.add(R.drawable.androids_experimenter_kids);
+			stimuliImages.add(R.drawable.f387_a_f392);
+			stimuliImages.add(R.drawable.androids_experimenter_kids);
+			
+		}
+		if ("Copie".equals(mSubExperiments.get(subExperimentId))) {
+			stimuliImages.add(R.drawable.f393_a_f397);
+			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
+		}
+		if ("Dictée mots".equals(mSubExperiments.get(subExperimentId))) {
+			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
+		}
+		if ("Dictée phrases".equals(mSubExperiments.get(subExperimentId))) {
+			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
+		}
+		if ("Lecture silencieuse des mots".equals(mSubExperiments
+				.get(subExperimentId))) {
+			stimuliImages.add(R.drawable.f408_0);
+			stimuliImages.add(R.drawable.f055_f408);
+			stimuliImages.add(R.drawable.f409_0);
+			stimuliImages.add(R.drawable.f059_f0409);
+			stimuliImages.add(R.drawable.f410_0);
+			stimuliImages.add(R.drawable.f052_f410);
+			stimuliImages.add(R.drawable.f411_0);
+			stimuliImages.add(R.drawable.f054_f411);
+			stimuliImages.add(R.drawable.f412_0);
+			stimuliImages.add(R.drawable.f412);
+			stimuliImages.add(R.drawable.f413_0);
+			stimuliImages.add(R.drawable.f048_0_and_f413);
+			stimuliImages.add(R.drawable.f414_0);
+			stimuliImages.add(R.drawable.f056_f414);
+			stimuliImages.add(R.drawable.f415_0);
+			stimuliImages.add(R.drawable.f062_f0415);
+			stimuliImages.add(R.drawable.f416_0);
+			stimuliImages.add(R.drawable.f060_f0416);
+			stimuliImages.add(R.drawable.f417_0);
+			stimuliImages.add(R.drawable.f417);
+		}
+		if ("Lecture silencieuse des phrases".equals(mSubExperiments
+				.get(subExperimentId))) {
+			stimuliImages.add(R.drawable.f418_0);
+			stimuliImages.add(R.drawable.ef418);
+			stimuliImages.add(R.drawable.f419_0);
+			stimuliImages.add(R.drawable.ef426_f0419);
+			stimuliImages.add(R.drawable.f420_0);
+			stimuliImages.add(R.drawable.ef420);
+			stimuliImages.add(R.drawable.f421_0);
+			stimuliImages.add(R.drawable.ef421);
+			stimuliImages.add(R.drawable.f422_0);
+			stimuliImages.add(R.drawable.ef422);
+			stimuliImages.add(R.drawable.f423_0);
+			stimuliImages.add(R.drawable.ef423);
+			stimuliImages.add(R.drawable.f424_0);
+			stimuliImages.add(R.drawable.ef424);
+			stimuliImages.add(R.drawable.f425_0);
+			stimuliImages.add(R.drawable.ef425);
+			stimuliImages.add(R.drawable.f426_0);
+			stimuliImages.add(R.drawable.ef426_f0419);
+			stimuliImages.add(R.drawable.f427_0);
+			stimuliImages.add(R.drawable.f427);
+			
+		}
+		if ("Écriture spontanée".equals(mSubExperiments.get(subExperimentId))) {
+			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
+		}
+		/*end French sub experiments*/
+		
+		
 		if(!mSkipStimuli){
 			intent.putExtra(EXTRA_STIMULI, stimuliImages);
 		}
@@ -497,6 +828,22 @@ public class BilingualAphasiaTestHome extends Activity {
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
+		case SWITCH_LANGUAGE:
+			SharedPreferences prefens = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+			if(prefens.getBoolean(PreferenceConstants.PREFERENCE_PARTICIPANT_WORSTLANGUAGE_IS_ENGLISH, true)){
+				mCurrentSubExperimentLanguage = ENGLISH;
+			}else{
+				mCurrentSubExperimentLanguage = FRENCH;
+			}
+			if(mCurrentSubExperimentLanguage.equals(ENGLISH)){
+				mSubExperiments =  new ArrayList(Arrays.asList(subExperiments.split(",")));
+			}else{
+				mSubExperiments =  new ArrayList(Arrays.asList(subExperimentsFrench.split(",")));
+			}
+			mSubExperimentTypes =  new ArrayList(Arrays.asList(subExperimentTypes.split(",")));
+			mExperimentLaunch = System.currentTimeMillis();
+			mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
+			break;
 		case PREPARE_TRIAL:
 			SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 			String firstname = prefs.getString(PreferenceConstants.PREFERENCE_PARTICIPANT_FIRSTNAME, "none");
@@ -548,6 +895,14 @@ public class BilingualAphasiaTestHome extends Activity {
 		        		"Trial start timesamp: "+mExperimentLaunch+"\n\n" +
         				"Touchez Commencer pour apprendre l'histoire du participant ...", Toast.LENGTH_LONG).show();
 	        
+	        	if(mCurrentSubExperimentLanguage.equals(ENGLISH)){
+	    			mSubExperiments =  new ArrayList(Arrays.asList(subExperiments.split(",")));
+	    		}else{
+	    			mSubExperiments =  new ArrayList(Arrays.asList(subExperimentsFrench.split(",")));
+	    		}
+	    		mSubExperimentTypes =  new ArrayList(Arrays.asList(subExperimentTypes.split(",")));
+	    		mExperimentLaunch = System.currentTimeMillis();
+	    		mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
 	        }
 			
 			break;
@@ -639,10 +994,9 @@ public class BilingualAphasiaTestHome extends Activity {
 			startActivity(i);
 			return true;
 		case R.id.language_settings:
-
 			Intent inte = new Intent(getBaseContext(),
 					SetPreferencesActivity.class);
-			startActivity(inte);
+			startActivityForResult(inte, SWITCH_LANGUAGE);
 			return true;
 		case R.id.result_folder:
 			final boolean fileManagerAvailable = isIntentAvailable(this,
