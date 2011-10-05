@@ -55,13 +55,13 @@ public class BilingualAphasiaTestHome extends Activity {
 	
 	/*
 	 * List of things to do to run in testing mode:
-	 * *devmode false
+	 * *devmode false(will run through all experiments iwth out stopping, maybebetter to keep devmode always true to alow for experimenter control
 	 * *mSkipStimuli = false
 	 * *mAutoAdvance true
 	 * *VideoRecorderSubExperiment:
 	 * * uncomment mVideoRecorder.setVideoEncodingBitRate(3000000)
 	 */
-	private Boolean devMode= false;
+	private Boolean devMode= true;
 	private Boolean mSkipStimuli = false;
 	
 	@Override
@@ -240,74 +240,74 @@ public class BilingualAphasiaTestHome extends Activity {
 		if ("Verbal Auditory Discrimination".equals(mSubExperiments
 				.get(subExperimentId))) {
 			stimuliImages.add(R.drawable.e048_0);
-			stimuliImages.add(R.drawable.e048);
-			stimuliImages.add(R.drawable.e049);
-			stimuliImages.add(R.drawable.e050);
+			stimuliImages.add(R.drawable.e048_e408);
+			stimuliImages.add(R.drawable.e049_e409);
+			stimuliImages.add(R.drawable.ef050);
 			stimuliImages.add(R.drawable.e051);
-			stimuliImages.add(R.drawable.e052);
-			stimuliImages.add(R.drawable.e053);
-			stimuliImages.add(R.drawable.e054);
+			stimuliImages.add(R.drawable.e052_e410);
+			stimuliImages.add(R.drawable.e053_e411);
+			stimuliImages.add(R.drawable.e054_e412);
 			stimuliImages.add(R.drawable.e055);
 			stimuliImages.add(R.drawable.e056);
-			stimuliImages.add(R.drawable.e057);
-			stimuliImages.add(R.drawable.e058);
-			stimuliImages.add(R.drawable.e059);
-			stimuliImages.add(R.drawable.e060);
-			stimuliImages.add(R.drawable.e061);
-			stimuliImages.add(R.drawable.e062);
+			stimuliImages.add(R.drawable.ef057);
+			stimuliImages.add(R.drawable.e058_e413);
+			stimuliImages.add(R.drawable.e059_e414);
+			stimuliImages.add(R.drawable.e060_e415);
+			stimuliImages.add(R.drawable.ef061);
+			stimuliImages.add(R.drawable.e062_e416);
 			stimuliImages.add(R.drawable.e063);
-			stimuliImages.add(R.drawable.e064);
+			stimuliImages.add(R.drawable.e064_e417);
 			stimuliImages.add(R.drawable.e065);
 			intent.putExtra(EXTRA_X_IMAGE, R.drawable.x);
 		}
 		if ("Syntactic Comprehension".equals(mSubExperiments
 				.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.e066_0);
+			stimuliImages.add(R.drawable.ef066_0);
 			
-			stimuliImages.add(R.drawable.e066);
-			stimuliImages.add(R.drawable.e066);
-			stimuliImages.add(R.drawable.e066);
-			stimuliImages.add(R.drawable.e066);
-			stimuliImages.add(R.drawable.e066);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
 
-			stimuliImages.add(R.drawable.e071);
-			stimuliImages.add(R.drawable.e071);
-			stimuliImages.add(R.drawable.e071);
-			stimuliImages.add(R.drawable.e071);
-			stimuliImages.add(R.drawable.e071);
-			stimuliImages.add(R.drawable.e071);
+			stimuliImages.add(R.drawable.e071_e419);
+			stimuliImages.add(R.drawable.e071_e419);
+			stimuliImages.add(R.drawable.e071_e419);
+			stimuliImages.add(R.drawable.e071_e419);
+			stimuliImages.add(R.drawable.e071_e419);
+			stimuliImages.add(R.drawable.e071_e419);
 
-			stimuliImages.add(R.drawable.e077);
-			stimuliImages.add(R.drawable.e077);
-			stimuliImages.add(R.drawable.e077);
-			stimuliImages.add(R.drawable.e077);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
 			
-			stimuliImages.add(R.drawable.e081);
-			stimuliImages.add(R.drawable.e081);
-			stimuliImages.add(R.drawable.e081);
-			stimuliImages.add(R.drawable.e081);
-			stimuliImages.add(R.drawable.e081);
-			stimuliImages.add(R.drawable.e081);
-			stimuliImages.add(R.drawable.e081);
-			stimuliImages.add(R.drawable.e081);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
 			
-			stimuliImages.add(R.drawable.e089);
-			stimuliImages.add(R.drawable.e089);
-			stimuliImages.add(R.drawable.e089);
-			stimuliImages.add(R.drawable.e089);
-			stimuliImages.add(R.drawable.e089);
-			stimuliImages.add(R.drawable.e089);
-			stimuliImages.add(R.drawable.e089);
-			stimuliImages.add(R.drawable.e089);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
+			stimuliImages.add(R.drawable.e089_f089_a_f096);
 			
-			stimuliImages.add(R.drawable.e097);
-			stimuliImages.add(R.drawable.e097);
-			stimuliImages.add(R.drawable.e097);
-			stimuliImages.add(R.drawable.e097);
-			stimuliImages.add(R.drawable.e097);
-			stimuliImages.add(R.drawable.e097);
-			stimuliImages.add(R.drawable.e097);
-			stimuliImages.add(R.drawable.e097);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
+			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
 			
 			stimuliImages.add(R.drawable.e105);
 			stimuliImages.add(R.drawable.e105);
@@ -316,55 +316,55 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.e105);
 			stimuliImages.add(R.drawable.e105);
 			
-			stimuliImages.add(R.drawable.e111);
-			stimuliImages.add(R.drawable.e111);
-			stimuliImages.add(R.drawable.e111);
-			stimuliImages.add(R.drawable.e111);
+			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
+			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
+			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
+			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
 			
-			stimuliImages.add(R.drawable.e115);
-			stimuliImages.add(R.drawable.e115);
-			stimuliImages.add(R.drawable.e115);
-			stimuliImages.add(R.drawable.e115);
-			stimuliImages.add(R.drawable.e115);
-			stimuliImages.add(R.drawable.e115);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
+			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
 			
-			stimuliImages.add(R.drawable.e121);
-			stimuliImages.add(R.drawable.e121);
-			stimuliImages.add(R.drawable.e121);
-			stimuliImages.add(R.drawable.e121);
+			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
+			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
+			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
+			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
 			
-			stimuliImages.add(R.drawable.e125);
-			stimuliImages.add(R.drawable.e125);
-			stimuliImages.add(R.drawable.e125);
-			stimuliImages.add(R.drawable.e125);
+			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
+			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
+			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
+			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
 			
-			stimuliImages.add(R.drawable.e129);
-			stimuliImages.add(R.drawable.e129);
-			stimuliImages.add(R.drawable.e129);
-			stimuliImages.add(R.drawable.e129);
+			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
+			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
+			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
+			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
 			
-			stimuliImages.add(R.drawable.e133);
-			stimuliImages.add(R.drawable.e133);
-			stimuliImages.add(R.drawable.e133);
-			stimuliImages.add(R.drawable.e133);
+			stimuliImages.add(R.drawable.ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.ef0133_to_ef0136);
 			
 			stimuliImages.add(R.drawable.e137_e145);
 			stimuliImages.add(R.drawable.e138_e146);
 			stimuliImages.add(R.drawable.e139_e147);
-			stimuliImages.add(R.drawable.e140_e148);
+			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
 			stimuliImages.add(R.drawable.e141_e149);
 			stimuliImages.add(R.drawable.e142_e150);
 			stimuliImages.add(R.drawable.e143_e151);
-			stimuliImages.add(R.drawable.e144_e152);
+			stimuliImages.add(R.drawable.e144_e152_f0141_et_f0149);
 
 			stimuliImages.add(R.drawable.e137_e145);
 			stimuliImages.add(R.drawable.e138_e146);
 			stimuliImages.add(R.drawable.e139_e147);
-			stimuliImages.add(R.drawable.e140_e148);
-			stimuliImages.add(R.drawable.e140_e148);
+			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
+			stimuliImages.add(R.drawable.e141_e149);
 			stimuliImages.add(R.drawable.e142_e150);
 			stimuliImages.add(R.drawable.e143_e151);
-			stimuliImages.add(R.drawable.e144_e152);
+			stimuliImages.add(R.drawable.e144_e152_f0141_et_f0149);
 		}
 		if ("Semantic Categories".equals(mSubExperiments.get(subExperimentId))) {
 		}
@@ -398,7 +398,7 @@ public class BilingualAphasiaTestHome extends Activity {
 				.get(subExperimentId))) {
 		}
 		if ("Description".equals(mSubExperiments.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.e344);
+			stimuliImages.add(R.drawable.e344_f0344);
 		}
 		if ("Mental Arithmetic".equals(mSubExperiments.get(subExperimentId))) {
 		}
@@ -416,7 +416,8 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.e385);
 			stimuliImages.add(R.drawable.androids_experimenter_kids);
 			stimuliImages.add(R.drawable.e387_0);
-
+			stimuliImages.add(R.drawable.androids_experimenter_kids);
+			
 		}
 		if ("Copying".equals(mSubExperiments.get(subExperimentId))) {
 			stimuliImages.add(R.drawable.e393);
@@ -431,49 +432,49 @@ public class BilingualAphasiaTestHome extends Activity {
 		if ("Reading Comprehension for Words".equals(mSubExperiments
 				.get(subExperimentId))) {
 			stimuliImages.add(R.drawable.e408_0);
-			stimuliImages.add(R.drawable.e408);
+			stimuliImages.add(R.drawable.e048_e408);
 			stimuliImages.add(R.drawable.e409_0);
-			stimuliImages.add(R.drawable.e409);
+			stimuliImages.add(R.drawable.e049_e409);
 			stimuliImages.add(R.drawable.e410_0);
-			stimuliImages.add(R.drawable.e410);
+			stimuliImages.add(R.drawable.e052_e410);
 			stimuliImages.add(R.drawable.e411_0);
-			stimuliImages.add(R.drawable.e411);
+			stimuliImages.add(R.drawable.e053_e411);
 			stimuliImages.add(R.drawable.e412_0);
-			stimuliImages.add(R.drawable.e412);
+			stimuliImages.add(R.drawable.e054_e412);
 			stimuliImages.add(R.drawable.e413_0);
-			stimuliImages.add(R.drawable.e413);
+			stimuliImages.add(R.drawable.e058_e413);
 			stimuliImages.add(R.drawable.e414_0);
-			stimuliImages.add(R.drawable.e414);
+			stimuliImages.add(R.drawable.e059_e414);
 			stimuliImages.add(R.drawable.e415_0);
-			stimuliImages.add(R.drawable.e415);
+			stimuliImages.add(R.drawable.e060_e415);
 			stimuliImages.add(R.drawable.e416_0);
-			stimuliImages.add(R.drawable.e416);
+			stimuliImages.add(R.drawable.e062_e416);
 			stimuliImages.add(R.drawable.e417_0);
-			stimuliImages.add(R.drawable.e417);
+			stimuliImages.add(R.drawable.e064_e417);
 		}
 		if ("Reading Comprehension for Sentences".equals(mSubExperiments
 				.get(subExperimentId))) {
 			stimuliImages.add(R.drawable.e418_0);
-			stimuliImages.add(R.drawable.e418);
+			stimuliImages.add(R.drawable.ef418);
 			stimuliImages.add(R.drawable.e419_0);
-			stimuliImages.add(R.drawable.e419);
+			stimuliImages.add(R.drawable.e071_e419);
 			stimuliImages.add(R.drawable.e420_0);
-			stimuliImages.add(R.drawable.e420);
+			stimuliImages.add(R.drawable.ef420);
 			stimuliImages.add(R.drawable.e421_0);
-			stimuliImages.add(R.drawable.e421);
+			stimuliImages.add(R.drawable.ef421);
 			stimuliImages.add(R.drawable.e422_0);
-			stimuliImages.add(R.drawable.e422);
+			stimuliImages.add(R.drawable.ef422);
 			stimuliImages.add(R.drawable.e423_0);
-			stimuliImages.add(R.drawable.e423);
+			stimuliImages.add(R.drawable.ef423);
 			stimuliImages.add(R.drawable.e424_0);
-			stimuliImages.add(R.drawable.e424);
+			stimuliImages.add(R.drawable.ef424);
 			stimuliImages.add(R.drawable.e425_0);
-			stimuliImages.add(R.drawable.e425);
+			stimuliImages.add(R.drawable.ef425);
 			stimuliImages.add(R.drawable.e426_0);
-			stimuliImages.add(R.drawable.e426);
+			stimuliImages.add(R.drawable.ef426_f0419);
 			stimuliImages.add(R.drawable.e427_0);
 			stimuliImages.add(R.drawable.e427);
-			stimuliImages.add(R.drawable.androids_experimenter_kids); //paragraph hidden for questions
+			
 		}
 		if ("Writing".equals(mSubExperiments.get(subExperimentId))) {
 			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
