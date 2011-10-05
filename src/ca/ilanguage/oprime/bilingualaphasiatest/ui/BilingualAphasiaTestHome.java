@@ -8,6 +8,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
@@ -20,6 +21,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
+import ca.ilanguage.oprime.bilingualaphasiatest.preferences.PreferenceConstants;
 import ca.ilanguage.oprime.bilingualaphasiatest.preferences.SetPreferencesActivity;
 
 public class BilingualAphasiaTestHome extends Activity {
@@ -33,6 +35,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	public static final String EXTRA_PARTICIPANT_ID ="participant";
 	public static final String EXTRA_X_IMAGE = "xiamge";
 	public static final String EXTRA_SUB_EXPERIMENT_TITLE = "subexperimenttitle";
+	public static final String EXTRA_EXPERIMENT_TRIAL_INFORMATION = "experimenttrialinfo";
 	public static final String EXTRA_RESULT_FILENAME = "resultfilename";
 	public static final String EXTRA_STIMULI = "stimuli";
 	public static final String EXTRA_TAKE_PICTURE_AT_END = "takepictureatend";
@@ -40,12 +43,26 @@ public class BilingualAphasiaTestHome extends Activity {
 	private ArrayList<String> mSubExperiments;
 	private ArrayList<String> mSubExperimentTypes;
 	private String mParticipantId = PARTICIPANT_ID_DEFAULT; //day00,participantnumber00,firstlanguage
+	private String mCurrentSubExperimentLanguage = ENGLISH;
+	String mTabletOrPaperFirst = "T";
+	private String mExperimentTrialHeader = "";
 	private long mExperimentLaunch;
 	private long mExperimentQuit;
 	private int mCurrentSubExperiment = 0;
-	private Boolean mAutoAdvance= false;
+	private Boolean mAutoAdvance= false; //if user clicks on start or History then it will automatically go into auto advance mode, unless dev mode is on. 
 	private static final int AUTO_ADVANCE_NEXT_SUB_EXPERIMENT = 2;
-	private Boolean devMode= true;
+	private static final int PREPARE_TRIAL = 0;
+	
+	/*
+	 * List of things to do to run in testing mode:
+	 * *devmode false
+	 * *mSkipStimuli = false
+	 * *mAutoAdvance true
+	 * *VideoRecorderSubExperiment:
+	 * * uncomment mVideoRecorder.setVideoEncodingBitRate(3000000)
+	 */
+	private Boolean devMode= false;
+	private Boolean mSkipStimuli = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -145,8 +162,11 @@ public class BilingualAphasiaTestHome extends Activity {
 		 * start settings activity
 		 * on result read settings
 		 */
-
+		Intent setupIntent = new Intent(getBaseContext(),
+				SetPreferencesActivity.class);
+		startActivityForResult(setupIntent, PREPARE_TRIAL);
 	}
+	
 
 	public class JavaScriptInterface {
 		
@@ -453,14 +473,18 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.e426);
 			stimuliImages.add(R.drawable.e427_0);
 			stimuliImages.add(R.drawable.e427);
+			stimuliImages.add(R.drawable.androids_experimenter_kids); //paragraph hidden for questions
 		}
 		if ("Writing".equals(mSubExperiments.get(subExperimentId))) {
 			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
 		}
 
-		intent.putExtra(EXTRA_STIMULI, stimuliImages);
+		if(!mSkipStimuli){
+			intent.putExtra(EXTRA_STIMULI, stimuliImages);
+		}
 		intent.putExtra(EXTRA_LANGUAGE, ENGLISH);
 		intent.putExtra(EXTRA_PARTICIPANT_ID, mParticipantId);
+		intent.putExtra(EXTRA_EXPERIMENT_TRIAL_INFORMATION, mExperimentTrialHeader);
 		intent.putExtra(EXTRA_SUB_EXPERIMENT_TITLE, subExperimentId + " "
 				+ mSubExperiments.get(subExperimentId));
 		if (!mAutoAdvance) {
@@ -472,10 +496,71 @@ public class BilingualAphasiaTestHome extends Activity {
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
+		case PREPARE_TRIAL:
+			SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+			String firstname = prefs.getString(PreferenceConstants.PREFERENCE_PARTICIPANT_FIRSTNAME, "none");
+			String lastname = prefs.getString(PreferenceConstants.PREFERENCE_PARTICIPANT_LASTNAME, "nobody");
+			String experimenter = prefs.getString(PreferenceConstants.PREFERENCE_EXPERIEMENTER_CODE,"AA");
+			String testDayNumber = prefs.getString(PreferenceConstants.PREFERENCE_TESTING_DAY_NUMBER,"0");
+			String participantNumberOnDay = prefs.getString(PreferenceConstants.PREFERENCE_PARTICIPANT_NUMBER_IN_DAY,"0");
+			mTabletOrPaperFirst = "T";
+			if(prefs.getBoolean(PreferenceConstants.PREFERENCE_TABLET_FIRST, true)){
+				
+			}else{
+				mTabletOrPaperFirst = "P";
+			}
+			String participantGroup= "E"; //participants worst language is English, so they get english first.
+			mCurrentSubExperimentLanguage = ENGLISH;
+			if(prefs.getBoolean(PreferenceConstants.PREFERENCE_PARTICIPANT_WORSTLANGUAGE_IS_ENGLISH, true)){
+			}else{
+				participantGroup ="F";
+				mCurrentSubExperimentLanguage = FRENCH;
+			}
+			/*
+			 * Build the participant ID and save the start time to the preferences. 
+			 */
+			mParticipantId = participantGroup+mTabletOrPaperFirst+testDayNumber+experimenter+participantNumberOnDay+firstname.substring(0,1)+lastname.substring(0,1);
+			mExperimentLaunch = System.currentTimeMillis();
+			mExperimentTrialHeader = "ParticipantID,FirstName,LastName,WorstLanguage,FirstBat,StartTime,EndTime,ExperimenterID" +
+					":::==="+mParticipantId+","
+					+firstname+","
+					+lastname+","
+					+participantGroup+","
+					+mTabletOrPaperFirst+","
+					+mExperimentLaunch+","
+					+mExperimentQuit	;
+			SharedPreferences.Editor editor = prefs.edit();
+	        editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_ID,mParticipantId);
+	        editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_STARTTIME, mExperimentLaunch+"");
+	        editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_ENDTIME, mExperimentLaunch+"");
+	        editor.commit();
+	       
+	        if(mCurrentSubExperimentLanguage.equals(ENGLISH)){
+		        Toast.makeText(getApplicationContext(), "Experiment Trial is ready:\n\n" +
+		        		"ParticipantCode: "+mParticipantId+"\n"+
+		        		"Trial start timestamp: "+mExperimentLaunch+"\n\n" +
+		        				"Touch Start to take Participants Background Info...", Toast.LENGTH_LONG).show();
+	        }else{
+	        	Toast.makeText(getApplicationContext(), "L'expŽrience est prt:\n\n" +
+		        		"ParticipantCode: "+mParticipantId+"\n"+
+		        		"Trial start timesamp: "+mExperimentLaunch+"\n\n" +
+        				"Touchez Commencer pour apprendre l'histoire du participant ...", Toast.LENGTH_LONG).show();
+	        
+	        }
+			
+			break;
 		case AUTO_ADVANCE_NEXT_SUB_EXPERIMENT:
 			mCurrentSubExperiment++;
+			if (mCurrentSubExperiment == 1 && mTabletOrPaperFirst.equals("P")){
+				/*TODO make experiment pause so that experimenter can do the paper BAT*/
+			}
+			
 			if (mCurrentSubExperiment >= mSubExperiments.size() ){
-				Toast.makeText(getApplicationContext(), "Experiment completed!", Toast.LENGTH_LONG).show();
+				if(mTabletOrPaperFirst.equals("T")){
+					Toast.makeText(getApplicationContext(), "Tablet Experiment completed!\n\n Time for the Paper version.", Toast.LENGTH_LONG).show();
+				}else{
+					Toast.makeText(getApplicationContext(), "Experiment completed!", Toast.LENGTH_LONG).show();
+				}
 			}else{
 				if(!devMode){
 					//launchSubExperiment(mCurrentSubExperiment);
@@ -491,8 +576,25 @@ public class BilingualAphasiaTestHome extends Activity {
 	protected void onDestroy() {
 		mExperimentQuit=System.currentTimeMillis();
 		/*
-		 * TODO save particpant details to outfile
+		 * TODO save participant details to outfile
 		 */
+		
+		/*
+		 * Reset the participant details from the settings so that they wont be saved on the next participant. 
+		 */
+		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+		String participantNumber = prefs.getString(PreferenceConstants.PREFERENCE_PARTICIPANT_NUMBER_IN_DAY, "0");
+		int participantInt = Integer.parseInt(participantNumber);
+		participantInt++;
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_NUMBER_IN_DAY, participantInt+"");
+		editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_FIRSTNAME, "reset");
+		editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_LASTNAME, "reset");
+		editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_ID, "");
+		editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_STARTTIME, "00");
+        editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_ENDTIME, "00");
+        editor.commit();
+		
 		super.onDestroy();
 	}
 

@@ -71,6 +71,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 	 */
 	String mLanguageOfSubExperiment = BilingualAphasiaTestHome.ENGLISH;
 	private String mParticipantId = BilingualAphasiaTestHome.PARTICIPANT_ID_DEFAULT;
+	private String mExperimentTrialHeader = "";
 	// private int mSubExperimentId = 0;
 	private String mSubExperimentShortTitle = "";
 	private String mSubExperimentTitle = "";
@@ -133,6 +134,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 		mTakePictureAtEnd = getIntent().getExtras().getBoolean(BilingualAphasiaTestHome.EXTRA_TAKE_PICTURE_AT_END, false);
 		mParticipantId = getIntent().getExtras().getString(
 				BilingualAphasiaTestHome.EXTRA_PARTICIPANT_ID);
+		mExperimentTrialHeader = getIntent().getExtras().getString(BilingualAphasiaTestHome.EXTRA_EXPERIMENT_TRIAL_INFORMATION);
 		mLanguageOfSubExperiment = getIntent().getExtras().getString(
 				BilingualAphasiaTestHome.EXTRA_LANGUAGE);
 		mSubExperimentTitle = getIntent().getExtras().getString(
@@ -277,17 +279,26 @@ public class VideoRecorderSubExperiment extends Activity implements
 	      FileOutputStream outSRT;
 	      try {
 	        outSRT = new FileOutputStream(outSRTFileClient,false);//false for dont append
+	        
+	        outSRT.write((subtitleNumber.toString()+"\n").getBytes());
+	        subtitleNumber++;
+	        outSRT.write("00:00:00,329 --> 00:00:02,219\n".getBytes());
+	        outSRT.write(mExperimentTrialHeader.toString().getBytes());
+	        outSRT.write("\n\n".getBytes());
+	        
 	        outSRT.write((subtitleNumber.toString()+"\n").getBytes());
 	        subtitleNumber++;
 	        outSRT.write("00:00:02,329 --> 00:00:07,419\n".getBytes());
-	        outSRT.write(mReactionTimes.toString().getBytes());
+	        outSRT.write(("ReactionTimes "+mReactionTimes.toString()).getBytes());
 	        outSRT.write("\n\n".getBytes());
-
+	        
+	        
 	        outSRT.write((subtitleNumber.toString()+"\n").getBytes());
 	        subtitleNumber++;
 	        outSRT.write("00:00:07,942 --> 00:00:13,783\n".getBytes());
-	        outSRT.write(mStimuliResponses.toString().getBytes());
+	        outSRT.write(("TouchResponses "+mStimuliResponses.toString()).getBytes());
 	        outSRT.write("\n\n".getBytes());
+	        
 	        outSRT.flush();
 	        outSRT.close();
 	      } catch (IOException e) {
