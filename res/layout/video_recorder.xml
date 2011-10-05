@@ -5,18 +5,19 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:background="#ffffff" android:layout_height="fill_parent">
 	<TableLayout android:id="@+id/tableLayout1"
-		android:layout_width="match_parent" android:layout_height="match_parent"
-		android:stretchColumns="1">
-		<TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_gravity= "center" android:stretchColumns="field">
+		<TableRow android:id="@+id/tableRow1" android:layout_width="fill_parent"
 			android:layout_height="wrap_content">
 			<VideoView android:id="@+id/videoView"
 				android:layout_width="10px" android:layout_height="10px" />
 		</TableRow>
-		<TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
-
+		<TableRow android:id="@+id/tableRow1" android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			<ImageView android:id="@+id/extraimage"
+				android:layout_weight=".5" android:gravity="center"  android:layout_width="0px" android:layout_height="fill_parent" />
 			<ImageView android:id="@+id/mainimage"
-				android:layout_width="fill_parent" android:layout_height="fill_parent" />
+				android:layout_weight=".5" android:gravity="center" android:layout_width="0px"  android:layout_height="fill_parent"  />
 		</TableRow>
 	</TableLayout>
 </LinearLayout>

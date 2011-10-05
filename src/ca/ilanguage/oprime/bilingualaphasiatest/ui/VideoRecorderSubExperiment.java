@@ -110,13 +110,18 @@ public class VideoRecorderSubExperiment extends Activity implements
 		setContentView(R.layout.video_recorder);
 		mVideoView = (VideoView) this.findViewById(R.id.videoView);
 		mImage = (ImageView) findViewById(R.id.mainimage);
-		//mImage.setImageResource(R.drawable.androids_experimenter_kids);
-
+		
 		/*
 		 * Get extras from the Experiment Home screen
 		 */
 		mStimuliImages = getIntent().getExtras().getIntegerArrayList(
 				BilingualAphasiaTestHome.EXTRA_STIMULI);
+		int xImageId = getIntent().getExtras().getInt(BilingualAphasiaTestHome.EXTRA_X_IMAGE,0);
+		if(xImageId>0){
+			ImageView xImage = (ImageView) findViewById(R.id.extraimage);
+			xImage.setImageResource(xImageId);
+		}
+		
 		mParticipantId = getIntent().getExtras().getString(
 				BilingualAphasiaTestHome.EXTRA_PARTICIPANT_ID);
 		mLanguageOfSubExperiment = getIntent().getExtras().getString(
@@ -131,7 +136,8 @@ public class VideoRecorderSubExperiment extends Activity implements
 		}
 
 		this.setTitle(mSubExperimentTitle + "-" + mStimuliImages.size());
-
+		
+		
 		mUseFrontFacingCamera = getIntent().getExtras().getBoolean(
 				EXTRA_USE_FRONT_FACING_CAMERA, true);
 		if (mUseFrontFacingCamera) {
@@ -200,6 +206,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 			startActivityForResult(intent, STIMULI_RESULT);
 		}else{
 			mImage.setImageResource(mStimuliImages.get(mStimuliIndex));
+			this.setTitle(mSubExperimentTitle + "-"+mStimuliIndex+"/" + mStimuliImages.size());
 			mStartTime = System.currentTimeMillis();
 			mListeningForTouch = true;
 		}
