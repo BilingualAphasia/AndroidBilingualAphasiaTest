@@ -677,23 +677,24 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.ef0133_to_ef0136);
 			stimuliImages.add(R.drawable.ef0133_to_ef0136);
 			
-			stimuliImages.add(R.drawable.e137_e145);
+			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
 			stimuliImages.add(R.drawable.f138_et_f146);
 			stimuliImages.add(R.drawable.f139_et_f147);
 			stimuliImages.add(R.drawable.f140_et_f148);
-			stimuliImages.add(R.drawable.e141_e149);
-			stimuliImages.add(R.drawable.e142_e150);
-			stimuliImages.add(R.drawable.e143_e151);
 			stimuliImages.add(R.drawable.e144_e152_f0141_et_f0149);
-
-			stimuliImages.add(R.drawable.e137_e145);
-			stimuliImages.add(R.drawable.e138_e146);
-			stimuliImages.add(R.drawable.e139_e147);
-			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
-			stimuliImages.add(R.drawable.e141_e149);
 			stimuliImages.add(R.drawable.f142_et_f150);
 			stimuliImages.add(R.drawable.f143_et_f151);
 			stimuliImages.add(R.drawable.f144_et_f152);
+			
+			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
+			stimuliImages.add(R.drawable.f138_et_f146);
+			stimuliImages.add(R.drawable.f139_et_f147);
+			stimuliImages.add(R.drawable.f140_et_f148);
+			stimuliImages.add(R.drawable.e144_e152_f0141_et_f0149);
+			stimuliImages.add(R.drawable.f142_et_f150);
+			stimuliImages.add(R.drawable.f143_et_f151);
+			stimuliImages.add(R.drawable.f144_et_f152);
+
 		}
 		if ("Compatibilité sémantique".equals(mSubExperiments.get(subExperimentId))) {
 		}
