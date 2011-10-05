@@ -533,6 +533,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	        editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_ID,mParticipantId);
 	        editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_STARTTIME, mExperimentLaunch+"");
 	        editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_ENDTIME, mExperimentLaunch+"");
+	        editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_GROUP, participantGroup+mTabletOrPaperFirst);
 	        editor.commit();
 	       
 	        if(mCurrentSubExperimentLanguage.equals(ENGLISH)){
@@ -593,6 +594,8 @@ public class BilingualAphasiaTestHome extends Activity {
 		editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_ID, "");
 		editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_STARTTIME, "00");
         editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_ENDTIME, "00");
+        editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_GROUP, "");
+        
         editor.commit();
 		
 		super.onDestroy();
