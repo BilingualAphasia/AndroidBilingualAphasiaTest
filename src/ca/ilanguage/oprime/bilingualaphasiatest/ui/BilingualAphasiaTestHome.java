@@ -301,11 +301,11 @@ public class BilingualAphasiaTestHome extends Activity {
 				.get(subExperimentId))) {
 			stimuliImages.add(R.drawable.ef066_0);
 			
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
 
 			stimuliImages.add(R.drawable.e071_e419);
 			stimuliImages.add(R.drawable.e071_e419);
@@ -314,19 +314,19 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.e071_e419);
 			stimuliImages.add(R.drawable.e071_e419);
 
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
 			
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
 			
 			stimuliImages.add(R.drawable.e089_f089_a_f096);
 			stimuliImages.add(R.drawable.e089_f089_a_f096);
@@ -380,10 +380,10 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
 			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
 			
-			stimuliImages.add(R.drawable.ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
 			
 			stimuliImages.add(R.drawable.e137_e145);
 			stimuliImages.add(R.drawable.e138_e146);
@@ -492,7 +492,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		if ("Reading Comprehension for Sentences".equals(mSubExperiments
 				.get(subExperimentId))) {
 			stimuliImages.add(R.drawable.e418_0);
-			stimuliImages.add(R.drawable.ef418);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
 			stimuliImages.add(R.drawable.e419_0);
 			stimuliImages.add(R.drawable.e071_e419);
 			stimuliImages.add(R.drawable.e420_0);
@@ -506,11 +506,11 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.e424_0);
 			stimuliImages.add(R.drawable.ef424);
 			stimuliImages.add(R.drawable.e425_0);
-			stimuliImages.add(R.drawable.ef425);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
 			stimuliImages.add(R.drawable.e426_0);
-			stimuliImages.add(R.drawable.ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
 			stimuliImages.add(R.drawable.e427_0);
-			stimuliImages.add(R.drawable.e427);
+			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
 			
 		}
 		if ("Writing".equals(mSubExperiments.get(subExperimentId))) {
@@ -579,7 +579,7 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.f055_f408);
 			stimuliImages.add(R.drawable.f056_f414);
 			stimuliImages.add(R.drawable.ef057);
-			stimuliImages.add(R.drawable.f058);
+			stimuliImages.add(R.drawable.f058_f417);
 			stimuliImages.add(R.drawable.f059_f0409);
 			stimuliImages.add(R.drawable.f060_f0416);
 			stimuliImages.add(R.drawable.ef061);
@@ -593,11 +593,11 @@ public class BilingualAphasiaTestHome extends Activity {
 				.get(subExperimentId))) {
 			stimuliImages.add(R.drawable.ef066_0);
 			
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
 
 			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
 			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
@@ -606,19 +606,19 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
 			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
 
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
 			
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
 			
 			stimuliImages.add(R.drawable.e089_f089_a_f096);
 			stimuliImages.add(R.drawable.e089_f089_a_f096);
@@ -672,10 +672,10 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
 			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
 			
-			stimuliImages.add(R.drawable.ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
+			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
 			
 			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
 			stimuliImages.add(R.drawable.f138_et_f146);
@@ -780,14 +780,14 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.f416_0);
 			stimuliImages.add(R.drawable.f060_f0416);
 			stimuliImages.add(R.drawable.f417_0);
-			stimuliImages.add(R.drawable.f417);
+			stimuliImages.add(R.drawable.f058_f417);
 		}
 		if ("Lecture silencieuse des phrases".equals(mSubExperiments
 				.get(subExperimentId))) {
 			stimuliImages.add(R.drawable.f418_0);
-			stimuliImages.add(R.drawable.ef418);
+			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
 			stimuliImages.add(R.drawable.f419_0);
-			stimuliImages.add(R.drawable.ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
 			stimuliImages.add(R.drawable.f420_0);
 			stimuliImages.add(R.drawable.ef420);
 			stimuliImages.add(R.drawable.f421_0);
@@ -799,9 +799,9 @@ public class BilingualAphasiaTestHome extends Activity {
 			stimuliImages.add(R.drawable.f424_0);
 			stimuliImages.add(R.drawable.ef424);
 			stimuliImages.add(R.drawable.f425_0);
-			stimuliImages.add(R.drawable.ef425);
+			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
 			stimuliImages.add(R.drawable.f426_0);
-			stimuliImages.add(R.drawable.ef426_f0419);
+			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
 			stimuliImages.add(R.drawable.f427_0);
 			stimuliImages.add(R.drawable.f427);
 			
