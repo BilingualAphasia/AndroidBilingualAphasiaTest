@@ -294,11 +294,14 @@ var getPositionAsButton = function(x, y){
 var buttonLabels;
 var menuShape = "arc"; //arc or circle
 
-function isNativeApp() {
+function isNativeAndroidApp() {
 	return /BilingualAphasiaTest\/[0-9\.]+$/.test(navigator.userAgent);
 }
-if (isNativeApp()) {
-	window.pressButton = function(id) {
+if (isNativeAndroidApp()) {
+	window.pressButton = function(id,label) {
+		if(label === "Start" || label === "Commencer"){
+			Android.setAutoAdvanceJS("1");
+		}
 		Android.launchSubExperimentJS(id);
 	}
 	fetchSubExperimentsArray = function(){
@@ -311,10 +314,17 @@ if (isNativeApp()) {
 		}
 		//Android.showToast(buttonLabels);
 	}
+	fetchExperimentTitle= function(){
+		titleLabel = Android.fetchExperimentTitleJS();
+	}
 } else {
 	//alert("in a browser");
-	window.pressButton = function(id) {
-		alert("pressed experiment button "+id);
+	window.pressButton = function(id,label) {
+		if(label === "Start" || label === "Commencer"){
+			alert("Starting AutoAdvance - pressed experiment button "+id);
+		}else{
+			alert("pressed experiment button "+id);
+		}
 	}
 	fetchSubExperimentsArray = function(){
 		var javaArrayListToString = "[History of Bilingualism, English Background, Spontaneous Speech, Verbal Comprehension, Pointing, Simple and Semi-complex Commands, Complex Commands, Verbal Auditory Discrimination, Syntactic Comprehension, Semantic Categories, Synonyms, Antonyms, Grammaticality Judgement, Semantic Acceptability, Lexical Decision, Series, Verbal Fluency, Naming, Sentence Construction, Semantic Opposites, Derivational Morphology, Morphological Opposites, Description, Mental Arithmetic, Listening Comprehension, Reading, Copying, Dictation, Reading Comprehension for Words, Reading Comprehension for Sentences, Writing]";
@@ -326,8 +336,12 @@ if (isNativeApp()) {
 			menuShape = "circle";
 		}
 	}
+	fetchExperimentTitle= function(){
+		titleLabel = "Bilingual Aphasia Test - English";
+	}
 }
 var titleFont;
+var titleLabel;
 var labelFont;
 var el;
 var ctx;
@@ -343,7 +357,7 @@ var ctx;
 		ctx.font = titleFont;
 		ctx.fillStyle = "#369";
 		ctx.textAlign = "center";
-		ctx.fillText("Bilingual Aphasia Test - English", ctx.canvas.width / 2,
+		ctx.fillText(titleLabel, ctx.canvas.width / 2,
 				ctx.canvas.height / 2);
 
 		//reset font for labels
@@ -376,6 +390,7 @@ var ctx;
 	}
 	loadButton = function() {
 		fetchSubExperimentsArray();
+		fetchExperimentTitle();
 
 		buttonRadiusForClicking = 2 * Math.PI * minScreenSize
 				/ buttonLabels.length / 5//button size is relative to number of buttons and circumference
@@ -385,6 +400,10 @@ var ctx;
 		startPosition = new Particle();
 		startPosition.init(0);
 		startPosition.label = "Start";
+		//if titleLabel contains aphasie
+		if(titleLabel.indexOf("aphasie") != -1){
+			startPosition.label = "Commencer";
+		}
 		startPosition.y = ctx.canvas.height / 2 + ctx.canvas.height / 8;
 		startPosition.x = ctx.canvas.width / 2;
 		startPosition.textAlign = "center";
@@ -414,7 +433,7 @@ var ctx;
 								positionsFilled[k].labely);
 						//alert("Clicked "+positionsFilled[k].id);
 						setTimeout("window.pressButton(positionsFilled[" + k
-								+ "].id);", 500);
+								+ "].id,positionsFilled[" + k + "].label);", 500);
 						return;//dont click on multiple buttons
 					} else {
 						//alert(" distance to this position "+d);
@@ -440,7 +459,7 @@ var ctx;
 							positionsFilled[k].labely);
 					//alert("Clicked "+positionsFilled[k].id);
 					setTimeout("window.pressButton(positionsFilled[" + k
-							+ "].id);", 0);
+								+ "].id,positionsFilled[" + k + "].label);", 0);
 					return;//dont click on multiple buttons
 				} else {
 					//alert(" distance to this position "+d);

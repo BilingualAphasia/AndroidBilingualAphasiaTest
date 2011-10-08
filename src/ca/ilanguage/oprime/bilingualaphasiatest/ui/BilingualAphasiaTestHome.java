@@ -40,6 +40,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	public static final String EXTRA_STIMULI = "stimuli";
 	public static final String EXTRA_TAKE_PICTURE_AT_END = "takepictureatend";
 	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BAT/video/";
+	private String mExperimentTitle="";
 	private ArrayList<String> mSubExperiments;
 	private ArrayList<String> mSubExperimentTypes;
 	private String mParticipantId = PARTICIPANT_ID_DEFAULT; //day00,participantnumber00,firstlanguage
@@ -65,7 +66,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	 * *VideoRecorderSubExperiment:
 	 * * uncomment mVideoRecorder.setVideoEncodingBitRate(3000000)
 	 */
-	private Boolean devMode= true;
+	private Boolean devMode= false;
 	private Boolean mSkipStimuli = false;
 	
 	@Override
@@ -86,7 +87,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		
 		
 		new File(OUTPUT_DIRECTORY).mkdirs();
-		
+		mExperimentTitle = "Bilingual Aphasia Test - English";
 		 subExperiments = 
 			  "History of Bilingualism," +
 				"English Background," + //1
@@ -215,11 +216,18 @@ public class BilingualAphasiaTestHome extends Activity {
 			return mSubExperiments.toString();			
 			
 		}
+		public void setAutoAdvanceJS(String autoAdvance){
+			if("1".equals(autoAdvance)){
+				mAutoAdvance = true;
+			}else if("0".equals(autoAdvance)){
+				mAutoAdvance = false;
+			}
+		}
+		public String fetchExperimentTitleJS(){
+			return mExperimentTitle;
+		}
 		public void launchSubExperimentJS(int subExperimentId){
 			mCurrentSubExperiment=subExperimentId;
-			if(subExperimentId==0){
-				mAutoAdvance=true;
-			}
 			launchSubExperiment(subExperimentId);
 		}
 		public void showToast(String toast) {
@@ -838,11 +846,13 @@ public class BilingualAphasiaTestHome extends Activity {
 			}
 			if(mCurrentSubExperimentLanguage.equals(ENGLISH)){
 				mSubExperiments =  new ArrayList(Arrays.asList(subExperiments.split(",")));
+				mExperimentTitle = "Bilingual Aphasia Test - English";
 			}else{
 				mSubExperiments =  new ArrayList(Arrays.asList(subExperimentsFrench.split(",")));
+				mExperimentTitle = "Test de l'aphasie chez les bilingues - français";
 			}
 			mSubExperimentTypes =  new ArrayList(Arrays.asList(subExperimentTypes.split(",")));
-			mExperimentLaunch = System.currentTimeMillis();
+			//mExperimentLaunch = System.currentTimeMillis();
 			mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
 			break;
 		case PREPARE_TRIAL:
@@ -885,26 +895,28 @@ public class BilingualAphasiaTestHome extends Activity {
 	        editor.putString(PreferenceConstants.PREFERENCE_PARTICIPANT_GROUP, participantGroup+mTabletOrPaperFirst);
 	        editor.commit();
 	       
-	        if(mCurrentSubExperimentLanguage.equals(ENGLISH)){
-		        Toast.makeText(getApplicationContext(), "Experiment Trial is ready:\n\n" +
+			if (mCurrentSubExperimentLanguage.equals(ENGLISH)) {
+				mSubExperiments = new ArrayList(Arrays.asList(subExperiments
+						.split(",")));
+				mExperimentTitle = "Bilingual Aphasia Test - English";
+				Toast.makeText(getApplicationContext(), "Experiment Trial is ready:\n\n" +
 		        		"ParticipantCode: "+mParticipantId+"\n"+
-		        		"Trial start timestamp: "+mExperimentLaunch+"\n\n" +
+		        		//"Trial start timestamp: "+mExperimentLaunch+"\n\n" +
 		        				"Touch Start to take Participants Background Info...", Toast.LENGTH_LONG).show();
-	        }else{
-	        	Toast.makeText(getApplicationContext(), "L'expérience est prêt:\n\n" +
+			} else {
+				mSubExperiments = new ArrayList(
+						Arrays.asList(subExperimentsFrench.split(",")));
+				mExperimentTitle = "Test de l'aphasie chez les bilingues - français";
+				Toast.makeText(getApplicationContext(), "L'expérience est prêt:\n\n" +
 		        		"ParticipantCode: "+mParticipantId+"\n"+
-		        		"Trial start timesamp: "+mExperimentLaunch+"\n\n" +
-        				"Touchez Commencer pour apprendre l'histoire du participant ...", Toast.LENGTH_LONG).show();
+		        		//"Trial start timesamp: "+mExperimentLaunch+"\n\n" +
+        				"Touchez Commencer pour prendre l'histoire du participant ...", Toast.LENGTH_LONG).show();
+			}
+			mSubExperimentTypes = new ArrayList(
+					Arrays.asList(subExperimentTypes.split(",")));
+			mExperimentLaunch = System.currentTimeMillis();
+			mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
 	        
-	        	if(mCurrentSubExperimentLanguage.equals(ENGLISH)){
-	    			mSubExperiments =  new ArrayList(Arrays.asList(subExperiments.split(",")));
-	    		}else{
-	    			mSubExperiments =  new ArrayList(Arrays.asList(subExperimentsFrench.split(",")));
-	    		}
-	    		mSubExperimentTypes =  new ArrayList(Arrays.asList(subExperimentTypes.split(",")));
-	    		mExperimentLaunch = System.currentTimeMillis();
-	    		mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
-	        }
 			
 			break;
 		case AUTO_ADVANCE_NEXT_SUB_EXPERIMENT:

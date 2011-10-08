@@ -227,7 +227,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 		//mEndTime = System.currentTimeMillis();
 		Long reactionTime = mEndTime - mStartTime;
 		mReactionTimes.add(mStimuliIndex, reactionTime);
-		mStimuliResponses.add(mStimuliIndex,x+":::"+y);
+		mStimuliResponses.add(mStimuliIndex,mStimuliImages.get(mStimuliIndex)+":::"+x+":::"+y);
 		advanceStimuli();
 	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -456,7 +456,7 @@ as is the case for most desktop recognition software.
 													// YouTube HD: 1280x720
 			mVideoRecorder.setVideoFrameRate(20); // might be auto-determined
 													// due to lighting
-			 mVideoRecorder.setVideoEncodingBitRate(3000000);// 3 megapixel,
+//			 mVideoRecorder.setVideoEncodingBitRate(3000000);// 3 megapixel,
 			// or the max of
 			// the camera
 			mVideoRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);// MPEG_4_SP
