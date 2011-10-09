@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string-array name="participant_codes">
+    <item>ET1AM4</item>
+    <item>SAMPLE</item>
+    <item>ET1AM4</item>
+    <item>ET1AM4</item>
+    <item>ET1AM4</item>
+  </string-array>
+  <!-- using 1,000,000 as a metric of 1 min of audio -->
+  <string-array name="participant_codes_int">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+  </string-array>
+
+</resources>

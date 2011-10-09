@@ -16,6 +16,9 @@
 
 package ca.ilanguage.oprime.bilingualaphasiatest.preferences;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -26,6 +29,7 @@ import android.preference.PreferenceScreen;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
+import ca.ilanguage.oprime.bilingualaphasiatest.ui.BilingualAphasiaTestHome;
 
 public class SetPreferencesActivity extends PreferenceActivity implements 
 		YesNoDialogPreference.YesNoDialogListener {
@@ -58,4 +62,6 @@ public class SetPreferencesActivity extends PreferenceActivity implements
                     Toast.LENGTH_SHORT).show();
 		}
 	}
+
+	
 }

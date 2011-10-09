@@ -16,7 +16,26 @@
 
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android">
-
+	<PreferenceCategory
+            android:title="Replay Results">
+            
+            <CheckBoxPreference
+       			android:key="replayresults"
+                android:title="Replay Participant's Trial"
+                android:summaryOn="Replaying a participant's experience"
+                android:summaryOff="Running the experiment"
+                android:defaultValue="false"
+                android:persistent="true"
+                />
+    <!-- <ca.ilanguage.oprime.bilingualaphasiatest.preferences.IntegerListPreference
+            android:key="replayparticipantcode"
+            android:title="Replay Participant Code"
+            android:summary="You can use the home screen to replay participant's behavior during the experiment."
+            android:entries="@array/participant_codes"
+            android:entryValues="@array/participant_codes_int"
+            android:defaultValue="2000000"  />
+            -->
+     </PreferenceCategory>
 	<PreferenceCategory
             android:title="Experiment settings">
             <CheckBoxPreference
@@ -107,7 +126,6 @@
 				android:defaultValue="1"
 				android:persistent="true"/>
     </PreferenceCategory>
-    
     
     <PreferenceCategory
             android:title="About">

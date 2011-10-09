@@ -17,11 +17,11 @@
 }
 input.groovybutton
 {
-   font-size:8px;
+	 font-size:8px;
    color:#FFFFFF;
    background-color:#006633;
-   border-style:none;
-   border-color:#006633;
+   border-style:double;
+   border-color:#fff;
 }
 </STYLE>
 
@@ -291,6 +291,8 @@ var pushButton = function(id){
 var getPositionAsButton = function(x, y){
 	//to be defined later
 }
+var participantCodes;
+var setReplayParticipantCode;
 var buttonLabels;
 var menuShape = "arc"; //arc or circle
 
@@ -307,7 +309,7 @@ if (isNativeAndroidApp()) {
 	fetchSubExperimentsArray = function(){
 		result = Android.fetchSubExperimentsArrayJS();
 		result = result.replace(/\]/g,"").replace(/\[/g,"");
-		buttonLabels = result.split(",");//"History of Bilingualism","English Background","Spontaneous Speech","Verbal Comprehension","Pointing","Simple and Semi-complex Commands","Complex Commands","Verbal Auditory Discrimination","Syntactic Comprehension","Semantic Categories","Synonyms","Antonyms","Grammaticality Judgement","Semantic Acceptability","Lexical Decision","Series","Verbal Fluency","Naming","Sentence Construction","Semantic Opposites","Derivational Morphology","Morphological Opposites","Description","Mental Arithmetic","Listening Comprehension","Reading","Copying","Dictation","Reading Comprehension for Words","Reading Comprehension for Sentences","Writing");
+		buttonLabels = result.split(", ");//"History of Bilingualism","English Background","Spontaneous Speech","Verbal Comprehension","Pointing","Simple and Semi-complex Commands","Complex Commands","Verbal Auditory Discrimination","Syntactic Comprehension","Semantic Categories","Synonyms","Antonyms","Grammaticality Judgement","Semantic Acceptability","Lexical Decision","Series","Verbal Fluency","Naming","Sentence Construction","Semantic Opposites","Derivational Morphology","Morphological Opposites","Description","Mental Arithmetic","Listening Comprehension","Reading","Copying","Dictation","Reading Comprehension for Words","Reading Comprehension for Sentences","Writing");
 		console.log(buttonLabels);
 		if (buttonLabels.length > 8){
 			menuShape = "circle";
@@ -316,6 +318,18 @@ if (isNativeAndroidApp()) {
 	}
 	fetchExperimentTitle= function(){
 		titleLabel = Android.fetchExperimentTitleJS();
+	}
+	fetchParticipantCodes = function(){
+		result = Android.fetchParticipantCodesJS();
+		result = result.replace(/\]/g,"").replace(/\[/g,"");
+		if(result.length > 0){
+			participantCodes = result.split(", ");//"ET1AM4mc, SAMPLE".split(",");
+		}else{
+			participantCodes = "";
+		}
+	}
+	setReplayParticipantCode = function(code){
+		Android.setReplayParticipantCodeJS(code);
 	}
 } else {
 	//alert("in a browser");
@@ -338,6 +352,13 @@ if (isNativeAndroidApp()) {
 	}
 	fetchExperimentTitle= function(){
 		titleLabel = "Bilingual Aphasia Test - English";
+	}
+	fetchParticipantCodes = function(){
+		participantCodes = 'ET1AM4mc, SAMPLE'.split(",");
+	}
+	setReplayParticipantCode = function(code){
+		console.log("IN set replay button");
+		alert("Set replay participant to "+code);
 	}
 }
 var titleFont;
@@ -391,7 +412,7 @@ var ctx;
 	loadButton = function() {
 		fetchSubExperimentsArray();
 		fetchExperimentTitle();
-
+		
 		buttonRadiusForClicking = 2 * Math.PI * minScreenSize
 				/ buttonLabels.length / 5//button size is relative to number of buttons and circumference
 		console.log(buttonRadiusForClicking);
@@ -444,6 +465,7 @@ var ctx;
 			/*
 			Otherwise check to see if the x,y match a button
 			*/
+			
 			for ( var k = 0; k < positionsFilled.length; k++) {
 				var dx = x - positionsFilled[k].x;
 				var dy = y - positionsFilled[k].y;
@@ -477,17 +499,50 @@ var ctx;
 			getPositionAsButton(e.pageX, e.pageY);
 		});
 
-	
-}
-	initCanvas=function(){
+
+		
+
+	}
+	initCanvas = function() {
 		var C = 0.99; // canvas width to viewport width ratio
 
 		// For IE compatibility http://www.google.com/search?q=get+viewport+size+js
 		var viewportWidth = window.innerWidth;
 		var viewportHeight = window.innerHeight;
 
-		var canvasWidth = viewportWidth * C;
-		var canvasHeight = viewportHeight * C ;
+		fetchParticipantCodes();
+		if (window.participantCodes.length >= 1) {
+			document.getElementById("loadButton").style.display = 'none';
+			document.getElementById("buttonArea").appendChild(
+					document.createTextNode("Results"));
+			for ( var p = 0; p < participantCodes.length; p++) {
+				var playButtn = document.createElement("input");
+				playButtn.setAttribute("type", "button");
+				playButtn.setAttribute("id", participantCodes[p]);
+				playButtn.setAttribute("value", participantCodes[p]);
+				playButtn.setAttribute("name", participantCodes[p]);
+				playButtn.setAttribute("class", "groovybutton");
+				playButtn.setAttribute("onClick", "setReplayParticipantCode('"
+						+ participantCodes[p].toString() + "')");
+				document.getElementById("buttonArea").appendChild(playButtn);
+
+				document.getElementById("buttonArea").appendChild(
+						document.createElement('br'));
+			}
+
+		} else {
+			var row = document.getElementById("sidebar");
+			if (row.style.display == '')
+				row.style.display = 'none';
+			else
+				row.style.display = '';
+		}
+		var sideBarWidth=0;
+		if (participantCodes.length >= 1) {
+			sideBarWidth = 60;
+		}
+		var canvasWidth = viewportWidth * C-sideBarWidth;
+		var canvasHeight = viewportHeight * C;
 
 		window.maxScreenSize = viewportWidth;
 		if (viewportWidth < viewportHeight) {
@@ -508,7 +563,8 @@ var ctx;
 		}
 
 		el = document.getElementById("a");
-		el.style.position = "fixed";
+		//el.style.position = "fixed";
+		el.style.zindex = 1;
 		el.setAttribute("width", canvasWidth);
 		el.setAttribute("height", canvasHeight);
 		el.style.top = (viewportHeight - canvasHeight) / 2;
@@ -522,24 +578,28 @@ var ctx;
 	//this works in chrome and on android.
 	//http://stackoverflow.com/questions/1152203/centering-a-canvas/1646370#1646370
 	//window.onload = window.onresize = function() {
-	
-		
-		
-		window.onload = window.onresize = function() {
+
+	window.onload = window.onresize = function() {
 		//initCanvas();
 	}
-		
 </script>
 
 </head>
-<body>
-
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table cellpadding="0" cellspacing="0" border="0" width="100%"><tr valign="top"><td>
 <!-- <canvas id="homeCanvas"> </canvas>-->
-<canvas id="a" style="background: #fff, top: 60"  width="10" height="10">
+<canvas id="a" style="z-index: -1, background: #fff, top: 60;"  width="10" height="10">
 </canvas>
-<input type="button" name="groovybtn1" id="loadButton" class="groovybutton" title="" value="Load" onClick="initCanvas()" />
-
-
+</td><td id="sidebar" width="30">
+<center>
+<p>&nbsp;</p>
+<span style="font-size: .75em;" style="font-family: helvetica, sans-serif;" id="buttonArea">
+<div id='layer1' style='z-index: 10, background: #ffa;'>
+	<input type="button" name="groovybtn1" id="loadButton" class="groovybutton" title="" value="Load" onClick="initCanvas()" />
+</div>
+</span>
+</center>
+</td></tr></table>
 
 </body>
 

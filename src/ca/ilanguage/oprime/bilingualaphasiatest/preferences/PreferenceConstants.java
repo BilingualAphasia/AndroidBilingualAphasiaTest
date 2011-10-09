@@ -36,5 +36,7 @@ public class PreferenceConstants {
     public static final String PREFERENCE_PARTICIPANT_ENDTIME = "participantendtime";
     public static final String PREFERENCE_EXPERIMENT_IS_READY= "experimentIsReady";
 	
+    public static final String PREFERENCE_REPLAY_RESULTS_MODE = "replayresults";
+    public static final String PREFERENCE_REPLAY_PARTICIPANT_CODE = "replayparticipantcode";
 	
 }
