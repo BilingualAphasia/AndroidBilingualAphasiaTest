@@ -914,7 +914,10 @@ public class BilingualAphasiaTestHome extends Activity {
 			//findVideosWithSubstring(prefs.getString(PreferenceConstants.PREFERENCE_REPLAY_PARTICIPANT_CODE, ""));
 			mReplayBySubExperiments =true;
 			findParticipantCodesWithResults();
+			findVideosWithSubstring("_");
 			//mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
+		}else{
+			mReplayBySubExperiments =false;
 		}
 		mTabletOrPaperFirst = "T";
 		if(prefs.getBoolean(PreferenceConstants.PREFERENCE_TABLET_FIRST, true)){
@@ -976,6 +979,7 @@ public class BilingualAphasiaTestHome extends Activity {
 			if(mReplayMode){
 				mReplayBySubExperiments = true;
 				findParticipantCodesWithResults();
+				findVideosWithSubstring("_");
 				mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
 			}else{
 				mReplayBySubExperiments = false;
