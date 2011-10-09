@@ -21,8 +21,8 @@
             
             <CheckBoxPreference
        			android:key="replayresults"
-                android:title="Replay Participant's Trial"
-                android:summaryOn="Replaying a participant's experience"
+                android:title="Replay Results Mode"
+                android:summaryOn="Replaying participant videos"
                 android:summaryOff="Running the experiment"
                 android:defaultValue="false"
                 android:persistent="true"
