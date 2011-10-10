@@ -1,0 +1,21 @@
+<html>
+<head>
+  <title>Transcription Upload</title>
+  <script src="jquery.js" type="text/javascript"></script>
+  <script src="hack.js" type="text/javascript"></script>
+</head>
+<body>
+
+<form id='uploadform' enctype="multipart/form-data" method="post">
+  media: <input type="file" name="file"><br>
+  title: <input type="text" name="title" id="title"><br>
+  <input type="button" id="submit_button" value="upload">
+</form>
+
+<div id="status">No status.</div>
+<div id="progress"></div>
+
+<div id="target" style="width: 100px; height:0px; visibility:hidden;"></div>
+
+</body>
+</html>
