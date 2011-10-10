@@ -1,0 +1,79 @@
+*{padding:0;margin:0}
+body{background:#F4F5F5;color:#222;font:12px/1 sans-serif; min-width:1000px}
+a{color:#6B7B95;outline:none;text-decoration:none}
+a:hover{color:#572d37;}
+
+h1{letter-spacing:-1px;text-transform:uppercase;font-size:36px; padding:20px;margin:0 0 20px 0; color:#C17878; background:#111; border-bottom:10px solid}
+h3,h4,h5,h6{padding:6px 0}
+p{color:#333; clear:both; margin:1em auto; line-height:1.5}
+hr{display:none}
+
+#content{width:760px;float:left}
+#menu{float:left}
+#menu{list-style:none; padding:0 22px;}
+#menu ul{padding:0 0 0 20px; list-style:square}
+#menu a{padding:6px 0;display:block; font-size:14px; white-space:nowrap}
+#menu a:hover{color:#E79D35}
+#menu li a{font-weight:bold;}
+#menu li li a{font-weight:normal}
+#donate{padding:10px 0;}
+
+ul.sub{list-style:none;margin:0 0 40px 0;}
+ul.sub li{ float:left;}
+ul.sub a{ padding:5px 10px; margin:5px 5px 0 0; background:#111; border:solid; display:block}
+ul.sub a:after{content: " È"}
+ul.sub a:hover{color:#C17878}
+
+ul.list{border:1px solid #888}
+ul.list, ul.list ul{padding:5px 0 5px 20px; margin:6px 0}
+ul.list li{padding:2px 0}
+
+.half{width:49%;margin-bottom:2%}
+.colAA{width:68%;margin-bottom:2%}
+.colC{width:30%;margin-bottom:2%}
+.left{float:left}
+.right{float:right}
+
+#listing{color:222}
+pre {
+	background: #fff;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	padding: 5px 7px;
+	overflow: auto;
+	font-size: 12px;
+}
+pre, code {margin:0 0 1em 0;white-space:pre;}
+pre, code, tt {font:1em 'andale mono', 'lucida console', monospace;line-height:1.5;}
+
+.kw1 {
+	color: #1b609a;
+}
+
+.kw2 {
+	color: #9a6f1b;
+}
+
+.me1 {
+	color: #666;
+}
+
+.kw3, .re0, .sc1 {
+	color: #784e0c;
+}
+
+.br0 {
+	color: #444;
+}
+
+.st0 {
+	color: #489a1b;
+}
+
+.co1, .coMULTI {
+	color: #888;
+}
+
+.nu0 {
+	color: #70483d;
+}

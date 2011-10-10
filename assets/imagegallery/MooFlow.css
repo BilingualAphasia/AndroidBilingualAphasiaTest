@@ -1,0 +1,105 @@
+.mf{visibility: hidden; z-index:1; color:#fff; font-size:14px}
+.mf * {
+	outline:none;
+	border:none;
+	padding:0;
+	margin:0;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select:none;
+	-o-user-select:none
+}
+.mf div.loader{
+	position:absolute;
+	text-align:center;
+	z-index:10000;
+	margin:0 auto;
+	top:45%;
+	width:100%;
+	background:url(skin/ajax_loader.gif) no-repeat 50% 0;
+	padding:50px 0;
+}
+.mf div.caption {
+	position:absolute;
+	text-align:center;
+	z-index:98;
+	margin:1em auto;
+	bottom:50px;
+	width:100%;
+}
+.mf div.mfNav{
+	position:absolute;
+	z-index:99;
+	margin:0 auto;
+	text-align:center;
+	width:100%;
+	bottom:20px;
+	font-size:1px;
+	line-height:1px;
+	width:100%;
+}
+.mf div.autoPlayCon{
+	float:left;
+	width:10%;
+	padding-left:3%;
+	height:24px;
+}
+.mf a.play, .mf a.stop{
+	width:27px;
+	height:24px;
+	float:left;
+	cursor:pointer;
+}
+.mf a.play{
+	background:url(skin/play.gif) no-repeat;
+}
+.mf a.stop{
+	background:url(skin/stop.gif) no-repeat;
+}
+.mf div.sliderCon{
+	margin-top:5px;
+	float:left;
+	width:74%;
+}
+.mf a.sliderNext{
+	background:url(skin/left.gif) no-repeat;
+}
+.mf a.sliderPrev{
+	background:url(skin/right.gif) no-repeat;
+}
+.mf a.sliderNext, a.sliderPrev{
+	text-decoration:none;
+	width:25px;
+	height:16px;
+	cursor:pointer;
+	float:left;
+}
+.mf div.resizeCon{
+	float:right;
+	width:10%;
+	padding-right:3%;
+	height:24px;
+}
+.mf a.resize{
+	width:34px;
+	height:24px;
+	float:right;
+	cursor:pointer;
+	background:url(skin/resize.gif) no-repeat;
+}
+.mf div.slider{
+	background:url(skin/middle.gif) repeat-x;
+	height:16px;
+	position:relative;
+	text-align:left;
+	float:left;
+}
+.mf div.knob{
+	height:16px;
+	background:url(skin/middle-slider.gif) repeat-x right center;
+}
+.mf div.knobleft{
+	background:url(skin/left-slider.gif) repeat-x center;
+	width:8px;
+	height:16px;
+}
