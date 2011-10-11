@@ -50,6 +50,12 @@ input.groovybutton
 				useViewer: true,
 				'onClickView': function(mixedObject){
 					myMooFlowPage.log(JSON.encode(mixedObject));
+					//console.log(mixedObject);
+					if(mixedObject.stimulus >=0){
+						currentSubExperiment.stimuli[mixedObject.stimulus].draw();
+					}else{
+						console.log("no stimulus number");
+					}
 				},
 				'onStart': function(){
 					myMooFlowPage.log("MooFlow initialized");
@@ -218,10 +224,10 @@ input.groovybutton
 						//h.image = new Image();
 						//h.image.src = data.stimuli[0].image.src;
 						tempdata.images[t] = {"src": data.stimuli[t].image.src, "title": data.stimuli[t].image.title, "stimulus":t};
-						//tempimg = [];//new Image();
-						//tempimg.src = data.stimuli[t].image.src;
-						//tempimg.title = data.stimuli[t].image.title;
-						//h.image = tempimg;
+						tempimg = new Image();
+						tempimg.src = data.stimuli[t].image.src;
+						tempimg.title = data.stimuli[t].image.title;
+						h.image = tempimg;
 						//tempdata.images.push(tempimg);
 						console.log("tempdata"+tempdata);
 						for (var s = 0; s < data.stimuli[t].responses.length; s++){
