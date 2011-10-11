@@ -17,11 +17,10 @@
 }
 input.groovybutton
 {
-	 font-size:8px;
+	 font-size:10px;
    color:#FFFFFF;
    background-color:#006633;
    border-style:double;
-   border-color:#fff;
 }
 </STYLE>
 
@@ -73,7 +72,7 @@ input.groovybutton
 					myMooFlowPage.log("onResized Fullscreen: " + isFull);
 				}
 			});
-			$$('.loadsubexperiment').addEvent('click', function(){
+			$$('.loadexternalsubexperiment').addEvent('click', function(){
 				//mf.loadJSON(this.get('href'));
 				currentSubExperiment = new SubExperiment();
 				currentSubExperiment.loadJSON(this.get('href'));
@@ -98,7 +97,9 @@ input.groovybutton
 	var addResponses;
 	var addStimuli;
 	var addSubExperiments;
-	var subExperiments = [];
+	var setCurrentSubExperiment;
+  var subExperiments = [];
+	var stimuliimages = [];
 	var currentSubExperiment = [];
 	var tempdata = [];
 	tempdata.images = [];
@@ -175,13 +176,14 @@ input.groovybutton
 		this.image = new Image();
 		this.imageScaleFactor = 1;
 		this.offset = 0;
-		this.title =  "mat";
+		this.title =  "Filler";
 		this.windowxsize = 0;
 		this.windowysize = 0;
 		this.responses = [];
 		this.init = function(i) {
 			this.id = i;
-			this.image.src = "images/e048_e408.jpg";
+			this.image.title = "Filler";
+			this.image.src = "images/androids_experimenter_kids.png";
 		}
 		this.draw = function(){
 			imageScaleFactor = canvasHeight/this.image.height;
@@ -206,6 +208,16 @@ input.groovybutton
 		}
 		this.draw = function(){
 			
+		}
+		this.setAsImageGallery = function(){
+			tempdata = [];
+			tempdata.images = [];
+			for (var t = 0; t < this.stimuli.length; t++){
+				tempdata.images[t] = {"src": this.stimuli[t].image.src, "title": this.stimuli[t].image.title, "stimulus":t};
+			}
+			mf.master = tempdata;
+      mf.clearMain();
+      mf.fireEvent('request', tempdata);
 		}
 		this.loadJSON = function(url){
 		if(!url || this.isLoading) return;
@@ -258,16 +270,25 @@ input.groovybutton
 			stimulus.responses.push(e);
 		}
 	}
-	function addStimuli(n, subexperiment) {
+	function addStimuli(n, subexperiment,imagesrcs,imagetitles) {
 		subexperiment.stimuli = [];
 		for ( var i = 0; i < n; i++) {
 			var e = new Stimulus();
 			e.init(i);
-			e.label = auditoryLabels[i];
-			e.image.src = "images/"+auditorySrc[i];
-			addResponses(2,e);
+			e.label = imagetitles[i];
+			e.image = null;
+			e.image = new Image();
+			e.image.title = imagetitles[i];
+			e.image.src = "images/"+imagesrcs[i];
+			//addResponses(2,e);
 			subexperiment.stimuli.push(e);
 		}
+	}
+	function setCurrentSubExperiment(id){
+		console.log("in set sub experiment" + id);
+		currentSubExperiment = new SubExperiment();
+		currentSubExperiment = subExperiments[id];
+		currentSubExperiment.setAsImageGallery();
 	}
 	function addSubExperiments(n) {
 		subExperiments = [];
@@ -275,8 +296,8 @@ input.groovybutton
 			var e = new SubExperiment();
 			e.init(i);
 			e.label = window.subExperimentLabels[i];
+			addStimuli(1,e,stimuliimages[i].imagesrcs,stimuliimages[i].imagetitles);	
 			subExperiments.push(e);
-			addStimuli(2,subExperiments[i]);
 		}
 	}
 	function clearBubbles(bubbleType) {
@@ -301,10 +322,16 @@ input.groovybutton
 			result = result.replace(/\]/g, "").replace(/\[/g, "");
 			subExperimentLabels = result.split(", ");//"History of Bilingualism","English Background","Spontaneous Speech","Verbal Comprehension","Pointing","Simple and Semi-complex Commands","Complex Commands","Verbal Auditory Discrimination","Syntactic Comprehension","Semantic Categories","Synonyms","Antonyms","Grammaticality Judgement","Semantic Acceptability","Lexical Decision","Series","Verbal Fluency","Naming","Sentence Construction","Semantic Opposites","Derivational Morphology","Morphological Opposites","Description","Mental Arithmetic","Listening Comprehension","Reading","Copying","Dictation","Reading Comprehension for Words","Reading Comprehension for Sentences","Writing");
 			console.log(subExperimentLabels);
-			if (subExperimentLabels.length > 8) {
-				menuShape = "circle";
-			}
+			fetchStimuliImages();
 			//Android.showToast(subExperimentLabels);
+		}
+		fetchStimuliImages = function(){
+			stimuliimages = [];
+			for (var i = 0; i < subExperimentLabels.length; i++){
+				stimuliimages[i] = [];
+				stimuliimages[i].imagesrcs = "e048_0.jpg,e048_e408.jpg".split(",");
+				stimuliimages[i].imagetitles = "Rain,Mat".split(",");
+			}
 		}
 		fetchExperimentTitle = function() {
 			titleLabel = Android.fetchExperimentTitleJS();
@@ -338,9 +365,32 @@ input.groovybutton
 			auditoryLabels = "rain,mat,ball".split(",");
 			auditorySrc = "e048_0.jpg,e048_e408.jpg,e049_e409.jpg,ef050.jpg,e051.jpg,e052_e410.jpg,e053_e411.jpg,e054_e412.jpg,e055.jpg,e056.jpg,ef057.jpg,e058_e413.jpg,e059_e414.jpg,e060_e415.jpg,ef061.jpg,e062_e416.jpg,e063.jpg,e064_e417.jpg,e065.jpg".split(",");
 			console.log(subExperimentLabels);
+			fetchStimuliImages();
 			addSubExperiments(subExperimentLabels.length);
+			for ( var p = 0; p < subExperimentLabels.length; p++) {
+        var playButtn = document.createElement("input");
+        playButtn.setAttribute("type", "button");
+        playButtn.setAttribute("id", subExperimentLabels[p]);
+        playButtn.setAttribute("value", subExperimentLabels[p]);
+        playButtn.setAttribute("name", subExperimentLabels[p]);
+        playButtn.setAttribute("class", "groovybutton");
+        playButtn.setAttribute("onClick", "setCurrentSubExperiment('"
+            + p + "')");
+        document.getElementById("buttonArea").appendChild(playButtn);
+
+        document.getElementById("buttonArea").appendChild(
+            document.createElement('br'));
+      }
 
 		}
+		fetchStimuliImages = function(){
+      stimuliimages = [];
+      for (var i = 0; i < subExperimentLabels.length; i++){
+        stimuliimages[i] = [];
+        stimuliimages[i].imagesrcs = "e048_0.jpg,e048_e408.jpg".split(",");
+        stimuliimages[i].imagetitles = "Rain,Mat".split(",");
+      }
+    }
 		fetchExperimentTitle = function() {
 			titleLabel = "Bilingual Aphasia Test - English";
 		}
@@ -356,8 +406,8 @@ input.groovybutton
 	loadButton = function() {
 		fetchSubExperimentsArray();
 		fetchExperimentTitle();
-		addSubExperiments(subExperimentLabels.length);
-		
+		//addSubExperiments(subExperimentLabels.length);
+		console.log(subExperiments);
 		getPositionAsButton = function(x, y, buttonid, responses) {
 			/*
 			If recieved a button id, flash that button
@@ -437,7 +487,8 @@ input.groovybutton
 		initCanvas();
 		fetchSubExperimentsArray();
 		fetchExperimentTitle();
-		addSubExperiments(subExperimentLabels.length);
+		//addSubExperiments(subExperimentLabels.length);
+		loadButton();
 }
 
 	window.addEvent('domready', myMooFlowPage.start);
@@ -448,35 +499,39 @@ input.groovybutton
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
 <div id="content">
-	<div class="half left">
+	<div class="colC left">
 	<div id=MooFlowieze>
 	</div>
 	</div>
-	<div class="half right">
-	<ul class="sub">
-		<li><a class="loadsubexperiment" href="bilingualaphasiatest/en06_Verbal_Auditory_Discrimination.json">SubExperiment</a></li>
-		<li><a class="loadjson" href="moo-images.json">JSON-Icons</a></li>
-		<!-- <li><a class="loadremote" href="ajax-page.html" rel=".icons" >Remote Images form a HTML-Page with Filter</a></li>-->
-	</ul>
+	<div class="colAA right">
 	<p>Doubleclick on a image.</p>
 	<div id="callback"></div>
 	</div>
 </div>
 
-<table cellpadding="0" cellspacing="0" border="1" width="100%"><tr valign="top"><td>
-<!-- <canvas id="homeCanvas"> </canvas>-->
-<canvas id="viewStimulus" style="z-index: -1, background: #999, top: 60;"  width="1280" height="800">
-</canvas>
-</td><td id="sidebar" width="30">
+<table cellpadding="0" cellspacing="0" border="1" width="100%"><tr valign="top">
+<td id="sidebar" width="30">
 <center>
 <p>&nbsp;</p>
 <span style="font-size: .75em;" style="font-family: helvetica, sans-serif;" id="buttonArea">
 <div id='layer1' style='z-index: 10, background: #ffa;'>
-	<input type="button" name="groovybtn1" id="loadButton" class="groovybutton" title="" value="Load" onClick="loadData()" />
+  <input type="button" name="groovybtn1" id="loadButton" class="groovybutton" title="" value="Load" onClick="loadData()" />
 </div>
 </span>
 </center>
-</td></tr></table>
+<ul class="sub">
+    <li><a class="loadexternalsubexperiment" href="bilingualaphasiatest/en06_Verbal_Auditory_Discrimination.json">LoadExternalData</a></li>
+    <!--<li><a class="loadjson" href="moo-images.json">JSON-Icons</a></li>-->
+    <!-- <li><a class="loadremote" href="ajax-page.html" rel=".icons" >Remote Images form a HTML-Page with Filter</a></li>-->
+  </ul>
+
+</td>
+<td>
+<!-- <canvas id="homeCanvas"> </canvas>-->
+<canvas id="viewStimulus" style="z-index: -1, background: #999, top: 60;"  width="1280" height="800">
+</canvas>
+</td>
+</tr></table>
 
 </body>
 
