@@ -1,0 +1,10 @@
+{"id":0,"label":"History of Bilingualism","stimuli":
+  [{"id":0,"label":"rain","imagex":"","image":{"src":"images/e049_e409.jpg", "title":"here"},"imageScaleFactor":1,"offset":0,"title":"mat","windowxsize":0,"windowysize":0,"responses":
+    [{"id":0,"x":890.7576510310173,"y":475.2837171778083,"userid":0,"reactionTime":0,"label":"","stimuli":"","color":"#f986b7","r":10},
+    {"id":1,"x":762.3938784003258,"y":346.79195918142796,"userid":0,"reactionTime":0,"label":"","stimuli":"","color":"#28a87d","r":10}
+  ]},{"id":1,"label":"mat","imagex":"","image":{"src":"images/e048_e408.jpg", "title":"Mountin Moo"},"imageScaleFactor":1,"offset":0,"title":"mat","windowxsize":0,"windowysize":0,"responses":
+    [{"id":0,"x":108.4562286734581,"y":279.10147570073605,"userid":0,"reactionTime":0,"label":"","stimuli":"","color":"#94629c","r":10},
+    {"id":1,"x":253.57675462961197,"y":407.11934454739094,"userid":0,"reactionTime":0,"label":"","stimuli":"","color":"#677d6d","r":10}
+  ]}
+  ]}
+

@@ -34,10 +34,68 @@ input.groovybutton
 <script type="text/javascript" src="imagegallery/MooFlow.js"></script>
 
 <script>
-	var addresponses;
+
+	
+	var myMooFlowPage = {	
+		start: function(){
+			/* MooFlow instance with the complete UI and dbllick-callback */
+			mf = new MooFlow($('MooFlowieze'), {
+				useSlider: true,
+				useAutoPlay: false,
+				useCaption: true,
+				bgColor: '#fff',
+				useResize: true,
+				useMouseWheel: true,
+				useKeyInput: true,
+				useViewer: true,
+				'onClickView': function(mixedObject){
+					myMooFlowPage.log(JSON.encode(mixedObject));
+				},
+				'onStart': function(){
+					myMooFlowPage.log("MooFlow initialized");
+				},
+				'onChancel': function(error){
+					myMooFlowPage.log(error);
+				},
+				'onAutoPlay': function(){
+					myMooFlowPage.log("AutoPlay started");
+				},
+				'onAutoStop': function(){
+					myMooFlowPage.log("AutoPlay stoped");
+				},
+				'onResized': function(isFull){
+					myMooFlowPage.log("onResized Fullscreen: " + isFull);
+				}
+			});
+			$$('.loadsubexperiment').addEvent('click', function(){
+				//mf.loadJSON(this.get('href'));
+				currentSubExperiment = new SubExperiment();
+				currentSubExperiment.loadJSON(this.get('href'));
+				return false;
+			});
+			$$('.loadjson').addEvent('click', function(){
+				mf.loadJSON(this.get('href'));
+				return false;
+			});
+			$$('.loadremote').addEvent('click', function(){
+				mf.loadHTML(this.get('href'), this.get('rel'));
+				return false;
+			});
+		},
+		log: function(result){
+			new Element('p',{html:result}).inject($('callback'), 'top');
+		}
+	};
+	
+
+
+	var addResponses;
 	var addStimuli;
 	var addSubExperiments;
 	var subExperiments = [];
+	var currentSubExperiment = [];
+	var tempdata = [];
+	tempdata.images = [];
 	var titleFont;
 	var titleLabel;
 	var labelFont;
@@ -49,16 +107,21 @@ input.groovybutton
 	var stopLooping = function() {
 		clearInterval(timer);
 	}
-	var buttonRadiusForClicking;
+	var buttonRadiusForClicking = 10;
 	var pushButton = function(id) {
 		//to be defined later
 	}
 	var getPositionAsButton = function(x, y) {
 		//to be defined later
 	}
+	var mf;
 	var participantCodes;
 	var setReplayParticipantCode;
 	var subExperimentLabels = [];
+	var xImage = new Image();
+	xImage.src = "images/x.jpg";
+	var auditoryLabels = [];
+	var auditorySrc = [];
 	var menuShape = "arc"; //arc or circle
 
 	var randomColor = function() {
@@ -89,7 +152,7 @@ input.groovybutton
 			this.x = Math.random() * ctx.canvas.width;
 			this.y = Math.random() * ctx.canvas.height;
 			var maxButtonSize = Math.max(buttonRadiusForClicking - 10, 3);
-			this.r = Math.random() * (8) + maxButtonSize;
+			this.r = 10;//Math.random() * (8) + maxButtonSize;
 		}
 		this.draw = function() {
 			ctx.fillStyle = this.color;
@@ -103,15 +166,29 @@ input.groovybutton
 		this.id = 0;
 		this.label = "";
 		this.imagex = "";
-		this.image = "";
+		this.image = new Image();
+		this.imageScaleFactor = 1;
+		this.offset = 0;
+		this.title =  "mat";
 		this.windowxsize = 0;
 		this.windowysize = 0;
 		this.responses = [];
 		this.init = function(i) {
 			this.id = i;
+			this.image.src = "images/e048_e408.jpg";
 		}
 		this.draw = function(){
-			
+			imageScaleFactor = canvasHeight/this.image.height;
+			if(this.image.width*imageScaleFactor > canvasWidth){
+				imageScaleFactor=canvasWidth/this.image.width;
+			}
+			imageScaleFactor = canvasWidth/2/this.image.width;
+			this.offset = 10;//(canvasWidth-xImage.width*imageScaleFactor-subExperiments[7].stimuli[3].image.width*imageScaleFactor )/2;
+			window.ctx.drawImage(xImage, this.offset, 0, xImage.width, xImage.height);
+			window.ctx.drawImage(this.image, canvasWidth/2, 0, this.image.width*imageScaleFactor, this.image.height*imageScaleFactor);	
+			for ( var r = 0; r < this.responses.length; r++){
+				this.responses[r].draw();
+			}
 		}
 	}
 	SubExperiment = function() {
@@ -124,9 +201,48 @@ input.groovybutton
 		this.draw = function(){
 			
 		}
+		this.loadJSON = function(url){
+		if(!url || this.isLoading) return;
+		this.isLoading = true;
+		new Request.JSON({
+			'onComplete': function(data){
+				if($chk(data)){
+					console.log(data);
+					this.label = data.label;
+					for(var t = 0; t < data.stimuli.length; t++){
+						var h = new Stimulus();
+						h.init(t);
+						h.label = data.stimuli[t].label;
+						//h.image = new Image();
+						//h.image.src = data.stimuli[0].image.src;
+						tempimg = new Image();
+						tempimg.src = data.stimuli[t].image.src;
+						tempimg.title = data.stimuli[t].image.title;
+						h.image = tempimg;
+						tempdata.images.push(tempimg);
+						console.log(tempimg);
+						for (var s = 0; s < data.stimuli[t].responses.length; s++){
+							var r = new Response();
+							r.init(s);
+							r.label = data.stimuli[t].responses[s].label;
+							r.x = data.stimuli[t].responses[s].x;
+							r.y = data.stimuli[t].responses[s].y;
+							h.responses.push(r);
+						}
+						this.stimuli.push(h);
+					}		
+					console.log(tempdata);
+					mf.master = tempdata;
+					mf.clearMain();
+					mf.fireEvent('request', tempdata);
+				}
+			}.bind(this)
+		 }, this).get(url);
+		}
 	}
 
-	function addresponses(n, stimulus) {
+	function addResponses(n, stimulus) {
+		stimulus.responses =[];
 		for ( var i = 0; i < n; i++) {
 			var e = new Response();
 			e.init(i);
@@ -134,18 +250,24 @@ input.groovybutton
 		}
 	}
 	function addStimuli(n, subexperiment) {
+		subexperiment.stimuli = [];
 		for ( var i = 0; i < n; i++) {
 			var e = new Stimulus();
 			e.init(i);
+			e.label = auditoryLabels[i];
+			e.image.src = "images/"+auditorySrc[i];
+			addResponses(2,e);
 			subexperiment.stimuli.push(e);
 		}
 	}
 	function addSubExperiments(n) {
+		subExperiments = [];
 		for ( var i = 0; i < n; i++) {
 			var e = new SubExperiment();
 			e.init(i);
-			e.label = subExperimentLabels[n];
+			e.label = window.subExperimentLabels[i];
 			subExperiments.push(e);
+			addStimuli(2,subExperiments[i]);
 		}
 	}
 	function clearBubbles(bubbleType) {
@@ -203,7 +325,9 @@ input.groovybutton
 			var javaArrayListToString = "[History of Bilingualism, English Background, Spontaneous Speech, Verbal Comprehension, Pointing, Simple and Semi-complex Commands, Complex Commands, Verbal Auditory Discrimination, Syntactic Comprehension, Semantic Categories, Synonyms, Antonyms, Grammaticality Judgement, Semantic Acceptability, Lexical Decision, Series, Verbal Fluency, Naming, Sentence Construction, Semantic Opposites, Derivational Morphology, Morphological Opposites, Description, Mental Arithmetic, Listening Comprehension, Reading, Copying, Dictation, Reading Comprehension for Words, Reading Comprehension for Sentences, Writing]";
 			javaArrayListToString = javaArrayListToString.replace(/\]/g, "")
 					.replace(/\[/g, "");
-			subExperimentLabels = javaArrayListToString.split(",");
+			subExperimentLabels = javaArrayListToString.split(", ");
+			auditoryLabels = "rain,mat,ball".split(",");
+			auditorySrc = "e048_0.jpg,e048_e408.jpg,e049_e409.jpg,ef050.jpg,e051.jpg,e052_e410.jpg,e053_e411.jpg,e054_e412.jpg,e055.jpg,e056.jpg,ef057.jpg,e058_e413.jpg,e059_e414.jpg,e060_e415.jpg,ef061.jpg,e062_e416.jpg,e063.jpg,e064_e417.jpg,e065.jpg".split(",");
 			console.log(subExperimentLabels);
 			addSubExperiments(subExperimentLabels.length);
 
@@ -224,12 +348,7 @@ input.groovybutton
 		fetchSubExperimentsArray();
 		fetchExperimentTitle();
 		addSubExperiments(subExperimentLabels.length);
-		var img = new Image();
-		img.src = '../res/drawable/x.jpg';
-		ctx.drawImage(img, 0, 0,200,200);
-		//var img2 = new Image();
-		//img2.src = '../res/drawable/e048_e408.jpg';
-		//ctx.drawImage(img2, 400, 0,200,200);
+		
 		getPositionAsButton = function(x, y, buttonid, responses) {
 			/*
 			If recieved a button id, flash that button
@@ -294,43 +413,57 @@ input.groovybutton
 	initCanvas = function() {
 		canvasWidth = 1280;
 		canvasHeight = 800;
-		viewstimulus = document.getElementById("a");
+		viewstimulus = document.getElementById("viewStimulus");
 		viewstimulus.setAttribute("width", canvasWidth);
 		viewstimulus.setAttribute("height", canvasHeight);
-
+		//viewstimulus.setAtt.ibute('style', 'background-color: #999;');
+		viewstimulus.style.position = "relative";
+		viewstimulus.style.zindex = 1;
 		window.ctx = viewstimulus.getContext("2d");
+		
 		ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-		loadButton();
+		//loadButton();
 	}
+	loadData = function() {
+		initCanvas();
+		fetchSubExperimentsArray();
+		fetchExperimentTitle();
+		addSubExperiments(subExperimentLabels.length);
+}
+
+	window.addEvent('domready', myMooFlowPage.start);
+
 </script>
 
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
 <div id="content">
 	<div class="half left">
-		<div class="MooFlowieze">
-			<div><img src="../res/drawable/x.jpg" title="ball" alt="Lautsprecherturm" /></div>
-		    <div><img src="../res/drawable/e048_e408.jpg" title="ball" alt="Lautsprecherturm" /></div>
-		    <div><img src="../res/drawable/e049_e409.jpg" title="ball" alt="Lautsprecherturm" /></div>
-		    <div><img src="../res/drawable/e051.jpg" title="brew" alt="A deginer must have." /></div>
-		    <div><img src="../res/drawable/e052_e410.jpg" title="thick" alt="Tropfen" /></div>
-		    <div><img src="../res/drawable/e053_e411.jpg" title="knees, `s is scho arg verändert..." alt="...aber ratet mal was das is.." /></div>
-    
-		</div>
+	<div id=MooFlowieze>
 	</div>
-	
+	</div>
+	<div class="half right">
+	<ul class="sub">
+		<li><a class="loadsubexperiment" href="bilingualaphasiatest/en06_Verbal_Auditory_Discrimination.json">SubExperiment</a></li>
+		<li><a class="loadjson" href="moo-images.json">JSON-Icons</a></li>
+		<!-- <li><a class="loadremote" href="ajax-page.html" rel=".icons" >Remote Images form a HTML-Page with Filter</a></li>-->
+	</ul>
+	<p>Doubleclick on a image.</p>
+	<div id="callback"></div>
+	</div>
 </div>
 
-<table cellpadding="0" cellspacing="0" border="0" width="100%"><tr valign="top"><td>
+<table cellpadding="0" cellspacing="0" border="1" width="100%"><tr valign="top"><td>
 <!-- <canvas id="homeCanvas"> </canvas>-->
-<canvas id="a" style="z-index: -1, background: #fff, top: 60;"  width="10" height="10">
+<canvas id="viewStimulus" style="z-index: -1, background: #999, top: 60;"  width="1280" height="800">
 </canvas>
 </td><td id="sidebar" width="30">
 <center>
 <p>&nbsp;</p>
 <span style="font-size: .75em;" style="font-family: helvetica, sans-serif;" id="buttonArea">
 <div id='layer1' style='z-index: 10, background: #ffa;'>
-	<input type="button" name="groovybtn1" id="loadButton" class="groovybutton" title="" value="Load" onClick="initCanvas()" />
+	<input type="button" name="groovybtn1" id="loadButton" class="groovybutton" title="" value="Load" onClick="loadData()" />
 </div>
 </span>
 </center>

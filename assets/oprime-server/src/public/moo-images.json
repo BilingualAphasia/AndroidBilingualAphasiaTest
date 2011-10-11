@@ -1,6 +1,7 @@
 ﻿{"images":[
-	{"src":"../res/drawable/e048_e408.jpg", "title":"Chill a bit..."},
-	{"src":"../res/drawable/e049_e409.jpg", "title":"Mountin Moo"},
-	{"src":"../res/drawable/e053_e411.jpg", "title":"Das Einhorn"},
-	{"src":"../res/drawable/x.jpg", "title":"Little Moo"}
+	{"src":"images/x.jpg", "title":"Little Moo"},
+	{"src":"images/e048_e408.jpg", "title":"Chill a bit..."},
+	{"src":"images/e049_e409.jpg", "title":"Mountin Moo"},
+	{"src":"images/e053_e411.jpg", "title":"Das Einhorn"}
+	
 ]}

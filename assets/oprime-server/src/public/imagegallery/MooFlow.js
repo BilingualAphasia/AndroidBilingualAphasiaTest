@@ -257,6 +257,7 @@ var MooFlow = new Class({
 		new Request.JSON({
 			'onComplete': function(data){
 				if($chk(data)){
+					console.log(data);
 					this.master = data;
 					this.clearMain();
 					this.fireEvent('request', data);
