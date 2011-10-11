@@ -84,7 +84,6 @@ input.groovybutton
 		},
 		log: function(result){
 			new Element('p',{html:result}).inject($('callback'), 'top');
-			console.log(result);
 		}
 	};
 	
@@ -218,12 +217,13 @@ input.groovybutton
 						h.label = data.stimuli[t].label;
 						//h.image = new Image();
 						//h.image.src = data.stimuli[0].image.src;
-						tempimg = [];//new Image();
-						tempimg.src = data.stimuli[t].image.src;
-						tempimg.title = data.stimuli[t].image.title;
+						tempdata.images[t] = {"src": data.stimuli[t].image.src, "title": data.stimuli[t].image.title, "stimulus":t};
+						//tempimg = [];//new Image();
+						//tempimg.src = data.stimuli[t].image.src;
+						//tempimg.title = data.stimuli[t].image.title;
 						//h.image = tempimg;
-						tempdata.images.push(tempimg);
-						console.log(tempimg);
+						//tempdata.images.push(tempimg);
+						console.log("tempdata"+tempdata);
 						for (var s = 0; s < data.stimuli[t].responses.length; s++){
 							var r = new Response();
 							r.init(s);
