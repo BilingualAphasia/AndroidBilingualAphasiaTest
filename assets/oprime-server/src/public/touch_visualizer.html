@@ -270,9 +270,9 @@ input.groovybutton
 			stimulus.responses.push(e);
 		}
 	}
-	function addStimuli(n, subexperiment,imagesrcs,imagetitles) {
+	function addStimuli(subexperiment,imagesrcs,imagetitles) {
 		subexperiment.stimuli = [];
-		for ( var i = 0; i < n; i++) {
+		for ( var i = 0; i < imagesrcs.length; i++) {
 			var e = new Stimulus();
 			e.init(i);
 			e.label = imagetitles[i];
@@ -296,7 +296,7 @@ input.groovybutton
 			var e = new SubExperiment();
 			e.init(i);
 			e.label = window.subExperimentLabels[i];
-			addStimuli(1,e,stimuliimages[i].imagesrcs,stimuliimages[i].imagetitles);	
+			addStimuli(e,stimuliimages[i].imagesrcs,stimuliimages[i].imagetitles);	
 			subExperiments.push(e);
 		}
 	}
@@ -329,9 +329,26 @@ input.groovybutton
 			stimuliimages = [];
 			for (var i = 0; i < subExperimentLabels.length; i++){
 				stimuliimages[i] = [];
-				stimuliimages[i].imagesrcs = "e048_0.jpg,e048_e408.jpg".split(",");
-				stimuliimages[i].imagetitles = "Rain,Mat".split(",");
+				stimuliimages[i].imagesrcs = "androids_experimenter_kids.png".split(",");
+				stimuliimages[i].imagetitles = "Filler".split(",");
 			}
+			stimuliimages[7].imagesrcs = "e048_0.jpg,e048_e408.jpg,e049_e409.jpg,ef050.jpg,e051.jpg,e052_e410.jpg,e053_e411.jpg,e054_e412.jpg,e055.jpg,e056.jpg,ef057.jpg,e058_e413.jpg,e059_e414.jpg,e060_e415.jpg,ef061.jpg,e062_e416.jpg,e063.jpg,e064_e417.jpg,e065.jpg".split(",");
+      stimuliimages[8].imagesrcs = "ef066_0.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e137_e145.jpg,e138_e146.jpg,e139_e147.jpg,e140_e148_f0137_et_f0145.jpg,e141_e149.jpg,e142_e150.jpg,e143_e151.jpg,e144_e152_f0141_et_f0149.jpg,e137_e145.jpg,e138_e146.jpg,e139_e147.jpg,e140_e148_f0137_et_f0145.jpg,e141_e149.jpg,e142_e150.jpg,e143_e151.jpg,e144_e152_f0141_et_f0149.jpg".split(",");
+      stimuliimages[22].imagesrcs = "e344_f0344.jpg".split(",");
+      stimuliimages[25].imagesrcs = "e367.jpg,e372.jpg,androids_experimenter_kids.png,e377.jpg,e379.jpg,e381.jpg,e383.jpg,e385.jpg,androids_experimenter_kids.jpg,e387_0.jpg,androids_experimenter_kids.jpg".split(",");
+      stimuliimages[26].imagesrcs = "e393.jpg".split(",");
+      stimuliimages[28].imagesrcs = "e408_0.jpg,e048_e408.jpg,e409_0.jpg,e049_e409.jpg,e410_0.jpg,e052_e410.jpg,e411_0.jpg,e053_e411.jpg,e412_0.jpg,e054_e412.jpg,e413_0.jpg,e058_e413.jpg,e414_0.jpg,e059_e414.jpg,e415_0.jpg,e060_e415.jpg,e416_0.jpg,e062_e416.jpg,e417_0.jpg,e064_e417.jpg".split(",");
+
+      stimuliimages[29].imagesrcs = "e418_0.jpg,e066_and_f066_to_f070_ef418.jpg,e419_0.jpg,e071_e419.jpg,e420_0.jpg,ef420.jpg,e421_0.jpg,ef421.jpg,e422_0.jpg,ef422.jpg,e423_0.jpg,ef423.jpg,e424_0.jpg,ef424.jpg,e425_0.jpg,e077_and_f077_to_f080_ef425.jpg,e426_0.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e427_0.jpg,e427_ef0133_to_ef0136.jpg".split(",");
+
+      stimuliimages[7].imagetitles = "e048_0.jpg,e048_e408.jpg,e049_e409.jpg,ef050.jpg,e051.jpg,e052_e410.jpg,e053_e411.jpg,e054_e412.jpg,e055.jpg,e056.jpg,ef057.jpg,e058_e413.jpg,e059_e414.jpg,e060_e415.jpg,ef061.jpg,e062_e416.jpg,e063.jpg,e064_e417.jpg,e065.jpg".split(",");
+      stimuliimages[8].imagetitles = "ef066_0.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e137_e145.jpg,e138_e146.jpg,e139_e147.jpg,e140_e148_f0137_et_f0145.jpg,e141_e149.jpg,e142_e150.jpg,e143_e151.jpg,e144_e152_f0141_et_f0149.jpg,e137_e145.jpg,e138_e146.jpg,e139_e147.jpg,e140_e148_f0137_et_f0145.jpg,e141_e149.jpg,e142_e150.jpg,e143_e151.jpg,e144_e152_f0141_et_f0149.jpg".split(",");      stimuliimages[22].imagetitles = "e344_f0344.jpg".split(",");      stimuliimages[25].imagetitles = "e367.jpg,e372.jpg,androids_experimenter_kids.png,e377.jpg,e379.jpg,e381.jpg,e383.jpg,e385.jpg,androids_experimenter_kids.jpg,e387_0.jpg,androids_experimenter_kids.jpg".split(",");      stimuliimages[26].imagetitles = "e393.jpg".split(",");
+      stimuliimages[28].imagetitles = "e408_0.jpg,e048_e408.jpg,e409_0.jpg,e049_e409.jpg,e410_0.jpg,e052_e410.jpg,e411_0.jpg,e053_e411.jpg,e412_0.jpg,e054_e412.jpg,e413_0.jpg,e058_e413.jpg,e414_0.jpg,e059_e414.jpg,e415_0.jpg,e060_e415.jpg,e416_0.jpg,e062_e416.jpg,e417_0.jpg,e064_e417.jpg".split(",");
+      stimuliimages[29].imagetitles = "e418_0.jpg,e066_and_f066_to_f070_ef418.jpg,e419_0.jpg,e071_e419.jpg,e420_0.jpg,ef420.jpg,e421_0.jpg,ef421.jpg,e422_0.jpg,ef422.jpg,e423_0.jpg,ef423.jpg,e424_0.jpg,ef424.jpg,e425_0.jpg,e077_and_f077_to_f080_ef425.jpg,e426_0.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e427_0.jpg,e427_ef0133_to_ef0136.jpg".split(",");
+
+
+
+
 		}
 		fetchExperimentTitle = function() {
 			titleLabel = Android.fetchExperimentTitleJS();
@@ -371,7 +388,7 @@ input.groovybutton
         var playButtn = document.createElement("input");
         playButtn.setAttribute("type", "button");
         playButtn.setAttribute("id", subExperimentLabels[p]);
-        playButtn.setAttribute("value", subExperimentLabels[p]);
+        playButtn.setAttribute("value", p+" "+subExperimentLabels[p]);
         playButtn.setAttribute("name", subExperimentLabels[p]);
         playButtn.setAttribute("class", "groovybutton");
         playButtn.setAttribute("onClick", "setCurrentSubExperiment('"
@@ -387,9 +404,28 @@ input.groovybutton
       stimuliimages = [];
       for (var i = 0; i < subExperimentLabels.length; i++){
         stimuliimages[i] = [];
-        stimuliimages[i].imagesrcs = "e048_0.jpg,e048_e408.jpg".split(",");
-        stimuliimages[i].imagetitles = "Rain,Mat".split(",");
+        stimuliimages[i].imagesrcs = "androids_experimenter_kids.png".split(",");
+        stimuliimages[i].imagetitles = "Filler".split(",");
       }
+			stimuliimages[7].imagesrcs = "e048_0.jpg,e048_e408.jpg,e049_e409.jpg,ef050.jpg,e051.jpg,e052_e410.jpg,e053_e411.jpg,e054_e412.jpg,e055.jpg,e056.jpg,ef057.jpg,e058_e413.jpg,e059_e414.jpg,e060_e415.jpg,ef061.jpg,e062_e416.jpg,e063.jpg,e064_e417.jpg,e065.jpg".split(",");
+			stimuliimages[8].imagesrcs = "ef066_0.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e137_e145.jpg,e138_e146.jpg,e139_e147.jpg,e140_e148_f0137_et_f0145.jpg,e141_e149.jpg,e142_e150.jpg,e143_e151.jpg,e144_e152_f0141_et_f0149.jpg,e137_e145.jpg,e138_e146.jpg,e139_e147.jpg,e140_e148_f0137_et_f0145.jpg,e141_e149.jpg,e142_e150.jpg,e143_e151.jpg,e144_e152_f0141_et_f0149.jpg".split(",");
+			stimuliimages[22].imagesrcs = "e344_f0344.jpg".split(",");
+			stimuliimages[25].imagesrcs = "e367.jpg,e372.jpg,androids_experimenter_kids.png,e377.jpg,e379.jpg,e381.jpg,e383.jpg,e385.jpg,androids_experimenter_kids.jpg,e387_0.jpg,androids_experimenter_kids.jpg".split(",");
+			stimuliimages[26].imagesrcs = "e393.jpg".split(",");
+			stimuliimages[28].imagesrcs = "e408_0.jpg,e048_e408.jpg,e409_0.jpg,e049_e409.jpg,e410_0.jpg,e052_e410.jpg,e411_0.jpg,e053_e411.jpg,e412_0.jpg,e054_e412.jpg,e413_0.jpg,e058_e413.jpg,e414_0.jpg,e059_e414.jpg,e415_0.jpg,e060_e415.jpg,e416_0.jpg,e062_e416.jpg,e417_0.jpg,e064_e417.jpg".split(",");
+
+			stimuliimages[29].imagesrcs = "e418_0.jpg,e066_and_f066_to_f070_ef418.jpg,e419_0.jpg,e071_e419.jpg,e420_0.jpg,ef420.jpg,e421_0.jpg,ef421.jpg,e422_0.jpg,ef422.jpg,e423_0.jpg,ef423.jpg,e424_0.jpg,ef424.jpg,e425_0.jpg,e077_and_f077_to_f080_ef425.jpg,e426_0.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e427_0.jpg,e427_ef0133_to_ef0136.jpg".split(",");
+
+			stimuliimages[7].imagetitles = "e048_0.jpg,e048_e408.jpg,e049_e409.jpg,ef050.jpg,e051.jpg,e052_e410.jpg,e053_e411.jpg,e054_e412.jpg,e055.jpg,e056.jpg,ef057.jpg,e058_e413.jpg,e059_e414.jpg,e060_e415.jpg,ef061.jpg,e062_e416.jpg,e063.jpg,e064_e417.jpg,e065.jpg".split(",");
+      stimuliimages[8].imagetitles = "ef066_0.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e066_and_f066_to_f070_ef418.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e071_e419.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e077_and_f077_to_f080_ef425.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e089_f089_a_f096.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e097_and_f071_to_f076.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e105.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e111_f0111_to_f0114.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e115_f0115_to_f0120.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e121_f0121_a_f0124.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e125_f0125_to_f0128.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e129_f0129_a_f0132.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e427_ef0133_to_ef0136.jpg,e137_e145.jpg,e138_e146.jpg,e139_e147.jpg,e140_e148_f0137_et_f0145.jpg,e141_e149.jpg,e142_e150.jpg,e143_e151.jpg,e144_e152_f0141_et_f0149.jpg,e137_e145.jpg,e138_e146.jpg,e139_e147.jpg,e140_e148_f0137_et_f0145.jpg,e141_e149.jpg,e142_e150.jpg,e143_e151.jpg,e144_e152_f0141_et_f0149.jpg".split(",");
+      stimuliimages[22].imagetitles = "e344_f0344.jpg".split(",");
+      stimuliimages[25].imagetitles = "e367.jpg,e372.jpg,androids_experimenter_kids.png,e377.jpg,e379.jpg,e381.jpg,e383.jpg,e385.jpg,androids_experimenter_kids.jpg,e387_0.jpg,androids_experimenter_kids.jpg".split(",");
+      stimuliimages[26].imagetitles = "e393.jpg".split(",");
+      stimuliimages[28].imagetitles = "e408_0.jpg,e048_e408.jpg,e409_0.jpg,e049_e409.jpg,e410_0.jpg,e052_e410.jpg,e411_0.jpg,e053_e411.jpg,e412_0.jpg,e054_e412.jpg,e413_0.jpg,e058_e413.jpg,e414_0.jpg,e059_e414.jpg,e415_0.jpg,e060_e415.jpg,e416_0.jpg,e062_e416.jpg,e417_0.jpg,e064_e417.jpg".split(",");
+      stimuliimages[29].imagetitles = "e418_0.jpg,e066_and_f066_to_f070_ef418.jpg,e419_0.jpg,e071_e419.jpg,e420_0.jpg,ef420.jpg,e421_0.jpg,ef421.jpg,e422_0.jpg,ef422.jpg,e423_0.jpg,ef423.jpg,e424_0.jpg,ef424.jpg,e425_0.jpg,e077_and_f077_to_f080_ef425.jpg,e426_0.jpg,e081_and_f081_to_f088_ef426_f0419.jpg,e427_0.jpg,e427_ef0133_to_ef0136.jpg".split(",");
+
+
+
     }
 		fetchExperimentTitle = function() {
 			titleLabel = "Bilingual Aphasia Test - English";
@@ -511,14 +547,12 @@ input.groovybutton
 
 <table cellpadding="0" cellspacing="0" border="1" width="100%"><tr valign="top">
 <td id="sidebar" width="30">
-<center>
 <p>&nbsp;</p>
 <span style="font-size: .75em;" style="font-family: helvetica, sans-serif;" id="buttonArea">
 <div id='layer1' style='z-index: 10, background: #ffa;'>
   <input type="button" name="groovybtn1" id="loadButton" class="groovybutton" title="" value="Load" onClick="loadData()" />
 </div>
 </span>
-</center>
 <ul class="sub">
     <li><a class="loadexternalsubexperiment" href="bilingualaphasiatest/en06_Verbal_Auditory_Discrimination.json">LoadExternalData</a></li>
     <!--<li><a class="loadjson" href="moo-images.json">JSON-Icons</a></li>-->
