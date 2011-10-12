@@ -326,7 +326,7 @@ input.groovybutton
 			//Android.showToast(subExperimentLabels);
 		}
 		fetchStimuliImages = function(){
-			stimuliimages = [];
+			stimuliimages = null; //[];
 			for (var i = 0; i < subExperimentLabels.length; i++){
 				stimuliimages[i] = [];
 				stimuliimages[i].imagesrcs = "androids_experimenter_kids.png".split(",");
