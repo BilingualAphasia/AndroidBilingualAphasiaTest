@@ -116,6 +116,7 @@ input.groovybutton
 	var currentStimulus =[];
 	var loadTouchResponses;
 	var allTouchResponses = [];
+	var allUserIds = [];
 	var tempdata = [];
 	tempdata.images = [];
 	var titleFont;
@@ -159,6 +160,15 @@ input.groovybutton
 	}
 	var srandom = function() {
 		return Math.random() * 2 - 1;
+	}
+	User = function(){
+		this.id = 0;
+		this.userid = 0;
+		this.color = "#000000";
+		this.init = function(i){
+			this.id = i;
+			//this.color = randomColor();
+		}
 	}
 	Response = function() {
 		this.id = 0;
@@ -347,6 +357,7 @@ input.groovybutton
           //console.log(data);
 					allTouchResponses = null;
 					allTouchResponses = [];
+					allUserIds = [];
 					for(var i = 1; i < data.responses.length; i++){
 						//console.log(data.responses[i]);
 						var r = new Response();
@@ -355,6 +366,32 @@ input.groovybutton
             	r.x = data.responses[i].x;
             	r.y = data.responses[i].y;
 							r.userid = data.responses[i].userid;
+							//console.log(allUserIds);
+							/*set the color of the touch response according
+							to the participant code userid
+							*/	
+							var found = "x";
+							if(allUserIds != null){	
+								for(var l = 0; l < allUserIds.length; l++){
+									if (r.userid === allUserIds[l].userid){
+										found = l;
+										break;
+									}
+								}
+							}
+							//console.log(found);
+				
+							if(found != "x"){
+								r.color = allUserIds[found].color;
+							}else{
+								u = new User();
+								u.init(allUserIds.length);
+								u.userid = r.userid;
+								r.color = randomColor();
+								u.color = r.color;
+								allUserIds.push(u);
+							}
+							
 							r.reactionTime = data.responses[i].reactionTime;
 							subex = data.responses[i].subexperiment.replace(/en/g, "");
             	stim = data.responses[i].stimulus;
@@ -597,6 +634,9 @@ input.groovybutton
 		//loadButton();
 	}
 	loadData = function() {
+		var u = new User();
+		u.init(0);
+		allUserIds.push(u);
 		initCanvas();
 		fetchSubExperimentsArray();
 		fetchExperimentTitle();
