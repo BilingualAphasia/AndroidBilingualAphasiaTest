@@ -107,11 +107,13 @@ input.groovybutton
 
 	var addResponses;
 	var addStimuli;
+	var pressButton;
 	var addSubExperiments;
 	var setCurrentSubExperiment;
   var subExperiments = [];
 	var stimuliimages = [];
 	var currentSubExperiment = [];
+	var currentStimulus =[];
 	var loadTouchResponses;
 	var allTouchResponses = [];
 	var tempdata = [];
@@ -165,6 +167,8 @@ input.groovybutton
 		this.userid = 0;
 		this.reactionTime = 0;
 		this.label = "";
+		this.labelx = 0;
+		this.labely= 0;
 		this.stimulus = "";
 		this.init = function(i) {
 			this.id = i;
@@ -197,6 +201,7 @@ input.groovybutton
 			this.image.src = "images/androids_experimenter_kids.png";
 		}
 		this.draw = function(){
+			currentStimulus = this;
 			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 			imageScaleFactor = canvasHeight/this.image.height;
 			if(this.image.width*imageScaleFactor > canvasWidth){
@@ -445,7 +450,7 @@ input.groovybutton
 			if (label === "Start" || label === "Commencer") {
 				alert("Starting AutoAdvance - pressed experiment button " + id);
 			} else {
-				alert("pressed experiment button " + id);
+				alert("Touch response: " + label);
 			}
 		}
 		fetchSubExperimentsArray = function() {
@@ -522,8 +527,8 @@ input.groovybutton
 						ctx.fillText(responses[k].label, responses[k].labelx,
 								responses[k].labely);
 						//alert("Clicked "+responses[k].id);
-						setTimeout("window.pressButton(responses[" + k
-								+ "].id,responses[" + k + "].label);", 500);
+						setTimeout("window.pressButton(allTouchResponses[" + k
+								+ "].id,allTouchResponses[" + k + "].label);", 500);
 						return;//dont click on multiple buttons
 					} else {
 						//alert(" distance to this position "+d);
@@ -540,16 +545,25 @@ input.groovybutton
 				var dy = y - responses[k].y;
 				var d = Math.sqrt(dx * dx + dy * dy);
 				var R = 30;//buttonRadiusForClicking;// responses[k].r + 5;//added 10 pixles to click around the buton
-				if (d < R) {
+				var exstim = responses[k].stimulus.split("_");
+				var ex = exstim[0];
+				var sti = exstim[1];		
+				if (d <  200){	
+					//console.log(ex+"  "+sti+" x:"+x+" touchx:"+responses[k].x+" y: "+y+" touchy:"+responses[k].y +" delta" +d);	
+				}
+				if ( currentSubExperiment.id == ex && currentStimulus.id == sti && d < R) {
 					responses[k].color = "#aaaaaa";
 					responses[k].r = buttonRadiusForClicking;
 					responses[k].draw();
-					ctx.textAlign = responses[k].textAlign;
+					responses[k].label=responses[k].userid+" Reaction time: "+responses[k].reactionTime;
+					responses[k].labelx=responses[k].x+10;
+					responses[k].labely=responses[k].y-10;
+					ctx.textAlign = "left";
 					ctx.fillText(responses[k].label, responses[k].labelx,
 							responses[k].labely);
-					alert("Clicked "+responses[k].userid);
-					setTimeout("window.pressButton(responses[" + k
-							+ "].id,responses[" + k + "].label);", 0);
+					alert("Participant "+responses[k].userid);
+					setTimeout("window.pressButton(allTouchResponses[" + k
+							+ "].id,allTouchResponses[" + k + "].label);", 0);
 					return;//dont click on multiple buttons
 				} else {
 					//alert(" distance to this position "+d);
