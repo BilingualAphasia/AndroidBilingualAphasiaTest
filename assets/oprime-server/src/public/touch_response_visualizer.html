@@ -202,10 +202,14 @@ input.groovybutton
 			if(this.image.width*imageScaleFactor > canvasWidth){
 				imageScaleFactor=canvasWidth/this.image.width;
 			}
-			imageScaleFactor = canvasWidth/2/this.image.width;
-			this.offset = 10;//(canvasWidth-xImage.width*imageScaleFactor-subExperiments[7].stimuli[3].image.width*imageScaleFactor )/2;
-			window.ctx.drawImage(xImage, this.offset, 0, xImage.width, xImage.height);
-			window.ctx.drawImage(this.image, canvasWidth/2, 0, this.image.width*imageScaleFactor, this.image.height*imageScaleFactor);	
+			if(currentSubExperiment.id === 6){
+				imageScaleFactor = canvasWidth/2/this.image.width;
+				this.offset = 10;//(canvasWidth-xImage.width*imageScaleFactor-subExperiments[7].stimuli[3].image.width*imageScaleFactor )/2;
+				window.ctx.drawImage(xImage, this.offset, 0, xImage.width, xImage.height);
+				window.ctx.drawImage(this.image, canvasWidth/2, 0, this.image.width*imageScaleFactor, this.image.height*imageScaleFactor);	
+			}else{
+				 window.ctx.drawImage(this.image, canvasWidth/2-this.image.width/2, 0, this.image.width*imageScaleFactor, this.image.height*imageScaleFactor); 
+			}
 			for ( var r = 0; r < this.responses.length; r++){
 				this.responses[r].draw();
 			}
@@ -360,6 +364,7 @@ input.groovybutton
 							console.log(r);
 						}	
 					}
+					setTimeout("displaySampleSetUp();", 1000);
         }
       }.bind(this)
      }, this).get(url);
@@ -583,10 +588,15 @@ input.groovybutton
 		fetchExperimentTitle();
 		//addSubExperiments(subExperimentLabels.length);
 		loadButton();
-}
-
+		//displaySampleSetUp();
+  }
+  displaySampleSetUp = function(){
+		setCurrentSubExperiment(6);
+		currentSubExperiment.stimuli[2].draw();
+	}
 	window.addEvent('domready', myMooFlowPage.start);
-
+	window.addEvent('domready', loadData);
+	
 </script>
 
 </head>
@@ -606,9 +616,10 @@ input.groovybutton
 </div>
 </span>
 <ul class="su">
+		<!--
     <li><a class="loadexternalsubexperiment" href="bilingualaphasiatest/en06_Verbal_Auditory_Discrimination.json">LoadExternalData</a></li>
     <li><a class="loadtouchresponses" href="bilingualaphasiatest/touch-responses.json">LoadTouchResultData</a></li>
-    <!--<li><a class="loadjson" href="moo-images.json">JSON-Icons</a></li>-->
+    --><!--<li><a class="loadjson" href="moo-images.json">JSON-Icons</a></li>-->
     <!-- <li><a class="loadremote" href="ajax-page.html" rel=".icons" >Remote Images form a HTML-Page with Filter</a></li>-->
   </ul>
 
