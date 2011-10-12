@@ -1,4 +1,4 @@
-{{"id":0,"x":0,"y":0,"userid":"0000","reactionTime":0,"subexperiment":"00","stimulus":0,"color":"#000000","r":3}
+{"responses":[{"id":0,"x":0,"y":0,"userid":"0000","reactionTime":0,"subexperiment":"00","stimulus":0,"color":"#000000","r":3}
   ,{"id":0,"x":1194.5,"y":305.0,"userid":"ET1GC1VB","reactionTime":95070,"subexperiment":"en2","stimulus":0,"color":"#00ff00","r":10}
   ,{"id":0,"x":1181.5,"y":229.0,"userid":"ET1GC1VB","reactionTime":31533,"subexperiment":"en3","stimulus":0,"color":"#00ff00","r":10}
   ,{"id":0,"x":1106.0,"y":424.5,"userid":"ET1GC1VB","reactionTime":41490,"subexperiment":"en4","stimulus":0,"color":"#00ff00","r":10}
@@ -3301,4 +3301,4 @@
   ,{"id":0,"x":800.5,"y":538.5,"userid":"ET1AM8RB","reactionTime":1914,"subexperiment":"en29","stimulus":18,"color":"#00ff00","r":10}
   ,{"id":0,"x":628.5,"y":497.0,"userid":"ET1AM8RB","reactionTime":2437,"subexperiment":"en29","stimulus":19,"color":"#00ff00","r":10}
   ,{"id":0,"x":675.5,"y":573.0,"userid":"ET1AM8RB","reactionTime":2075,"subexperiment":"en29","stimulus":20,"color":"#00ff00","r":10}
-}
+]}
