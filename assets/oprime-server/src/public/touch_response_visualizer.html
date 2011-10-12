@@ -47,15 +47,16 @@ input.groovybutton
 				useSlider: true,
 				useAutoPlay: false,
 				useCaption: true,
-				bgColor: '#fff',
+				bgColor: '#000',
 				useResize: true,
 				useMouseWheel: true,
 				useKeyInput: true,
 				useViewer: true,
 				'onClickView': function(mixedObject){
-					myMooFlowPage.log(JSON.encode(mixedObject));
+					//myMooFlowPage.log(JSON.encode(currentSubExperiment[mixedObject.stimulus]));
 					//console.log(mixedObject);
 					if(mixedObject.stimulus >=0){
+						myMooFlowPage.log(JSON.encode(currentSubExperiment.stimuli[mixedObject.stimulus]));
 						currentSubExperiment.stimuli[mixedObject.stimulus].draw();
 					}else{
 						console.log("no stimulus number");
@@ -151,7 +152,7 @@ input.groovybutton
 		//return 'hs1('+Math.floor(Math.random() * 360) + ',100%,50%)';
 		//return '#'+Math.floor(Math.random() * 360);
 		return '#000000'.replace(/0/g, function() {
-			return (~~(Math.random() * 16)).toString(16);
+			return (~~(Math.random() * 10)).toString(16);
 		})
 		//return '#'+Math.floor(Math.random()*16777215).toString(16);
 	}
@@ -176,6 +177,7 @@ input.groovybutton
 		this.y = 0;
 		this.userid = 0;
 		this.reactionTime = 0;
+		this.encodedResponse = "unknown";
 		this.label = "";
 		this.labelx = 0;
 		this.labely= 0;
@@ -197,6 +199,10 @@ input.groovybutton
 	Stimulus = function() {
 		this.id = 0;
 		this.label = "";
+		this.correctResponse = "unknown";
+		this.tophalf = 400;
+		this.lefthalf = 640;
+		this.xhalf = 0;
 		this.imagex = "";
 		this.image = new Image();
 		this.imageScaleFactor = 1;
@@ -220,15 +226,50 @@ input.groovybutton
 			if(currentSubExperiment.id === 6){
 				imageScaleFactor = canvasWidth/2/this.image.width;
 				this.offset = 10;//(canvasWidth-xImage.width*imageScaleFactor-subExperiments[7].stimuli[3].image.width*imageScaleFactor )/2;
+				this.xhalf = 640;
+				this.lefthalf = 640 + this.image.width*imageScaleFactor/2;
 				window.ctx.drawImage(xImage, this.offset, 0, xImage.width, xImage.height);
 				window.ctx.drawImage(this.image, canvasWidth/2, 0, this.image.width*imageScaleFactor, this.image.height*imageScaleFactor);	
 			}else{
 				 window.ctx.drawImage(this.image, canvasWidth/2-this.image.width/2, 0, this.image.width*imageScaleFactor, this.image.height*imageScaleFactor); 
 			}
 			for ( var r = 0; r < this.responses.length; r++){
-				this.responses[r].draw();
+				var index = allTouchResponses.indexOf(this.responses[r]);
+				//this.responses[r].draw();
+				var pic= "unknown";
+				if(this.responses[r].encodedResponse == "unknown"){
+					console.log("calculating response accuracy");
+					if(this.responses[r].x < this.xhalf){
+						pic = "X";
+					}else {
+						if (this.responses[r].x < this.lefthalf){
+							if (this.responses[r].y < this.tophalf){
+								pic = "A";
+							}else{
+								pic = "C";
+							}
+						}else {
+							if (this.responses[r].y < this.tophalf){
+								pic = "B";
+							}else{
+								pic = "D";
+							}
+						}
+					}
+					this.responses[r].encodedResponse = pic;
+				}
+				var timedelay = this.responses[r].reactionTime;
+				//console.log(timedelay);
+				setTimeout("drawTouchesByReactionTime(allTouchResponses["+index+"]);", timedelay);
 			}
+ 		  myMooFlowPage.log("Above will appear the data for SubExperiment "+currentSubExperiment.id+" item: "+this.id);
+      myMooFlowPage.log("<font color='#ff0000'>ReactionTime, ParticipantCode, AutoEncodedResponse");
+
 		}
+	}
+	drawTouchesByReactionTime = function(r){
+		r.draw();
+		myMooFlowPage.log("<font color='"+r.color+"'>"+r.reactionTime +"ms, "+r.userid+", "+r.encodedResponse );	
 	}
 	SubExperiment = function() {
 		this.id = 0;
@@ -592,13 +633,13 @@ input.groovybutton
 					responses[k].color = "#aaaaaa";
 					responses[k].r = buttonRadiusForClicking;
 					responses[k].draw();
-					responses[k].label=responses[k].userid+" Reaction time: "+responses[k].reactionTime;
-					responses[k].labelx=responses[k].x+10;
-					responses[k].labely=responses[k].y-10;
+					responses[k].label=responses[k].encodedResponse+" :  "+responses[k].userid+" Reaction time: "+responses[k].reactionTime;
+					responses[k].labelx=responses[k].y+6;
+					responses[k].labely=responses[k].y+6;
 					ctx.textAlign = "left";
 					ctx.fillText(responses[k].label, responses[k].labelx,
 							responses[k].labely);
-					alert("Participant "+responses[k].userid);
+					//alert("Participant "+responses[k].userid);
 					setTimeout("window.pressButton(allTouchResponses[" + k
 							+ "].id,allTouchResponses[" + k + "].label);", 0);
 					return;//dont click on multiple buttons
