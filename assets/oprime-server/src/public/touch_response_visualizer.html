@@ -47,7 +47,7 @@ input.groovybutton
 				useSlider: true,
 				useAutoPlay: false,
 				useCaption: true,
-				bgColor: '#000',
+				bgColor: '#fff',
 				useResize: true,
 				useMouseWheel: true,
 				useKeyInput: true,
@@ -56,14 +56,15 @@ input.groovybutton
 					//myMooFlowPage.log(JSON.encode(currentSubExperiment[mixedObject.stimulus]));
 					//console.log(mixedObject);
 					if(mixedObject.stimulus >=0){
-						myMooFlowPage.log(JSON.encode(currentSubExperiment.stimuli[mixedObject.stimulus]));
+						//myMooFlowPage.log(JSON.encode(currentSubExperiment.stimuli[mixedObject.stimulus]));
 						currentSubExperiment.stimuli[mixedObject.stimulus].draw();
 					}else{
 						console.log("no stimulus number");
 					}
 				},
 				'onStart': function(){
-					myMooFlowPage.log("Displaying stimuli from "+currentSubExperiment.label+". Double click on a stimuli to plot the touch response results.");
+					document.getElementById("pagetitle").innerHTML = titleLabel+ " ::: Displaying "+currentSubExperiment.label+".<p> (Double click on a stimuli image in the gallery, it will plot the touch response results in real time so you can see the speed of the touches.)";
+					//myMooFlowPage.log("Displaying stimuli from "+currentSubExperiment.label+". Double click on a stimuli to plot the touch response results.");
 				},
 				'onChancel': function(error){
 					myMooFlowPage.log(error);
@@ -199,7 +200,9 @@ input.groovybutton
 	Stimulus = function() {
 		this.id = 0;
 		this.label = "";
-		this.correctResponse = "unknown";
+		this.normalResponse = "unknown";
+		this.correctResponseGold = "unknown";
+		this.responseCount = [];
 		this.tophalf = 400;
 		this.lefthalf = 640;
 		this.xhalf = 0;
@@ -237,22 +240,33 @@ input.groovybutton
 				var index = allTouchResponses.indexOf(this.responses[r]);
 				//this.responses[r].draw();
 				var pic= "unknown";
+				this.responseCount.push({"code":"X","count":0});
+        this.responseCount.push({"code":"A","count":0});
+        this.responseCount.push({"code":"B","count":0});
+        this.responseCount.push({"code":"C","count":0});
+        this.responseCount.push({"code":"D","count":0});
+	
 				if(this.responses[r].encodedResponse == "unknown"){
 					console.log("calculating response accuracy");
 					if(this.responses[r].x < this.xhalf){
 						pic = "X";
+						this.responseCount[0].count++;
 					}else {
 						if (this.responses[r].x < this.lefthalf){
 							if (this.responses[r].y < this.tophalf){
 								pic = "A";
+								this.responseCount[1].count++;
 							}else{
 								pic = "C";
+								this.responseCount[2].count++;
 							}
 						}else {
 							if (this.responses[r].y < this.tophalf){
 								pic = "B";
+								this.responseCount[3].count++;
 							}else{
 								pic = "D";
+								this.responseCount[4].count++;
 							}
 						}
 					}
@@ -262,8 +276,18 @@ input.groovybutton
 				//console.log(timedelay);
 				setTimeout("drawTouchesByReactionTime(allTouchResponses["+index+"]);", timedelay);
 			}
- 		  myMooFlowPage.log("Above will appear the data for SubExperiment "+currentSubExperiment.id+" item: "+this.id);
+			
+ 		  myMooFlowPage.log(" SubExperiment "+currentSubExperiment.id+" item: "+this.id +" will appear above this line.");
       myMooFlowPage.log("<font color='#ff0000'>ReactionTime, ParticipantCode, AutoEncodedResponse");
+			this.normalResponse = "Unknown";
+			//Extract autodetermined normallly correct answer (if 50% of participants chose that answer)
+			for (var w = 0; w < this.responseCount.length; w++){
+				if ( this.responseCount[w].count/this.responses.length > .3){
+				this.normalResponse = this.normalResponse+", "+this.responseCount[w].code;
+				}
+			}
+			myMooFlowPage.log("Automatically determined normla response(s) :"+this.normalResponse);
+
 
 		}
 	}
@@ -630,7 +654,7 @@ input.groovybutton
 					//console.log(ex+"  "+sti+" x:"+x+" touchx:"+responses[k].x+" y: "+y+" touchy:"+responses[k].y +" delta" +d);	
 				}
 				if ( currentSubExperiment.id == ex && currentStimulus.id == sti && d < R) {
-					responses[k].color = "#aaaaaa";
+					//responses[k].color = "#aaaaaa";
 					responses[k].r = buttonRadiusForClicking;
 					responses[k].draw();
 					responses[k].label=responses[k].encodedResponse+" :  "+responses[k].userid+" Reaction time: "+responses[k].reactionTime;
@@ -727,7 +751,7 @@ input.groovybutton
   </div>
   </div>
   <div class="colAA right">
-  <div class="pagetitle">Bilingual Aphasia Test - English </div>
+  <div class="pagetitle" id="pagetitle">Bilingual Aphasia Test - English </div>
   <div id="callback"></div>
   </div>
 </div>

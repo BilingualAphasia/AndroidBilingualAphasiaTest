@@ -22,6 +22,7 @@
 .mf div.caption {
 	position:absolute;
 	text-align:center;
+	color:#240580;
 	z-index:98;
 	margin:1em auto;
 	bottom:50px;
