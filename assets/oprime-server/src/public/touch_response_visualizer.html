@@ -258,12 +258,12 @@ input.groovybutton
 								this.responseCount[1].count++;
 							}else{
 								pic = "C";
-								this.responseCount[2].count++;
+								this.responseCount[3].count++;
 							}
 						}else {
 							if (this.responses[r].y < this.tophalf){
 								pic = "B";
-								this.responseCount[3].count++;
+								this.responseCount[2].count++;
 							}else{
 								pic = "D";
 								this.responseCount[4].count++;
@@ -279,14 +279,14 @@ input.groovybutton
 			
  		  myMooFlowPage.log(" SubExperiment "+currentSubExperiment.id+" item: "+this.id +" will appear above this line.");
       myMooFlowPage.log("<font color='#ff0000'>ReactionTime, ParticipantCode, AutoEncodedResponse");
-			this.normalResponse = "Unknown";
+			this.normalResponse = "";
 			//Extract autodetermined normallly correct answer (if 50% of participants chose that answer)
 			for (var w = 0; w < this.responseCount.length; w++){
 				if ( this.responseCount[w].count/this.responses.length > .3){
-				this.normalResponse = this.normalResponse+", "+this.responseCount[w].code;
+				this.normalResponse = this.normalResponse+", "+this.responseCount[w].code+":"+this.responseCount[w].count+"/"+this.responses.length;
 				}
 			}
-			myMooFlowPage.log("Automatically determined normla response(s) :"+this.normalResponse);
+			myMooFlowPage.log("Automatically determined 'normal' response(s) over 30%:"+this.normalResponse);
 
 
 		}
@@ -658,7 +658,7 @@ input.groovybutton
 					responses[k].r = buttonRadiusForClicking;
 					responses[k].draw();
 					responses[k].label=responses[k].encodedResponse+" :  "+responses[k].userid+" Reaction time: "+responses[k].reactionTime;
-					responses[k].labelx=responses[k].y+6;
+					responses[k].labelx=responses[k].x+6;
 					responses[k].labely=responses[k].y+6;
 					ctx.textAlign = "left";
 					ctx.fillText(responses[k].label, responses[k].labelx,
