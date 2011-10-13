@@ -203,7 +203,9 @@ input.groovybutton
 		this.normalResponse = "unknown";
 		this.correctResponseGold = "unknown";
 		this.responseCount = [];
+		this.topquarter = 200;
 		this.tophalf = 400;
+		this.topthreequarters = 600;
 		this.lefthalf = 640;
 		this.xhalf = 0;
 		this.imagex = "";
@@ -242,10 +244,14 @@ input.groovybutton
 				var pic= "unknown";
 				this.responseCount.push({"code":"X","count":0});
         this.responseCount.push({"code":"A","count":0});
-        this.responseCount.push({"code":"B","count":0});
-        this.responseCount.push({"code":"C","count":0});
+        this.responseCount.push({"code":"AA","count":0});
+				this.responseCount.push({"code":"B","count":0});
+        this.responseCount.push({"code":"BB","count":0});
+				this.responseCount.push({"code":"C","count":0});
+        this.responseCount.push({"code":"CC","count":0});
         this.responseCount.push({"code":"D","count":0});
-	
+				this.responseCount.push({"code":"DD","count":0});
+					
 				if(this.responses[r].encodedResponse == "unknown"){
 					console.log("calculating response accuracy");
 					if(this.responses[r].x < this.xhalf){
@@ -657,9 +663,9 @@ input.groovybutton
 					//responses[k].color = "#aaaaaa";
 					responses[k].r = buttonRadiusForClicking;
 					responses[k].draw();
-					responses[k].label=responses[k].encodedResponse+" :  "+responses[k].userid+" Reaction time: "+responses[k].reactionTime;
-					responses[k].labelx=responses[k].x+6;
-					responses[k].labely=responses[k].y+6;
+					responses[k].label=responses[k].encodedResponse+" :  "+responses[k].userid+" @ "+responses[k].reactionTime/1000+"sec";
+					responses[k].labelx=responses[k].x+10;
+					responses[k].labely=responses[k].y+10;
 					ctx.textAlign = "left";
 					ctx.fillText(responses[k].label, responses[k].labelx,
 							responses[k].labely);
