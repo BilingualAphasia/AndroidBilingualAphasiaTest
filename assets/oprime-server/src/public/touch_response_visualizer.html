@@ -257,25 +257,39 @@ input.groovybutton
 					if(this.responses[r].x < this.xhalf){
 						pic = "X";
 						this.responseCount[0].count++;
-					}else {
-						if (this.responses[r].x < this.lefthalf){
-							if (this.responses[r].y < this.tophalf){
+					}else if(this.responses[r].y < this.topquarter){
+							if(this.responses[r].x < this.lefthalf){
 								pic = "A";
 								this.responseCount[1].count++;
 							}else{
-								pic = "C";
+								pic = "B";
 								this.responseCount[3].count++;
 							}
-						}else {
-							if (this.responses[r].y < this.tophalf){
-								pic = "B";
-								this.responseCount[2].count++;
+					 }else 	if(this.responses[r].y < this.tophalf){
+							if(this.responses[r].x < this.lefthalf){
+									pic = "AA";
+									this.responseCount[2].count++;
 							}else{
-								pic = "D";
-								this.responseCount[4].count++;
+									pic = "BB";
+									this.responseCount[4].count++;
+							}
+						}else	if(this.responses[r].y < this.topthreequarters){
+							if(this.responses[r].y < this.lefthalf){
+										pic = "C";
+										this.responseCount[5].count++;
+							}else{
+										pic = "D";
+										this.responseCount[7].count++;
+							}
+						}else{
+							if(this.responses[r].y < this.lefthalf){
+									pic = "CC";
+									this.responseCount[6].count++;
+							}else{
+									pic = "DD";
+									this.responseCount[8].count++;
 							}
 						}
-					}
 					this.responses[r].encodedResponse = pic;
 				}
 				var timedelay = this.responses[r].reactionTime;
