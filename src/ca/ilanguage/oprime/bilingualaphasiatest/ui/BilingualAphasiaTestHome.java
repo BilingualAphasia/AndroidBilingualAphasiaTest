@@ -1136,7 +1136,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		case R.id.issue_tracker:
 
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-					Uri.parse("http://code.google.com/p/aublog/issues/entry"));
+					Uri.parse("https://github.com/iLanguage/AndroidBilingualAphasiaTest/issues/"));
 			startActivity(browserIntent);
 			return true;
 		default:
@@ -1176,10 +1176,10 @@ public class BilingualAphasiaTestHome extends Activity {
             }
         }
         
-        Toast.makeText(
-				getApplicationContext(),
-				mSubExperimentParticipantVideos.toString().replaceAll(OUTPUT_DIRECTORY, ""),
-				Toast.LENGTH_LONG).show();
+//        Toast.makeText(
+//				getApplicationContext(),
+//				mSubExperimentParticipantVideos.toString().replaceAll(OUTPUT_DIRECTORY, ""),
+//				Toast.LENGTH_LONG).show();
         return mSubExperimentParticipantVideos.size();
 
 	}
