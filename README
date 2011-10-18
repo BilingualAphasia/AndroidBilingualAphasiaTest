@@ -1,5 +1,6 @@
 
-This is code which was used give the pdf "eyes and ears" for the Bilingual Aphasia Test Android app (Cook, Marquis, Achim 2011 presented at The Academy of Aphasia 2011 - Montreal)). To know more about the architecture you can look at the Participant Android App in this pdf: http://ilanguagelab.googlecode.com/files/cook%2Cmarquis%2Cachim-2011-Aphasia_assesment_on_Android_recording_voice_eye_gaze_and_touch_for_the_BAT_compressed.pdf
+This is code which was used give the pdf "eyes and ears" for the Bilingual Aphasia Test Android app (Cook, Marquis, Achim 2011 presented at The Academy of Aphasia 2011 - Montreal)). To know more about the architecture you can look at the Participant Android App in this pdf: 
+http://ilanguagelab.googlecode.com/files/cook%2Cmarquis%2Cachim-2011-Aphasia_assesment_on_Android_recording_voice_eye_gaze_and_touch_for_the_BAT_compressed.pdf
 
 You can think of this as the Participant's side of the project.  The tool has three functions
 
@@ -8,7 +9,7 @@ You can think of this as the Participant's side of the project.  The tool has th
 3. Backup results to a laptop by wifi after the experiment, and replay participant result videos 
 
 
-There will be a WACHME  TubeVideo to show what this project does. The project will also be on the Android Market when we think it is ready for random users (ie, after we have WATCHMEs which tell the user how to use it).
+There will be a WACHME  YouTube Videos http://www.youtube.com/user/cesine0 to show what this project does. The project will also be on the Android Market when we think it is ready for random users (ie, after we have WATCHMEs which tell the user how to use it).
 
 
 The audience of this project:
