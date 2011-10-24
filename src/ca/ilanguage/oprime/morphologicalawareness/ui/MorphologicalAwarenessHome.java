@@ -22,6 +22,7 @@ public class MorphologicalAwarenessHome extends Activity {
     	this.setContentView(R.layout.main);
     	//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     	startVideoRecorder();
+    	
     	/*
     	 * Wait two seconds so that the video activity has time to load the camera.
     	 * It will continue recording until you exit the video activity.
@@ -35,10 +36,8 @@ public class MorphologicalAwarenessHome extends Activity {
     }
 	private void launchExperiment(){
 		Intent intent;
-		intent = new Intent(getApplicationContext(), CurlActivity.class);
+		intent = new Intent(getApplicationContext(), StoryBookSubExperiment.class);
 		startActivity(intent);
-	
-		
 	}
 	private void startVideoRecorder(){
 		Intent intent;
