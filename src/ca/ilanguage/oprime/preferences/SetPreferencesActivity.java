@@ -18,14 +18,9 @@ package ca.ilanguage.oprime.preferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
-import android.widget.TextView;
 import android.widget.Toast;
-import ca.ilanguage.oprime.R;
+import ca.ilanguage.oprime.morphologicalawareness.*;
 
 public class SetPreferencesActivity extends PreferenceActivity implements 
 		YesNoDialogPreference.YesNoDialogListener {

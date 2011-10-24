@@ -120,14 +120,9 @@ public class VideoRecorderSubExperiment extends Activity implements
 		 */
 		mStimuliImages = getIntent().getExtras().getIntegerArrayList(
 				OPrime.EXTRA_STIMULI);
-		int xImageId = getIntent().getExtras().getInt(OPrime.EXTRA_X_IMAGE,0);
-		if(xImageId>0){
-			setContentView(R.layout.video_recorder_two_images);
-			ImageView xImage = (ImageView) findViewById(R.id.extraimage);
-			xImage.setImageResource(xImageId);
-		}else{
-			setContentView(R.layout.video_recorder);
-		}
+		
+		setContentView(R.layout.video_recorder);
+		
 		mVideoView = (VideoView) this.findViewById(R.id.videoView);
 		mImage = (ImageView) findViewById(R.id.mainimage);
 		
