@@ -1,15 +1,6 @@
+This is code for the Morphological Awareness Experiment designed by Alexandra Marquis and Phaedra Royle. 
 
-This is code which was used give the pdf "eyes and ears" for the Bilingual Aphasia Test Android app (Cook, Marquis, Achim 2011 presented at The Academy of Aphasia 2011 - Montreal)). To know more about the architecture you can look at the Participant Android App in this pdf: 
-http://ilanguagelab.googlecode.com/files/cook%2Cmarquis%2Cachim-2011-Aphasia_assesment_on_Android_recording_voice_eye_gaze_and_touch_for_the_BAT_compressed.pdf
-
-You can think of this as the Participant's side of the project.  The tool has three functions
-
-1. Record audio video and touch for each subsection of the BAT
-2. Enter participant first and last name, autogenerate the participant code etc
-3. Backup results to a laptop by wifi after the experiment, and replay participant result videos 
-
-
-There will be a WACHME  YouTube Videos http://www.youtube.com/user/cesine0 to show what this project does. The project will also be on the Android Market when we think it is ready for random users (ie, after we have WATCHMEs which tell the user how to use it).
+This presents a story book to pre-k children to elicit sentences. It does eye gaze and audio recording. The children or experimentor can turn the page. It will show a page turning animation which was built by harism and his collaborators https://github.com/harism/android_page_curl
 
 
 The audience of this project:
@@ -17,9 +8,6 @@ The audience of this project:
 * open source programmers
 * researchers who program, or have a programmer in their team who can adapt the code to their needs
 
-
-You will probably be interested in the Experiementer's WebApp too, it runs on any laptop that has Chrome, Firefox or Safari (its HTML5).
-https://github.com/iLanguage/OPrimeAdministrator
 
 The next steps:
 
