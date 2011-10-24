@@ -24,6 +24,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import ca.ilanguage.oprime.morphologicalawareness.R;
 /**
  * Simple Activity for curl testing.
  * 
