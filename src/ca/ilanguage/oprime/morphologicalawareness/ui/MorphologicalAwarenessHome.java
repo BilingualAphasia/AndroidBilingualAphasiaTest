@@ -21,18 +21,19 @@ public class MorphologicalAwarenessHome extends Activity {
     	super.onCreate(savedInstanceState);
     	this.setContentView(R.layout.main);
     	//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    	startVideoRecorder();
-    	
-    	/*
-    	 * Wait two seconds so that the video activity has time to load the camera.
-    	 * It will continue recording until you exit the video activity.
-    	 */
-    	mHandlerDelayStimuli.postDelayed(new Runnable() {
-			public void run() {
-				launchExperiment();
-			}
-		}, 2000);
-    	
+    	if(savedInstanceState == null){
+	    	startVideoRecorder();
+	    	
+	    	/*
+	    	 * Wait two seconds so that the video activity has time to load the camera.
+	    	 * It will continue recording until you exit the video activity.
+	    	 */
+	    	mHandlerDelayStimuli.postDelayed(new Runnable() {
+				public void run() {
+					launchExperiment();
+				}
+			}, 2000);
+    	}
     }
 	private void launchExperiment(){
 		Intent intent;
