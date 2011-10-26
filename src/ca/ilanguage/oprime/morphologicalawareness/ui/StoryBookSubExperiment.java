@@ -94,8 +94,19 @@ public class StoryBookSubExperiment extends Activity {
 	 */
 	private class BitmapProvider implements CurlView.BitmapProvider {
 
-		private int[] mBitmapIds = { R.drawable.stimulus_1_nonpublic, R.drawable.stimulus_10_nonpublic,
-				R.drawable.stimulus_11_nonpublic, R.drawable.stimulus_12_nonpublic, R.drawable.stimulus_13_nonpublic};
+		private int[] mBitmapIds = { R.drawable.stimulus_9_nonpublic,
+				R.drawable.stimulus_12_nonpublic,
+				R.drawable.stimulus_8_nonpublic,
+				R.drawable.stimulus_25_nonpublic,
+				R.drawable.stimulus_15_nonpublic,
+				R.drawable.stimulus_26_nonpublic,
+				R.drawable.stimulus_4_nonpublic,
+				R.drawable.stimulus_18_nonpublic,
+				R.drawable.stimulus_5_nonpublic,
+				R.drawable.stimulus_17_nonpublic,
+				R.drawable.stimulus_13_nonpublic,
+				R.drawable.stimulus_22_nonpublic,
+				R.drawable.stimulus_24_nonpublic };
 
 		@Override
 		public Bitmap getBitmap(int width, int height, int index) {
