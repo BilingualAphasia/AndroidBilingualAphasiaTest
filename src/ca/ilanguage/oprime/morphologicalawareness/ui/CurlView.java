@@ -21,6 +21,7 @@ import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.opengl.GLSurfaceView;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -73,6 +74,7 @@ public class CurlView extends GLSurfaceView implements View.OnTouchListener,
 	private PointF mAnimationTarget = new PointF();
 	private long mAnimationStartTime;
 	private long mAnimationDurationTime = 300;
+	private Handler mHandlerDelayStimuli = new Handler();
 	private int mAnimationTargetEvent;
 	
 	// Constants for mAnimationTargetEvent.
@@ -301,6 +303,12 @@ public class CurlView extends GLSurfaceView implements View.OnTouchListener,
 				// bit more readable and easier to maintain.
 				mAnimationSource.set(mPointerPos.mPos);
 				mAnimationStartTime = System.currentTimeMillis();
+				
+				mHandlerDelayStimuli.postDelayed(new Runnable() {
+					public void run() {
+						mBitmapProvider.playSound();
+					}
+				}, mAnimationDurationTime);
 
 				// Given the explanation, here we decide whether to simulate
 				// drag to left or right end.
@@ -452,6 +460,7 @@ public class CurlView extends GLSurfaceView implements View.OnTouchListener,
 	 */
 	private void setCurlPos(PointF curlPos, PointF curlDir, double radius) {
 
+		
 		// First reposition curl so that page doesn't 'rip off' from book.
 		if (mCurlState == CURL_RIGHT
 				|| (mCurlState == CURL_LEFT && mViewMode == SHOW_ONE_PAGE)) {
@@ -509,6 +518,7 @@ public class CurlView extends GLSurfaceView implements View.OnTouchListener,
 		}
 
 		requestRender();
+		
 	}
 
 	/**
@@ -618,6 +628,7 @@ public class CurlView extends GLSurfaceView implements View.OnTouchListener,
 		}
 
 		}
+		//mBitmapProvider.playSound();
 	}
 
 	/**
@@ -768,6 +779,8 @@ public class CurlView extends GLSurfaceView implements View.OnTouchListener,
 		 * Index is a number between 0 and getBitmapCount() - 1.
 		 */
 		public Bitmap getBitmap(int width, int height, int index);
+		public void playSound();
+		
 
 		/**
 		 * Return number of pages/bitmaps available.
