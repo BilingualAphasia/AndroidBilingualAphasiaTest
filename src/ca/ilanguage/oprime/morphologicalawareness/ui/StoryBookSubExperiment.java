@@ -161,7 +161,13 @@ public class StoryBookSubExperiment extends Activity {
 			p.setColor(0xFFC0C0C0);
 			c.drawRect(r, p);
 			p.setColor(0xFF0000C0);
-			c.drawText("hi"+index, width-50, height-40, p);
+			int itemNumber = index+1;
+			if(index < 3){
+				c.drawText("Pratique "+itemNumber, 50, 40, p);
+			}else{
+				itemNumber = index-2;
+				c.drawText("Item "+itemNumber, 50, 40, p);
+			}
 			r.left += border;
 			r.right -= border;
 			r.top += border;
