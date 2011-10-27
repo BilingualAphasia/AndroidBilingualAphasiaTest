@@ -1,12 +1,10 @@
 package ca.ilanguage.oprime.domain;
 
-import java.util.ArrayList;
-
 import android.view.Menu;
 import android.webkit.WebView;
 
 public class OPrime {
-	private Menu mMenu;
+	public Menu mMenu;
 	private WebView mWebView;
 	//private int mSubExperiments = 5;
 	public static final String ENGLISH = "en";
@@ -21,23 +19,22 @@ public class OPrime {
 	public static final String EXTRA_RESULT_FILENAME = "resultfilename";
 	public static final String EXTRA_STIMULI = "stimuli";
 	public static final String EXTRA_TAKE_PICTURE_AT_END = "takepictureatend";
+	public static final String EXTRA_OUTPUT_DIR = "outputdir";
 	public static final String EXTRA_REPLAY_PARTICIPANT_CODE = "replayparticipantcode";
 	public static final String EXTRA_USE_FRONT_FACING_CAMERA = "usefrontcamera";
-	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BAT/video/";
+	public static final String EXTRA_STIMULI_IMAGE_ID = "stimuliimageid";
+	
+	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/MorphologicalAwarenessNew/video/";
 
-	private long mExperimentLaunch;
-	private long mExperimentQuit;
+	public static final String INTENT_STOP_VIDEO_RECORDING = "ca.ilanguage.oprime.intent.action.BROADCAST_STOP_VIDEO_SERVICE";
 	
 	
 
-	private static final int AUTO_ADVANCE_NEXT_SUB_EXPERIMENT = 2;
-	private static final int PREPARE_TRIAL = 0;
-	private static final int SWITCH_LANGUAGE = 1;
-	private static final int REPLAY_RESULTS = 3;
+	public static final int AUTO_ADVANCE_NEXT_SUB_EXPERIMENT = 2;
+	public static final int PREPARE_TRIAL = 0;
+	public static final int SWITCH_LANGUAGE = 1;
+	public static final int REPLAY_RESULTS = 3;
 	public static final int EXPERIMENT_COMPLETED =4;
 	
-	private ArrayList<String> mSubExperimentParticipantVideos = new ArrayList<String>();
-	private ArrayList<String> mParticipantsCodesCompleted = new ArrayList<String>();
-
 }
 

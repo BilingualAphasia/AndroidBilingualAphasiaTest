@@ -17,13 +17,25 @@
 package ca.ilanguage.oprime.preferences;
 
 public class PreferenceConstants {
-	
-    
-    public static final String PREFERENCE_NAME = "OPrimePrefs";
-    public static final String PREFERENCE_EXPERIMENTS_DIR = "experimentsDir";
-    public static final String PREFERENCE_DEFAULT_STIMULI = "defaultStimuli";
-    public static final String PREFERENCE_DEFAULT_EXPERIEMENTER_CODE= "defaultExperimenterCode";
-    public static final String PREFERENCE_EXPERIMENT_IS_READY= "experimentIsReady";
-	
-	
+	public static final String PREFERENCE_NAME = "BilingualAphasiaPrefs";
+	public static final String PREFERENCE_EXPERIMENT_LANGUAGE = "experimentlanguage";
+	public static final String PREFERENCE_PARTICIPANT_ID = "participantId";
+	public static final String PREFERENCE_PARTICIPANT_FIRSTNAME = "participantfirstname";
+	public static final String PREFERENCE_PARTICIPANT_LASTNAME = "participantlastname";
+	public static final String PREFERENCE_PARTICIPANT_WORSTLANGUAGE_IS_ENGLISH = "participantworstlanguage";
+
+	public static final String PREFERENCE_TESTING_DAY_NUMBER = "testingdaynumber";
+	public static final String PREFERENCE_PARTICIPANT_NUMBER_IN_DAY = "participantnumberinday";
+	public static final String PREFERENCE_PARTICIPANT_GROUP = "participantgroup";
+	public static final String PREFERENCE_TABLET_FIRST = "tabletfirst";
+	public static final String PREFERENCE_EXPERIEMENTER_CODE= "experimenterCode";
+
+	public static final String PREFERENCE_PARTICIPANT_STARTTIME = "participantstarttime";
+	public static final String PREFERENCE_PARTICIPANT_ENDTIME = "participantendtime";
+	public static final String PREFERENCE_EXPERIMENT_IS_READY= "experimentIsReady";
+
+	public static final String PREFERENCE_REPLAY_RESULTS_MODE = "replayresults";
+	public static final String PREFERENCE_REPLAY_PARTICIPANT_CODE = "replayparticipantcode";
+
+
 }
