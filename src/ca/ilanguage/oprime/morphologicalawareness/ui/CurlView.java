@@ -227,6 +227,10 @@ public class CurlView extends GLSurfaceView implements View.OnTouchListener,
 			// user is holding the paper to make curl happen.
 			mDragStartPos.set(mPointerPos.mPos);
 
+			
+			if((me.getX() > 200 && me.getX() < 1100)){
+				return false;
+			}
 			// First we make sure it's not over or below page. Pages are
 			// supposed to be same height so it really doesn't matter do we use
 			// left or right one.
@@ -555,7 +559,7 @@ public class CurlView extends GLSurfaceView implements View.OnTouchListener,
 			mPageCurl.setFlipTexture(false);
 			mPageCurl.reset();
 			mRenderer.addCurlMesh(mPageCurl);
-
+			
 			mCurlState = CURL_RIGHT;
 			break;
 		}

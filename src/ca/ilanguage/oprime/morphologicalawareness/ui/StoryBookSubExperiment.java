@@ -43,6 +43,8 @@ public class StoryBookSubExperiment extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.page_curl);
+		this.setTitle("Practique");
+		
 
 		int index = 0;
 		if (getLastNonConfigurationInstance() != null) {
@@ -55,6 +57,7 @@ public class StoryBookSubExperiment extends Activity {
 		mCurlView.setBackgroundColor(0xFF202830);
 		mCurlView.setRenderLeftPage(false);
 		mCurlView.setMargins(.0f, .0f, .0f, .0f);
+		
 
 		// This is something somewhat experimental. Before uncommenting next
 		// line, please see method comments in CurlView.
@@ -89,6 +92,7 @@ public class StoryBookSubExperiment extends Activity {
 		return mCurlView.getCurrentIndex();
 	}
 
+	
 	/**
 	 * Bitmap provider.
 	 */
@@ -107,6 +111,7 @@ public class StoryBookSubExperiment extends Activity {
 				R.drawable.stimulus_13_nonpublic,
 				R.drawable.stimulus_22_nonpublic,
 				R.drawable.stimulus_24_nonpublic };
+		
 
 		@Override
 		public Bitmap getBitmap(int width, int height, int index) {
@@ -115,6 +120,7 @@ public class StoryBookSubExperiment extends Activity {
 			b.eraseColor(0xFFFFFFFF);
 			Canvas c = new Canvas(b);
 			Drawable d = getResources().getDrawable(mBitmapIds[index]);
+			
 
 			int margin = mBorderSize;
 			int border = mBorderSize;
@@ -144,6 +150,7 @@ public class StoryBookSubExperiment extends Activity {
 
 			d.setBounds(r);
 			d.draw(c);
+			
 			return b;
 		}
 
