@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -216,6 +217,7 @@ public class VideoRecorderSubExperiment extends Activity implements
 							+ mStimuliImages.size());
 			startActivityForResult(intent, STIMULI_RESULT);
 		}else{
+			playSound();
 			mImage.setImageResource(mStimuliImages.get(mStimuliIndex));
 			this.setTitle(mSubExperimentTitle + "-"+mStimuliIndex+"/" + mStimuliImages.size());
 			mStartTime = System.currentTimeMillis();
@@ -239,11 +241,24 @@ public class VideoRecorderSubExperiment extends Activity implements
 			break;
 		}
 	}
-
+	public void playSound(){
+		MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.gammatone);
+		try {
+			mediaPlayer.prepare();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mediaPlayer.start();
+	}
 	/**
 	 * This method is called after the response has been handled
 	 */
 	public void advanceStimuli() {
+		
 		mStimuliIndex++;
 		// if the index is outside of the array of stimuli
 		if (mStimuliIndex >= mStimuliImages.size() || mStimuliIndex < 0) {
