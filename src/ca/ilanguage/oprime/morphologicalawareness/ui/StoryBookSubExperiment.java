@@ -107,7 +107,7 @@ public class StoryBookSubExperiment extends Activity {
 				R.drawable.stimulus_25_nonpublic,
 				R.drawable.stimulus_15_nonpublic,
 				R.drawable.stimulus_26_nonpublic,
-				R.drawable.stimulus_4_nonpublic,
+				R.drawable.stimulus_21_nonpublic,//4
 				R.drawable.stimulus_18_nonpublic,
 				R.drawable.stimulus_5_nonpublic,
 				R.drawable.stimulus_17_nonpublic,
@@ -117,7 +117,7 @@ public class StoryBookSubExperiment extends Activity {
 		
 		@Override
 		public void playSound(){
-			MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.pageflip2);
+			MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.gammatone);
 			try {
 				mediaPlayer.prepare();
 			} catch (IllegalStateException e) {
