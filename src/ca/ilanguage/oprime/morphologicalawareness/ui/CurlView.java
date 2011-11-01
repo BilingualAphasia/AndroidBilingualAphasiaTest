@@ -229,8 +229,15 @@ public class CurlView extends GLSurfaceView implements View.OnTouchListener,
 			// user is holding the paper to make curl happen.
 			mDragStartPos.set(mPointerPos.mPos);
 
-			
-			if((me.getX() > 200 && me.getX() < 1100)){
+			/*
+			 * Dont turn react if the touch is in the middle of the page
+			 */
+			int width = mPageBitmapWidth;
+			int turnSensitiveMarginWidth=width/6;
+			if (turnSensitiveMarginWidth < 100){
+				turnSensitiveMarginWidth = 100;
+			}
+			if((me.getX() > turnSensitiveMarginWidth && me.getX() < width-turnSensitiveMarginWidth)){
 				return false;
 			}
 			// First we make sure it's not over or below page. Pages are
