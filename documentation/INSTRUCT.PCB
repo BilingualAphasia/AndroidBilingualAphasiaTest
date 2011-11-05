@@ -1,0 +1,146 @@
+                Instructions for PCBAT
+      
+                c1991 David E. Caldwell
+				
+	This program allows you to enter and store responses for the 
+Bilingual Aphasia Test (henceforth the BAT): 
+
+		Part A (Background of Bilingualism),
+		Part B (Test of an Individual Language), and
+		Part C (Test of a Pair of Languages).
+			
+It will also compute scores for Parts B and C.
+
+
+Entering Responses
+
+	To begin entering responses with PCBAT, press F1 (New 
+File). A window will appear in  which you enter an ID number 
+under which to save the responses, and the drive/directory in
+which to store the file. (The ID does not actually have to be 
+a number; you can assign codes to  your subjects however you 
+wish, as long as they contain eight characters or less.)  
+	In the next window, you select the part of the BAT (Part 
+A, Part B, or Part C) you wish  to work on. Select a part by 
+using the arrow keys, or by typing a letter; then press Enter 
+to  proceed.
+ 	You are now ready to begin entering responses. 
+A window labelled with the ID number  and the part of the 
+test being worked on will appear in the upper left-hand 
+corner of the screen. This window displays the responses as 
+you enter them. For each item of the part you are  working 
+on, a window will appear in the lower part of the screen, 
+labelled with the number of the item. This window displays 
+either a choice of responses, or a space in which you can 
+enter a response, depending on the type of item.   
+
+Using Item Windows
+
+  	To enter a response for a multiple-choice item, use the 
+arrow keys to illuminate the  button that corresponds to your 
+selection, then press Enter to register the response. You 
+then  proceed automatically to the next item.
+ 	To enter a response for a non-multiple-choice item, 
+simply type the response in the  space provided, then press 
+Enter to register it. As before, you will then proceed 
+automatically  to the next item.
+ 	The menu contains commands which allow you to move 
+around between items. Next  [Item] (PgDn) and Prev[ious Item] 
+(PgUp) are self-explanatory. When you select GoTo [Item  
+#...] (F7), a window will appear in which you type the number 
+of the item you wish to go to,  then press Enter. Erase 
+[Response] (F6) is sometimes useful with multiple-choice 
+items, since  once a response has been selected for such an 
+item, there is no other way to cause the response to  be left 
+blank if you change your mind (responses to non-multiple-
+choice items can also be erased  using the Backspace key). 
+
+File Management
+
+  	You may notice that there is no Save command in PCBAT. 
+When you finish entering  responses for a part of the BAT, 
+simply select Close (F2) from the menu, and the responses 
+will  automatically be saved in the file <#>.<part>, where 
+<#> is the ID number you entered  initially, and <part> is 
+the part of the BAT covered (A, B, or C). If the responses 
+are for Part B  or Part C, when the response file is closed 
+the corresponding scores will automatically be  calculated, 
+and stored in the file <#>.<part>SC (e.g., for subject 
+#12345, Part B, the responses  would be stored in the file 
+12345.B, and the scores in the file 12345.BSC). This file can 
+be  opened from within PCBAT if one wishes to view the scores 
+on the screen.
+ 	If you wish to make changes to a set of responses that 
+were saved previously, simply  Open (F2) the relevant file, 
+and enter responses as before. When you close the file again, 
+the  new responses will be saved, and the scores (if 
+applicable) will be recalculated.
+ 	Either responses or scores can be printed from within 
+PCBAT using the Print command  (F1). If you wish, you can 
+also open response and score files (which are stored as text 
+files) from  within a text editor or a word processing 
+program, in order to view them or format them for  printing. 
+If you do so, it is recommended that you use non-
+proportionally-spaced fonts such as  Courier  so that columns 
+of data will line up properly. Also, if you modify response 
+or score files  using another program, you will very likely 
+not be able to open them again using PCBAT -  therefore, you 
+should save modified versions of the files under different 
+names.
+
+Scoring
+
+  	The most important thing to remember when entering 
+responses is that items which are  left blank are effectively 
+ignored when scores are calculated. Thus, an item should be 
+left blank  only when it has not been administered to a given 
+subject, or when the item is to be disregarded  for some 
+reason (e.g., the response is missing or cannot be 
+determined). A response of "0", on the  other hand, is 
+available as a choice on most items, and it indicates that 
+the subject gave no  response when the item was administered. 
+To illustrate the difference for purposes of scoring, a  
+section of ten items all of which were left blank would 
+receive a score of 0/0, while ten  responses of "0" would 
+give 0/10.
+ 	The score files created by PCBAT contain scores for 
+sections 2-31 (Part B) or 33-42 (Part  C) of the BAT, as well 
+as a matrix which breaks down the scores by the linguistic 
+levels  (Phonology, Morphology, Lexicon, Syntax, and 
+Semantics for Part B; Morphology/Syntax and  Lexicon for Part 
+C) and skills (Comprehension, Repetition, Judgment, Lexical 
+Access,  Propositionalizing, Reading, and Writing for Part B; 
+Translation and Grammaticality Judgment  for Part C) tapped 
+in each section. All of these scores are given in fractional 
+and decimal form.  (In decimal scores, "N/A" corresponds to a 
+score of 0/0.) An example of the matrix of scores is  shown 
+below:
+
+SCORES BY LINGUISTIC LEVEL AND SKILL  
+0/0     1/1     0/0     0/0     0/0     0/0     0/0   Phonlgy   1/1      
+0/0     0/0     0/0     0/0     0/0     0/0     0/0   Mrphlgy   0/0      
+0/2     7/7     0/0     0/0     2/2     0/2     0/0   Lexicon   9/13     
+8/10    1/1     2/2    14/14    0/0     0/0     0/0   Syntax   25/27     
+0/0     0/0     0/0     0/0     0/0     0/0     0/0   Smntics   0/0    
+Compreh Repetit Judgmnt LxclAcc Proposi Reading Writing   
+8/12    9/9     2/2    14/14    2/2     0/2     0/0     
+
+Each cell in the matrix gives a score for a combination of 
+linguistic level and skill - for  example, the score in the 
+top left corner of the matrix is for phonological 
+comprehension. The  rightmost column gives the total scores 
+for the five linguistic levels, and the bottom row gives  the 
+totals for the seven linguistic skills.     
+
+--------------------------    	
+
+If you notice any bugs, or have any comments or suggestions 
+concerning this program,  please address them to:  		
+
+David E. Caldwell 		
+Bilingual Aphasia Research Project 		
+Linguistics Department, McGill University 		
+1001 Sherbrooke St. West 		
+Montreal, P.Q. 	Canada	H3A 1G5          		
+
+eMail: CX16@MUSICA.MCGILL.CA
