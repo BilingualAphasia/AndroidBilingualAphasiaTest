@@ -1,4 +1,4 @@
-package ca.ilanguage.oprime.morphologicalawareness.ui;
+package ca.ilanguage.oprime.bilingualaphasiatest.ui;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.ilanguage.oprime.domain.OPrime;
-import ca.ilanguage.oprime.morphologicalawareness.R;
-import ca.ilanguage.oprime.preferences.PreferenceConstants;
-import ca.ilanguage.oprime.preferences.SetPreferencesActivity;
+import ca.ilanguage.oprime.storybookui.ui.StoryBookSubExperiment;
+import ca.ilanguage.oprime.bilingualaphasiatest.R;
+import ca.ilanguage.oprime.bilingualaphasiatest.preferences.PreferenceConstants;
+import ca.ilanguage.oprime.bilingualaphasiatest.preferences.SetPreferencesActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-public class MorphologicalAwarenessHome extends Activity {
+public class ExperimentHome extends Activity {
 	private String mParticipantId = OPrime.PARTICIPANT_ID_DEFAULT;
 	private String mExperimentTrialHeader = "";
 	private Handler mHandlerDelayStimuli = new Handler();
@@ -36,7 +37,7 @@ public class MorphologicalAwarenessHome extends Activity {
 	private String mCurrentSubExperimentLanguage = OPrime.ENGLISH;
 	public long mExperimentLaunch;
 	public long mExperimentQuit;
-	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/MorphologicalAwarenessNew/video/";
+	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BilingualAphasiaTest/video/";
 
 	public ArrayList<String> mSubExperimentParticipantVideos = new ArrayList<String>();
 	public ArrayList<String> mParticipantsCodesCompleted = new ArrayList<String>();
@@ -265,6 +266,7 @@ public class MorphologicalAwarenessHome extends Activity {
 
 			intent.putExtra(OPrime.EXTRA_USE_FRONT_FACING_CAMERA, true);
 			intent.putExtra(OPrime.EXTRA_LANGUAGE, OPrime.ENGLISH);
+			intent.putExtra(OPrime.EXTRA_VIDEO_QUALITY, OPrime.DEFAULT_DEBUGGING_QUALITY);
 			intent.putExtra(OPrime.EXTRA_PARTICIPANT_ID, mParticipantId);
 			intent.putExtra(OPrime.EXTRA_OUTPUT_DIR, OUTPUT_DIRECTORY);
 			intent.putExtra(OPrime.EXTRA_EXPERIMENT_TRIAL_INFORMATION,

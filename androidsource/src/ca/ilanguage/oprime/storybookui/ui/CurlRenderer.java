@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package ca.ilanguage.oprime.morphologicalawareness.ui;
+package ca.ilanguage.oprime.storybookui.ui;
 
 import java.util.Vector;
 

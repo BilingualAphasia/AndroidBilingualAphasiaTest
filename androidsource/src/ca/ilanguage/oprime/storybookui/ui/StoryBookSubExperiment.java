@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package ca.ilanguage.oprime.morphologicalawareness.ui;
+package ca.ilanguage.oprime.storybookui.ui;
 
 import java.io.IOException;
 
@@ -30,7 +30,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 
 import ca.ilanguage.oprime.domain.OPrime;
-import ca.ilanguage.oprime.morphologicalawareness.R;
+import ca.ilanguage.oprime.bilingualaphasiatest.R;
 /**
  * Simple Activity for curl testing.
  * 
@@ -46,7 +46,6 @@ public class StoryBookSubExperiment extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.page_curl);
-		//this.setTitle("Practique");
 		
 
 		int index = 0;
@@ -101,19 +100,7 @@ public class StoryBookSubExperiment extends Activity {
 	 */
 	private class BitmapProvider implements CurlView.BitmapProvider {
 
-		private int[] mBitmapIds = { R.drawable.stimulus_9_nonpublic,
-				R.drawable.stimulus_12_nonpublic,
-				R.drawable.stimulus_8_nonpublic,
-				R.drawable.stimulus_25_nonpublic,
-				R.drawable.stimulus_15_nonpublic,
-				R.drawable.stimulus_26_nonpublic,
-				R.drawable.stimulus_21_nonpublic,//4
-				R.drawable.stimulus_18_nonpublic,
-				R.drawable.stimulus_5_nonpublic,
-				R.drawable.stimulus_17_nonpublic,
-				R.drawable.stimulus_13_nonpublic,
-				R.drawable.stimulus_22_nonpublic,
-				R.drawable.stimulus_24_nonpublic };
+		private int[] mBitmapIds = { R.drawable.androids_experimenter_kids,R.drawable.androids_experimenter_kids,R.drawable.androids_experimenter_kids };
 		
 		@Override
 		public void playSound(){
@@ -162,10 +149,10 @@ public class StoryBookSubExperiment extends Activity {
 			c.drawRect(r, p);
 			p.setColor(0xFF0000C0);
 			int itemNumber = index+1;
-			if(index < 3){
+			if(index < 1){
 				c.drawText("Pratique "+itemNumber, 50, 40, p);
 			}else{
-				itemNumber = index-2;
+				itemNumber = index;
 				c.drawText("Item "+itemNumber, 50, 40, p);
 			}
 			r.left += border;

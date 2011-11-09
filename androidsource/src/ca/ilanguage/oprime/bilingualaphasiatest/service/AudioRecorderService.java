@@ -2,19 +2,14 @@ package ca.ilanguage.oprime.bilingualaphasiatest.service;
 
 import java.io.IOException;
 
-import ca.ilanguage.oprime.bilingualaphasiatest.ui.BilingualAphasiaTestHome;
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.media.AudioManager;
 import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.IBinder;
 
 /**

@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
+import ca.ilanguage.oprime.domain.OPrime;
 
 public class TakePictureSubExperiment extends Activity {
 	 Uri myPicture = null;
@@ -31,7 +32,7 @@ public class TakePictureSubExperiment extends Activity {
 	        setContentView(R.layout.take_picture);
 
 	        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-	        mImageFilename = getIntent().getExtras().getString(BilingualAphasiaTestHome.EXTRA_RESULT_FILENAME);
+	        mImageFilename = getIntent().getExtras().getString(OPrime.EXTRA_RESULT_FILENAME);
 	    }
 
 	    public void captureImage(View view)

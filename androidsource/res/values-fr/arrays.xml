@@ -2,7 +2,7 @@
 <resources>
 <string-array name="subexperiment_titles">
 	<item>Histoire du bilinguisme</item>
-	<item>Contexte d'apprentissage et d'utilisation du français </item>
+	<item>Contexte d\'apprentissage et d\'utilisation du français </item>
 	<item>Langage spontane</item>
 	<item>Désignation </item>
 	<item>Ordres simple et semi-complexes</item>
@@ -12,7 +12,7 @@
 	<item>Compatibilité sémantique</item>
 	<item>Synonyms</item>
 	<item>Antonyms</item>
-	<item>Jugement d'acceptabilité</item>
+	<item>Jugement d\'acceptabilité</item>
 	<item>Acceptabilité sémantique</item>
 	<item>Décision lexicale</item>
 	<item>Séries</item>

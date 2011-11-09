@@ -19,7 +19,6 @@ package ca.ilanguage.oprime.bilingualaphasiatest.service;
 // Need the following import to get access to the app resources, since this
 // class is in a sub-package.
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -47,7 +46,6 @@ Retry xxx audio file (add files to cue)
  */
 public class NotifyingController extends Activity {
 	private Uri mUri;
-	GoogleAnalyticsTracker tracker;
 	private String mAuBlogInstallId;
 	
 	

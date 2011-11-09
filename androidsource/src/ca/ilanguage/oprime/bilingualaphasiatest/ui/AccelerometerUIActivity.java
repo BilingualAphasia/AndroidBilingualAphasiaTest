@@ -21,6 +21,7 @@ import java.util.List;
 
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
 import ca.ilanguage.oprime.bilingualaphasiatest.service.AudioRecorderService;
+import ca.ilanguage.oprime.domain.OPrime;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -131,7 +132,7 @@ public class AccelerometerUIActivity extends Activity {
 		mSimulationView = new SimulationView(this);
 		setContentView(mSimulationView);
 
-		mAudioResultsFile = BilingualAphasiaTestHome.OUTPUT_DIRECTORY
+		mAudioResultsFile = OPrime.OUTPUT_DIRECTORY
 				+ System.currentTimeMillis() + "_" + mParticipantId + "_" + mStimuliId
 				+ ".mp3";
 		Intent intent = new Intent(this, AudioRecorderService.class);
@@ -440,7 +441,7 @@ public class AccelerometerUIActivity extends Activity {
 				final float gy = -sy * m;
 
 				/*
-				 * ·F = mA <=> A = ·F / m We could simplify the code by completely
+				 * ï¿½F = mA <=> A = ï¿½F / m We could simplify the code by completely
 				 * eliminating "m" (the mass) from all the equations, but it would hide
 				 * the concepts from this sample code.
 				 */
@@ -450,11 +451,11 @@ public class AccelerometerUIActivity extends Activity {
 
 				/*
 				 * Time-corrected Verlet integration The position Verlet integrator is
-				 * defined as x(t+Æt) = x(t) + x(t) - x(t-Æt) + a(t)Ætö2 However, the
-				 * above equation doesn't handle variable Æt very well, a time-corrected
-				 * version is needed: x(t+Æt) = x(t) + (x(t) - x(t-Æt)) * (Æt/Æt_prev) +
-				 * a(t)Ætö2 We also add a simple friction term (f) to the equation:
-				 * x(t+Æt) = x(t) + (1-f) * (x(t) - x(t-Æt)) * (Æt/Æt_prev) + a(t)Ætö2
+				 * defined as x(t+ï¿½t) = x(t) + x(t) - x(t-ï¿½t) + a(t)ï¿½tï¿½2 However, the
+				 * above equation doesn't handle variable ï¿½t very well, a time-corrected
+				 * version is needed: x(t+ï¿½t) = x(t) + (x(t) - x(t-ï¿½t)) * (ï¿½t/ï¿½t_prev) +
+				 * a(t)ï¿½tï¿½2 We also add a simple friction term (f) to the equation:
+				 * x(t+ï¿½t) = x(t) + (1-f) * (x(t) - x(t-ï¿½t)) * (ï¿½t/ï¿½t_prev) + a(t)ï¿½tï¿½2
 				 */
 				final float dTdT = dT * dT;
 				final float x = mPosX + mOneMinusFriction * dTC * (mPosX - mLastPosX)
