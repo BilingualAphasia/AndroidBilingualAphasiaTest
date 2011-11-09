@@ -1,4 +1,3 @@
-This is code for the Morphological Awareness Experiment designed by Alexandra Marquis and Phaedra Royle. 
 
 This is code which was used give the eBAT pdfs (http://www.mcgill.ca/linguistics/research/bat/ a collection of over 50 Bilingual Assessments for Aphasia made open and free by Dr. Paradis and his collaborators)  "eyes and ears" for the Bilingual Aphasia Test Android app (Cook, Marquis, Achim 2011 presented at The Academy of Aphasia 2011 - Montreal)). To know more about the architecture you can look at the diagram for the Android section in this pdf: 
 https://github.com/iLanguage/AndroidBilingualAphasiaTest/blob/master/cook,marquis,achim-2011-aphasia_assessment_on_android_architecture_and_sample_results.pdf?raw=true
@@ -24,5 +23,5 @@ https://github.com/iLanguage/OPrimeAdministrator
 
 The next steps:
 
-To encourage us  you can "watch" our project, "fork" the code, and even send us "pull requests" if you want to contribute your modifications.
+To encourage us you can "watch" our project, comment and vote on Feature requests or add bugs to our Issue Tracker https://github.com/iLanguage/AndroidBilingualAphasiaTest/issues, "fork" the code, and even send us "pull requests" if you want to contribute your modifications.
 
