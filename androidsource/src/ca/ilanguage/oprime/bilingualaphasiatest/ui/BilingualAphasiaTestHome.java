@@ -20,8 +20,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
-import ca.ilanguage.oprime.bilingualaphasiatest.R;
+import ca.ilanguage.oprime.bilingualaphasiatest.*;
 import ca.ilanguage.oprime.bilingualaphasiatest.preferences.PreferenceConstants;
 import ca.ilanguage.oprime.bilingualaphasiatest.preferences.SetPreferencesActivity;
 import ca.ilanguage.oprime.bilingualaphasiatest.ui.AccelerometerUIActivity;
@@ -93,71 +94,6 @@ public class BilingualAphasiaTestHome extends Activity {
 				+ getString(R.string.user_agent_suffix));
 		
 		new File(OUTPUT_DIRECTORY).mkdirs();
-		mExperimentTitle = "Bilingual Aphasia Test - English";
-		 subExperiments = 
-			  "History of Bilingualism," +
-				"English Background," + //1
-				"Spontaneous Speech," +
-				"Pointing," + //3
-				"Simple and Semi-complex Commands," +
-				"Complex Commands," + //5
-				"Verbal Auditory Discrimination," +
-				"Syntactic Comprehension," + //7
-				"Semantic Categories," +
-				"Synonyms," +
-				"Antonyms," +
-				"Grammaticality Judgement," +
-				"Semantic Acceptability," +
-				"Lexical Decision," +
-				"Series," +
-				"Verbal Fluency," +
-				"Naming," +
-				"Sentence Construction," +
-				"Semantic Opposites," +
-				"Derivational Morphology," +
-				"Morphological Opposites," +
-				"Description," +
-				"Mental Arithmetic," +
-				"Listening Comprehension," +
-				"Reading," +
-				"Copying," +
-				"Dictation for Words," +
-				"Dictation for Sentences," +
-				"Reading Comprehension for Words," +
-				"Reading Comprehension for Sentences," +
-				"Writing";
-		 subExperimentsFrench = 
-			  "Histoire du bilinguisme," +
-				"Contexte d'apprentissage et d'utilisation du fran�ais," + //1
-				"Langage spontane," +
-				"D�signation," + //3
-				"Ordres simple et semi-complexes," +
-				"Ordres complexes," + //5
-				"Discrimination auditive verbale," +
-				"Compr�hension de structures syntaxiques," + //7
-				"Compatibilit� s�mantique," +
-				"Synonyms," +
-				"Antonyms," +
-				"Jugement d'acceptabilit�," +
-				"Acceptabilit� s�mantique," +
-				"D�cision lexicale," +
-				"S�ries," +
-				"Fluence verbale," +
-				"D�nomination," +
-				"Constuction de phrases," +
-				"Contraires s�mantiques," +
-				"Morphologie," +
-				"Contraires morphologiques," +
-				"Description," +
-				"Calcul mental," +
-				"Compr�hension auditive," +
-				"Lecture," +// � haute voix
-				"Copie," +
-				"Dict�e mots," +
-				"Dict�e phrases," +
-				"Lecture silencieuse des mots," +
-				"Lecture silencieuse des phrases," +
-				"�criture spontan�e";
 		
 		/*
 		 * frontvideo creates backup audio to be analysied with subtitles and annotations
@@ -401,8 +337,15 @@ public class BilingualAphasiaTestHome extends Activity {
         editor.commit();
        
 	}
+	private void getSubExperimentTitles(){
+		String[] subexperimentarray;
+		
+		subexperimentarray = getResources().getStringArray(R.array.subexperiment_titles);
+		mSubExperiments =  new ArrayList(Arrays.asList(subexperimentarray));
+	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		SharedPreferences prefens = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+		getSubExperimentTitles();
 		switch (requestCode) {
 		case SWITCH_LANGUAGE:
 			if(prefens.getBoolean(PreferenceConstants.PREFERENCE_PARTICIPANT_WORSTLANGUAGE_IS_ENGLISH, true)){
@@ -411,11 +354,11 @@ public class BilingualAphasiaTestHome extends Activity {
 				mCurrentSubExperimentLanguage = FRENCH;
 			}
 			if(mCurrentSubExperimentLanguage.equals(ENGLISH)){
-				mSubExperiments =  new ArrayList(R.array.subexperiment_titles);
+				
 				mExperimentTitle = "Bilingual Aphasia Test - English";
 			}else{
-				mSubExperiments =  new ArrayList(Arrays.asList(subExperimentsFrench.split(",")));
-				mExperimentTitle = "Test de l'aphasie chez les bilingues - fran�ais";
+				
+				mExperimentTitle = "Test de l'aphasie chez les bilingues - français";
 			}
 			mSubExperimentTypes =  new ArrayList(Arrays.asList(subExperimentTypes.split(",")));
 			mExperimentLaunch = System.currentTimeMillis();
@@ -438,16 +381,14 @@ public class BilingualAphasiaTestHome extends Activity {
 		case PREPARE_TRIAL:
 			initExperiment();
 			if (mCurrentSubExperimentLanguage.equals(ENGLISH)) {
-				mSubExperiments = new ArrayList(Arrays.asList(subExperiments
-						.split(",")));
+				
 				mExperimentTitle = "Bilingual Aphasia Test - English";
 				Toast.makeText(getApplicationContext(), "Experiment Trial is ready:\n\n" +
 		        		"ParticipantCode: "+mParticipantId+"\n"+
 		        		//"Trial start timestamp: "+mExperimentLaunch+"\n\n" +
 		        				"Touch Start to take Participants Background Info...", Toast.LENGTH_LONG).show();
 			} else {
-				mSubExperiments = new ArrayList(
-						Arrays.asList(subExperimentsFrench.split(",")));
+				
 				mExperimentTitle = "Test de l'aphasie chez les bilingues - fran�ais";
 				Toast.makeText(getApplicationContext(), "L'exp�rience est pr�t:\n\n" +
 		        		"ParticipantCode: "+mParticipantId+"\n"+
