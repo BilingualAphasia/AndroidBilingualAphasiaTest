@@ -2,35 +2,35 @@
 <resources>
 <string-array name="subexperiment_titles">
 	<item>Histoire du bilinguisme</item>
-	<item>Contexte d'apprentissage et d'utilisation du français </item>
+	<item>Contexte d'apprentissage et d'utilisation du fran√ßais </item>
 	<item>Langage spontane</item>
-	<item>Désignation </item>
+	<item>D√©signation </item>
 	<item>Ordres simple et semi-complexes</item>
 	<item>Ordres complexes </item>
 	<item>Discrimination auditive verbale</item>
-	<item>Compréhension de structures syntaxiques </item>
-	<item>Compatibilité sémantique</item>
+	<item>Compr√©hension de structures syntaxiques </item>
+	<item>Compatibilit√© s√©mantique</item>
 	<item>Synonyms</item>
 	<item>Antonyms</item>
-	<item>Jugement d'acceptabilité</item>
-	<item>Acceptabilité sémantique</item>
-	<item>Décision lexicale</item>
-	<item>Séries</item>
+	<item>Jugement d'acceptabilit√©</item>
+	<item>Acceptabilit√© s√©mantique</item>
+	<item>D√©cision lexicale</item>
+	<item>S√©ries</item>
 	<item>Fluence verbale</item>
-	<item>Dénomination</item>
+	<item>D√©nomination</item>
 	<item>Constuction de phrases</item>
-	<item>Contraires sémantiques</item>
+	<item>Contraires s√©mantiques</item>
 	<item>Morphologie</item>
 	<item>Contraires morphologiques</item>
 	<item>Description</item>
 	<item>Calcul mental</item>
-	<item>Compréhension auditive</item>
-	<item>Lectureà haute voix</item>
+	<item>Compr√©hension auditive</item>
+	<item>Lecture √† haute voix</item>
 	<item>Copie</item>
-	<item>Dictée mots</item>
-	<item>Dictée phrases</item>
+	<item>Dict√©e mots</item>
+	<item>Dict√©e phrases</item>
 	<item>Lecture silencieuse des mots</item>
 	<item>Lecture silencieuse des phrases</item>
-	<item>Écriture spontanée</item>
+	<item>√âcriture spontan√©e</item>
  </string-array>
 </resources>
