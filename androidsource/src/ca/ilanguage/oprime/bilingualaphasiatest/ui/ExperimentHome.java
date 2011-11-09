@@ -241,7 +241,7 @@ public class ExperimentHome extends Activity {
 
 	private void launchExperiment(){
 		Intent intent;
-		intent = new Intent(getApplicationContext(), StoryBookSubExperiment.class);
+		intent = new Intent(getApplicationContext(), BilingualAphasiaTestHome.class);
 		startActivity(intent);
 	}
 
@@ -272,7 +272,7 @@ public class ExperimentHome extends Activity {
 			intent.putExtra(OPrime.EXTRA_EXPERIMENT_TRIAL_INFORMATION,
 					mExperimentTrialHeader);
 
-			startActivityForResult(intent, OPrime.EXPERIMENT_COMPLETED);
+			//startActivityForResult(intent, OPrime.EXPERIMENT_COMPLETED);
 		}
 	}
 	private void stopVideoRecorder(){

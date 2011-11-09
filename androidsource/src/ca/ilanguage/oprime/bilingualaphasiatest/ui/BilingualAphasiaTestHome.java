@@ -24,6 +24,8 @@ import android.widget.Toast;
 import ca.ilanguage.oprime.bilingualaphasiatest.R;
 import ca.ilanguage.oprime.bilingualaphasiatest.preferences.PreferenceConstants;
 import ca.ilanguage.oprime.bilingualaphasiatest.preferences.SetPreferencesActivity;
+import ca.ilanguage.oprime.bilingualaphasiatest.ui.AccelerometerUIActivity;
+import ca.ilanguage.oprime.domain.OPrime;
 
 public class BilingualAphasiaTestHome extends Activity {
 	private Menu mMenu;
@@ -41,7 +43,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	public static final String EXTRA_STIMULI = "stimuli";
 	public static final String EXTRA_TAKE_PICTURE_AT_END = "takepictureatend";
 	public static final String EXTRA_REPLAY_PARTICIPANT_CODE = "replayparticipantcode";
-	public static final String OUTPUT_DIRECTORY = "/sdcard/OPrime/BAT/video/";
+	public static final String OUTPUT_DIRECTORY = OPrime.OUTPUT_DIRECTORY;
 	private String mExperimentTitle="";
 	private ArrayList<String> mSubExperiments= new ArrayList<String>();
 	private ArrayList<String> mSubExperimentTypes= new ArrayList<String>();
@@ -71,8 +73,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	 * *devmode false(will run through all experiments iwth out stopping, maybebetter to keep devmode always true to alow for experimenter control
 	 * *mSkipStimuli = false
 	 * *mAutoAdvance true
-	 * *VideoRecorderSubExperiment:
-	 * * uncomment mVideoRecorder.setVideoEncodingBitRate(3000000)
+	 *  comment out extra for video quality
 	 */
 	private Boolean devMode= false;
 	private Boolean mSkipStimuli = false;
@@ -127,36 +128,36 @@ public class BilingualAphasiaTestHome extends Activity {
 				"Writing";
 		 subExperimentsFrench = 
 			  "Histoire du bilinguisme," +
-				"Contexte d'apprentissage et d'utilisation du français," + //1
+				"Contexte d'apprentissage et d'utilisation du franÔøΩais," + //1
 				"Langage spontane," +
-				"Désignation," + //3
+				"DÔøΩsignation," + //3
 				"Ordres simple et semi-complexes," +
 				"Ordres complexes," + //5
 				"Discrimination auditive verbale," +
-				"Compréhension de structures syntaxiques," + //7
-				"Compatibilité sémantique," +
+				"ComprÔøΩhension de structures syntaxiques," + //7
+				"CompatibilitÔøΩ sÔøΩmantique," +
 				"Synonyms," +
 				"Antonyms," +
-				"Jugement d'acceptabilité," +
-				"Acceptabilité sémantique," +
-				"Décision lexicale," +
-				"Séries," +
+				"Jugement d'acceptabilitÔøΩ," +
+				"AcceptabilitÔøΩ sÔøΩmantique," +
+				"DÔøΩcision lexicale," +
+				"SÔøΩries," +
 				"Fluence verbale," +
-				"Dénomination," +
+				"DÔøΩnomination," +
 				"Constuction de phrases," +
-				"Contraires sémantiques," +
+				"Contraires sÔøΩmantiques," +
 				"Morphologie," +
 				"Contraires morphologiques," +
 				"Description," +
 				"Calcul mental," +
-				"Compréhension auditive," +
-				"Lecture," +// à haute voix
+				"ComprÔøΩhension auditive," +
+				"Lecture," +// ÔøΩ haute voix
 				"Copie," +
-				"Dictée mots," +
-				"Dictée phrases," +
+				"DictÔøΩe mots," +
+				"DictÔøΩe phrases," +
 				"Lecture silencieuse des mots," +
 				"Lecture silencieuse des phrases," +
-				"Écriture spontanée";
+				"ÔøΩcriture spontanÔøΩe";
 		
 		/*
 		 * frontvideo creates backup audio to be analysied with subtitles and annotations
@@ -306,586 +307,33 @@ public class BilingualAphasiaTestHome extends Activity {
 		ArrayList<Integer> stimuliImages = new ArrayList<Integer>();
 		stimuliImages.add(R.drawable.androids_experimenter_kids);
 
-		if (mSubExperimentTypes.get(subExperimentId).contains("frontvideo")) {
-			// intent = new Intent(getApplicationContext(),
-			// PresentStimuliActivity.class);//no video
-			intent = new Intent(getApplicationContext(),
-					VideoRecorderSubExperiment.class); // yes video
-			intent.putExtra(
-					VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA,
-					true);
-		} else if (mSubExperimentTypes.get(subExperimentId).contains(
-				"backvideo")) {
-			intent = new Intent(getApplicationContext(),
-					VideoRecorderSubExperiment.class);
-			intent.putExtra(
-					VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA,
-					false);
-		} else if (mSubExperimentTypes.get(subExperimentId).contains("writing")) {
+//		if (mSubExperimentTypes.get(subExperimentId).contains("frontvideo")) {
+//			// intent = new Intent(getApplicationContext(),
+//			// PresentStimuliActivity.class);//no video
+//			intent = new Intent(getApplicationContext(),
+//					VideoRecorderSubExperiment.class); // yes video
+//			intent.putExtra(
+//					VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA,
+//					true);
+//		} else if (mSubExperimentTypes.get(subExperimentId).contains(
+//				"backvideo")) {
+//			intent = new Intent(getApplicationContext(),
+//					VideoRecorderSubExperiment.class);
+//			intent.putExtra(
+//					VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA,
+//					false);
+//		} else if (mSubExperimentTypes.get(subExperimentId).contains("writing")) {
+//			intent = new Intent(getApplicationContext(),
+//					AccelerometerUIActivity.class);
+//		} else if (mSubExperimentTypes.get(subExperimentId).contains("reading")) {
+//			intent = new Intent(getApplicationContext(),
+//					AccelerometerUIActivity.class);
+//		} else {
 			intent = new Intent(getApplicationContext(),
 					AccelerometerUIActivity.class);
-		} else if (mSubExperimentTypes.get(subExperimentId).contains("reading")) {
-			intent = new Intent(getApplicationContext(),
-					AccelerometerUIActivity.class);
-		} else {
-			intent = new Intent(getApplicationContext(),
-					AccelerometerUIActivity.class);
-		}
+//		}
 		
 
-		/*
-		 * English sub experiments
-		 */
-		if ("History of Bilingualism".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("English Background".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Spontaneous Speech".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Pointing".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Simple and Semi-complex Commands".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Complex Commands".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Verbal Auditory Discrimination".equals(mSubExperiments
-				.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.e048_0);
-			stimuliImages.add(R.drawable.e048_e408);
-			stimuliImages.add(R.drawable.e049_e409);
-			stimuliImages.add(R.drawable.ef050);
-			stimuliImages.add(R.drawable.e051);
-			stimuliImages.add(R.drawable.e052_e410);
-			stimuliImages.add(R.drawable.e053_e411);
-			stimuliImages.add(R.drawable.e054_e412);
-			stimuliImages.add(R.drawable.e055);
-			stimuliImages.add(R.drawable.e056);
-			stimuliImages.add(R.drawable.ef057);
-			stimuliImages.add(R.drawable.e058_e413);
-			stimuliImages.add(R.drawable.e059_e414);
-			stimuliImages.add(R.drawable.e060_e415);
-			stimuliImages.add(R.drawable.ef061);
-			stimuliImages.add(R.drawable.e062_e416);
-			stimuliImages.add(R.drawable.e063);
-			stimuliImages.add(R.drawable.e064_e417);
-			stimuliImages.add(R.drawable.e065);
-			intent.putExtra(EXTRA_X_IMAGE, R.drawable.x);
-		}
-		if ("Syntactic Comprehension".equals(mSubExperiments
-				.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.ef066_0);
-			
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-
-			stimuliImages.add(R.drawable.e071_e419);
-			stimuliImages.add(R.drawable.e071_e419);
-			stimuliImages.add(R.drawable.e071_e419);
-			stimuliImages.add(R.drawable.e071_e419);
-			stimuliImages.add(R.drawable.e071_e419);
-			stimuliImages.add(R.drawable.e071_e419);
-
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
-			
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			
-			stimuliImages.add(R.drawable.e105);
-			stimuliImages.add(R.drawable.e105);
-			stimuliImages.add(R.drawable.e105);
-			stimuliImages.add(R.drawable.e105);
-			stimuliImages.add(R.drawable.e105);
-			stimuliImages.add(R.drawable.e105);
-			
-			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
-			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
-			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
-			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
-			
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			
-			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
-			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
-			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
-			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
-			
-			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
-			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
-			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
-			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
-			
-			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
-			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
-			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
-			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
-			
-			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
-			
-			stimuliImages.add(R.drawable.e137_e145);
-			stimuliImages.add(R.drawable.e138_e146);
-			stimuliImages.add(R.drawable.e139_e147);
-			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
-			stimuliImages.add(R.drawable.e141_e149);
-			stimuliImages.add(R.drawable.e142_e150);
-			stimuliImages.add(R.drawable.e143_e151);
-			stimuliImages.add(R.drawable.e144_e152_f0141_et_f0149);
-
-			stimuliImages.add(R.drawable.e137_e145);
-			stimuliImages.add(R.drawable.e138_e146);
-			stimuliImages.add(R.drawable.e139_e147);
-			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
-			stimuliImages.add(R.drawable.e141_e149);
-			stimuliImages.add(R.drawable.e142_e150);
-			stimuliImages.add(R.drawable.e143_e151);
-			stimuliImages.add(R.drawable.e144_e152_f0141_et_f0149);
-		}
-		if ("Semantic Categories".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Synonyms".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Antonyms".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Grammaticality Judgement".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Semantic Acceptability".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Lexical Decision".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Series".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Verbal Fluency".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Naming".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Sentence Construction"
-				.equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Semantic Opposites".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Derivational Morphology".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Morphological Opposites".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Description".equals(mSubExperiments.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.e344_f0344);
-		}
-		if ("Mental Arithmetic".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Listening Comprehension".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Reading".equals(mSubExperiments.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.e367);
-			stimuliImages.add(R.drawable.e372);
-			stimuliImages.add(R.drawable.androids_experimenter_kids);
-			stimuliImages.add(R.drawable.e377);
-			stimuliImages.add(R.drawable.e379);
-			stimuliImages.add(R.drawable.e381);
-			stimuliImages.add(R.drawable.e383);
-			stimuliImages.add(R.drawable.e385);
-			stimuliImages.add(R.drawable.androids_experimenter_kids);
-			stimuliImages.add(R.drawable.e387_0);
-			stimuliImages.add(R.drawable.androids_experimenter_kids);
-			
-		}
-		if ("Copying".equals(mSubExperiments.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.e393);
-			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
-		}
-		if ("Dictation for Words".equals(mSubExperiments.get(subExperimentId))) {
-			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
-		}
-		if ("Dictation for Sentences".equals(mSubExperiments.get(subExperimentId))) {
-			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
-		}
-		if ("Reading Comprehension for Words".equals(mSubExperiments
-				.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.e408_0);
-			stimuliImages.add(R.drawable.e048_e408);
-			stimuliImages.add(R.drawable.e409_0);
-			stimuliImages.add(R.drawable.e049_e409);
-			stimuliImages.add(R.drawable.e410_0);
-			stimuliImages.add(R.drawable.e052_e410);
-			stimuliImages.add(R.drawable.e411_0);
-			stimuliImages.add(R.drawable.e053_e411);
-			stimuliImages.add(R.drawable.e412_0);
-			stimuliImages.add(R.drawable.e054_e412);
-			stimuliImages.add(R.drawable.e413_0);
-			stimuliImages.add(R.drawable.e058_e413);
-			stimuliImages.add(R.drawable.e414_0);
-			stimuliImages.add(R.drawable.e059_e414);
-			stimuliImages.add(R.drawable.e415_0);
-			stimuliImages.add(R.drawable.e060_e415);
-			stimuliImages.add(R.drawable.e416_0);
-			stimuliImages.add(R.drawable.e062_e416);
-			stimuliImages.add(R.drawable.e417_0);
-			stimuliImages.add(R.drawable.e064_e417);
-		}
-		if ("Reading Comprehension for Sentences".equals(mSubExperiments
-				.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.e418_0);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-			stimuliImages.add(R.drawable.e419_0);
-			stimuliImages.add(R.drawable.e071_e419);
-			stimuliImages.add(R.drawable.e420_0);
-			stimuliImages.add(R.drawable.ef420);
-			stimuliImages.add(R.drawable.e421_0);
-			stimuliImages.add(R.drawable.ef421);
-			stimuliImages.add(R.drawable.e422_0);
-			stimuliImages.add(R.drawable.ef422);
-			stimuliImages.add(R.drawable.e423_0);
-			stimuliImages.add(R.drawable.ef423);
-			stimuliImages.add(R.drawable.e424_0);
-			stimuliImages.add(R.drawable.ef424);
-			stimuliImages.add(R.drawable.e425_0);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
-			stimuliImages.add(R.drawable.e426_0);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e427_0);
-			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
-			
-		}
-		if ("Writing".equals(mSubExperiments.get(subExperimentId))) {
-			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
-		}
-
-		/*
-		 * French Sub Experiments
-		 *  "Histoire du bilinguisme," +
-				"Contexte d'apprentissage et d'utilisation du français," + //1
-				"Langage spontane," +
-				"Désignation," + //3
-				"Ordres simple et semi-complexes," +
-				"Ordres complexes," + //5
-				"Discrimination auditive verbale," +
-				"Compréhension de structures syntaxiques," + //7
-				"Compatibilité sémantique," +
-				"Synonyms," +
-				"Antonyms," +
-				"Jugement d'acceptabilité," +
-				"Acceptabilité sémantique," +
-				"Décision lexicale," +
-				"Séries," +
-				"Fluence verbale," +
-				"Dénomination," +
-				"Constuction de phrases," +
-				"Contraires sémantiques," +
-				"Morphologie," +
-				"Contraires morphologiques," +
-				"Description," +
-				"Calcul mental," +
-				"Compréhension auditive," +
-				"Lecture," +// à haute voix
-				"Copie," +
-				"Dictée mots," +
-				"Dictée phrases," +
-				"Lecture silencieuse des mots," +
-				"Lecture silencieuse des phrases," +
-				"Écriture spontanée";
-		 */
-
-		if ("Contexte d'apprentissage et d'utilisation du français".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Contexte d'apprentissage et d'utilisation du français".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Langage spontane".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Désignation".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Ordres simple et semi-complexes".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Ordres complexes".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Discrimination auditive verbale".equals(mSubExperiments
-				.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.f048_0_and_f413);
-			stimuliImages.add(R.drawable.f048);
-			stimuliImages.add(R.drawable.f049);
-			stimuliImages.add(R.drawable.ef050);
-			stimuliImages.add(R.drawable.f051);
-			stimuliImages.add(R.drawable.f052_f410);
-			stimuliImages.add(R.drawable.e053_e411);
-			stimuliImages.add(R.drawable.f054_f411);
-			stimuliImages.add(R.drawable.f055_f408);
-			stimuliImages.add(R.drawable.f056_f414);
-			stimuliImages.add(R.drawable.ef057);
-			stimuliImages.add(R.drawable.f058_f417);
-			stimuliImages.add(R.drawable.f059_f0409);
-			stimuliImages.add(R.drawable.f060_f0416);
-			stimuliImages.add(R.drawable.ef061);
-			stimuliImages.add(R.drawable.f062_f0415);
-			stimuliImages.add(R.drawable.f063);
-			stimuliImages.add(R.drawable.f064);
-			stimuliImages.add(R.drawable.f065);
-			intent.putExtra(EXTRA_X_IMAGE, R.drawable.x);
-		}
-		if ("Compréhension de structures syntaxiques".equals(mSubExperiments
-				.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.ef066_0);
-			
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-			stimuliImages.add(R.drawable.e097_and_f071_to_f076);
-
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
-			
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			stimuliImages.add(R.drawable.e089_f089_a_f096);
-			
-			stimuliImages.add(R.drawable.f097_a_f104);
-			stimuliImages.add(R.drawable.f097_a_f104);
-			stimuliImages.add(R.drawable.f097_a_f104);
-			stimuliImages.add(R.drawable.f097_a_f104);
-			stimuliImages.add(R.drawable.f097_a_f104);
-			stimuliImages.add(R.drawable.f097_a_f104);
-			stimuliImages.add(R.drawable.f097_a_f104);
-			stimuliImages.add(R.drawable.f097_a_f104);
-			
-			stimuliImages.add(R.drawable.f105_a_f110);
-			stimuliImages.add(R.drawable.f105_a_f110);
-			stimuliImages.add(R.drawable.f105_a_f110);
-			stimuliImages.add(R.drawable.f105_a_f110);
-			stimuliImages.add(R.drawable.f105_a_f110);
-			stimuliImages.add(R.drawable.f105_a_f110);
-			
-			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
-			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
-			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
-			stimuliImages.add(R.drawable.e111_f0111_to_f0114);
-			
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			stimuliImages.add(R.drawable.e115_f0115_to_f0120);
-			
-			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
-			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
-			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
-			stimuliImages.add(R.drawable.e121_f0121_a_f0124);
-			
-			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
-			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
-			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
-			stimuliImages.add(R.drawable.e125_f0125_to_f0128);
-			
-			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
-			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
-			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
-			stimuliImages.add(R.drawable.e129_f0129_a_f0132);
-			
-			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
-			stimuliImages.add(R.drawable.e427_ef0133_to_ef0136);
-			
-			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
-			stimuliImages.add(R.drawable.f138_et_f146);
-			stimuliImages.add(R.drawable.f139_et_f147);
-			stimuliImages.add(R.drawable.f140_et_f148);
-			stimuliImages.add(R.drawable.e144_e152_f0141_et_f0149);
-			stimuliImages.add(R.drawable.f142_et_f150);
-			stimuliImages.add(R.drawable.f143_et_f151);
-			stimuliImages.add(R.drawable.f144_et_f152);
-			
-			stimuliImages.add(R.drawable.e140_e148_f0137_et_f0145);
-			stimuliImages.add(R.drawable.f138_et_f146);
-			stimuliImages.add(R.drawable.f139_et_f147);
-			stimuliImages.add(R.drawable.f140_et_f148);
-			stimuliImages.add(R.drawable.e144_e152_f0141_et_f0149);
-			stimuliImages.add(R.drawable.f142_et_f150);
-			stimuliImages.add(R.drawable.f143_et_f151);
-			stimuliImages.add(R.drawable.f144_et_f152);
-
-		}
-		if ("Compatibilité sémantique".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Synonyms".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Antonyms".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Jugement d'acceptabilité".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Acceptabilité sémantique".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Décision lexicale".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Séries".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Fluence verbale".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Dénomination".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Constuction de phrases"
-				.equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Contraires sémantiques".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Morphologie".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Contraires morphologiques".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Description".equals(mSubExperiments.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.e344_f0344);
-		}
-		if ("Calcul mental".equals(mSubExperiments.get(subExperimentId))) {
-		}
-		if ("Compréhension auditive".equals(mSubExperiments
-				.get(subExperimentId))) {
-		}
-		if ("Lecture".equals(mSubExperiments.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.f367_a_f371);
-			stimuliImages.add(R.drawable.f372_a_f376);
-			stimuliImages.add(R.drawable.androids_experimenter_kids);
-			stimuliImages.add(R.drawable.f377_f378);
-			stimuliImages.add(R.drawable.f379_et_f380);
-			stimuliImages.add(R.drawable.f381_f382);
-			stimuliImages.add(R.drawable.f383_f384);
-			stimuliImages.add(R.drawable.f385_f386);
-			stimuliImages.add(R.drawable.androids_experimenter_kids);
-			stimuliImages.add(R.drawable.f387_a_f392);
-			stimuliImages.add(R.drawable.androids_experimenter_kids);
-			
-		}
-		if ("Copie".equals(mSubExperiments.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.f393_a_f397);
-			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
-		}
-		if ("Dictée mots".equals(mSubExperiments.get(subExperimentId))) {
-			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
-		}
-		if ("Dictée phrases".equals(mSubExperiments.get(subExperimentId))) {
-			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
-		}
-		if ("Lecture silencieuse des mots".equals(mSubExperiments
-				.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.f408_0);
-			stimuliImages.add(R.drawable.f055_f408);
-			stimuliImages.add(R.drawable.f409_0);
-			stimuliImages.add(R.drawable.f059_f0409);
-			stimuliImages.add(R.drawable.f410_0);
-			stimuliImages.add(R.drawable.f052_f410);
-			stimuliImages.add(R.drawable.f411_0);
-			stimuliImages.add(R.drawable.f054_f411);
-			stimuliImages.add(R.drawable.f412_0);
-			stimuliImages.add(R.drawable.f412);
-			stimuliImages.add(R.drawable.f413_0);
-			stimuliImages.add(R.drawable.f048_0_and_f413);
-			stimuliImages.add(R.drawable.f414_0);
-			stimuliImages.add(R.drawable.f056_f414);
-			stimuliImages.add(R.drawable.f415_0);
-			stimuliImages.add(R.drawable.f062_f0415);
-			stimuliImages.add(R.drawable.f416_0);
-			stimuliImages.add(R.drawable.f060_f0416);
-			stimuliImages.add(R.drawable.f417_0);
-			stimuliImages.add(R.drawable.f058_f417);
-		}
-		if ("Lecture silencieuse des phrases".equals(mSubExperiments
-				.get(subExperimentId))) {
-			stimuliImages.add(R.drawable.f418_0);
-			stimuliImages.add(R.drawable.e066_and_f066_to_f070_ef418);
-			stimuliImages.add(R.drawable.f419_0);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.f420_0);
-			stimuliImages.add(R.drawable.ef420);
-			stimuliImages.add(R.drawable.f421_0);
-			stimuliImages.add(R.drawable.ef421);
-			stimuliImages.add(R.drawable.f422_0);
-			stimuliImages.add(R.drawable.ef422);
-			stimuliImages.add(R.drawable.f423_0);
-			stimuliImages.add(R.drawable.ef423);
-			stimuliImages.add(R.drawable.f424_0);
-			stimuliImages.add(R.drawable.ef424);
-			stimuliImages.add(R.drawable.f425_0);
-			stimuliImages.add(R.drawable.e077_and_f077_to_f080_ef425);
-			stimuliImages.add(R.drawable.f426_0);
-			stimuliImages.add(R.drawable.e081_and_f081_to_f088_ef426_f0419);
-			stimuliImages.add(R.drawable.f427_0);
-			stimuliImages.add(R.drawable.f427);
-			
-		}
-		if ("Écriture spontanée".equals(mSubExperiments.get(subExperimentId))) {
-			intent.putExtra(EXTRA_TAKE_PICTURE_AT_END, true);
-		}
-		/*end French sub experiments*/
 		
 		
 		if(!mSkipStimuli){
@@ -963,11 +411,11 @@ public class BilingualAphasiaTestHome extends Activity {
 				mCurrentSubExperimentLanguage = FRENCH;
 			}
 			if(mCurrentSubExperimentLanguage.equals(ENGLISH)){
-				mSubExperiments =  new ArrayList(Arrays.asList(subExperiments.split(",")));
+				mSubExperiments =  new ArrayList(R.array.subexperiment_titles);
 				mExperimentTitle = "Bilingual Aphasia Test - English";
 			}else{
 				mSubExperiments =  new ArrayList(Arrays.asList(subExperimentsFrench.split(",")));
-				mExperimentTitle = "Test de l'aphasie chez les bilingues - français";
+				mExperimentTitle = "Test de l'aphasie chez les bilingues - franÔøΩais";
 			}
 			mSubExperimentTypes =  new ArrayList(Arrays.asList(subExperimentTypes.split(",")));
 			mExperimentLaunch = System.currentTimeMillis();
@@ -1000,8 +448,8 @@ public class BilingualAphasiaTestHome extends Activity {
 			} else {
 				mSubExperiments = new ArrayList(
 						Arrays.asList(subExperimentsFrench.split(",")));
-				mExperimentTitle = "Test de l'aphasie chez les bilingues - français";
-				Toast.makeText(getApplicationContext(), "L'expérience est prêt:\n\n" +
+				mExperimentTitle = "Test de l'aphasie chez les bilingues - franÔøΩais";
+				Toast.makeText(getApplicationContext(), "L'expÔøΩrience est prÔøΩt:\n\n" +
 		        		"ParticipantCode: "+mParticipantId+"\n"+
 		        		//"Trial start timesamp: "+mExperimentLaunch+"\n\n" +
         				"Touchez Commencer pour prendre l'histoire du participant ...", Toast.LENGTH_LONG).show();
