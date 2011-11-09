@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="subexperiment_titles">
+	<item>Histoire du bilinguisme</item>
+	<item>Contexte d'apprentissage et d'utilisation du français </item>
+	<item>Langage spontane</item>
+	<item>Désignation </item>
+	<item>Ordres simple et semi-complexes</item>
+	<item>Ordres complexes </item>
+	<item>Discrimination auditive verbale</item>
+	<item>Compréhension de structures syntaxiques </item>
+	<item>Compatibilité sémantique</item>
+	<item>Synonyms</item>
+	<item>Antonyms</item>
+	<item>Jugement d'acceptabilité</item>
+	<item>Acceptabilité sémantique</item>
+	<item>Décision lexicale</item>
+	<item>Séries</item>
+	<item>Fluence verbale</item>
+	<item>Dénomination</item>
+	<item>Constuction de phrases</item>
+	<item>Contraires sémantiques</item>
+	<item>Morphologie</item>
+	<item>Contraires morphologiques</item>
+	<item>Description</item>
+	<item>Calcul mental</item>
+	<item>Compréhension auditive</item>
+	<item>Lectureà haute voix</item>
+	<item>Copie</item>
+	<item>Dictée mots</item>
+	<item>Dictée phrases</item>
+	<item>Lecture silencieuse des mots</item>
+	<item>Lecture silencieuse des phrases</item>
+	<item>Écriture spontanée</item>
+ </string-array>
+</resources>

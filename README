@@ -1,13 +1,26 @@
 This is code for the Morphological Awareness Experiment designed by Alexandra Marquis and Phaedra Royle. 
 
-This presents a story book to pre-k children to elicit sentences. It does eye gaze and audio recording. The children or experimentor can turn the page. It will show a page turning animation which was built by harism and his collaborators https://github.com/harism/android_page_curl
+This is code which was used give the eBAT pdfs (http://www.mcgill.ca/linguistics/research/bat/ a collection of over 50 Bilingual Assessments for Aphasia made open and free by Dr. Paradis and his collaborators)  "eyes and ears" for the Bilingual Aphasia Test Android app (Cook, Marquis, Achim 2011 presented at The Academy of Aphasia 2011 - Montreal)). To know more about the architecture you can look at the diagram for the Android section in this pdf: 
+https://github.com/iLanguage/AndroidBilingualAphasiaTest/blob/master/cook,marquis,achim-2011-aphasia_assessment_on_android_architecture_and_sample_results.pdf?raw=true
 
+
+You can think of this as the Participant's side of the project.  The tool has three functions
+
+1. Record audio video and touch for each subsection of the BAT
+2. Enter participant first and last name, autogenerate the participant code etc
+3. Backup results to a laptop by wifi after the experiment, and replay participant result videos 
+
+
+There are some WACHME YouTube Videos http://www.youtube.com/playlist?list=PLF468B25FFEF8EAF9 to show what this project does. The project will also be on the Android Market when we think it is ready for random users (ie, after we have WATCHMEs which tell the user how to use it).
 
 The audience of this project:
 
 * open source programmers
 * researchers who program, or have a programmer in their team who can adapt the code to their needs
 
+
+You will probably be interested in another project, which is a WebApp that extracts and analyzes touch, eye gaze and audio data using Open Source software. It runs on any laptop that has Chrome, Firefox or Safari (its HTML5).
+https://github.com/iLanguage/OPrimeAdministrator
 
 The next steps:
 
