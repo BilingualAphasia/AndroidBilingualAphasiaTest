@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <string-array name="participant_codes">
+    <string-array name="subexperiment_titles">
+        <item>History of Bilingualism</item>
+        <item>English Background </item>
+        <item>Spontaneous Speech</item>
+        <item>Pointing </item>
+        <item>Simple and Semi-complex Commands</item>
+        <item>Complex Commands </item>
+        <item>Verbal Auditory Discrimination</item>
+        <item>Syntactic Comprehension </item>
+        <item>Semantic Categories</item>
+        <item>Synonyms</item>
+        <item>Antonyms</item>
+        <item>Grammaticality Judgement</item>
+        <item>Semantic Acceptability</item>
+        <item>Lexical Decision</item>
+        <item>Series</item>
+        <item>Verbal Fluency</item>
+        <item>Naming</item>
+        <item>Sentence Construction</item>
+        <item>Semantic Opposites</item>
+        <item>Derivational Morphology</item>
+        <item>Morphological Opposites</item>
+        <item>Description</item>
+        <item>Mental Arithmetic</item>
+        <item>Listening Comprehension</item>
+        <item>Reading</item>
+        <item>Copying</item>
+        <item>Dictation for Words</item>
+        <item>Dictation for Sentences</item>
+        <item>Reading Comprehension for Words</item>
+        <item>Reading Comprehension for Sentences</item>
+        <item>Writing</item>
+    </string-array>
+
+ <string-array name="participant_codes">
     <item>ET1AM4</item>
     <item>SAMPLE</item>
     <item>ET1AM4</item>
