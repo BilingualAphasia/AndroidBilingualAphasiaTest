@@ -1,0 +1,384 @@
+==Partial ISO 639 table==
+
+This table lists all of:
+* [[ISO 639-1]]: two-letter codes, one per language or [[macrolanguage]]
+And some of:
+* [[ISO 639-2]]/T: three-letter codes, for the same languages as 639-1
+* [[ISO 639-2]]/B: three-letter codes, mostly the same as 639-2/T, but with some codes derived from English names rather than native names of languages. In the following table, these differing codes are highlighted in '''[[boldface]]'''.
+* [[ISO 639-3]]: three-letter codes, the same as 639-2/T for languages, but with distinct codes for each dialect of macrolanguages
+
+{|class="wikitable sortable"
+|-style="background-color:#efefef"
+!class="unsortable"| !! [[Language family]] !! Language name !! Native name !! [[ISO 639-1|639-1]] !! [[ISO 639-2|639-2]]/T !! 639-2/B !! [[ISO 639-3|639-3]]  !! Notes
+|-
+|bgcolor=#ACE1AF width=8px| || [[Northwest Caucasian languages|Northwest Caucasian]] || [[Abkhaz language|Abkhaz]] || lang="ab"|аҧсуа бызшәа, аҧсшәа || ab || abk || abk || abk ||
+|-
+|bgcolor=#FFFF00| || [[Afro-Asiatic languages|Afro-Asiatic]] || [[Afar language|Afar]] || lang="aa"|Afaraf || aa || aar || aar || aar ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Afrikaans language|Afrikaans]] || lang="af"|Afrikaans || af || afr || afr || afr ||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Akan language|Akan]] || lang="ak"|Akan || ak || aka || aka || aka + [[ISO 639 macrolanguage#aka|2]] || [[macrolanguage]], [[Twi language|Twi]] is [tw/twi], [[Fanti language|Fanti]] is [fat]
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Albanian language|Albanian]] || lang="sq"|gjuha shqipe || sq || sqi || '''alb''' || sqi + [[ISO 639 macrolanguage#sqi|4]] || [[macrolanguage]]
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Alemannic language|Alemannic]], [[Swiss German]], [[Alsatian language|Alsatian]] || lang="gsw"|Schwyzerdütsch, Elsassisch, Alemannisch ||&nbsp;|| gsw || gsw || gsw || 
+|-
+|bgcolor=#FFFF00| ||  [[Afro-Asiatic languages|Afro-Asiatic]] || [[Amharic language|Amharic]] || lang="am"|አማርኛ || am || amh || amh || amh ||
+|-
+|bgcolor=#FFFF00| ||  [[Afro-Asiatic languages|Afro-Asiatic]] || [[Arabic language|Arabic]] || lang="ar" dir="rtl"|<!--rtl-->العربية<!--rtl--> || ar || ara || ara || ara + [[ISO 639 macrolanguage#ara|30]] || [[macrolanguage]], [[Standard Arabic]] is [arb]
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Aragonese language|Aragonese]] || lang="an"|aragonés || an || arg || arg || arg ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] ||[[Armenian language|Armenian]] || lang="hy"|Հայերեն || hy || hye || '''arm''' || hye ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] ||[[Assamese language|Assamese]] || lang="as"|অসমীয়া || as || asm || asm || asm ||
+|-
+|bgcolor=#ACE1AF| || [[Northeast Caucasian languages|Northeast Caucasian]] || [[Avar language|Avaric]] || lang="av"|авар мацӀ, магӀарул мацӀ || av || ava || ava ||ava ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Avestan language|Avestan]] || lang="ae"|avesta || ae || ave || ave || ave || [[ancient languages|ancient]]
+|-
+|bgcolor=#ADD8E6| || [[Aymaran languages|Aymaran]] || [[Aymara language|Aymara]] || lang="ay"|aymar aru || |ay || aym || aym || aym + [[ISO 639 macrolanguage#aym|2]] || [[macrolanguage]]
+|-
+|bgcolor=#ADFF2F| || [[Turkic languages|Turkic]] || [[Azerbaijani language|Azerbaijani]] || lang="az"|azərbaycan dili || az || aze || aze ||aze + [[ISO 639 macrolanguage#aze|2]] || [[macrolanguage]]
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Bambara language|Bambara]] || lang="bm"|bamanankan || bm || bam || bam || bam ||
+|-
+|bgcolor=#ADFF2F| || [[Turkic languages|Turkic]] || [[Bashkir language|Bashkir]] || lang="ba"|башҡорт теле || ba || bak || bak || bak ||
+|-
+|bgcolor=#A9A9A9| || [[Language isolate]] || [[Basque language|Basque]] || lang="eu"|euskara, euskera || eu || eus || '''baq''' || eus ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Belarusian language|Belarusian]] || lang="be"|беларуская мова|| be || bel || bel || bel ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] ||  [[Bengali language|Bengali]] || lang="bn"|বাংলা || bn || ben || ben || ben ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] ||  [[Bihari languages|Bihari]] || lang="bh"|भोजपुरी || bh || bih || bih || – || Collective language code for [[Bhojpuri language|Bhojpuri]], [[Magahi language|Magahi]], and [[Maithili language|Maithili]]
+|-
+|bgcolor=#D2B48C| || [[Creole languages|Creole]] || [[Bislama language|Bislama]] || lang="bi"|Bislama || bi || bis || bis || bis ||
+|-
+|bgcolor=#66FF00 | ||  [[Indo-European languages|Indo-European]] || [[Bosnian language|Bosnian]] ||lang="bs"|bosanski jezik || bs || bos || bos || bos ||
+|-
+|bgcolor=#66FF00 | ||  [[Indo-European languages|Indo-European]] || [[Breton language|Breton]] || lang="br"|brezhoneg || br || bre || bre || bre ||
+|-
+|bgcolor=#66FF00 | ||  [[Indo-European languages|Indo-European]] || [[Bulgarian language|Bulgarian]] || lang="bg"|български език || bg || bul || bul || bul ||
+|-
+|bgcolor=#FF2000| || [[Sino-Tibetan languages|Sino-Tibetan]] || [[Burmese language|Burmese]] ||lang="my"|ဗမာစာ || my || mya || '''bur''' || mya ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Catalan language|Catalan]]; [[Valencian]] || lang="ca"|català, valencià || ca || cat || cat || cat ||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Chamorro language|Chamorro]]|| lang="ch"|Chamoru || ch || cha || cha || cha ||
+|-
+|bgcolor=#ACE1AF| || [[Northeast Caucasian languages|Northeast Caucasian]] || [[Chechen language|Chechen]] || lang="ce"|нохчийн мотт || ce || che || che || che ||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Chichewa language|Chichewa]]; Chewa; Nyanja || lang="ny"|chiCheŵa, chinyanja || ny || nya || nya || nya ||
+|-
+|bgcolor=#FF2000| || [[Sino-Tibetan languages|Sino-Tibetan]] || [[Chinese language|Chinese]] || {{lang|zh-Hani|中文}} (Zhōngwén), {{lang|zh-Hans|汉语}}, {{lang|zh-Hant|漢語}} || zh || zho || '''chi''' || zho + [[ISO 639 macrolanguage#zho|13]] || [[macrolanguage]]
+|-
+|bgcolor=#ADFF2F| || [[Turkic languages|Turkic]] || [[Chuvash language|Chuvash]] || lang="cv"|чӑваш чӗлхи || cv || chv || chv || chv ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Cornish language|Cornish]] || lang="kw"| Kernewek || kw || cor || cor || cor ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Corsican language|Corsican]] || lang="co"|corsu, lingua corsa || co || cos || cos || cos ||
+|-
+|bgcolor=#ADD8E6| || [[Algonquian languages|Algonquian]] || [[Cree language|Cree]] || lang="cr"|ᓀᐦᐃᔭᐍᐏᐣ || cr || cre || cre || cre + [[ISO 639 macrolanguage#cre|6]] || [[macrolanguage]]
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Croatian language|Croatian]] || lang="hr"|hrvatski jezik || hr || hrv || hrv || hrv ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] ||[[Czech language|Czech]] || lang="cs"|čeština, český jazyk || cs || ces || '''cze''' || ces ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Danish language|Danish]] || lang="da"|dansk|| da || dan || dan || dan ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Dhivehi language|Divehi]]; Dhivehi; Maldivian; || lang="dv" dir="rtl"|<!--rtl-->ދިވެހި<!--rtl--> || dv || div || div || div ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Dutch language|Dutch]] ||lang="nl"|Nederlands, Vlaams||nl||nld||'''dut'''||nld||
+|-
+|bgcolor=#FF2000| || [[Sino-Tibetan languages|Sino-Tibetan]] || [[Dzongkha language|Dzongkha]] || lang="dz"|རྫོང་ཁ || dz || dzo || dzo || dzo ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[English language|English]] || lang="en"|English || en || eng || eng || eng ||
+|-
+|bgcolor=#000000| || [[Constructed languages|Constructed]] || [[Esperanto]] || lang="eo"|Esperanto || eo || epo || epo || epo || [[Constructed languages|constructed]]
+|-
+|bgcolor=#32CD32| || [[Uralic languages|Uralic]] || [[Estonian language|Estonian]] || lang="et"|eesti, eesti keel || et || est || est || est + [[ISO 639 macrolanguage#est|2]] ||  [[macrolanguage]]
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Ewe language|Ewe]] || lang="ee"|Eʋegbe || ee || ewe || ewe || ewe ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Faroese language|Faroese]] || lang="fo"|føroyskt || fo || fao || fao || fao ||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Fijian language|Fijian]] || lang="fj"|vosa Vakaviti || fj || fij || fij || fij ||
+|-
+|bgcolor=#32CD32| || [[Uralic languages|Uralic]] || [[Finnish language|Finnish]] || lang="fi"|suomi, suomen kieli || fi || fin || fin || fin ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[French language|French]] || lang="fr"|français, langue française || fr || fra || '''fre''' || fra ||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Fula language|Fula]]; Fulah; Pulaar; Pular || lang="ff"|Fulfulde, Pulaar, Pular || ff || ful || ful || ful + [[ISO 639 macrolanguage#ful|9]] || [[macrolanguage]]
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Galician language|Galician]] || lang="gl"|galego || gl || glg || glg || glg ||
+|-
+|bgcolor=#90EE90| || [[South Caucasian languages|South Caucasian]] || [[Georgian language|Georgian]] ||lang="ka"|ქართული|| ka || kat || '''geo''' || kat ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[German language|German]] || lang="de"|Deutsch || de || deu || '''ger''' || deu ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Greek language|Greek]], Modern || lang="el"|ελληνική γλώσσα, ελληνικά || el || ell || '''gre''' || ell ||
+|-
+|bgcolor=#ADD8E6| || [[Tupian languages|Tupian]] || [[Guaraní language|Guaraní]] || lang="gn"|Avañe'ẽ || gn || grn || grn || grn + [[ISO 639 macrolanguage#grn|5]] || [[macrolanguage]]
+|-
+|bgcolor=#66FF00 rowspan=| || rowspan=| [[Indo-European languages|Indo-European]] || [[Gujarati language|Gujarati]] || lang="gu"|ગુજરાતી || gu || guj || guj || guj ||
+|-
+|bgcolor=#D2B48C| || [[Creole languages|Creole]] || [[Haitian Creole language|Haitian]]; Haitian Creole || lang="ht"|Kreyòl ayisyen || ht || hat || hat || hat ||
+|-
+|bgcolor=#FFFF00 | ||  [[Afro-Asiatic languages|Afro-Asiatic]] || [[Hausa language|Hausa]] || lang="ha" dir="rtl"|Hausa, <!--rtl-->هَوُسَ<!--rtl--> || ha || hau || hau || hau ||
+|-
+|bgcolor=#FFFF00 | ||  [[Afro-Asiatic languages|Afro-Asiatic]] || [[Hebrew language|Hebrew]] (modern) || lang="he" dir="rtl"|<!--rtl-->עברית<!--rtl--> || he || heb || heb || heb ||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Herero language|Herero]] || lang="hz"|Otjiherero || hz || her || her || her ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Hindi]] || lang="hi"|हिन्दी, हिंदी || hi || hin || hin || hin ||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Hiri Motu language|Hiri Motu]] || lang="ho"|Hiri Motu || ho || hmo || hmo || hmo ||
+|-
+|bgcolor=#32CD32| || [[Uralic languages|Uralic]] || [[Hungarian language|Hungarian]] || lang="hu"|Magyar || hu || hun || hun || hun ||
+|-
+|bgcolor=#000000| || [[Constructed languages|Constructed]] || [[Interlingua]] || lang="ia"|Interlingua || ia || ina || ina || ina || constructed by [[International Auxiliary Language Association]]
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Indonesian language|Indonesian]] || lang="id"|Bahasa Indonesia || id || ind || ind || ind || Covered by macrolanguage [ms/msa]
+|-
+|bgcolor=#000000| || [[Constructed languages|Constructed]] || [[Interlingue language|Interlingue]] || lang="ie"|Originally called [[Occidental language|Occidental]]; then Interlingue after WWII || ie || ile || ile || ile || constructed by [[Edgar de Wahl]], first published in 1922
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Irish language|Irish]] || lang="ga"|Gaeilge || ga || gle || gle || gle ||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Igbo language|Igbo]] || lang="ig"|Asụsụ Igbo || ig || ibo || ibo || ibo ||
+|-
+|bgcolor=#F0F8FF| || [[Eskimo–Aleut languages|Eskimo–Aleut]] || [[Inupiaq language|Inupiaq]] || lang="ik"|Iñupiaq, Iñupiatun || ik || ipk || ipk || ipk + [[ISO 639 macrolanguage#ipk|2]] || [[macrolanguage]]
+|-
+|bgcolor=#000000| || [[Constructed languages|Constructed]] || [[Ido]] || lang="io"|Ido || io || ido || ido || ido ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Icelandic language|Icelandic]] ||lang="is"|Íslenska|| is || isl || '''ice''' || isl ||
+|-
+|bgcolor=#66FF00 | || [[Indo-European languages|Indo-European]] || [[Italian language|Italian]] ||lang="it"|italiano|| it || ita || ita || ita ||
+|-
+|bgcolor=#F0F8FF| || [[Eskimo–Aleut languages|Eskimo–Aleut]] || [[Inuktitut]] ||lang="iu"|ᐃᓄᒃᑎᑐᑦ|| iu || iku || iku || iku + [[ISO 639 macrolanguage#iku|2]] || macrolanguage
+|-
+|bgcolor=#DDDDDD| || [[Japonic]] || [[Japanese language|Japanese]] ||{{lang|ja-Hani|日本語}} ({{lang|ja-Hira|にほんご}})|| ja || jpn || jpn || jpn ||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Javanese language|Javanese]] ||lang="jv"|basa Jawa|| jv || jav || jav || jav ||
+|-
+|bgcolor=#F0F8FF| || [[Eskimo–Aleut languages|Eskimo–Aleut]] || [[Kalaallisut language|Kalaallisut]], Greenlandic|| lang="kl"|kalaallisut, kalaallit oqaasii||kl||kal || kal || kal||
+|-
+|bgcolor=#00FF7F| || [[Dravidian languages|Dravidian]] || [[Kannada language|Kannada]] || lang="kn"|ಕನ್ನಡ || kn || kan || kan || kan ||
+|-
+|bgcolor=#FFBF00| || [[Nilo-Saharan languages|Nilo-Saharan]] || [[Kanuri language|Kanuri]] || lang="kr"|Kanuri || kr || kau || kau || kau + [[ISO 639 macrolanguage#kau|3]] ||  [[macrolanguage]]
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] ||[[Kashmiri language|Kashmiri]]||{{lang|ks-Deva|कश्मीरी}}, {{rtl-lang|ks-Arb|<!--rtl-->كشميري<!--rtl-->}}|| ks || kas || kas || kas ||
+|-
+|bgcolor=#ADFF2F| || [[Turkic languages|Turkic]] || [[Kazakh language|Kazakh]]|| lang="kk"|қазақ тілі||kk||kaz || kaz || kaz||
+|-
+|bgcolor=#FB607F| || [[Austro-Asiatic languages|Austro-Asiatic]] || [[Khmer language|Khmer]]|| lang="km"|ខ្មែរ, ខេមរភាសា, ភាសាខ្មែរ||km||khm || khm || khm||a.k.a. Cambodian
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Gikuyu language|Kikuyu]], Gikuyu|| lang="ki"|Gĩkũyũ||ki||kik || kik || kik||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Kinyarwanda]]||lang="rw"|Ikinyarwanda||rw||kin || kin || kin||
+|-
+|bgcolor=#ADFF2F| || [[Turkic languages|Turkic]] || [[Kyrgyz language|Kirghiz]], Kyrgyz || lang="ky"|кыргыз тили || ky || kir || kir || kir ||
+|-
+|bgcolor=#32CD32| || [[Uralic languages|Uralic]] || [[Komi language|Komi]] || lang="kv"|коми кыв || kv || kom || kom || kom + [[ISO 639 macrolanguage#kom|2]] || macrolanguage
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Kongo language|Kongo]] || lang="kg"|KiKongo || kg || kon || kon || kon + [[ISO 639 macrolanguage#kon|3]] || macrolanguage
+|-
+|bgcolor=#A9A9A9| || [[Language isolate]] || [[Korean language|Korean]]||{{lang|ko-Hang|한국어}} ({{lang|ko-Hani|韓國語}}), {{lang|ko-Hang|조선어}} ({{lang|ko-Hani|朝鮮語}})<!-- ideograph is used in Korea-->|| ko || kor || kor || kor ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Kurdish language|Kurdish]] ||{{lang|ku-Latn|Kurdî}}, {{rtl-lang|ku-Arab|كوردی}}|| ku || kur || kur || kur + [[ISO 639 macrolanguage#kur|3]] || macrolanguage
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Kwanyama]], Kuanyama|| lang="kj"|Kuanyama||kj||kua || kua || kua||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Latin]] || lang="la"|latine, lingua latina || la || lat || lat || lat || ancient
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Luxembourgish language|Luxembourgish]], Letzeburgesch || lang="lb"|Lëtzebuergesch || lb || ltz || ltz || ltz ||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Luganda|Ganda]] || lang="lg"|Luganda || lg || lug || lug || lug ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Limburgish language|Limburgish]], Limburgan, Limburger || lang="li"|Limburgs || li || lim || lim || lim ||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Lingala language|Lingala]] || lang="ln"|Lingála || ln || lin || lin || lin ||
+|-
+|bgcolor=#CCCCFF| || [[Tai–Kadai languages|Tai–Kadai]] || [[Lao language|Lao]] || lang="lo"|ພາສາລາວ || lo || lao || lao || lao ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Lithuanian language|Lithuanian]] || lang="lt"|lietuvių kalba || lt || lit || lit || lit ||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Tshiluba language|Luba-Katanga]] || || lu || lub || lub || lub ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Latvian language|Latvian]] || lang="lv"|latviešu valoda || lv || lav || lav || lav ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Manx language|Manx]] || lang="gv"|Gaelg, Gailck || gv || glv || glv || glv ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Macedonian language|Macedonian]]||lang="mk"|македонски јазик|| mk||mkd||'''mac'''||mkd||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Malagasy language|Malagasy]] || lang="mg"|Malagasy fiteny || mg || mlg || mlg || mlg + [[ISO 639 macrolanguage#mlg|10]] || macrolanguage
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Malay language|Malay]]||{{lang|ms|bahasa Melayu}}, {{rtl-lang|ms-Arab|<!--rtl-->بهاس ملايو<!--rtl-->}}||ms||msa||'''may'''||msa + [[ISO 639 macrolanguage#msa|13]]||macrolanguage, [[Malaysian language|Standard Malay]] is [zsm], [[Indonesian language|Indonesian]] is [id/ind]
+|-
+|bgcolor=#00FF7F| || [[Dravidian languages|Dravidian]] || [[Malayalam language|Malayalam]]||lang="ml"|മലയാളം||ml||mal || mal || mal||
+|-
+|bgcolor=#FFFF00| || [[Afro-Asiatic languages|Afro-Asiatic]] ||  [[Maltese language|Maltese]]||lang="mt"|Malti||mt||mlt || mlt || mlt||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Māori language|Māori]]||lang="mi"|te reo Māori||mi||mri||'''mao'''||mri||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Marathi language|Marathi (Marāṭhī)]]||lang="mr"|मराठी||mr||mar || mar || mar||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Marshallese language|Marshallese]] || lang="mh"|Kajin M̧ajeļ || mh || mah || mah || mah ||
+|-
+|bgcolor=#ADFF2F| || [[Mongolic languages|Mongolic]] || [[Mongolian language|Mongolian]]||lang="mn"|монгол||mn||mon || mon || mon + [[ISO 639 macrolanguage#mon|2]]||macrolanguage
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Nauruan language|Nauru]]||lang="na"|Ekakairũ Naoero||na||nau || nau || nau||
+|-
+|bgcolor=#00BFFF| || [[Dené–Yeniseian languages|Dené–Yeniseian]] || [[Navajo language|Navajo]], Navaho || lang="nv"|Diné bizaad, Dinékʼehǰí || nv || nav || nav || nav ||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Bokmål|Norwegian Bokmål]]||lang="nb"|Norsk bokmål||nb||nob || nob || nob||Covered by macrolanguage [no/nor]
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Northern Ndebele language|North Ndebele]]||lang="nd"|isiNdebele||nd||nde || nde || nde||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Nepali language|Nepali]]||lang="ne"|नेपाली||ne||nep || nep || nep||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Ndonga]]||lang="ng"|Owambo||ng||ndo || ndo || ndo||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Nynorsk|Norwegian Nynorsk]]||lang="nn"|Norsk nynorsk||nn||nno || nno || nno||Covered by macrolanguage [no/nor]
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Norwegian language|Norwegian]]||lang="no"|Norsk||no||nor || nor || nor + [[ISO 639 macrolanguage#nor|2]]||macrolanguage, [[Bokmål]] is [nb/nob], [[Nynorsk]] is [nn/nno]
+|-
+|bgcolor=#FF2000| || [[Sino-Tibetan languages|Sino-Tibetan]] || [[Nuosu language|Nuosu]] || lang="ii"|ꆈꌠ꒿ Nuosuhxop || ii || iii || iii || iii || Standard form of [[Yi language]]s
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Southern Ndebele language|South Ndebele]]||lang="nr"|isiNdebele||nr||nbl || nbl || nbl||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Occitan language|Occitan]] ||lang="oc"|occitan, lenga d'òc||oc||oci || oci || oci||
+|-
+|bgcolor=#ADD8E6| || [[Algonquian languages|Algonquian]] || [[Ojibwe language|Ojibwe]], Ojibwa||lang="oj"|ᐊᓂᔑᓈᐯᒧᐎᓐ||oj||oji || oji || oji + [[ISO 639 macrolanguage#oji|7]]||macrolanguage
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Old Church Slavonic]], Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic || lang="cu"|ѩзыкъ словѣньскъ || cu || chu || chu || chu || [[ancient languages|ancient]]
+|-
+|bgcolor=#FFFF00| || [[Afro-Asiatic languages|Afro-Asiatic]] ||  [[Oromo language|Oromo]]||lang="om"|Afaan Oromoo||om||orm || orm || orm + [[ISO 639 macrolanguage#orm|4]]||macrolanguage
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Oriya language|Oriya]]||lang="or"|ଓଡ଼ିଆ||or||ori || ori || ori||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Ossetic language|Ossetian]], Ossetic||lang="os"|ирон æвзаг||os||oss || oss || oss||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Punjabi language|Panjabi]], Punjabi||{{lang|pa|ਪੰਜਾਬੀ}}, {{rtl-lang|pa-Arab|<!--rtl-->پنجابی<!--rtl-->}}||pa||pan || pan || pan||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Pāli language|Pāli]]||lang="pi"|पाऴि||pi||pli || pli || pli||ancient
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Persian language|Persian]]||lang="fa" dir="rtl"|<!--rtl-->فارسی<!--rtl-->||fa||fas||'''per'''||fas + [[ISO 639 macrolanguage#fas|2]]||macrolanguage
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Polish language|Polish]]||lang="pl"|język polski, polszczyzna||pl||pol || pol || pol||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Pashto language|Pashto]], Pushto||lang="ps" dir="rtl"|<!--rtl-->پښتو<!--rtl-->||ps||pus || pus || pus + [[ISO 639 macrolanguage#pus|3]]||macrolanguage
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Portuguese language|Portuguese]]||lang="pt"|português||pt||por || por || por||
+|-
+|bgcolor=#ADD8E6| || [[Quechuan languages|Quechuan]] || [[Quechua language|Quechua]]||lang="qu"|Runa Simi, Kichwa||qu||que || que || que + [[ISO 639 macrolanguage#que|44]]||macrolanguage
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Romansh language|Romansh]]||lang="rm"|rumantsch grischun||rm||roh || roh || roh||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Kirundi]]||lang="rn"|Ikirundi||rn||run || run || run||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Romanian language|Romanian]], [[Moldavian language|Moldavian]], Moldovan||lang="ro"|limba română, limba moldovenească||ro||ron||'''rum'''||ron||[mo] for Moldavian has been withdrawn, recommending [ro] also for Moldavian
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Russian language|Russian]]||lang="ru"|русский язык||ru||rus || rus || rus||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Sanskrit|Sanskrit (Saṁskṛta)]]||lang="sa"|संस्कृतम्||sa||san || san || san||ancient, still spoken
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Sardinian language|Sardinian]]||lang="sc"|sardu||sc||srd || srd || srd + [[ISO 639 macrolanguage#srd|4]]||macrolanguage
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Sindhi language|Sindhi]]||{{lang|sd-Deva|सिन्धी}}, {{rtl-lang|sd-Arab|<!--rtl-->سنڌي، سندھی<!--rtl-->}}||sd||snd || snd || snd||
+|-
+|bgcolor=#32CD32| || [[Uralic languages|Uralic]] || [[Northern Sami]]||lang="se"|Davvisámegiella||se||sme || sme || sme||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian Languages|Austronesian]] || [[Samoan language|Samoan]]||lang="sm"|gagana fa'a Samoa||sm||smo || smo || smo||
+|-
+|bgcolor=#D2B48C| || [[Creole languages|Creole]] || [[Sango language|Sango]]||lang="sg"|yângâ tî sängö||sg||sag || sag || sag||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Serbian language|Serbian]]||lang="sr"|српски језик||sr||srp || srp || srp||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Scottish Gaelic language|Scottish Gaelic]]; Gaelic || lang="gd"|Gàidhlig || gd || gla || gla || gla ||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Shona language|Shona]]||lang="sn"|chiShona||sn||sna || sna || sna||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Sinhala language|Sinhala]], Sinhalese||lang="si"|සිංහල||si||sin || sin || sin||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Slovak language|Slovak]]||lang="sk"| slovenčina, slovenský jazyk||sk||slk||'''slo'''||slk||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Slovene language|Slovene]]||lang="sl"|slovenski jezik, slovenščina||sl||slv || slv || slv||
+|-
+|bgcolor=#FFFF00| || [[Afro-Asiatic languages|Afro-Asiatic]] || [[Somali language|Somali]]||lang="so"|Soomaaliga, af Soomaali||so||som || som || som||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Sotho language|Southern Sotho]]||lang="st"|Sesotho||st||sot || sot || sot||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Spanish language|Spanish]]; Castilian || lang="es"|español, castellano || es || spa || spa || spa ||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Sundanese language|Sundanese]]||lang="su"|Basa Sunda||su||sun || sun || sun||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Swahili language|Swahili]]||lang="sw"|Kiswahili||sw||swa || swa || swa + [[ISO 639 macrolanguage#swa|2]]||macrolanguage
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Swati language|Swati]]||lang="ss"|SiSwati||ss||ssw || ssw || ssw||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Swedish language|Swedish]]||lang="sv"|svenska||sv||swe || swe || swe||
+|-
+|bgcolor=#00FF7F| || [[Dravidian languages|Dravidian]] || [[Tamil language|Tamil]]||lang="ta"|தமிழ்||ta||tam || tam || tam||
+|-
+|bgcolor=#00FF7F| || [[Dravidian languages|Dravidian]] || [[Telugu language|Telugu]]||lang="te"|తెలుగు||te||tel || tel || tel||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Tajik language|Tajik]]||{{lang|tg-Cyrl|тоҷикӣ}}, {{lang|tg-Latn|toğikī}}, {{rtl-lang|tg-Arab|<!--rtl-->تاجیکی<!--rtl-->}}||tg||tgk || tgk || tgk||
+|-
+|bgcolor=#CCCCFF| || [[Tai–Kadai languages|Tai–Kadai]] || [[Thai language|Thai]]||lang="th"|ไทย||th||tha || tha || tha||
+|-
+|bgcolor=#FFFF00| || [[Afro-Asiatic languages|Afro-Asiatic]] || [[Tigrinya language|Tigrinya]]||lang="ti"|ትግርኛ||ti||tir || tir || tir||
+|-
+|bgcolor=#FF2000| || [[Sino-Tibetan languages|Sino-Tibetan]] || [[Standard Tibetan|Tibetan Standard]], Tibetan, Central || lang="bo"|བོད་ཡིག || bo || bod || '''tib''' || bod ||
+|-
+|bgcolor=#ADFF2F| || [[Turkic languages|Turkic]] || [[Turkmen language|Turkmen]]||lang="tk"|Türkmen, Түркмен||tk||tuk || tuk || tuk||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Tagalog language|Tagalog]]||lang="tl"|Wikang Tagalog, ᜏᜒᜃᜅ᜔ ᜆᜄᜎᜓᜄ᜔||tl||tgl || tgl || tgl||Note: [[Filipino language|Filipino]] (Pilipino) has the code [fil]
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Tswana language|Tswana]]||lang="tn"|Setswana||tn||tsn || tsn || tsn||
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Tongan language|Tonga]] (Tonga Islands)||lang="to"|faka Tonga||to||ton || ton || ton||
+|-
+|bgcolor=#ADFF2F| || [[Turkic languages|Turkic]] || [[Turkish language|Turkish]]||lang="tr"|Türkçe||tr||tur || tur || tur||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Tsonga language|Tsonga]]||lang="ts"|Xitsonga||ts||tso || tso || tso||
+|-
+|bgcolor=#ADFF2F| || [[Turkic languages|Turkic]] || [[Tatar language|Tatar]]||{{lang|tt-Cyrl|татар теле}}, {{lang|tt-Latn|tatar tele}}||tt||tat || tat || tat||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Twi]] || lang="tw"|Twi || tw || twi || twi || twi || Covered by macrolanguage [ak/aka]
+|-
+|bgcolor=#FFC0CB| || [[Austronesian languages|Austronesian]] || [[Tahitian language|Tahitian]]||lang="ty"|Reo Tahiti||ty||tah || tah || tah||One of the Reo Mā`ohi (languages of French Polynesia)
+|-
+|bgcolor=#ADFF2F| || [[Turkic languages|Turkic]] || [[Uyghur language|Uighur]], Uyghur||{{lang|ug-Latn|Uyƣurqə}}, {{rtl-lang|ug-Arab|<!--rtl-->ئۇيغۇرچە<!--rtl-->}}||ug||uig || uig || uig||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Ukrainian language|Ukrainian]]||lang="uk"|українська мова||uk||ukr || ukr || ukr||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Urdu]]||lang="ur" dir="rtl"|<!--rtl-->اردو<!--rtl-->||ur||urd || urd || urd||
+|-
+|bgcolor=#ADFF2F| || [[Turkic languages|Turkic]] || [[Uzbek language|Uzbek]]||{{lang|uz-Latn|O'zbek}}, {{lang|uz-Cyrl|Ўзбек}}, {{rtl-lang|uz-Arab|<!--rtl-->أۇزبېك<!--rtl-->}}||uz||uzb || uzb || uzb + [[ISO 639 macrolanguage#uzb|2]]||macrolanguage
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Venda language|Venda]]||lang="ve"|Tshivenḓa||ve||ven || ven || ven||
+|-
+|bgcolor=#FB607F| || [[Austro-Asiatic languages|Austro-Asiatic]] ||[[Vietnamese language|Vietnamese]] || lang="vi"|Tiếng Việt || vi || vie || vie || vie ||
+|-bgcolor=#FB607F| || [[Indo-European languages|Indo-European]] ||[[Viking language|Viking]] ||lang="vk"|Ovalingo || vk || vik || vkg || vik ||
+|-
+|bgcolor=#000000| || [[Constructed languages|Constructed]] || [[Volapük]]||lang="vo"|Volapük||vo||vol || vol || vol||constructed
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Walloon language|Walloon]]||lang="wa"|walon||wa||wln || wln || wln||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Welsh language|Welsh]]||lang="cy"|Cymraeg||cy||cym||'''wel'''||cym||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Wolof language|Wolof]]||lang="wo"|Wollof||wo||wol || wol || wol||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[West Frisian language|Western Frisian]]||lang="fy"|Frysk||fy||fry || fry || fry||
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Xhosa language|Xhosa]]||lang="xh"|isiXhosa||xh||xho || xho || xho||
+|-
+|bgcolor=#66FF00| || [[Indo-European languages|Indo-European]] || [[Yiddish language|Yiddish]]||lang="yi" dir="rtl"|<!--rtl-->ייִדיש<!--rtl-->||yi||yid || yid || yid + [[ISO 639 macrolanguage#yid|2]]||macrolanguage
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Yoruba language|Yoruba]]||lang="yo"|Yorùbá||yo||yor || yor || yor||
+|-
+|bgcolor=#CCCCFF| || [[Tai–Kadai languages|Tai–Kadai]] || [[Zhuang language|Zhuang]], Chuang||lang="za"|Saɯ cueŋƅ, Saw cuengh||za||zha || zha || zha + [[ISO 639 macrolanguage#zha|16]]||macrolanguage
+|-
+|bgcolor=#FFA500| || [[Niger–Congo languages|Niger–Congo]] || [[Zulu language|Zulu]]||lang="zu"|isiZulu||zu||zul || zul || zul||
+|}
