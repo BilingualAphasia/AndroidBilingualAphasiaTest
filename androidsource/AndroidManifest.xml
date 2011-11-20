@@ -19,13 +19,7 @@
 	
     <application android:icon="@drawable/ic_oprime" android:label="@string/app_name">
          
-       <activity android:name=".ui.ExperimentHome"
-                  android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>     		
+ 		
        
 		<activity android:name=".preferences.SetPreferencesActivity"
                   android:label="@string/app_name">
@@ -34,6 +28,10 @@
           		
         <activity android:name=".ui.BilingualAphasiaTestHome"
                   android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>  
 		 
     </application>
