@@ -144,7 +144,6 @@ public class BilingualAphasiaTestHome extends Activity {
 		startActivityForResult(setupIntent, PREPARE_TRIAL);
 	}
 	
-
 	public class JavaScriptInterface {
 		
 		Context mContext;
@@ -233,6 +232,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		}
 		
 	}
+	
 	public void launchSubExperiment(int subExperimentId){
 		if(mReplayMode){
 			replaySubExperiment(subExperimentId);
@@ -286,6 +286,7 @@ public class BilingualAphasiaTestHome extends Activity {
 			startActivityForResult(intent, AUTO_ADVANCE_NEXT_SUB_EXPERIMENT);
 		}
 	}
+	
 	private void initExperiment(){
 		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 		String firstname = prefs.getString(PreferenceConstants.PREFERENCE_PARTICIPANT_FIRSTNAME, "none");
@@ -337,12 +338,14 @@ public class BilingualAphasiaTestHome extends Activity {
         editor.commit();
        
 	}
+	
 	private void getSubExperimentTitles(){
 		String[] subexperimentarray;
 		
 		subexperimentarray = getResources().getStringArray(R.array.subexperiment_titles);
 		mSubExperiments =  new ArrayList(Arrays.asList(subexperimentarray));
 	}
+	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		SharedPreferences prefens = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
 		getSubExperimentTitles();
@@ -425,6 +428,8 @@ public class BilingualAphasiaTestHome extends Activity {
 			break;
 		}
 	}
+	
+	
 	@Override
 	protected void onDestroy() {
 		mExperimentQuit=System.currentTimeMillis();
@@ -544,6 +549,7 @@ public class BilingualAphasiaTestHome extends Activity {
 				PackageManager.MATCH_DEFAULT_ONLY);
 		return list.size() > 0;
 	}
+	
 	public int findVideosWithSubstring(final String substring){
 		if(substring.length() < 1 ){
 			return 0;
@@ -572,6 +578,7 @@ public class BilingualAphasiaTestHome extends Activity {
         return mSubExperimentParticipantVideos.size();
 
 	}
+	
 	public String findParticipantCodesWithResults() {
 		mParticipantsCodesCompleted = null;
 		mParticipantsCodesCompleted = new ArrayList<String>();
