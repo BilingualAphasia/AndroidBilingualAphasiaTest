@@ -36,6 +36,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	private Handler mHandlerDelayStimuli = new Handler();
 	private Boolean mReplayMode = false;
 	private Boolean mReplayBySubExperiments = false;
+	private Boolean mDisplayPreparedToast = false;
 	private String mCurrentSubExperimentLanguage = OPrime.ENGLISH;
 	public long mExperimentLaunch;
 	public long mExperimentQuit;
@@ -306,7 +307,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		 */
 		mParticipantId = participantGroup+mTabletOrPaperFirst+testDayNumber+experimenter+participantNumberOnDay+firstname.substring(0,1).toUpperCase()+lastname.substring(0,1).toUpperCase();
 		mExperimentLaunch = System.currentTimeMillis();
-		mExperimentTrialHeader = "ParticipantID,FirstName,LastName,WorstLanguage,FirstBat,StartTime,EndTime,ExperimenterID" +
+		mExperimentTrialHeader = getString(R.string.experiment_trial_header) +
 				":::==="+mParticipantId+","
 				+firstname+","
 				+lastname+","
@@ -328,6 +329,18 @@ public class BilingualAphasiaTestHome extends Activity {
 		
 		subexperimentarray = getResources().getStringArray(R.array.subexperiment_titles);
 		mSubExperiments =  new ArrayList(Arrays.asList(subexperimentarray));
+		
+		mExperimentTitle = getString(R.string.experiment_title);
+		
+		if (mDisplayPreparedToast){
+			Toast.makeText(getApplicationContext(), getString(R.string.experiment_ready_message)+":\n\n" +
+	        		"ParticipantCode: "+mParticipantId+"\n"+
+	        		//"Trial start timestamp: "+mExperimentLaunch+"\n\n" +
+	        				getString(R.string.experiment_start_instructions)+"...", Toast.LENGTH_LONG).show();
+			mDisplayPreparedToast = false;
+		}
+		setTitle(getString(R.string.app_name));
+	
 	}
 
 
@@ -359,9 +372,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		if (!fileManagerAvailable) {
 			Toast.makeText(
 					getApplicationContext(),
-					"To record participant video you can install the "
-							+ "OPrime Android Experimentation App, it allows your tablet to record video "
-							+ "in the background and save it to the SDCARD.",
+					getString(R.string.install_oprime),
 							Toast.LENGTH_LONG).show();
 			Intent goToMarket = new Intent(Intent.ACTION_VIEW).setData(Uri
 					.parse("market://details?id=ca.ilanguage.oprime.android"));
@@ -397,14 +408,9 @@ public class BilingualAphasiaTestHome extends Activity {
 		case SWITCH_LANGUAGE:
 			
 			setLocaleToExperimentLangauge();
-//			
-//			if(mCurrentSubExperimentLanguage.equals(OPrime.ENGLISH)){
-//				
-//				mExperimentTitle = "Bilingual Aphasia Test - English";
-//			}else{
-//				
-				mExperimentTitle = "Test de l'aphasie chez les bilingues - français";
-//			}
+
+			
+
 			mSubExperimentTypes =  new ArrayList(Arrays.asList(subExperimentTypes.split(",")));
 			mExperimentLaunch = System.currentTimeMillis();
 			mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
@@ -425,21 +431,7 @@ public class BilingualAphasiaTestHome extends Activity {
 			break;
 		case OPrime.PREPARE_TRIAL:
 			initExperiment();
-			if (mCurrentSubExperimentLanguage.equals(OPrime.ENGLISH)) {
-				
-				mExperimentTitle = "Bilingual Aphasia Test - English";
-				Toast.makeText(getApplicationContext(), "Experiment Trial is ready:\n\n" +
-		        		"ParticipantCode: "+mParticipantId+"\n"+
-		        		//"Trial start timestamp: "+mExperimentLaunch+"\n\n" +
-		        				"Touch Start to take Participants Background Info...", Toast.LENGTH_LONG).show();
-			} else {
-				
-				mExperimentTitle = "Test de l'aphasie chez les bilingues - fran�ais";
-				Toast.makeText(getApplicationContext(), "L'exp�rience est pr�t:\n\n" +
-		        		"ParticipantCode: "+mParticipantId+"\n"+
-		        		//"Trial start timesamp: "+mExperimentLaunch+"\n\n" +
-        				"Touchez Commencer pour prendre l'histoire du participant ...", Toast.LENGTH_LONG).show();
-			}
+			mDisplayPreparedToast= true;
 			mSubExperimentTypes = new ArrayList(
 					Arrays.asList(subExperimentTypes.split(",")));
 			mExperimentLaunch = System.currentTimeMillis();
@@ -460,16 +452,9 @@ public class BilingualAphasiaTestHome extends Activity {
 			break;
 		case AUTO_ADVANCE_NEXT_SUB_EXPERIMENT:
 			mCurrentSubExperiment++;
-			if (mCurrentSubExperiment == 1 && mTabletOrPaperFirst.equals("P")){
-				/*TODO make experiment pause so that experimenter can do the paper BAT*/
-			}
 			
 			if (mCurrentSubExperiment >= mSubExperiments.size() ){
-				if(mTabletOrPaperFirst.equals("T")){
-					Toast.makeText(getApplicationContext(), "Tablet Experiment completed!\n\n Time for the Paper version.", Toast.LENGTH_LONG).show();
-				}else{
-					Toast.makeText(getApplicationContext(), "Experiment completed!", Toast.LENGTH_LONG).show();
-				}
+				Toast.makeText(getApplicationContext(), getString(R.string.experiment_completed_message), Toast.LENGTH_LONG).show();
 			}else{
 				if(!devMode){
 					//launchSubExperiment(mCurrentSubExperiment);
