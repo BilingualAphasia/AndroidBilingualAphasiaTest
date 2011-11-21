@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+
     <string-array name="subexperiment_titles">
         <item>History of Bilingualism</item>
         <item>English Background </item>
@@ -33,21 +34,134 @@
         <item>Reading Comprehension for Sentences</item>
         <item>Writing</item>
     </string-array>
+    <!-- These language names are from Wikipedia, and verified using the eBAT pdfs for the language name in it's language. 
+    	These are the languages that are available as eBAT as of November 20 2011
+     -->
+    <string-array name="available_languages">
+        <item>Amharic አማርኛ</item>
+        <item>Arabic العربية </item>
+        <item>Armenian Հայերեն</item>
+        <item>Azari</item>
+        <item>Basque euskara</item>
+        <item>Berber</item>
+        <item>Bosnian bosanski</item>
+        <item>Bulgarian български език</item>
+        <item>Cantonese 广州话 / 廣州話</item>
+        <item>Carinthian Kärntnarisch</item>
+        <item>Catalan català</item>
+        <item>Croatian hrvatski</item>
+        <item>Czech český</item>
+        <item>Danish dansk</item>
+        <item>English</item>
+        <item>Farsiفارسی</item>
+        <item>Finnish suomen</item>
+        <item>French français</item>
+        <item>Frulian furlan</item>
+        <item>Galician galego</item>
+        <item>German Deutsch</item>
+        <item>Greek ελληνικά</item>
+        <item>Hebrew עברית</item>
+        <item>Hindi हिन्दी</item>
+        <item>Hungarian magyar</item>
+        <item>Icelandic islenska</item>
+        <item>Inuktitut ᐃᓄᒃᑎᑐᑦ</item>
+        <item>Japanese 日本語 (にほんご)</item>
+        <item>Kannada ಕನ್ನಡ</item>
+        <item>Korean한국어</item>
+        <item>Kurdish  كوردی‎</item>
+        <item>Latvian latviešu</item>
+        <item>Lithuanian lietuvių</item>
+        <item>Luganda</item>
+        <item>Malagasy fiteny</item>
+        <item>Mandarin 普通話 / 普通话</item>
+        <item>Oriya ଓଡ଼ିଆ</item>
+        <item>Polish polski</item>
+        <item>Portuguese português</item>
+        <item>Romanian română</item>
+        <item>Russian русский</item>
+        <item>Sardinian sardu</item>
+        <item>Serbian српски</item>
+        <item>Slovenian slovenski</item>
+        <item>Somali Soomaaliga</item>
+        <item>Spanish español</item>
+        <item>Swahili Kiswahili</item>
+        <item>Swedish svenska</item>
+        <item>Tagalog ᜏᜒᜃᜅ᜔ ᜆᜄᜎᜓᜄ᜔</item>
+        <item>Tamil தமிழ்</item>
+        <item>Tulu ತುಳು ಬಾಸೆ</item>
+        <item>Turkish Türkçe</item>
+        <item>Ukrainian українська</item>
+        <item>Urdu اردو</item>
+        <item>Vietnamese việt</item>
+        <item>Yiddish ייִדיש</item>
+    </string-array>
+    <!--
+	Android Locale Documentation:
+	These codes are directly from the ISO 639-1 standard, except for languages where there is no code. 
+	There are some problems with using them, because java is not using the standard ISO 639-1.
+	
+    The language codes are two-letter lowercase ISO language codes (such as "en") as defined by ISO 639-1. The country codes are two-letter uppercase ISO country codes (such as "US") as defined by ISO 3166-1. The variant codes are unspecified.
+	
+	Note that Java uses several deprecated two-letter codes. The Hebrew ("he") language code is rewritten as "iw", Indonesian ("id") as "in", and Yiddish ("yi") as "ji". This rewriting happens even if you construct your own Locale object, not just for instances returned by the various lookup methods.
+    -->
 
- <string-array name="participant_codes">
-    <item>ET1AM4</item>
-    <item>SAMPLE</item>
-    <item>ET1AM4</item>
-    <item>ET1AM4</item>
-    <item>ET1AM4</item>
-  </string-array>
-  <!-- using 1,000,000 as a metric of 1 min of audio -->
-  <string-array name="participant_codes_int">
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
-    <item>5</item>
-  </string-array>
+    <string-array name="available_languages_codes">
+        <item>am</item>
+        <item>ar</item>
+        <item>hy</item>
+        <item>qaz</item>
+        <item>eu</item>
+        <item>qbe</item>
+        <item>bs</item>
+        <item>bg</item>
+        <item>yue</item>
+        <item>qcr</item>
+        <item>ca</item>
+        <item>hr</item>
+        <item>cs</item>
+        <item>da</item>
+        <item>en</item>
+        <item>fa</item>
+        <item>fi</item>
+        <item>fr</item>
+        <item>qfu</item>
+        <item>gl</item>
+        <item>de</item>
+        <item>el</item>
+        <item>he</item>
+        <item>hi</item>
+        <item>hu</item>
+        <item>is</item>
+        <item>iu</item>
+        <item>ja</item>
+        <item>kn</item>
+        <item>ko</item>
+        <item>ku</item>
+        <item>lv</item>
+        <item>lt</item>
+        <item>lg</item>
+        <item>mg</item>
+        <item>zh</item>
+        <item>or</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>sc</item>
+        <item>sr</item>
+        <item>sl</item>
+        <item>so</item>
+        <item>es</item>
+        <item>sw</item>
+        <item>sv</item>
+        <item>tl</item>
+        <item>ta</item>
+        <item>qtu</item>
+        <item>tr</item>
+        <item>uk</item>
+        <item>ur</item>
+        <item>vi</item>
+        <item>yi</item>
+    </string-array>
 
 </resources>
