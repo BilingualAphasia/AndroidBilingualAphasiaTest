@@ -1,56 +1,56 @@
-Amharic አማርኛ
-Arabic العربية 
-Armenian Հայերեն
-Azari
-Basque euskara
-Berber
-Bosnian bosanski
-Bulgarian български език
-Cantonese 广州话 / 廣州話
-Carinthian Kärntnarisch
-Catalan català
-Croatian hrvatski
-Czech český
-Danish dansk
-English
-Farsiفارسی
-Finnish suomen
-French français
-Frulian furlan
-Galician galego
-German Deutsch
-Greek ελληνικά
-Hebrew עברית
-Hindi हिन्दी
-Hungarian magyar
-Icelandic islenska
-Inuktitut ᐃᓄᒃᑎᑐᑦ
-Japanese 日本語 (にほんご)
-Kannada ಕನ್ನಡ
-Korean한국어
-Kurdish  كوردی‎
-Latvian latviešu
-Lithuanian lietuvių
-Luganda
-Malagasy fiteny
-Mandarin 普通話 / 普通话
-Oriya ଓଡ଼ିଆ
-Polish polski
-Portuguese português
-Romanian română
-Russian русский
-Sardinian sardu
-Serbian српски
-Slovenian slovenski
-Somali Soomaaliga
-Spanish español
-Swahili Kiswahili
-Swedish svenska
-Tagalog ᜏᜒᜃᜅ᜔ ᜆᜄᜎᜓᜄ᜔
-Tamil தமிழ்
-Tulu ತುಳು ಬಾಸೆ
-Turkish Türkçe
-Ukrainian українська
-Urdu اردو
-Vietnamese việt
-Yiddish ייִדיש
+<item>Amharic አማርኛ</item>
+<item>Arabic العربية </item>
+<item>Armenian Հայերեն</item>
+<item>Azari</item>
+<item>Basque euskara</item>
+<item>Berber</item>
+<item>Bosnian bosanski</item>
+<item>Bulgarian български език</item>
+<item>Cantonese 广州话 / 廣州話</item>
+<item>Carinthian Kärntnarisch</item>
+<item>Catalan català</item>
+<item>Croatian hrvatski</item>
+<item>Czech český</item>
+<item>Danish dansk</item>
+<item>English</item>
+<item>Farsiفارسی</item>
+<item>Finnish suomen</item>
+<item>French français</item>
+<item>Frulian furlan</item>
+<item>Galician galego</item>
+<item>German Deutsch</item>
+<item>Greek ελληνικά</item>
+<item>Hebrew עברית</item>
+<item>Hindi हिन्दी</item>
+<item>Hungarian magyar</item>
+<item>Icelandic islenska</item>
+<item>Inuktitut ᐃᓄᒃᑎᑐᑦ</item>
+<item>Japanese 日本語 (にほんご)</item>
+<item>Kannada ಕನ್ನಡ</item>
+<item>Korean한국어</item>
+<item>Kurdish  كوردی‎</item>
+<item>Latvian latviešu</item>
+<item>Lithuanian lietuvių</item>
+<item>Luganda</item>
+<item>Malagasy fiteny</item>
+<item>Mandarin 普通話 / 普通话</item>
+<item>Oriya ଓଡ଼ିଆ</item>
+<item>Polish polski</item>
+<item>Portuguese português</item>
+<item>Romanian română</item>
+<item>Russian русский</item>
+<item>Sardinian sardu</item>
+<item>Serbian српски</item>
+<item>Slovenian slovenski</item>
+<item>Somali Soomaaliga</item>
+<item>Spanish español</item>
+<item>Swahili Kiswahili</item>
+<item>Swedish svenska</item>
+<item>Tagalog ᜏᜒᜃᜅ᜔ ᜆᜄᜎᜓᜄ᜔</item>
+<item>Tamil தமிழ்</item>
+<item>Tulu ತುಳು ಬಾಸೆ</item>
+<item>Turkish Türkçe</item>
+<item>Ukrainian українська</item>
+<item>Urdu اردو</item>
+<item>Vietnamese việt</item>
+<item>Yiddish ייִדיש</item>
