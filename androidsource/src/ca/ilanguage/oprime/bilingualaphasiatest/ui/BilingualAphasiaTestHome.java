@@ -5,6 +5,7 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -296,18 +298,9 @@ public class BilingualAphasiaTestHome extends Activity {
 			mReplayBySubExperiments =false;
 		}
 		mTabletOrPaperFirst = "T";
-		if(prefs.getBoolean(PreferenceConstants.PREFERENCE_TABLET_FIRST, true)){
-			
-		}else{
-			mTabletOrPaperFirst = "P";
-		}
-		String participantGroup= "E"; //participants worst language is English, so they get english first.
-		mCurrentSubExperimentLanguage = OPrime.ENGLISH;
-		if(prefs.getBoolean(PreferenceConstants.PREFERENCE_PARTICIPANT_WORSTLANGUAGE_IS_ENGLISH, true)){
-		}else{
-			participantGroup ="F";
-			mCurrentSubExperimentLanguage = OPrime.FRENCH;
-		}
+		
+		setLocaleToExperimentLangauge();
+		String participantGroup= "E";
 		/*
 		 * Build the participant ID and save the start time to the preferences. 
 		 */
@@ -338,7 +331,25 @@ public class BilingualAphasiaTestHome extends Activity {
 	}
 
 
+	private void setLocaleToExperimentLangauge(){
+		SharedPreferences prefs = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
+		
+		mCurrentSubExperimentLanguage = prefs.getString(PreferenceConstants.PREFERENCE_EXPERIMENT_LANGUAGE, "en");
+		String participantGroup=mCurrentSubExperimentLanguage.toUpperCase(); //participants worst language is English, so they get english first.
 
+		//http://www.tutorialforandroid.com/2009/01/force-localize-application-on-android.html
+		//String languageToLoad  = "fr";
+		Locale locale = new Locale(mCurrentSubExperimentLanguage); 
+		Locale.setDefault(locale);
+		Configuration config = new Configuration();
+		config.locale = locale;
+		/* This is the core part, here we only update the configuration of our basecontext's resources. I might not be right here but according to the description of Context, Interface to global information about an application environment. Getting the baseContext should be application level.
+		 * 
+		 */
+		getBaseContext().getResources().updateConfiguration(config, 
+				getBaseContext().getResources().getDisplayMetrics());
+
+	}
 
 
 
@@ -380,23 +391,20 @@ public class BilingualAphasiaTestHome extends Activity {
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		SharedPreferences prefens = getSharedPreferences(PreferenceConstants.PREFERENCE_NAME, MODE_PRIVATE);
-		getSubExperimentTitles();
 		switch (requestCode) {
 		case OPrime.EXPERIMENT_COMPLETED:
 			break;
 		case SWITCH_LANGUAGE:
-			if(prefens.getBoolean(PreferenceConstants.PREFERENCE_PARTICIPANT_WORSTLANGUAGE_IS_ENGLISH, true)){
-				mCurrentSubExperimentLanguage = OPrime.ENGLISH;
-			}else{
-				mCurrentSubExperimentLanguage = OPrime.FRENCH;
-			}
-			if(mCurrentSubExperimentLanguage.equals(OPrime.ENGLISH)){
-				
-				mExperimentTitle = "Bilingual Aphasia Test - English";
-			}else{
-				
+			
+			setLocaleToExperimentLangauge();
+//			
+//			if(mCurrentSubExperimentLanguage.equals(OPrime.ENGLISH)){
+//				
+//				mExperimentTitle = "Bilingual Aphasia Test - English";
+//			}else{
+//				
 				mExperimentTitle = "Test de l'aphasie chez les bilingues - français";
-			}
+//			}
 			mSubExperimentTypes =  new ArrayList(Arrays.asList(subExperimentTypes.split(",")));
 			mExperimentLaunch = System.currentTimeMillis();
 			mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
@@ -472,6 +480,8 @@ public class BilingualAphasiaTestHome extends Activity {
 		default:
 			break;
 		}
+		getSubExperimentTitles();
+		
 	}
 	@Override
 
