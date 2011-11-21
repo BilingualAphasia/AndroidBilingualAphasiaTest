@@ -535,28 +535,28 @@ public class BilingualAphasiaTestHome extends Activity {
 			startActivityForResult(inte, SWITCH_LANGUAGE);
 			return true;
 		case R.id.result_folder:
-			final boolean fileManagerAvailable = isIntentAvailable(this,
-					"org.openintents.action.PICK_FILE");
-			if (!fileManagerAvailable) {
-				Toast.makeText(
-						getApplicationContext(),
-						"To open and export recorded files or "
-								+ "draft data you can install the OI File Manager, "
-								+ "it allows you to browse your SDCARD directly on your mobile device.",
-								Toast.LENGTH_LONG).show();
-				Intent goToMarket = new Intent(Intent.ACTION_VIEW)
-				.setData(Uri
-						.parse("market://details?id=org.openintents.filemanager"));
-			} else {
-				Intent openResults = new Intent(
-						"org.openintents.action.PICK_FILE");
-				openResults.setData(Uri.parse("file://"
-						+ OPrime.OUTPUT_DIRECTORY));
-				startActivity(openResults);
-			}
-			//			Intent intentReplay = new Intent(getBaseContext(),
-			//					SetPreferencesActivity.class);
-			//			startActivityForResult(intentReplay, OPrime.REPLAY_RESULTS);
+//			final boolean fileManagerAvailable = isIntentAvailable(this,
+//					"org.openintents.action.PICK_FILE");
+//			if (!fileManagerAvailable) {
+//				Toast.makeText(
+//						getApplicationContext(),
+//						"To open and export recorded files or "
+//								+ "draft data you can install the OI File Manager, "
+//								+ "it allows you to browse your SDCARD directly on your mobile device.",
+//								Toast.LENGTH_LONG).show();
+//				Intent goToMarket = new Intent(Intent.ACTION_VIEW)
+//				.setData(Uri
+//						.parse("market://details?id=org.openintents.filemanager"));
+//			} else {
+//				Intent openResults = new Intent(
+//						"org.openintents.action.PICK_FILE");
+//				openResults.setData(Uri.parse("file://"
+//						+ OPrime.OUTPUT_DIRECTORY));
+//				startActivity(openResults);
+//			}
+			Intent intentReplay = new Intent(getBaseContext(),
+					SetPreferencesActivity.class);
+			startActivityForResult(intentReplay, OPrime.REPLAY_RESULTS);
 			return true;
 		case R.id.backup_results:
 			Intent backupIntent = new Intent(getBaseContext(),
