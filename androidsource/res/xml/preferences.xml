@@ -27,14 +27,14 @@
                 android:defaultValue="false"
                 android:persistent="true"
                 />
-    <!-- <ca.ilanguage.oprime.bilingualaphasiatest.preferences.IntegerListPreference
-            android:key="replayparticipantcode"
-            android:title="Replay Participant Code"
-            android:summary="You can use the home screen to replay participant's behavior during the experiment."
-            android:entries="@array/participant_codes"
-            android:entryValues="@array/participant_codes_int"
-            android:defaultValue="2000000"  />
-            -->
+    <ListPreference
+            android:key="experimentlanguage"
+            android:title="Choose BAT Language"
+            android:summary="You can choose any of the eBAT languages."
+            android:entries="@array/available_languages"
+            android:entryValues="@array/available_languages_codes"
+            android:defaultValue="en"  />
+            
      </PreferenceCategory>
 	<PreferenceCategory
             android:title="Experiment settings">
