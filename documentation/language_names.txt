@@ -1,0 +1,56 @@
+Amharic አማርኛ
+Arabic العربية 
+Armenian Հայերեն
+Azari
+Basque euskara
+Berber
+Bosnian bosanski
+Bulgarian български език
+Cantonese 广州话 / 廣州話
+Carinthian Kärntnarisch
+Catalan català
+Croatian hrvatski
+Czech český
+Danish dansk
+English
+Farsiفارسی
+Finnish suomen
+French français
+Frulian furlan
+Galician galego
+German Deutsch
+Greek ελληνικά
+Hebrew עברית
+Hindi हिन्दी
+Hungarian magyar
+Icelandic islenska
+Inuktitut ᐃᓄᒃᑎᑐᑦ
+Japanese 日本語 (にほんご)
+Kannada ಕನ್ನಡ
+Korean한국어
+Kurdish  كوردی‎
+Latvian latviešu
+Lithuanian lietuvių
+Luganda
+Malagasy fiteny
+Mandarin 普通話 / 普通话
+Oriya ଓଡ଼ିଆ
+Polish polski
+Portuguese português
+Romanian română
+Russian русский
+Sardinian sardu
+Serbian српски
+Slovenian slovenski
+Somali Soomaaliga
+Spanish español
+Swahili Kiswahili
+Swedish svenska
+Tagalog ᜏᜒᜃᜅ᜔ ᜆᜄᜎᜓᜄ᜔
+Tamil தமிழ்
+Tulu ತುಳು ಬಾಸೆ
+Turkish Türkçe
+Ukrainian українська
+Urdu اردو
+Vietnamese việt
+Yiddish ייִדיש
