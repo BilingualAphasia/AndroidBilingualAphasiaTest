@@ -128,7 +128,7 @@
         <item>gl</item>
         <item>de</item>
         <item>el</item>
-        <item>he</item>
+        <item>iw</item>
         <item>hi</item>
         <item>hu</item>
         <item>is</item>
@@ -161,7 +161,7 @@
         <item>uk</item>
         <item>ur</item>
         <item>vi</item>
-        <item>yi</item>
+        <item>ji</item>
     </string-array>
 
 </resources>
