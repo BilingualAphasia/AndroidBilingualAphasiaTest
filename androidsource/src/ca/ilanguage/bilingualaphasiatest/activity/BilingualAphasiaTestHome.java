@@ -1,6 +1,7 @@
 package ca.ilanguage.bilingualaphasiatest.activity;
 
 import ca.ilanguage.bilingualaphasiatest.R;
+import ca.ilanguage.bilingualaphasiatest.content.BilingualAphasiaTest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -36,19 +37,16 @@ public class BilingualAphasiaTestHome extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
 	public class JavaScriptInterface {
@@ -60,7 +58,22 @@ public class BilingualAphasiaTestHome extends Activity {
 			mContext = c;
 
 		}
-
+		public void launchSubExperimentJS(int subex){
+			Toast.makeText(mContext, "Launching subexperiment "+subex, Toast.LENGTH_LONG).show();
+		}
+		public String fetchSubExperimentsArrayJS(){
+			return ((BilingualAphasiaTest) getApplication()).getSubExperimentTitles().toString();
+		}
+		public String fetchParticipantCodesJS(){
+			return "[the,codes]";
+		}
+		public String fetchExperimentTitleJS(){
+			return ((BilingualAphasiaTest) getApplication()).getExperiment().getTitle();// ((RoogleTankApp) getApplication()).getLastMessage(); 
+		}
+		public void setAutoAdvanceJS(String autoadvance){
+			Toast.makeText(mContext, "Set autoadvance to "+autoadvance, Toast.LENGTH_LONG).show();
+			
+		}
 		public void showToast(String toast) {
 			Toast.makeText(mContext, toast, Toast.LENGTH_LONG).show();
 		}
@@ -70,7 +83,6 @@ public class BilingualAphasiaTestHome extends Activity {
 			try {
 				versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
 			} catch (NameNotFoundException e) {
-				// TODO Auto-generated catch block
 				Log.d(TAG, "Exception trying to get app version");
 				return "";
 			}
