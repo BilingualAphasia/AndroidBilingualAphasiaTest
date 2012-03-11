@@ -4,7 +4,7 @@
     <string name="app_name">Bilingual Aphasia Test</string>
     <string name="experiment_trial_header">ParticipantID,FirstName,LastName,WorstLanguage,FirstBat,StartTime,EndTime,ExperimenterID</string>
     <string name="install_oprime">To record participant video you can install the OPrime Android Experimentation App, it allows your tablet to record video in the background and save it to the SDCARD.</string>
-	<string name="experiment_title">Bilingual Aphasia Test - English</string>
+	<string name="experiment_title">Bilingual Aphasia Test</string>
     <string name="experiment_ready_message">Experiment Trial is ready</string>
     <string name="experiment_start_instructions">Touch Start to take Participants Background Info</string>
     <string name="experiment_completed_message">Tablet Experiment completed!</string>

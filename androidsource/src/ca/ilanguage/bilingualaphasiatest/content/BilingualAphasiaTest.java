@@ -15,19 +15,19 @@ public class BilingualAphasiaTest extends Application {
 	public static final boolean D = true;
 	
 	Experiment bat;
-	String language;
+	Locale language;
 	
 	ArrayList<SubExperimentBlock> subExperiments;
 	int currentSubExperiment;
 	
 	@Override
 	public void onCreate() {
-		
 		super.onCreate();
-		language = Locale.getDefault().getLanguage();
-		language = "fr";
-		forceLocale(language);
-		bat = new Experiment( getString(R.string.experiment_title) );
+		
+		language = Locale.getDefault();
+		forceLocale("es");
+		
+		bat = new Experiment( getString(R.string.experiment_title) +" - "+ language.getDisplayLanguage() );
 		subExperiments = new ArrayList<SubExperimentBlock>();
 		String[] subextitles = getResources().getStringArray(R.array.subexperiment_titles);
 		for(int i = 0; i < subextitles.length; i++){
@@ -57,7 +57,7 @@ public class BilingualAphasiaTest extends Application {
         Locale.setDefault(locale);
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        language = Locale.getDefault().getLanguage();
+        language = Locale.getDefault();
 		return Locale.getDefault().getDisplayLanguage();
     }
 	public Experiment getExperiment() {

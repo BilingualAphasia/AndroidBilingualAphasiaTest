@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Test de l\'aphasie chez les bilingues</string>
-    <string name="experiment_title">Test de l\'aphasie chez les bilingues - français</string>
+    <string name="experiment_title">Test de l\'aphasie chez les bilingues</string>
     <string name="experiment_ready_message">L\'expérience est prête</string>
     <string name="experiment_start_instructions">Touchez Commencer pour prendre l\'histoire du participant</string>
     
