@@ -20,6 +20,8 @@ public class BilingualAphasiaTest extends Application {
 	ArrayList<SubExperimentBlock> subExperiments;
 	int currentSubExperiment;
 	
+	String outputDir = "/sdcard/BilingualAphasiaTest/";
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -78,6 +80,13 @@ public class BilingualAphasiaTest extends Application {
 	}
 	public void setCurrentSubExperiment(int currentSubExperiment) {
 		this.currentSubExperiment = currentSubExperiment;
+	}
+	
+	public String getOutputDir() {
+		return outputDir;
+	}
+	public void setOutputDir(String outputDir) {
+		this.outputDir = outputDir;
 	}
 	@Override
 	public void onLowMemory() {

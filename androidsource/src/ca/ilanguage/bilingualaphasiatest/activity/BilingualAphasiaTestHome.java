@@ -1,25 +1,36 @@
 package ca.ilanguage.bilingualaphasiatest.activity;
 
+import java.io.File;
+import java.util.List;
+
 import ca.ilanguage.bilingualaphasiatest.R;
 import ca.ilanguage.bilingualaphasiatest.content.BilingualAphasiaTest;
 import ca.ilanguage.oprime.storybook.StoryBookSubExperiment;
+import ca.ilanguage.oprime.content.OPrime;
+import ca.ilanguage.oprime.datacollection.VideoRecorderSubExperiment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 public class BilingualAphasiaTestHome extends Activity {
 	protected static final String TAG = "BilingualAphasiaTest";
 	public static final boolean D = true;
 	private WebView mWebView;
+	private Handler mHandlerDelayStimuli = new Handler();
+	
+	private static final int EXPERIMENT_COMPLETED = 9;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +71,22 @@ public class BilingualAphasiaTestHome extends Activity {
 			mContext = c;
 
 		}
-		public void launchSubExperimentJS(int subex){
-			Toast.makeText(mContext, "Launching subexperiment "+subex, Toast.LENGTH_LONG).show();
-			Intent intent;
-			intent = new Intent(getApplicationContext(), StoryBookSubExperiment.class);
-			startActivity(intent);
+		public void launchSubExperimentJS(final int subex){
+			startVideoRecorder();
+			/*
+			 * Wait two seconds so that the video activity has time to load the
+			 * camera. It will continue recording until you exit the video
+			 * activity.
+			 */
+			mHandlerDelayStimuli.postDelayed(new Runnable() {
+				public void run() {
+					Toast.makeText(mContext, "Launching subexperiment "+subex, Toast.LENGTH_LONG).show();
+					Intent intent;
+					intent = new Intent(getApplicationContext(), StoryBookSubExperiment.class);
+					startActivity(intent);
+					
+				}
+			}, 2000);
 		}
 		public String fetchSubExperimentsArrayJS(){
 			return ((BilingualAphasiaTest) getApplication()).getSubExperimentTitles().toString();
@@ -109,9 +131,54 @@ public class BilingualAphasiaTestHome extends Activity {
 			return true;
 		}
 	}
+	private void startVideoRecorder() {
+		final boolean fileManagerAvailable = isIntentAvailable(this,
+				"ca.ilanguage.oprime.intent.action.START_VIDEO_RECORDER");
+		if (!fileManagerAvailable) {
+			Toast.makeText(
+					getApplicationContext(),
+					"To record participant video you can install the "
+							+ "OPrime Android Experimentation App, it allows your tablet to record video "
+							+ "in the background and save it to the SDCARD.",
+					Toast.LENGTH_LONG).show();
+			Intent goToMarket = new Intent(Intent.ACTION_VIEW).setData(Uri
+					.parse("market://details?id=ca.ilanguage.oprime.android"));
+		} else {
 
+			String outputDir = ((BilingualAphasiaTest) getApplication()).getOutputDir();
+			String resultsFile = outputDir+System.currentTimeMillis() + ".3gp";
 
-	
-	
+			new File(outputDir).mkdirs();
 
+			Intent intent;
+			intent = new Intent(
+					"ca.ilanguage.oprime.intent.action.START_VIDEO_RECORDER");
+
+			intent.putExtra(VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA, true);
+			intent.putExtra(OPrime.EXTRA_RESULT_FILENAME, resultsFile);
+			
+
+			startActivityForResult(intent, EXPERIMENT_COMPLETED);
+		}
+	}
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case EXPERIMENT_COMPLETED:
+			stopVideoRecorder();
+			break;
+		default:
+			break;
+		}
+	}
+	private void stopVideoRecorder(){
+		Intent i = new Intent("ca.ilanguage.oprime.intent.action.BROADCAST_STOP_VIDEO_SERVICE");
+        sendBroadcast(i);
+	}
+	public static boolean isIntentAvailable(Context context, String action) {
+	    final PackageManager packageManager = context.getPackageManager();
+	    final Intent intent = new Intent(action);
+	    List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
+	        PackageManager.MATCH_DEFAULT_ONLY);
+	    return list.size() > 0;
+	}
 }
