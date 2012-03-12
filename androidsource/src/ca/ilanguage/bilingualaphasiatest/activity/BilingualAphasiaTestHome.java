@@ -2,8 +2,10 @@ package ca.ilanguage.bilingualaphasiatest.activity;
 
 import ca.ilanguage.bilingualaphasiatest.R;
 import ca.ilanguage.bilingualaphasiatest.content.BilingualAphasiaTest;
+import ca.ilanguage.oprime.storybook.StoryBookSubExperiment;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,6 +62,9 @@ public class BilingualAphasiaTestHome extends Activity {
 		}
 		public void launchSubExperimentJS(int subex){
 			Toast.makeText(mContext, "Launching subexperiment "+subex, Toast.LENGTH_LONG).show();
+			Intent intent;
+			intent = new Intent(getApplicationContext(), StoryBookSubExperiment.class);
+			startActivity(intent);
 		}
 		public String fetchSubExperimentsArrayJS(){
 			return ((BilingualAphasiaTest) getApplication()).getSubExperimentTitles().toString();
