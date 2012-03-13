@@ -8,6 +8,7 @@ import ca.ilanguage.bilingualaphasiatest.R;
 import ca.ilanguage.bilingualaphasiatest.content.BilingualAphasiaTest;
 import ca.ilanguage.oprime.storybook.StoryBookSubExperiment;
 import ca.ilanguage.oprime.content.OPrime;
+import ca.ilanguage.oprime.content.Stimulus;
 import ca.ilanguage.oprime.datacollection.VideoRecorderSubExperiment;
 import android.app.Activity;
 import android.content.Context;
@@ -84,10 +85,7 @@ public class BilingualAphasiaTestHome extends Activity {
 					Toast.makeText(mContext, "Launching subexperiment "+subex, Toast.LENGTH_LONG).show();
 					Intent intent;
 					intent = new Intent(getApplicationContext(), StoryBookSubExperiment.class);
-					
-					ArrayList<Integer> stimuli = new ArrayList<Integer>();
-					stimuli.add(R.drawable.androids_experimenter_kids);
-					stimuli.add(R.drawable.s001);
+					ArrayList<Stimulus> stimuli = ((BilingualAphasiaTest) getApplication()).subExperiments.get(subex).getStimuli();
 					intent.putExtra(OPrime.EXTRA_STIMULI_IMAGE_ID, stimuli);
 					startActivity(intent);
 				}
