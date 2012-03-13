@@ -138,7 +138,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	}
 	private void startVideoRecorder() {
 		final boolean fileManagerAvailable = isIntentAvailable(this,
-				"ca.ilanguage.oprime.intent.action.START_VIDEO_RECORDER");
+				OPrime.INTENT_START_VIDEO_RECORDING);
 		if (!fileManagerAvailable) {
 			Toast.makeText(
 					getApplicationContext(),
