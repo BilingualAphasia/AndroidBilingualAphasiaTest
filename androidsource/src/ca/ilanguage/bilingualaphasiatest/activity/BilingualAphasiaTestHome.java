@@ -1,6 +1,7 @@
 package ca.ilanguage.bilingualaphasiatest.activity;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.ilanguage.bilingualaphasiatest.R;
@@ -83,8 +84,12 @@ public class BilingualAphasiaTestHome extends Activity {
 					Toast.makeText(mContext, "Launching subexperiment "+subex, Toast.LENGTH_LONG).show();
 					Intent intent;
 					intent = new Intent(getApplicationContext(), StoryBookSubExperiment.class);
-					startActivity(intent);
 					
+					ArrayList<Integer> stimuli = new ArrayList<Integer>();
+					stimuli.add(R.drawable.androids_experimenter_kids);
+					stimuli.add(R.drawable.s001);
+					intent.putExtra(OPrime.EXTRA_STIMULI_IMAGE_ID, stimuli);
+					startActivity(intent);
 				}
 			}, 2000);
 		}
@@ -146,18 +151,16 @@ public class BilingualAphasiaTestHome extends Activity {
 		} else {
 
 			String outputDir = ((BilingualAphasiaTest) getApplication()).getOutputDir();
-			String resultsFile = outputDir+System.currentTimeMillis() + ".3gp";
-
 			new File(outputDir).mkdirs();
 
 			Intent intent;
-			intent = new Intent(
-					"ca.ilanguage.oprime.intent.action.START_VIDEO_RECORDER");
-
+			intent = new Intent(OPrime.INTENT_START_VIDEO_RECORDING);
+			intent.putExtra(VideoRecorderSubExperiment.EXTRA_VIDEO_QUALITY, VideoRecorderSubExperiment.DEFAULT_DEBUGGING_QUALITY);
 			intent.putExtra(VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA, true);
+			
+			String resultsFile = outputDir+System.currentTimeMillis() + ".3gp";
 			intent.putExtra(OPrime.EXTRA_RESULT_FILENAME, resultsFile);
 			
-
 			startActivityForResult(intent, EXPERIMENT_COMPLETED);
 		}
 	}
@@ -171,7 +174,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		}
 	}
 	private void stopVideoRecorder(){
-		Intent i = new Intent("ca.ilanguage.oprime.intent.action.BROADCAST_STOP_VIDEO_SERVICE");
+		Intent i = new Intent(OPrime.INTENT_STOP_VIDEO_RECORDING);
         sendBroadcast(i);
 	}
 	public static boolean isIntentAvailable(Context context, String action) {
