@@ -36,12 +36,7 @@ public class BilingualAphasiaTest extends Application {
 		for(int i = 0; i < subextitles.length; i++){
 			subExperiments.add(new SubExperimentBlock(subextitles[i]));
 		}
-		
 		addStimuli();
-		
-		
-		
-		
 		currentSubExperiment = 0;
 		Log.d(TAG, "Oncreate of the application");
 	}
@@ -110,9 +105,9 @@ public class BilingualAphasiaTest extends Application {
 		
 		ArrayList<Stimulus> stimuli = new ArrayList<Stimulus>();
 		
-		stimuli.add(new Stimulus(R.drawable.s000));
-		stimuli.add(new Stimulus(R.drawable.s001));
-		stimuli.add(new Stimulus(R.drawable.s002));
+//		stimuli.add(new Stimulus(R.drawable.s000));
+//		stimuli.add(new Stimulus(R.drawable.s001));
+//		stimuli.add(new Stimulus(R.drawable.s002));
 		stimuli.add(new Stimulus(R.drawable.s003));
 		stimuli.add(new Stimulus(R.drawable.s004));
 		stimuli.add(new Stimulus(R.drawable.s005));
