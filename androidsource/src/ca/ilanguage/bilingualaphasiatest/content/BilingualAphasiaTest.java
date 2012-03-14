@@ -112,7 +112,7 @@ public class BilingualAphasiaTest extends Application {
 		
 		ArrayList<Stimulus> stimuli = new ArrayList<Stimulus>();
 		
-		stimuli.add(new Stimulus(R.drawable.s000));
+//		stimuli.add(new Stimulus(R.drawable.s000));
 //		stimuli.add(new Stimulus(R.drawable.s001));
 //		stimuli.add(new Stimulus(R.drawable.s002));
 		stimuli.add(new Stimulus(R.drawable.s003));
@@ -154,8 +154,7 @@ public class BilingualAphasiaTest extends Application {
 		stimuli.add(new Stimulus(R.drawable.s039));
 		stimuli.add(new Stimulus(R.drawable.s040));
 		stimuli.add(new Stimulus(R.drawable.s041));
-		stimuli.add(new Stimulus(R.drawable.s042));
-
+		
 		subExperiments.get(6).setStimuli(stimuli);
 		
 		stimuli = null;

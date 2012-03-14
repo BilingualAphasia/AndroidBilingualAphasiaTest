@@ -53,6 +53,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		//stopVideoRecorder();
 	}
 
 	@Override
@@ -88,7 +89,8 @@ public class BilingualAphasiaTestHome extends Activity {
 					ArrayList<Stimulus> stimuli = ((BilingualAphasiaTest) getApplication()).subExperiments.get(subex).getStimuli();
 					intent.putExtra(OPrime.EXTRA_STIMULI_IMAGE_ID, stimuli);
 					intent.putExtra(OPrime.EXTRA_LANGUAGE, ((BilingualAphasiaTest) getApplication()).getLanguage().getLanguage());
-					startActivity(intent);
+
+					startActivityForResult(intent, EXPERIMENT_COMPLETED);
 				}
 			}, 2000);
 		}
@@ -162,7 +164,7 @@ public class BilingualAphasiaTestHome extends Activity {
 			String resultsFile = outputDir+mDateString+"_"+System.currentTimeMillis() + ".3gp";
 			intent.putExtra(OPrime.EXTRA_RESULT_FILENAME, resultsFile);
 			
-			startActivityForResult(intent, EXPERIMENT_COMPLETED);
+			startActivity(intent);
 		}
 	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -177,6 +179,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	private void stopVideoRecorder(){
 		Intent i = new Intent(OPrime.INTENT_STOP_VIDEO_RECORDING);
         sendBroadcast(i);
+        Toast.makeText(this, "Killing video ", Toast.LENGTH_LONG).show();
 	}
 	public static boolean isIntentAvailable(Context context, String action) {
 	    final PackageManager packageManager = context.getPackageManager();
