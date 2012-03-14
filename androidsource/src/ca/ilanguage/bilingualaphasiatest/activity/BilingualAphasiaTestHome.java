@@ -87,6 +87,7 @@ public class BilingualAphasiaTestHome extends Activity {
 					intent = new Intent(getApplicationContext(), StoryBookSubExperiment.class);
 					ArrayList<Stimulus> stimuli = ((BilingualAphasiaTest) getApplication()).subExperiments.get(subex).getStimuli();
 					intent.putExtra(OPrime.EXTRA_STIMULI_IMAGE_ID, stimuli);
+					intent.putExtra(OPrime.EXTRA_LANGUAGE, ((BilingualAphasiaTest) getApplication()).getLanguage().getLanguage());
 					startActivity(intent);
 				}
 			}, 2000);
@@ -155,8 +156,10 @@ public class BilingualAphasiaTestHome extends Activity {
 			intent = new Intent(OPrime.INTENT_START_VIDEO_RECORDING);
 			intent.putExtra(VideoRecorderSubExperiment.EXTRA_VIDEO_QUALITY, VideoRecorderSubExperiment.DEFAULT_DEBUGGING_QUALITY);
 			intent.putExtra(VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA, true);
-			
-			String resultsFile = outputDir+System.currentTimeMillis() + ".3gp";
+			String mDateString = (String) android.text.format.DateFormat.format("yyyy-MM-dd_kk.mm", new java.util.Date());
+		      mDateString = mDateString.replaceAll("/","-").replaceAll(" ","-");
+
+			String resultsFile = outputDir+mDateString+"_"+System.currentTimeMillis() + ".3gp";
 			intent.putExtra(OPrime.EXTRA_RESULT_FILENAME, resultsFile);
 			
 			startActivityForResult(intent, EXPERIMENT_COMPLETED);

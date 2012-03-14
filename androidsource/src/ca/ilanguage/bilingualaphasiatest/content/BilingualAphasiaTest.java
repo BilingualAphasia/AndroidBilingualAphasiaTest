@@ -64,6 +64,13 @@ public class BilingualAphasiaTest extends Application {
         language = Locale.getDefault();
 		return Locale.getDefault().getDisplayLanguage();
     }
+	
+	public Locale getLanguage() {
+		return language;
+	}
+	public void setLanguage(Locale language) {
+		this.language = language;
+	}
 	public Experiment getExperiment() {
 		return bat;
 	}
@@ -105,7 +112,7 @@ public class BilingualAphasiaTest extends Application {
 		
 		ArrayList<Stimulus> stimuli = new ArrayList<Stimulus>();
 		
-//		stimuli.add(new Stimulus(R.drawable.s000));
+		stimuli.add(new Stimulus(R.drawable.s000));
 //		stimuli.add(new Stimulus(R.drawable.s001));
 //		stimuli.add(new Stimulus(R.drawable.s002));
 		stimuli.add(new Stimulus(R.drawable.s003));
