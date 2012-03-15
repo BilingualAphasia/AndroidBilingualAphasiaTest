@@ -172,8 +172,8 @@ public class BilingualAphasiaTestHome extends Activity {
 		switch (requestCode) {
 		case OPrime.EXPERIMENT_COMPLETED:
 			if(data != null){
-				((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).setStimuli( (ArrayList<Stimulus>) data.getExtras().getSerializable(OPrime.EXTRA_STIMULI));
-				Toast.makeText(this, ((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).getStimuli().toString(), Toast.LENGTH_LONG).show();
+				ArrayList<Stimulus> s =  (ArrayList<Stimulus>) data.getExtras().getSerializable(OPrime.EXTRA_STIMULI);
+				((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).setStimuli(s);
 			}
 			stopVideoRecorder();
 			break;
@@ -184,7 +184,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	private void stopVideoRecorder(){
 		Intent i = new Intent(OPrime.INTENT_STOP_VIDEO_RECORDING);
         sendBroadcast(i);
-        Toast.makeText(this, "Killing video ", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Subexperiment complete. ", Toast.LENGTH_LONG).show();
 	}
 	public static boolean isIntentAvailable(Context context, String action) {
 	    final PackageManager packageManager = context.getPackageManager();
