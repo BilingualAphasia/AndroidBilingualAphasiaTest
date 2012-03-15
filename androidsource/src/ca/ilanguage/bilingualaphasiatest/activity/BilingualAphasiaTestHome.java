@@ -32,7 +32,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	private WebView mWebView;
 	private Handler mHandlerDelayStimuli = new Handler();
 	
-	private static final int EXPERIMENT_COMPLETED = 9;
+	private int mCurrentSubex = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,7 @@ public class BilingualAphasiaTestHome extends Activity {
 
 		}
 		public void launchSubExperimentJS(final int subex){
+			mCurrentSubex = subex;
 			startVideoRecorder();
 			/*
 			 * Wait two seconds so that the video activity has time to load the
@@ -83,14 +84,14 @@ public class BilingualAphasiaTestHome extends Activity {
 			 */
 			mHandlerDelayStimuli.postDelayed(new Runnable() {
 				public void run() {
-					Toast.makeText(mContext, "Launching subexperiment "+subex, Toast.LENGTH_LONG).show();
+					Toast.makeText(mContext, "Launching subexperiment "+mCurrentSubex, Toast.LENGTH_LONG).show();
 					Intent intent;
 					intent = new Intent(getApplicationContext(), StoryBookSubExperiment.class);
-					ArrayList<Stimulus> stimuli = ((BilingualAphasiaTest) getApplication()).subExperiments.get(subex).getStimuli();
+					ArrayList<Stimulus> stimuli = ((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).getStimuli();
 					intent.putExtra(OPrime.EXTRA_STIMULI_IMAGE_ID, stimuli);
 					intent.putExtra(OPrime.EXTRA_LANGUAGE, ((BilingualAphasiaTest) getApplication()).getLanguage().getLanguage());
 
-					startActivityForResult(intent, EXPERIMENT_COMPLETED);
+					startActivityForResult(intent, OPrime.EXPERIMENT_COMPLETED);
 				}
 			}, 2000);
 		}
@@ -169,7 +170,11 @@ public class BilingualAphasiaTestHome extends Activity {
 	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
-		case EXPERIMENT_COMPLETED:
+		case OPrime.EXPERIMENT_COMPLETED:
+			if(data != null){
+				((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).setStimuli( (ArrayList<Stimulus>) data.getExtras().getSerializable(OPrime.EXTRA_STIMULI));
+				Toast.makeText(this, ((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).getStimuli().toString(), Toast.LENGTH_LONG).show();
+			}
 			stopVideoRecorder();
 			break;
 		default:
