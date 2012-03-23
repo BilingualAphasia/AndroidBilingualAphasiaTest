@@ -154,6 +154,7 @@ public class BilingualAphasiaTest extends Application {
 		stimuli.add(new Stimulus(R.drawable.s039));
 		stimuli.add(new Stimulus(R.drawable.s040));
 		stimuli.add(new Stimulus(R.drawable.s041));
+		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
 		
 		subExperiments.get(6).setStimuli(stimuli);
 		

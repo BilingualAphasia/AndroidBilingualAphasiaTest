@@ -11,6 +11,7 @@ import ca.ilanguage.oprime.storybook.StoryBookSubExperiment;
 import ca.ilanguage.oprime.content.OPrime;
 import ca.ilanguage.oprime.content.Stimulus;
 import ca.ilanguage.oprime.datacollection.VideoRecorderSubExperiment;
+import android.R.bool;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -92,7 +93,11 @@ public class BilingualAphasiaTestHome extends Activity {
 					ArrayList<Stimulus> stimuli = ((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).getStimuli();
 					intent.putExtra(OPrime.EXTRA_STIMULI_IMAGE_ID, stimuli);
 					intent.putExtra(OPrime.EXTRA_LANGUAGE, ((BilingualAphasiaTest) getApplication()).getLanguage().getLanguage());
-
+					boolean twopage= false;
+					if (mCurrentSubex == 6 || mCurrentSubex == 28){
+						twopage = true;
+					}
+					intent.putExtra(OPrime.EXTRA_TWO_PAGE_STORYBOOK, twopage);
 					startActivityForResult(intent, OPrime.EXPERIMENT_COMPLETED);
 				}
 			}, 2000);
