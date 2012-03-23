@@ -1,6 +1,7 @@
 package ca.ilanguage.bilingualaphasiatest.activity;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	private Handler mHandlerDelayStimuli = new Handler();
 	
 	private int mCurrentSubex = 0;
+	private BilingualAphasiaTest app;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		webSettings.setUserAgentString(webSettings.getUserAgentString() + " "
 				+ getString(R.string.user_agent_suffix));
 		mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
-		
+		app = (BilingualAphasiaTest) getApplication();
 	}
 
 	@Override
@@ -161,9 +163,10 @@ public class BilingualAphasiaTestHome extends Activity {
 			intent.putExtra(VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA, true);
 			String mDateString = (String) android.text.format.DateFormat.format("yyyy-MM-dd_kk.mm", new java.util.Date());
 		      mDateString = mDateString.replaceAll("/","-").replaceAll(" ","-");
-
-			String resultsFile = outputDir+mDateString+"_"+System.currentTimeMillis() + ".3gp";
-			intent.putExtra(OPrime.EXTRA_RESULT_FILENAME, resultsFile);
+		    
+			String resultsFile = outputDir+mDateString+"_"+System.currentTimeMillis() ;
+			intent.putExtra(OPrime.EXTRA_RESULT_FILENAME, resultsFile+ ".3gp");
+			app.subExperiments.get(mCurrentSubex).setResultsFileWithoutSuffix(resultsFile);
 			
 			startActivity(intent);
 		}
@@ -173,8 +176,12 @@ public class BilingualAphasiaTestHome extends Activity {
 		case OPrime.EXPERIMENT_COMPLETED:
 			if(data != null){
 				ArrayList<Stimulus> s =  (ArrayList<Stimulus>) data.getExtras().getSerializable(OPrime.EXTRA_STIMULI);
-				((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).setStimuli(s);
+				app.subExperiments.get(mCurrentSubex).setStimuli(s);
+				Intent i = new Intent(OPrime.INTENT_SAVE_SUB_EXPERIMENT_JSON);
+				i.putExtra(OPrime.EXTRA_SUB_EXPERIMENT, (Serializable) app.subExperiments.get(mCurrentSubex) );
+				startService(i); 
 			}
+			
 			stopVideoRecorder();
 			break;
 		default:

@@ -37,5 +37,13 @@
             </intent-filter>
          </activity>
          
+         <service 
+             android:name="ca.ilanguage.oprime.datacollection.SubExperimentToJson">
+              <intent-filter>
+                <action android:name="ca.ilanguage.oprime.intent.action.SAVE_SUB_EXPERIMENT_JSON" />
+                <category android:name="android.intent.category.DEFAULT" />
+              </intent-filter>
+         </service>
+         
     </application>
 </manifest>
