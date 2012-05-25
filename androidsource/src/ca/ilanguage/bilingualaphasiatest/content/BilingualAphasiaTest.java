@@ -192,7 +192,6 @@ public class BilingualAphasiaTest extends Application {
 		stimuli.add(new Stimulus(R.drawable.s071));
 		stimuli.add(new Stimulus(R.drawable.s072));
 		stimuli.add(new Stimulus(R.drawable.s073));
-		stimuli.add(new Stimulus(R.drawable.s074));
 		
 
 		subExperiments.get(7).setStimuli(stimuli);
@@ -200,14 +199,15 @@ public class BilingualAphasiaTest extends Application {
 		stimuli = null;
 		stimuli = new ArrayList<Stimulus>();
 		
-		
-		stimuli.add(new Stimulus(R.drawable.s075));
+
+		stimuli.add(new Stimulus(R.drawable.s074));
 		
 		subExperiments.get(21).setStimuli(stimuli);
 		
 		stimuli = null;
 		stimuli = new ArrayList<Stimulus>();
-		
+
+		stimuli.add(new Stimulus(R.drawable.s075));
 		stimuli.add(new Stimulus(R.drawable.s076));
 		stimuli.add(new Stimulus(R.drawable.s077));
 		stimuli.add(new Stimulus(R.drawable.s078));
