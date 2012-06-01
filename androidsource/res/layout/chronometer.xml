@@ -31,19 +31,22 @@
     <Button android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
+        android:background="@drawable/custom_button"
         android:text="@string/chronometer_start">
         <requestFocus />
     </Button>
 
     <Button android:id="@+id/stop"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_second_one" 
         android:text="@string/chronometer_stop">
     </Button>
 
     <Button android:id="@+id/reset"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button_third_one" 
         android:text="@string/chronometer_reset">
     </Button>
 
