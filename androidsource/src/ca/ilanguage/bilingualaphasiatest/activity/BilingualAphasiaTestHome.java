@@ -22,7 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.webkit.ConsoleMessage;
+//import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -139,11 +139,11 @@ public class BilingualAphasiaTestHome extends Activity {
 	}
 	
 	class MyWebChromeClient extends WebChromeClient {
-		public boolean onConsoleMessage(ConsoleMessage cm) {
-			if(D) Log.d(TAG, cm.message() + " -- From line " + cm.lineNumber() + " of "
-					+ cm.sourceId());
-			return true;
-		}
+//		public boolean onConsoleMessage(ConsoleMessage cm) {
+//			if(D) Log.d(TAG, cm.message() + " -- From line " + cm.lineNumber() + " of "
+//					+ cm.sourceId());
+//			return true;
+//		}
 	}
 	private void startVideoRecorder() {
 		final boolean fileManagerAvailable = isIntentAvailable(this,

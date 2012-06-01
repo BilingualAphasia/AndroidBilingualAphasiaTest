@@ -51,11 +51,11 @@ public class ChronometerDemo extends Activity {
         button = (Button) findViewById(R.id.reset);
         button.setOnClickListener(mResetListener);
 
-        button = (Button) findViewById(R.id.set_format);
-        button.setOnClickListener(mSetFormatListener);
-
-        button = (Button) findViewById(R.id.clear_format);
-        button.setOnClickListener(mClearFormatListener);
+//        button = (Button) findViewById(R.id.set_format);
+//        button.setOnClickListener(mSetFormatListener);
+//
+//        button = (Button) findViewById(R.id.clear_format);
+//        button.setOnClickListener(mClearFormatListener);
     }
 
     View.OnClickListener mStartListener = new OnClickListener() {
@@ -76,15 +76,15 @@ public class ChronometerDemo extends Activity {
         }
     };
 
-    View.OnClickListener mSetFormatListener = new OnClickListener() {
-        public void onClick(View v) {
-            mChronometer.setFormat("Formatted time (%s)");
-        }
-    };
-
-    View.OnClickListener mClearFormatListener = new OnClickListener() {
-        public void onClick(View v) {
-            mChronometer.setFormat(null);
-        }
-    };
+//    View.OnClickListener mSetFormatListener = new OnClickListener() {
+//        public void onClick(View v) {
+//            mChronometer.setFormat("Formatted time (%s)");
+//        }
+//    };
+//
+//    View.OnClickListener mClearFormatListener = new OnClickListener() {
+//        public void onClick(View v) {
+//            mChronometer.setFormat(null);
+//        }
+//    };
 }
