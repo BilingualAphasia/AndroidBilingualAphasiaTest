@@ -30,6 +30,7 @@ import android.widget.Chronometer;
 
 public class ChronometerDemo extends Activity {
     Chronometer mChronometer;
+    private long lastPause= 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +61,25 @@ public class ChronometerDemo extends Activity {
 
     View.OnClickListener mStartListener = new OnClickListener() {
         public void onClick(View v) {
+            if(lastPause == 0) {
+            	mChronometer.setBase(SystemClock.elapsedRealtime());
+
+            }else{
+            	mChronometer.setBase(mChronometer.getBase() + SystemClock.elapsedRealtime() - lastPause);
+            }
+            
+
             mChronometer.start();
         }
     };
 
     View.OnClickListener mStopListener = new OnClickListener() {
         public void onClick(View v) {
+//            mChronometer.stop();
+            lastPause = SystemClock.elapsedRealtime();
+
             mChronometer.stop();
+    
         }
     };
 
