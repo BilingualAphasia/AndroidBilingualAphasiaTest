@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import ca.ilanguage.oprime.content.Experiment;
 import ca.ilanguage.oprime.content.Stimulus;
+import ca.ilanguage.oprime.content.TwoImageStimulus;
 import ca.ilanguage.oprime.content.SubExperimentBlock;
 import android.app.Application;
 import android.content.res.Configuration;
@@ -110,56 +111,36 @@ public class BilingualAphasiaTest extends Application {
 	}
 	private void addStimuli(){
 		
+		ArrayList<TwoImageStimulus> stim = new ArrayList<TwoImageStimulus>();
+		
+//		stim.add(new Stimulus(R.drawable.s000));
+//		stim.add(new Stimulus(R.drawable.s001));
+//		stim.add(new Stimulus(R.drawable.s002));
+		stim.add(new TwoImageStimulus(R.drawable.s003,R.drawable.s004));
+		stim.add(new TwoImageStimulus(R.drawable.s005,R.drawable.s006));
+		stim.add(new TwoImageStimulus(R.drawable.s007,R.drawable.s008));
+		stim.add(new TwoImageStimulus(R.drawable.s009,R.drawable.s010));
+		stim.add(new TwoImageStimulus(R.drawable.s011,R.drawable.s012));
+		stim.add(new TwoImageStimulus(R.drawable.s013,R.drawable.s014));
+		stim.add(new TwoImageStimulus(R.drawable.s015,R.drawable.s016));
+		stim.add(new TwoImageStimulus(R.drawable.s017,R.drawable.s018));
+		stim.add(new TwoImageStimulus(R.drawable.s019,R.drawable.s020));
+		stim.add(new TwoImageStimulus(R.drawable.s021,R.drawable.s022));
+		stim.add(new TwoImageStimulus(R.drawable.s023,R.drawable.s024));
+		stim.add(new TwoImageStimulus(R.drawable.s025,R.drawable.s026));
+		stim.add(new TwoImageStimulus(R.drawable.s027,R.drawable.s028));
+		stim.add(new TwoImageStimulus(R.drawable.s029,R.drawable.s030));
+		stim.add(new TwoImageStimulus(R.drawable.s031,R.drawable.s032));
+		stim.add(new TwoImageStimulus(R.drawable.s033,R.drawable.s034));
+		stim.add(new TwoImageStimulus(R.drawable.s035,R.drawable.s036));
+		stim.add(new TwoImageStimulus(R.drawable.s037,R.drawable.s038));
+		stim.add(new TwoImageStimulus(R.drawable.s039,R.drawable.s040));
+		stim.add(new TwoImageStimulus(R.drawable.s041,R.drawable.androids_experimenter_kids));
+		
+		subExperiments.get(6).setStimuli(stim);
+		
+		stim = null;
 		ArrayList<Stimulus> stimuli = new ArrayList<Stimulus>();
-		
-//		stimuli.add(new Stimulus(R.drawable.s000));
-//		stimuli.add(new Stimulus(R.drawable.s001));
-//		stimuli.add(new Stimulus(R.drawable.s002));
-		stimuli.add(new Stimulus(R.drawable.s003));
-		stimuli.add(new Stimulus(R.drawable.s004));
-		stimuli.add(new Stimulus(R.drawable.s005));
-		stimuli.add(new Stimulus(R.drawable.s006));
-		stimuli.add(new Stimulus(R.drawable.s007));
-		stimuli.add(new Stimulus(R.drawable.s008));
-		stimuli.add(new Stimulus(R.drawable.s009));
-		stimuli.add(new Stimulus(R.drawable.s010));
-		stimuli.add(new Stimulus(R.drawable.s011));
-		stimuli.add(new Stimulus(R.drawable.s012));
-		stimuli.add(new Stimulus(R.drawable.s013));
-		stimuli.add(new Stimulus(R.drawable.s014));
-		stimuli.add(new Stimulus(R.drawable.s015));
-		stimuli.add(new Stimulus(R.drawable.s016));
-		stimuli.add(new Stimulus(R.drawable.s017));
-		stimuli.add(new Stimulus(R.drawable.s018));
-		stimuli.add(new Stimulus(R.drawable.s019));
-		stimuli.add(new Stimulus(R.drawable.s020));
-		stimuli.add(new Stimulus(R.drawable.s021));
-		stimuli.add(new Stimulus(R.drawable.s022));
-		stimuli.add(new Stimulus(R.drawable.s023));
-		stimuli.add(new Stimulus(R.drawable.s024));
-		stimuli.add(new Stimulus(R.drawable.s025));
-		stimuli.add(new Stimulus(R.drawable.s026));
-		stimuli.add(new Stimulus(R.drawable.s027));
-		stimuli.add(new Stimulus(R.drawable.s028));
-		stimuli.add(new Stimulus(R.drawable.s029));
-		stimuli.add(new Stimulus(R.drawable.s030));
-		stimuli.add(new Stimulus(R.drawable.s031));
-		stimuli.add(new Stimulus(R.drawable.s032));
-		stimuli.add(new Stimulus(R.drawable.s033));
-		stimuli.add(new Stimulus(R.drawable.s034));
-		stimuli.add(new Stimulus(R.drawable.s035));
-		stimuli.add(new Stimulus(R.drawable.s036));
-		stimuli.add(new Stimulus(R.drawable.s037));
-		stimuli.add(new Stimulus(R.drawable.s038));
-		stimuli.add(new Stimulus(R.drawable.s039));
-		stimuli.add(new Stimulus(R.drawable.s040));
-		stimuli.add(new Stimulus(R.drawable.s041));
-		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
-		
-		subExperiments.get(6).setStimuli(stimuli);
-		
-		stimuli = null;
-		stimuli = new ArrayList<Stimulus>();
 		
 		stimuli.add(new Stimulus(R.drawable.s043));
 		stimuli.add(new Stimulus(R.drawable.s044));

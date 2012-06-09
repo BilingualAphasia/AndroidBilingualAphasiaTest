@@ -37,6 +37,14 @@
             </intent-filter>
          </activity>
          <activity
+            android:name="ca.ilanguage.oprime.activity.TwoImageSubExperiment"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="ca.ilanguage.oprime.intent.action.START_TWO_IMAGE_SUB_EXPERIMENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+         </activity>
+         <activity
             android:name="ca.ilanguage.oprime.datacollection.VideoRecorderSubExperiment"
             android:label="@string/app_name" >
              <intent-filter>

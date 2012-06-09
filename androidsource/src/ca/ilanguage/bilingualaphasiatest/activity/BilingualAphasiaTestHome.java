@@ -89,15 +89,14 @@ public class BilingualAphasiaTestHome extends Activity {
 				public void run() {
 					Toast.makeText(mContext, "Launching subexperiment "+mCurrentSubex, Toast.LENGTH_LONG).show();
 					Intent intent;
-					intent = new Intent(OPrime.INTENT_START_SUB_EXPERIMENT);
-					ArrayList<Stimulus> stimuli = ((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).getStimuli();
-					intent.putExtra(OPrime.EXTRA_STIMULI_IMAGE_ID, stimuli);
-					intent.putExtra(OPrime.EXTRA_LANGUAGE, ((BilingualAphasiaTest) getApplication()).getLanguage().getLanguage());
-					boolean twopage= false;
-					if (mCurrentSubex == 6 || mCurrentSubex == 28){
-						twopage = true;
+					if(mCurrentSubex == 6 || mCurrentSubex == 28){
+						intent = new Intent(OPrime.INTENT_START_TWO_IMAGE_SUB_EXPERIMENT);
+					}else{
+						intent = new Intent(OPrime.INTENT_START_SUB_EXPERIMENT);
 					}
-					intent.putExtra(OPrime.EXTRA_TWO_PAGE_STORYBOOK, twopage);
+					intent.putExtra(OPrime.EXTRA_STIMULI_IMAGE_ID,  ((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).getStimuli());
+					intent.putExtra(OPrime.EXTRA_LANGUAGE, ((BilingualAphasiaTest) getApplication()).getLanguage().getLanguage());
+					
 					startActivityForResult(intent, OPrime.EXPERIMENT_COMPLETED);
 				}
 			}, 2000);
