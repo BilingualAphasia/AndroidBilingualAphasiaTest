@@ -29,7 +29,7 @@ public class BilingualAphasiaTest extends Application {
 		super.onCreate();
 		
 		language = Locale.getDefault();
-		forceLocale("iu");
+		forceLocale("fr");
 		
 		bat = new Experiment( getString(R.string.experiment_title) +" - "+ language.getDisplayLanguage() );
 		subExperiments = new ArrayList<SubExperimentBlock>();
