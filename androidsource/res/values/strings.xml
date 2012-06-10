@@ -29,12 +29,7 @@
     created and shared by Google and used according to terms described in
     the Apache 2.0 License.</string>
     <string name="preference_misc">More Information</string>
-    <string name="chronometer_start">Start</string>
-    <string name="chronometer_stop">Stop</string>
-    <string name="chronometer_reset">Reset</string>
-    <string name="chronometer_set_format">Set format string</string>
-    <string name="chronometer_clear_format">Clear format string</string>
-    <string name="chronometer_initial_format">%s</string>
+    
     
 
 </resources>
