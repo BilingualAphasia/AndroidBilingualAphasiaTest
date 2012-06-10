@@ -89,7 +89,7 @@ public class BilingualAphasiaTestHome extends Activity {
 				public void run() {
 					Toast.makeText(mContext, "Launching subexperiment "+mCurrentSubex, Toast.LENGTH_LONG).show();
 					Intent intent;
-					if(mCurrentSubex == 6 || mCurrentSubex == 28){
+					if(mCurrentSubex == 6 || mCurrentSubex == 28 || mCurrentSubex == 29){
 						intent = new Intent(OPrime.INTENT_START_TWO_IMAGE_SUB_EXPERIMENT);
 					}else{
 						intent = new Intent(OPrime.INTENT_START_SUB_EXPERIMENT);

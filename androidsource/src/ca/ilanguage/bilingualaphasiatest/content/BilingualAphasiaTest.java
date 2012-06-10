@@ -111,8 +111,10 @@ public class BilingualAphasiaTest extends Application {
 	}
 	private void addStimuli(){
 		
+		/*
+		 * SubExperiment 6: Verbal Auditory Comprehension uses 2 images per stimuli.
+		 */
 		ArrayList<TwoImageStimulus> twostimuli = new ArrayList<TwoImageStimulus>();
-		
 //		twostimuli.add(new Stimulus(R.drawable.s000));
 //		twostimuli.add(new Stimulus(R.drawable.s001));
 //		twostimuli.add(new Stimulus(R.drawable.s002));
@@ -138,8 +140,11 @@ public class BilingualAphasiaTest extends Application {
 		twostimuli.add(new TwoImageStimulus(R.drawable.s041,R.drawable.androids_experimenter_kids));
 		
 		subExperiments.get(6).setStimuli(twostimuli);
-		
 		twostimuli = null;
+		
+		/*
+		 * SubExperiment 7: Syntactic Comprehension 
+		 */
 		ArrayList<Stimulus> stimuli = new ArrayList<Stimulus>();
 		
 		stimuli.add(new Stimulus(R.drawable.s043));
@@ -172,22 +177,24 @@ public class BilingualAphasiaTest extends Application {
 		stimuli.add(new Stimulus(R.drawable.s070));
 		stimuli.add(new Stimulus(R.drawable.s071));
 		stimuli.add(new Stimulus(R.drawable.s072));
-//		stimuli.add(new Stimulus(R.drawable.s073));
 		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
 
 		subExperiments.get(7).setStimuli(stimuli);
-		
 		stimuli = null;
-		stimuli = new ArrayList<Stimulus>();
 		
-
+		/*
+		 * SubExperiment 21: Description of a cartoon 
+		 */
+		stimuli = new ArrayList<Stimulus>();
 		stimuli.add(new Stimulus(R.drawable.s074));
-		
+		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
 		subExperiments.get(21).setStimuli(stimuli);
-		
 		stimuli = null;
+		
+		/*
+		 * SubExperiment 24: Reading 
+		 */
 		stimuli = new ArrayList<Stimulus>();
-
 		stimuli.add(new Stimulus(R.drawable.s075));
 		stimuli.add(new Stimulus(R.drawable.s076));
 		stimuli.add(new Stimulus(R.drawable.s077));
@@ -196,74 +203,59 @@ public class BilingualAphasiaTest extends Application {
 		stimuli.add(new Stimulus(R.drawable.s080));
 		stimuli.add(new Stimulus(R.drawable.s081));
 		stimuli.add(new Stimulus(R.drawable.s082));
-		stimuli.add(new Stimulus(R.drawable.s083));
-		stimuli.add(new Stimulus(R.drawable.s084));
-		
-		
-
+		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
 		subExperiments.get(24).setStimuli(stimuli);
-		
 		stimuli = null;
-		stimuli = new ArrayList<Stimulus>();
 		
-		stimuli.add(new Stimulus(R.drawable.s085));
-
-
+		/*
+		 * SubExperiment 25: Copying 
+		 */
+		stimuli = new ArrayList<Stimulus>();
+		stimuli.add(new Stimulus(R.drawable.s083));
+		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
 		subExperiments.get(25).setStimuli(stimuli);
-		
 		stimuli = null;
-		stimuli = new ArrayList<Stimulus>();
 		
-		stimuli.add(new Stimulus(R.drawable.s086));
-		stimuli.add(new Stimulus(R.drawable.s087));
-		stimuli.add(new Stimulus(R.drawable.s088));
-		stimuli.add(new Stimulus(R.drawable.s089));
-		stimuli.add(new Stimulus(R.drawable.s090));
-		stimuli.add(new Stimulus(R.drawable.s091));
-		stimuli.add(new Stimulus(R.drawable.s092));
-		stimuli.add(new Stimulus(R.drawable.s093));
-		stimuli.add(new Stimulus(R.drawable.s094));
-		stimuli.add(new Stimulus(R.drawable.s095));
-		stimuli.add(new Stimulus(R.drawable.s096));
-		stimuli.add(new Stimulus(R.drawable.s097));
-		stimuli.add(new Stimulus(R.drawable.s098));
-		stimuli.add(new Stimulus(R.drawable.s099));
-		stimuli.add(new Stimulus(R.drawable.s100));
-		stimuli.add(new Stimulus(R.drawable.s101));
-		stimuli.add(new Stimulus(R.drawable.s102));
-		stimuli.add(new Stimulus(R.drawable.s103));
-		stimuli.add(new Stimulus(R.drawable.s104));
-		stimuli.add(new Stimulus(R.drawable.s105));
-		stimuli.add(new Stimulus(R.drawable.s106));
 		
-		subExperiments.get(28).setStimuli(stimuli);
+		/*
+		 * SubExperiment 28: Reading words for comprehension uses 2 images per stimuli.
+		 */
 		
-		stimuli = null;
-		stimuli = new ArrayList<Stimulus>();
+		twostimuli = new ArrayList<TwoImageStimulus>();
 		
-		stimuli.add(new Stimulus(R.drawable.s107));
-		stimuli.add(new Stimulus(R.drawable.s108));
-		stimuli.add(new Stimulus(R.drawable.s109));
-		stimuli.add(new Stimulus(R.drawable.s110));
-		stimuli.add(new Stimulus(R.drawable.s111));
-		stimuli.add(new Stimulus(R.drawable.s112));
-		stimuli.add(new Stimulus(R.drawable.s113));
-		stimuli.add(new Stimulus(R.drawable.s114));
-		stimuli.add(new Stimulus(R.drawable.s115));
-		stimuli.add(new Stimulus(R.drawable.s116));
-		stimuli.add(new Stimulus(R.drawable.s117));
-		stimuli.add(new Stimulus(R.drawable.s118));
-		stimuli.add(new Stimulus(R.drawable.s119));
-		stimuli.add(new Stimulus(R.drawable.s120));
-		stimuli.add(new Stimulus(R.drawable.s121));
-		stimuli.add(new Stimulus(R.drawable.s122));
-		stimuli.add(new Stimulus(R.drawable.s123));
-		stimuli.add(new Stimulus(R.drawable.s124));
-		stimuli.add(new Stimulus(R.drawable.s125));
-		stimuli.add(new Stimulus(R.drawable.s126));
-		stimuli.add(new Stimulus(R.drawable.s127));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s085,R.drawable.s086));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s087,R.drawable.s088));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s089,R.drawable.s090));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s091,R.drawable.s092));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s093,R.drawable.s094));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s095,R.drawable.s096));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s097,R.drawable.s098));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s099,R.drawable.s100));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s101,R.drawable.s102));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s103,R.drawable.s104));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s041,R.drawable.androids_experimenter_kids));
+		
+		subExperiments.get(28).setStimuli(twostimuli);
+		
+		/*
+		 * SubExperiment 29: Reading sentences for comprehension uses 2 images per stimuli.
+		 */
+		twostimuli = null;
+		twostimuli = new ArrayList<TwoImageStimulus>();
 
-		subExperiments.get(29).setStimuli(stimuli);
+		twostimuli.add(new TwoImageStimulus(R.drawable.s107,R.drawable.s108));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s109,R.drawable.s110));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s111,R.drawable.s112));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s113,R.drawable.s114));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s115,R.drawable.s116));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s117,R.drawable.s118));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s119,R.drawable.s120));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s121,R.drawable.s122));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s123,R.drawable.s124));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s125,R.drawable.s126));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s041,R.drawable.androids_experimenter_kids));
+		
+		subExperiments.get(29).setStimuli(twostimuli);
 		
 	}
 	
