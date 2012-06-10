@@ -148,35 +148,29 @@ public class BilingualAphasiaTestHome extends Activity {
 //		}
 	}
 	private void startVideoRecorder() {
-		final boolean fileManagerAvailable = isIntentAvailable(this,
-				OPrime.INTENT_START_VIDEO_RECORDING);
-		if (!fileManagerAvailable) {
-			Toast.makeText(
-					getApplicationContext(),
-					"To record participant video you can install the "
-							+ "OPrime Android Experimentation App, it allows your tablet to record video "
-							+ "in the background and save it to the SDCARD.",
-					Toast.LENGTH_LONG).show();
-			Intent goToMarket = new Intent(Intent.ACTION_VIEW).setData(Uri
-					.parse("market://details?id=ca.ilanguage.oprime.android"));
-		} else {
+		String outputDir = ((BilingualAphasiaTest) getApplication()).getOutputDir();
+		new File(outputDir).mkdirs();
 
-			String outputDir = ((BilingualAphasiaTest) getApplication()).getOutputDir();
-			new File(outputDir).mkdirs();
+		Intent intent;
+		intent = new Intent(OPrime.INTENT_START_VIDEO_RECORDING);
+		intent.putExtra(VideoRecorderSubExperiment.EXTRA_VIDEO_QUALITY,
+				VideoRecorderSubExperiment.DEFAULT_DEBUGGING_QUALITY);
+		intent.putExtra(
+				VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA, true);
+		String mDateString = (String) android.text.format.DateFormat.format(
+				"yyyy-MM-dd_kk.mm", new java.util.Date(System.currentTimeMillis() ));
+		mDateString = mDateString.replaceAll("/", "-").replaceAll(" ", "-");
 
-			Intent intent;
-			intent = new Intent(OPrime.INTENT_START_VIDEO_RECORDING);
-			intent.putExtra(VideoRecorderSubExperiment.EXTRA_VIDEO_QUALITY, VideoRecorderSubExperiment.DEFAULT_DEBUGGING_QUALITY);
-			intent.putExtra(VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA, true);
-			String mDateString = (String) android.text.format.DateFormat.format("yyyy-MM-dd_kk.mm", new java.util.Date());
-		      mDateString = mDateString.replaceAll("/","-").replaceAll(" ","-");
-		    
-			String resultsFile = outputDir+mDateString+"_"+System.currentTimeMillis() ;
-			intent.putExtra(OPrime.EXTRA_RESULT_FILENAME, resultsFile+ ".3gp");
-			app.subExperiments.get(mCurrentSubex).setResultsFileWithoutSuffix(resultsFile);
-			
-			startActivity(intent);
-		}
+		String resultsFile = outputDir 
+				+ app.getExperiment().getParticipant().getCode()
+				+ "_" + app.getLanguage()+mCurrentSubex 
+				+ "_" + app.subExperiments.get(mCurrentSubex).getTitle().replaceAll(" ","_")
+				+ "-" + mDateString;
+		intent.putExtra(OPrime.EXTRA_RESULT_FILENAME, resultsFile + ".3gp");
+		app.subExperiments.get(mCurrentSubex).setResultsFileWithoutSuffix(
+				resultsFile);
+
+		startActivity(intent);
 	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
@@ -198,7 +192,7 @@ public class BilingualAphasiaTestHome extends Activity {
 	private void stopVideoRecorder(){
 		Intent i = new Intent(OPrime.INTENT_STOP_VIDEO_RECORDING);
         sendBroadcast(i);
-        Toast.makeText(this, "Subexperiment complete. ", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Subexperiment complete. ", Toast.LENGTH_LONG).show();
 	}
 	public static boolean isIntentAvailable(Context context, String action) {
 	    final PackageManager packageManager = context.getPackageManager();
