@@ -2,28 +2,23 @@ package ca.ilanguage.bilingualaphasiatest.activity;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import ca.ilanguage.bilingualaphasiatest.R;
 import ca.ilanguage.bilingualaphasiatest.content.BilingualAphasiaTest;
-import ca.ilanguage.oprime.storybook.StoryBookSubExperiment;
 import ca.ilanguage.oprime.content.OPrime;
-import ca.ilanguage.oprime.content.Stimulus;
 import ca.ilanguage.oprime.content.SubExperimentBlock;
-import ca.ilanguage.oprime.datacollection.VideoRecorderSubExperiment;
-import android.R.bool;
+import ca.ilanguage.oprime.datacollection.VideoRecorder;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-//import android.webkit.ConsoleMessage;
+import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -141,11 +136,11 @@ public class BilingualAphasiaTestHome extends Activity {
 	}
 	
 	class MyWebChromeClient extends WebChromeClient {
-//		public boolean onConsoleMessage(ConsoleMessage cm) {
-//			if(D) Log.d(TAG, cm.message() + " -- From line " + cm.lineNumber() + " of "
-//					+ cm.sourceId());
-//			return true;
-//		}
+		public boolean onConsoleMessage(ConsoleMessage cm) {
+			if(D) Log.d(TAG, cm.message() + " -- From line " + cm.lineNumber() + " of "
+					+ cm.sourceId());
+			return true;
+		}
 	}
 	private void startVideoRecorder() {
 		String outputDir = ((BilingualAphasiaTest) getApplication()).getOutputDir();
@@ -153,10 +148,10 @@ public class BilingualAphasiaTestHome extends Activity {
 
 		Intent intent;
 		intent = new Intent(OPrime.INTENT_START_VIDEO_RECORDING);
-		intent.putExtra(VideoRecorderSubExperiment.EXTRA_VIDEO_QUALITY,
-				VideoRecorderSubExperiment.DEFAULT_DEBUGGING_QUALITY);
+		intent.putExtra(VideoRecorder.EXTRA_VIDEO_QUALITY,
+				VideoRecorder.DEFAULT_DEBUGGING_QUALITY);
 		intent.putExtra(
-				VideoRecorderSubExperiment.EXTRA_USE_FRONT_FACING_CAMERA, true);
+				VideoRecorder.EXTRA_USE_FRONT_FACING_CAMERA, true);
 		String mDateString = (String) android.text.format.DateFormat.format(
 				"yyyy-MM-dd_kk.mm", new java.util.Date(System.currentTimeMillis() ));
 		mDateString = mDateString.replaceAll("/", "-").replaceAll(" ", "-");
