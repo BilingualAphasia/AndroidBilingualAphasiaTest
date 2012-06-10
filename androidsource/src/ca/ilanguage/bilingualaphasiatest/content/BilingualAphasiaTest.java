@@ -115,9 +115,8 @@ public class BilingualAphasiaTest extends Application {
 		 * SubExperiment 6: Verbal Auditory Comprehension uses 2 images per stimuli.
 		 */
 		ArrayList<TwoImageStimulus> twostimuli = new ArrayList<TwoImageStimulus>();
-//		twostimuli.add(new Stimulus(R.drawable.s000));
-//		twostimuli.add(new Stimulus(R.drawable.s001));
-//		twostimuli.add(new Stimulus(R.drawable.s002));
+		
+		twostimuli.add(new TwoImageStimulus(R.drawable.s073,R.drawable.s002));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s003,R.drawable.s004));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s005,R.drawable.s006));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s007,R.drawable.s008));
@@ -147,31 +146,32 @@ public class BilingualAphasiaTest extends Application {
 		 */
 		ArrayList<Stimulus> stimuli = new ArrayList<Stimulus>();
 		
+		stimuli.add(new Stimulus(R.drawable.s042));
 		stimuli.add(new Stimulus(R.drawable.s043));
 		stimuli.add(new Stimulus(R.drawable.s044));
 		stimuli.add(new Stimulus(R.drawable.s045));
 		stimuli.add(new Stimulus(R.drawable.s046));
-//		stimuli.add(new Stimulus(R.drawable.s047));
-//		stimuli.add(new Stimulus(R.drawable.s048));
-//		stimuli.add(new Stimulus(R.drawable.s049));
-//		stimuli.add(new Stimulus(R.drawable.s050));
-//		stimuli.add(new Stimulus(R.drawable.s051));
-//		stimuli.add(new Stimulus(R.drawable.s052));
-//		stimuli.add(new Stimulus(R.drawable.s053));
-//		stimuli.add(new Stimulus(R.drawable.s054));
-//		stimuli.add(new Stimulus(R.drawable.s055));
-//		stimuli.add(new Stimulus(R.drawable.s056));
-//		stimuli.add(new Stimulus(R.drawable.s057));
-//		stimuli.add(new Stimulus(R.drawable.s058));
-//		stimuli.add(new Stimulus(R.drawable.s059));
-//		stimuli.add(new Stimulus(R.drawable.s060));
-//		stimuli.add(new Stimulus(R.drawable.s061));
-//		stimuli.add(new Stimulus(R.drawable.s062));
-//		stimuli.add(new Stimulus(R.drawable.s063));
-//		stimuli.add(new Stimulus(R.drawable.s064));
-//		stimuli.add(new Stimulus(R.drawable.s065));
-//		stimuli.add(new Stimulus(R.drawable.s066));
-//		stimuli.add(new Stimulus(R.drawable.s067));
+		stimuli.add(new Stimulus(R.drawable.s047));
+		stimuli.add(new Stimulus(R.drawable.s048));
+		stimuli.add(new Stimulus(R.drawable.s049));
+		stimuli.add(new Stimulus(R.drawable.s050));
+		stimuli.add(new Stimulus(R.drawable.s051));
+		stimuli.add(new Stimulus(R.drawable.s052));
+		stimuli.add(new Stimulus(R.drawable.s053));
+		stimuli.add(new Stimulus(R.drawable.s054));
+		stimuli.add(new Stimulus(R.drawable.s055));
+		stimuli.add(new Stimulus(R.drawable.s056));
+		stimuli.add(new Stimulus(R.drawable.s057));
+		stimuli.add(new Stimulus(R.drawable.s058));
+		stimuli.add(new Stimulus(R.drawable.s059));
+		stimuli.add(new Stimulus(R.drawable.s060));
+		stimuli.add(new Stimulus(R.drawable.s061));
+		stimuli.add(new Stimulus(R.drawable.s062));
+		stimuli.add(new Stimulus(R.drawable.s063));
+		stimuli.add(new Stimulus(R.drawable.s064));
+		stimuli.add(new Stimulus(R.drawable.s065));
+		stimuli.add(new Stimulus(R.drawable.s066));
+		stimuli.add(new Stimulus(R.drawable.s067));
 		stimuli.add(new Stimulus(R.drawable.s068));
 		stimuli.add(new Stimulus(R.drawable.s069));
 		stimuli.add(new Stimulus(R.drawable.s070));
@@ -186,6 +186,7 @@ public class BilingualAphasiaTest extends Application {
 		 * SubExperiment 21: Description of a cartoon 
 		 */
 		stimuli = new ArrayList<Stimulus>();
+		stimuli.add(new Stimulus(R.drawable.s073));
 		stimuli.add(new Stimulus(R.drawable.s074));
 		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
 		subExperiments.get(21).setStimuli(stimuli);
@@ -195,6 +196,7 @@ public class BilingualAphasiaTest extends Application {
 		 * SubExperiment 24: Reading 
 		 */
 		stimuli = new ArrayList<Stimulus>();
+		stimuli.add(new Stimulus(R.drawable.s073));
 		stimuli.add(new Stimulus(R.drawable.s075));
 		stimuli.add(new Stimulus(R.drawable.s076));
 		stimuli.add(new Stimulus(R.drawable.s077));
@@ -211,6 +213,7 @@ public class BilingualAphasiaTest extends Application {
 		 * SubExperiment 25: Copying 
 		 */
 		stimuli = new ArrayList<Stimulus>();
+		stimuli.add(new Stimulus(R.drawable.s073));
 		stimuli.add(new Stimulus(R.drawable.s083));
 		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
 		subExperiments.get(25).setStimuli(stimuli);
@@ -223,6 +226,7 @@ public class BilingualAphasiaTest extends Application {
 		
 		twostimuli = new ArrayList<TwoImageStimulus>();
 		
+		twostimuli.add(new TwoImageStimulus(R.drawable.s073,R.drawable.s084));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s085,R.drawable.s086));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s087,R.drawable.s088));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s089,R.drawable.s090));
@@ -243,6 +247,7 @@ public class BilingualAphasiaTest extends Application {
 		twostimuli = null;
 		twostimuli = new ArrayList<TwoImageStimulus>();
 
+		twostimuli.add(new TwoImageStimulus(R.drawable.s105,R.drawable.s106));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s107,R.drawable.s108));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s109,R.drawable.s110));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s111,R.drawable.s112));
