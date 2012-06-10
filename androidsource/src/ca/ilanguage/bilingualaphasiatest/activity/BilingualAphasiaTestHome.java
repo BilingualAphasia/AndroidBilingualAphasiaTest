@@ -10,6 +10,7 @@ import ca.ilanguage.bilingualaphasiatest.content.BilingualAphasiaTest;
 import ca.ilanguage.oprime.storybook.StoryBookSubExperiment;
 import ca.ilanguage.oprime.content.OPrime;
 import ca.ilanguage.oprime.content.Stimulus;
+import ca.ilanguage.oprime.content.SubExperimentBlock;
 import ca.ilanguage.oprime.datacollection.VideoRecorderSubExperiment;
 import android.R.bool;
 import android.app.Activity;
@@ -96,7 +97,7 @@ public class BilingualAphasiaTestHome extends Activity {
 					}else{
 						intent = new Intent(OPrime.INTENT_START_SUB_EXPERIMENT);
 					}
-					intent.putExtra(OPrime.EXTRA_STIMULI_IMAGE_ID,  ((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex).getStimuli());
+					intent.putExtra(OPrime.EXTRA_SUB_EXPERIMENT,  ((BilingualAphasiaTest) getApplication()).subExperiments.get(mCurrentSubex));
 					intent.putExtra(OPrime.EXTRA_LANGUAGE, ((BilingualAphasiaTest) getApplication()).getLanguage().getLanguage());
 					
 					startActivityForResult(intent, OPrime.EXPERIMENT_COMPLETED);
@@ -181,8 +182,8 @@ public class BilingualAphasiaTestHome extends Activity {
 		switch (requestCode) {
 		case OPrime.EXPERIMENT_COMPLETED:
 			if(data != null){
-				ArrayList<Stimulus> s =  (ArrayList<Stimulus>) data.getExtras().getSerializable(OPrime.EXTRA_STIMULI);
-				app.subExperiments.get(mCurrentSubex).setStimuli(s);
+				SubExperimentBlock completedExp = (SubExperimentBlock) data.getExtras().getSerializable(OPrime.EXTRA_SUB_EXPERIMENT);
+				app.subExperiments.set(mCurrentSubex, completedExp) ;
 				Intent i = new Intent(OPrime.INTENT_SAVE_SUB_EXPERIMENT_JSON);
 				i.putExtra(OPrime.EXTRA_SUB_EXPERIMENT, (Serializable) app.subExperiments.get(mCurrentSubex) );
 				startService(i); 
