@@ -44,7 +44,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
          </activity>
-         <activity android:name="ca.ilanguage.oprime.activity.StopWatchSubExperiment" android:label="Chronometer">
+         <activity android:name="ca.ilanguage.oprime.activity.StopWatchSubExperiment" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="ca.ilanguage.oprime.intent.action.START_STOP_WATCH_SUB_EXPERIMENT" />
                 <category android:name="android.intent.category.DEFAULT" />
