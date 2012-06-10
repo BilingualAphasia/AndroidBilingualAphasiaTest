@@ -153,7 +153,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		intent.putExtra(
 				VideoRecorder.EXTRA_USE_FRONT_FACING_CAMERA, true);
 		String mDateString = (String) android.text.format.DateFormat.format(
-				"yyyy-MM-dd_kk.mm", new java.util.Date(System.currentTimeMillis() ));
+				"yyyy-MM-dd_kk_mm", new java.util.Date(System.currentTimeMillis() ));
 		mDateString = mDateString.replaceAll("/", "-").replaceAll(" ", "-");
 
 		String resultsFile = outputDir 
@@ -187,6 +187,8 @@ public class BilingualAphasiaTestHome extends Activity {
 	private void stopVideoRecorder(){
 		Intent i = new Intent(OPrime.INTENT_STOP_VIDEO_RECORDING);
         sendBroadcast(i);
+        Intent audio = new Intent(OPrime.INTENT_START_AUDIO_RECORDING);
+        stopService(audio);
 //        Toast.makeText(this, "Subexperiment complete. ", Toast.LENGTH_LONG).show();
 	}
 	public static boolean isIntentAvailable(Context context, String action) {
