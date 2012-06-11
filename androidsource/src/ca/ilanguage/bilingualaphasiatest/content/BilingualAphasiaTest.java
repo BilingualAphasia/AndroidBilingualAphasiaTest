@@ -23,6 +23,14 @@ public class BilingualAphasiaTest extends Application {
 	int currentSubExperiment;
 	
 	String outputDir = "/sdcard/BilingualAphasiaTest/";
+	public static final String PREFERENCE_NAME = "BilingualAphasiaPrefs";
+    public static final String PREFERENCE_PARTICIPANT_ID = "participantId";
+    public static final String PREFERENCE_PARTICIPANT_FIRSTNAME = "participantfirstname";
+    public static final String PREFERENCE_PARTICIPANT_LASTNAME = "participantlastname";
+    public static final String PREFERENCE_PARTICIPANT_STARTTIME = "participantstarttime";
+    public static final String PREFERENCE_PARTICIPANT_ENDTIME = "participantendtime";
+    public static final String PREFERENCE_EXPERIEMENTER_CODE= "experimenterCode";
+    public static final String PREFERENCE_EXPERIMENT_IS_READY= "experimentIsReady";
 	
 	@Override
 	public void onCreate() {

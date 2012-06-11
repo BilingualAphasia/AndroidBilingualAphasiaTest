@@ -2,25 +2,25 @@
 <resources>
 
     <string name="app_name">Bilingual Aphasia Test</string>
-    <string name="experiment_trial_header">ParticipantID,FirstName,LastName,WorstLanguage,FirstBat,StartTime,EndTime,ExperimenterID</string>
-    <string name="install_oprime">To record participant video you can install the OPrime Android Experimentation App, it allows your tablet to record video in the background and save it to the SDCARD.</string>
-	<string name="experiment_title">Bilingual Aphasia Test</string>
+    <string name="experiment_trial_header">ParticipantID,StartTime,EndTime,ExperimenterID</string>
+    <string name="experiment_title">Bilingual Aphasia Test</string>
     <string name="experiment_ready_message">Experiment Trial is ready</string>
     <string name="experiment_start_instructions">Touch Start to take Participants Background Info</string>
     <string name="experiment_completed_message">Tablet Experiment completed!</string>
     <string name="alert_dialog_cancel">Cancel</string>
     <string name="alert_dialog_ok">OK</string>
-    <string name="alert_dialog_text_entry">Participant details dialog</string>
-    <string name="user_agent_suffix">BilingualAphasiaTest/1.0</string>
+    <string name="user_agent_suffix">BilingualAphasiaTest/2.0</string>
     <string name="preference_about">About</string>
     <string name="preference_about_title">About</string>
-    <string name="preference_about_summary">Bilingual Aphasia Test was Android-ified by
-    iLanguage Lab.</string>
-    <string name="preference_visit_site">Go to the web site</string>
+    <string name="preference_about_summary">The Bilingual Aphasia Test was Android-ified by
+    iLanguage Lab LTD, an OpenSource Fieldlinguistics company in Montreal, Canada.\n Programming: Gina Cook &amp; Kim Dan Ngyuen\n Logo: Émie Dessureault&amp; Alexandra Marquis\nUser Guide: Catherine Gervais &amp; Alexandra Marquis </string>
+    <string name="preference_visit_site">Go to the McGill BAT website</string>
+    <string name="preference_visit_site_summary">On the McGill BAT site you can get instructions on how to administer the Bilingual Aphasia Test, or download the PDF assessors test book.</string>
+    <string name="preference_visit_bug_tracker">Contact Us</string>
+   	<string name="preference_visit_bug_tracker_summary">Report a bug or request a feature</string>
     <string name="preference_thanks_title">Special Thanks</string>
-    <string name="preference_thanks_summary">Special Thanks to the Montreal Aphasia community,
-    the Montreal Computational Linguistics community, and the Android Open
-    Source developers for their work which directly or indirectly
+    <string name="preference_thanks_summary">Special thanks to the Bilingual Aphasia community,
+    our Speech Language Pathology interns Émie, Kim and Catherine, and the Android OpenSource developers for their work which directly or indirectly
     contributed to this project.</string>
     <string name="preference_licence_title">License</string>
     <string name="preference_licence_summary">The Experiments are copyright their original
@@ -29,7 +29,5 @@
     created and shared by Google and used according to terms described in
     the Apache 2.0 License.</string>
     <string name="preference_misc">More Information</string>
-    
-    
 
 </resources>
