@@ -314,7 +314,7 @@ public class BilingualAphasiaTestHome extends Activity {
 						|| mCurrentSubex == 27 || mCurrentSubex == 30) {
 					Intent takepicture = new Intent(OPrime.INTENT_TAKE_PICTURE);
 					takepicture.putExtra(OPrime.EXTRA_RESULT_FILENAME,
-							completedExp.getResultsFileWithoutSuffix()
+							completedExp.getResultsFileWithoutSuffix().replace("video", "")
 									+ ".jpg");
 					startActivity(takepicture);
 
