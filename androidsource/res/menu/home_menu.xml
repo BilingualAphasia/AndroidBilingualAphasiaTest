@@ -19,12 +19,10 @@
     <item android:id="@+id/open_settings"
         android:title="Settings" />
     <item android:id="@+id/language_settings"
-        android:title="French/English" />
+        android:title="Languages" />
     <item android:id="@+id/issue_tracker"
         android:title="Bugs" />
     <item android:id="@+id/result_folder"
-        android:title="View in Results mode" />
-    <item android:id="@+id/backup_results"
-        android:title="Backup Results to Server" />        
+        android:title="View in Results mode" />      
 
 </menu>
