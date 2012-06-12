@@ -238,7 +238,7 @@ public class BilingualAphasiaTestHome extends Activity {
 
 	private void startVideoRecorder() {
 		String outputDir = ((BilingualAphasiaTest) getApplication())
-				.getOutputDir() + "video/";
+				.getOutputDir()+ "video/" ;
 		new File(outputDir).mkdirs();
 
 		Intent intent;
@@ -251,17 +251,17 @@ public class BilingualAphasiaTestHome extends Activity {
 				new java.util.Date(System.currentTimeMillis()));
 		mDateString = mDateString.replaceAll("/", "-").replaceAll(" ", "-");
 
-		String resultsFile = outputDir
-				+ app.getExperiment().getParticipant().getCode()
+		String resultsFile = 
+				app.getExperiment().getParticipant().getCode()
 				+ "_"
 				+ app.getLanguage()
 				+ mCurrentSubex
 				+ "_"
 				+ app.getSubExperiments().get(mCurrentSubex).getTitle()
 						.replaceAll(" ", "_") + "-" + mDateString;
-		intent.putExtra(OPrime.EXTRA_RESULT_FILENAME, resultsFile + ".3gp");
+		intent.putExtra(OPrime.EXTRA_RESULT_FILENAME, outputDir+resultsFile +".3gp");
 		app.getSubExperiments().get(mCurrentSubex)
-				.setResultsFileWithoutSuffix(resultsFile);
+				.setResultsFileWithoutSuffix(outputDir+resultsFile);
 
 		startActivity(intent);
 	}
@@ -314,7 +314,7 @@ public class BilingualAphasiaTestHome extends Activity {
 						|| mCurrentSubex == 27 || mCurrentSubex == 30) {
 					Intent takepicture = new Intent(OPrime.INTENT_TAKE_PICTURE);
 					takepicture.putExtra(OPrime.EXTRA_RESULT_FILENAME,
-							completedExp.getResultsFileWithoutSuffix().replace("video", "")
+							completedExp.getResultsFileWithoutSuffix().replace("video", "writing")
 									+ ".jpg");
 					startActivity(takepicture);
 

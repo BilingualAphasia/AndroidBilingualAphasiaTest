@@ -1,5 +1,6 @@
 package ca.ilanguage.bilingualaphasiatest.content;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -66,6 +67,10 @@ public class BilingualAphasiaTest extends Application {
 		language = Locale.getDefault();
 		experiments = new ArrayList<Experiment>();
 
+		new File(outputDir+"video/").mkdirs();
+		new File(outputDir+"writing/").mkdirs();
+		new File(outputDir+"touchdata/").mkdirs();
+		
 		Log.d(TAG, "Oncreate of the application");
 	}
 
