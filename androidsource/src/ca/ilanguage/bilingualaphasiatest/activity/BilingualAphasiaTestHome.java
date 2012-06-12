@@ -330,6 +330,16 @@ public class BilingualAphasiaTestHome extends Activity {
 			initExperiment();
 			break;
 		case OPrime.SWITCH_LANGUAGE:
+			SharedPreferences prefs = getSharedPreferences(
+					BilingualAphasiaTest.PREFERENCE_NAME, MODE_PRIVATE);
+			String lang = prefs.getString(
+					BilingualAphasiaTest.PREFERENCE_EXPERIMENT_LANGUAGE, "en");
+			if(lang.equals(app.getLanguage().getLanguage())){
+				//do nothing if they didnt change the languge
+			}else{
+				app.createNewExperiment(lang);
+				initExperiment();
+			}
 			break;
 		case OPrime.REPLAY_RESULTS:
 			break;

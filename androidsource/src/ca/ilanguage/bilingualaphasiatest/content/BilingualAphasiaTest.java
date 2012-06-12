@@ -15,7 +15,21 @@ import android.app.Application;
 import android.content.res.Configuration;
 import android.util.Log;
 import ca.ilanguage.bilingualaphasiatest.R;
+/**
+ * AndroidBAT2.0 is an interactive OpenSource application of the Bilingual Aphasia Test
+(BAT). The BAT was designed to assess each of the languages of a bilingual or multilingual
+individual with aphasia in an equivalent way. [inutile] AndroidBAT2.0 is a ‘virtual paper’
+of the original BAT paper version. Unlike a computer application, the AndroidBAT2.0 is
+designed to simulate the flexibility of the original paper BAT, with the added benefit of
+allowing for a diversity of data collection integrated directly into the test. AndroidBAT2.0
+allows recording of a patient’s interview, without visible external camera or microphone,
+while providing more analyzable data (e.g., eye-gaze, touch, etc.) than the paper format. Data
+can then be easily transferred on the internet using Dropbox for instance. AndroidBAT2.0
+works on tablets and phones.
 
+ * @author iLanguage Lab LTD
+ *
+ */
 public class BilingualAphasiaTest extends Application {
 	protected static final String TAG = "BilingualAphasiaTest";
 	public static final boolean D = true;
