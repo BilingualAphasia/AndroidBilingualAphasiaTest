@@ -2,13 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <PreferenceCategory android:title="Replay Results" >
-        <CheckBoxPreference
+       <!--  <CheckBoxPreference
             android:defaultValue="false"
             android:key="replayresults"
             android:persistent="true"
             android:summaryOff="Running the experiment"
             android:summaryOn="Replaying participant videos"
-            android:title="Replay Results Mode" />
+            android:title="Replay Results Mode" />-->
 
         <ListPreference
             android:defaultValue="en"

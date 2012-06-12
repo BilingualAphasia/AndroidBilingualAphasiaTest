@@ -23,6 +23,6 @@
     <item android:id="@+id/issue_tracker"
         android:title="Bugs" />
     <item android:id="@+id/result_folder"
-        android:title="View in Results mode" />      
+        android:title="View Results Files" />      
 
 </menu>

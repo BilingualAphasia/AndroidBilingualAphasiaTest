@@ -1,80 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="ca.ilanguage.bilingualaphasiatest"
-      android:versionCode="3"
-      android:versionName="1.3"
-      android:installLocation="preferExternal">
-      <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15"/>
-    
-	<uses-feature android:name="android.hardware.camera"/>
-	<uses-feature android:name="android.hardware.camera.autofocus"/>
-	
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.VIBRATE" />
-	<uses-permission android:name="android.permission.CAMERA" />
-	<uses-permission android:name="android.permission.RECORD_AUDIO" />
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission android:name="android.permission.INTERNET"/>
-	
-    <application android:name=".content.BilingualAphasiaTest" android:icon="@drawable/ic_oprime" android:label="@string/app_name">
-         <activity android:name=".activity.BilingualAphasiaTestHome"
-                  android:label="@string/app_name">
-           <intent-filter>
+    package="ca.ilanguage.bilingualaphasiatest"
+    android:installLocation="preferExternal"
+    android:versionCode="4"
+    android:versionName="2.0.1" >
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="15" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+
+    <application
+        android:name=".content.BilingualAphasiaTest"
+        android:icon="@drawable/ic_oprime"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".activity.BilingualAphasiaTestHome"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> 
-        <activity android:name=".activity.ParticipantDetails"
-                  android:label="@string/app_name">
-        </activity>  
-		<activity
+        </activity>
+        <activity
+            android:name=".activity.ParticipantDetails"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="ca.ilanguage.oprime.storybook.StoryBookSubExperiment"
             android:label="@string/app_name" >
-         </activity>
-         <activity
+        </activity>
+        <activity
             android:name="ca.ilanguage.oprime.activity.SubExperiment"
-            android:label="@string/app_name" >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="ca.ilanguage.oprime.intent.action.START_SUB_EXPERIMENT" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-         </activity>
-         <activity
-            android:name="ca.ilanguage.oprime.activity.TwoImageSubExperiment"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="ca.ilanguage.oprime.intent.action.START_TWO_IMAGE_SUB_EXPERIMENT" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-         </activity>
-         <activity android:name="ca.ilanguage.oprime.activity.StopWatchSubExperiment" android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="ca.ilanguage.oprime.intent.action.START_STOP_WATCH_SUB_EXPERIMENT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-         <activity
-            android:name="ca.ilanguage.oprime.datacollection.VideoRecorder"
-            android:label="@string/app_name" >
-             <intent-filter>
-                <action android:name="ca.ilanguage.oprime.intent.action.START_VIDEO_RECORDING_SERVICE" />
+        <activity
+            android:name="ca.ilanguage.oprime.activity.TwoImageSubExperiment"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="ca.ilanguage.oprime.intent.action.START_TWO_IMAGE_SUB_EXPERIMENT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-         </activity>
-          
-         <service 
-             android:name="ca.ilanguage.oprime.datacollection.SubExperimentToJson">
-              <intent-filter>
+        </activity>
+        <activity
+            android:name="ca.ilanguage.oprime.activity.StopWatchSubExperiment"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="ca.ilanguage.oprime.intent.action.START_STOP_WATCH_SUB_EXPERIMENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ca.ilanguage.oprime.datacollection.VideoRecorder"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="ca.ilanguage.oprime.intent.action.START_VIDEO_RECORDING_SERVICE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="ca.ilanguage.oprime.datacollection.SubExperimentToJson" >
+            <intent-filter>
                 <action android:name="ca.ilanguage.oprime.intent.action.SAVE_SUB_EXPERIMENT_JSON" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-              </intent-filter>
-         </service>
-         <service 
-             android:name="ca.ilanguage.oprime.datacollection.AudioRecorder">
-              <intent-filter>
+            </intent-filter>
+        </service>
+        <service android:name="ca.ilanguage.oprime.datacollection.AudioRecorder" >
+            <intent-filter>
                 <action android:name="ca.ilanguage.oprime.intent.action.START_AUDIO_RECORDING_SERVICE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-              </intent-filter>
-         </service>
+            </intent-filter>
+        </service>
     </application>
+
 </manifest>

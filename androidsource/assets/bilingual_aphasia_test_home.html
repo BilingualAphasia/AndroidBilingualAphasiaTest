@@ -320,7 +320,7 @@ if (isNativeAndroidApp()) {
 		titleLabel = Android.fetchExperimentTitleJS();
 	}
 	fetchParticipantCodes = function(){
-		result = Android.fetchParticipantCodesJS();
+		result = "";//Android.fetchParticipantCodesJS(); //TODO turned off result mode
 		result = result.replace(/\]/g,"").replace(/\[/g,"");
 		if(result.length > 0){
 			participantCodes = result.split(", ");//"ET1AM4mc, SAMPLE".split(",");
@@ -584,6 +584,19 @@ var ctx;
 	}
 </script>
 
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30895446-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr valign="top"><td>

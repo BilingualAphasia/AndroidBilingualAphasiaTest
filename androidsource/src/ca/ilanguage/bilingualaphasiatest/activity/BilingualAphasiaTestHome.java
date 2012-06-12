@@ -3,6 +3,9 @@ package ca.ilanguage.bilingualaphasiatest.activity;
 import java.io.File;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
+
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import ca.ilanguage.bilingualaphasiatest.R;
 import ca.ilanguage.bilingualaphasiatest.content.BilingualAphasiaTest;
@@ -17,6 +20,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,12 +44,17 @@ public class BilingualAphasiaTestHome extends Activity {
 	private BilingualAphasiaTest app;
 
 	private Menu mMenu;
-	
-	private Boolean mAutoAdvance= false;
+
+	private Boolean mAutoAdvance = false;
+	GoogleAnalyticsTracker tracker;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		tracker = GoogleAnalyticsTracker.getInstance();
+		// Start the tracker in 20 sec interval dispatch mode...
+		tracker.start("UA-30895446-1", 20, this);
+
 		setContentView(R.layout.main_webview);
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.addJavascriptInterface(new JavaScriptInterface(this),
@@ -106,7 +115,7 @@ public class BilingualAphasiaTestHome extends Activity {
 									.getLanguage().getLanguage());
 
 					startActivityForResult(intent, OPrime.EXPERIMENT_COMPLETED);
-					
+
 				}
 			}, 2000);
 		}
@@ -127,9 +136,9 @@ public class BilingualAphasiaTestHome extends Activity {
 		}
 
 		public void setAutoAdvanceJS(String autoadvance) {
-			if(autoadvance.equals("true")){
+			if (autoadvance.equals("1")) {
 				mAutoAdvance = true;
-			}else{
+			} else {
 				mAutoAdvance = false;
 			}
 
@@ -229,7 +238,7 @@ public class BilingualAphasiaTestHome extends Activity {
 
 	private void startVideoRecorder() {
 		String outputDir = ((BilingualAphasiaTest) getApplication())
-				.getOutputDir();
+				.getOutputDir() + "video/";
 		new File(outputDir).mkdirs();
 
 		Intent intent;
@@ -243,7 +252,6 @@ public class BilingualAphasiaTestHome extends Activity {
 		mDateString = mDateString.replaceAll("/", "-").replaceAll(" ", "-");
 
 		String resultsFile = outputDir
-				+ "video/"
 				+ app.getExperiment().getParticipant().getCode()
 				+ "_"
 				+ app.getLanguage()
@@ -261,21 +269,60 @@ public class BilingualAphasiaTestHome extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case OPrime.EXPERIMENT_COMPLETED:
-			if(data != null){
-				SubExperimentBlock completedExp = (SubExperimentBlock) data.getExtras().getSerializable(OPrime.EXTRA_SUB_EXPERIMENT);
-				app.getSubExperiments().set(mCurrentSubex, completedExp) ;
+			if (data != null) {
+				SubExperimentBlock completedExp = (SubExperimentBlock) data
+						.getExtras().getSerializable(
+								OPrime.EXTRA_SUB_EXPERIMENT);
+				app.getSubExperiments().set(mCurrentSubex, completedExp);
 				Intent i = new Intent(OPrime.INTENT_SAVE_SUB_EXPERIMENT_JSON);
-				i.putExtra(OPrime.EXTRA_SUB_EXPERIMENT, (Serializable) app.getSubExperiments().get(mCurrentSubex) );
-				startService(i); 
+				i.putExtra(OPrime.EXTRA_SUB_EXPERIMENT, (Serializable) app
+						.getSubExperiments().get(mCurrentSubex));
+				startService(i);
+				app.getExperiment()
+						.getParticipant()
+						.setStatus(
+								app.getExperiment().getParticipant()
+										.getStatus()
+										+ ":::"
+										+ completedExp.getTitle()
+										+ " in "
+										+ (new Locale(completedExp
+												.getLanguage()))
+												.getDisplayLanguage()
+										+ " --- "
+										+ completedExp.getDisplayedStimuli()
+										+ "/"
+										+ completedExp.getStimuli().size()
+										+ " Completed ");
+				tracker.trackEvent(app.getExperiment().getParticipant().getCode(), // Category
+                        "SubExperiment", // Action
+                        completedExp.getTitle()
+						+ " in "
+						+ (new Locale(completedExp
+								.getLanguage()))
+								.getDisplayLanguage()
+						+ " --- "
+						+ completedExp.getDisplayedStimuli()
+						+ "/"
+						+ completedExp.getStimuli().size()
+						+ " Completed " + System.currentTimeMillis() + " : ", // Label
+                        (int) System.currentTimeMillis()); // Value
+
+
+
 				app.writePrivateParticipantToFile();
 			}
 			stopVideoRecorder();
-			if(mAutoAdvance){
+			if (mAutoAdvance) {
 				mCurrentSubex++;
-				if(mCurrentSubex >= app.getExperiment().getSubExperiments().size()){
-					Toast.makeText(getApplicationContext(), "BAT Part A and B completed!", Toast.LENGTH_LONG).show();
-				}else{
-					mWebView.loadUrl("javascript:getPositionAsButton(0,0,"+mCurrentSubex+")");
+				if (mCurrentSubex >= app.getExperiment().getSubExperiments()
+						.size()) {
+					Toast.makeText(getApplicationContext(),
+							"BAT Part A and B completed!", Toast.LENGTH_LONG)
+							.show();
+				} else {
+					mWebView.loadUrl("javascript:getPositionAsButton(0,0,"
+							+ mCurrentSubex + ")");
 				}
 			}
 			break;
@@ -344,6 +391,7 @@ public class BilingualAphasiaTestHome extends Activity {
 				Intent goToMarket = new Intent(Intent.ACTION_VIEW)
 						.setData(Uri
 								.parse("market://details?id=org.openintents.filemanager"));
+				startActivity(goToMarket);
 			} else {
 				Intent openResults = new Intent(
 						"org.openintents.action.PICK_FILE");
@@ -352,9 +400,9 @@ public class BilingualAphasiaTestHome extends Activity {
 								.getOutputDir()));
 				startActivity(openResults);
 			}
-			Intent intentReplay = new Intent(getBaseContext(),
-					ParticipantDetails.class);
-			startActivityForResult(intentReplay, OPrime.REPLAY_RESULTS);
+			// Intent intentReplay = new Intent(getBaseContext(),
+			// ParticipantDetails.class);
+			// startActivityForResult(intentReplay, OPrime.REPLAY_RESULTS);
 			return true;
 
 		case R.id.issue_tracker:
@@ -369,4 +417,24 @@ public class BilingualAphasiaTestHome extends Activity {
 
 		return false;
 	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		/*
+		 * Doing nothing makes the current redraw properly
+		 */
+	}
+
+	@Override
+	protected void onDestroy() {
+		tracker.trackEvent(app.getExperiment().getParticipant().getCode(), // Category
+				"Exit", // Action
+				"Exit : " + System.currentTimeMillis() + " : ", // Label
+				(int) System.currentTimeMillis()); // Value
+		tracker.stop();// Stop the tracker when it is no longer needed.
+
+		super.onDestroy();
+	}
+
 }

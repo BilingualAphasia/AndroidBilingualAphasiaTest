@@ -113,17 +113,6 @@ public class BilingualAphasiaTest extends Application {
 	}
 
 	public void writePrivateParticipantToFile() {
-		int completed = 0;
-		for (SubExperimentBlock s : getExperiment().getSubExperiments()) {
-			if (s.isExperimentProbablyComplete()) {
-				completed++;
-			}
-		}
-		Participant p = getExperiment().getParticipant();
-		p.setDetails(p.getDetails() + "Subsections completed in "
-				+ language.getDisplayLanguage() + " " + completed + "/"
-				+ getSubExperiments().size());
-
 		String outfile = outputDir + "participants_private.csv";
 		try {
 			FileOutputStream out = new FileOutputStream(outfile, true);

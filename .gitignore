@@ -1,11 +1,9 @@
 # private constants #
-NonPublicConstants.java
-assets/analytics_website_script.html
 *nonpublic*
 
 .project
 .settings
-#.classpath
+.classpath
 
 bin
 gen
@@ -29,9 +27,6 @@ target
 *.gz
 *.iso
 *.jar
-!android-gdata-1.30.0.jar
-!bursaq-goto.jar
-!libGoogleAnalytics.jar
 *.rar
 *.tar
 *.zip
