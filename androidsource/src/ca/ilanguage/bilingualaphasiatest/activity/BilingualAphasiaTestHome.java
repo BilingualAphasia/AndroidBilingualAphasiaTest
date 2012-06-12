@@ -274,6 +274,8 @@ public class BilingualAphasiaTestHome extends Activity {
 						.getExtras().getSerializable(
 								OPrime.EXTRA_SUB_EXPERIMENT);
 				app.getSubExperiments().set(mCurrentSubex, completedExp);
+				
+
 				Intent i = new Intent(OPrime.INTENT_SAVE_SUB_EXPERIMENT_JSON);
 				i.putExtra(OPrime.EXTRA_SUB_EXPERIMENT, (Serializable) app
 						.getSubExperiments().get(mCurrentSubex));
@@ -294,23 +296,29 @@ public class BilingualAphasiaTestHome extends Activity {
 										+ "/"
 										+ completedExp.getStimuli().size()
 										+ " Completed ");
-				tracker.trackEvent(app.getExperiment().getParticipant().getCode(), // Category
-                        "SubExperiment", // Action
-                        completedExp.getTitle()
-						+ " in "
-						+ (new Locale(completedExp
-								.getLanguage()))
-								.getDisplayLanguage()
-						+ " --- "
-						+ completedExp.getDisplayedStimuli()
-						+ "/"
-						+ completedExp.getStimuli().size()
-						+ " Completed " + System.currentTimeMillis() + " : ", // Label
-                        (int) System.currentTimeMillis()); // Value
-
-
+				tracker.trackEvent(
+						app.getExperiment().getParticipant().getCode(), // Category
+						"SubExperiment", // Action
+						completedExp.getTitle()
+								+ " in "
+								+ (new Locale(completedExp.getLanguage()))
+										.getDisplayLanguage() + " --- "
+								+ completedExp.getDisplayedStimuli() + "/"
+								+ completedExp.getStimuli().size()
+								+ " Completed " + System.currentTimeMillis()
+								+ " : ", // Label
+						(int) System.currentTimeMillis()); // Value
 
 				app.writePrivateParticipantToFile();
+				if (mCurrentSubex == 25 || mCurrentSubex == 26
+						|| mCurrentSubex == 27 || mCurrentSubex == 30) {
+					Intent takepicture = new Intent(OPrime.INTENT_TAKE_PICTURE);
+					takepicture.putExtra(OPrime.EXTRA_RESULT_FILENAME,
+							completedExp.getResultsFileWithoutSuffix()
+									+ ".jpg");
+					startActivity(takepicture);
+
+				}
 			}
 			stopVideoRecorder();
 			if (mAutoAdvance) {
@@ -334,9 +342,9 @@ public class BilingualAphasiaTestHome extends Activity {
 					BilingualAphasiaTest.PREFERENCE_NAME, MODE_PRIVATE);
 			String lang = prefs.getString(
 					BilingualAphasiaTest.PREFERENCE_EXPERIMENT_LANGUAGE, "en");
-			if(lang.equals(app.getLanguage().getLanguage())){
-				//do nothing if they didnt change the languge
-			}else{
+			if (lang.equals(app.getLanguage().getLanguage())) {
+				// do nothing if they didnt change the languge
+			} else {
 				app.createNewExperiment(lang);
 				initExperiment();
 			}
