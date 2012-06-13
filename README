@@ -1,3 +1,6 @@
+How to install:
+* If you have an Android, click on this link https://play.google.com/store/apps/details?id=ca.ilanguage.bilingualaphasiatest
+
 
 This is code which was used give the eBAT pdfs (http://www.mcgill.ca/linguistics/research/bat/ a collection of over 50 Bilingual Assessments for Aphasia made open and free by Dr. Paradis and his collaborators)  "eyes and ears" for the Bilingual Aphasia Test Android app (Cook, Marquis, Achim 2011 presented at The Academy of Aphasia 2011 - Montreal)). To know more about the architecture you can look at the diagram for the Android section in this pdf: 
 https://github.com/iLanguage/AndroidBilingualAphasiaTest/blob/master/cook,marquis,achim-2011-aphasia_assessment_on_android_architecture_and_sample_results.pdf?raw=true
