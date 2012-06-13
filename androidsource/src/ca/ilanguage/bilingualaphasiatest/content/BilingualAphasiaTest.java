@@ -374,7 +374,7 @@ public class BilingualAphasiaTest extends Application {
 		 * SubExperiment 21: Description of a cartoon
 		 */
 		stimuli = new ArrayList<Stimulus>();
-		stimuli.add(new Stimulus(R.drawable.s073));
+//		stimuli.add(new Stimulus(R.drawable.s073));
 		stimuli.add(new Stimulus(R.drawable.s074));
 		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
 		experiments.get(bat).getSubExperiments().get(21).setStimuli(stimuli);
@@ -384,7 +384,7 @@ public class BilingualAphasiaTest extends Application {
 		 * SubExperiment 24: Reading
 		 */
 		stimuli = new ArrayList<Stimulus>();
-		stimuli.add(new Stimulus(R.drawable.s073));
+//		stimuli.add(new Stimulus(R.drawable.s073));
 		stimuli.add(new Stimulus(R.drawable.s075));
 		stimuli.add(new Stimulus(R.drawable.s076));
 		stimuli.add(new Stimulus(R.drawable.s077));
@@ -401,7 +401,7 @@ public class BilingualAphasiaTest extends Application {
 		 * SubExperiment 25: Copying
 		 */
 		stimuli = new ArrayList<Stimulus>();
-		stimuli.add(new Stimulus(R.drawable.s073));
+//		stimuli.add(new Stimulus(R.drawable.s073));
 		stimuli.add(new Stimulus(R.drawable.s083));
 		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
 		experiments.get(bat).getSubExperiments().get(25).setStimuli(stimuli);
