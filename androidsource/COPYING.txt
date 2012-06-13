@@ -1,4 +1,3 @@
-
 Android Experimentation Software
-© Gina Cook
+
 Released under the Apache 2.0 License
