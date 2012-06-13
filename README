@@ -1,6 +1,13 @@
 How to install:
 * If you have an Android, click on this link https://play.google.com/store/apps/details?id=ca.ilanguage.bilingualaphasiatest
 
+User Guide: 
+* https://github.com/iLanguage/AndroidBilingualAphasiaTest/blob/master/documentation/UserGuide.doc?raw=true
+
+
+Screenshots:
+* https://github.com/iLanguage/AndroidBilingualAphasiaTest/tree/master/documentation
+
 
 This is code which was used give the eBAT pdfs (http://www.mcgill.ca/linguistics/research/bat/ a collection of over 50 Bilingual Assessments for Aphasia made open and free by Dr. Paradis and his collaborators)  "eyes and ears" for the Bilingual Aphasia Test Android app (Cook, Marquis, Achim 2011 presented at The Academy of Aphasia 2011 - Montreal)). To know more about the architecture you can look at the diagram for the Android section in this pdf: 
 https://github.com/iLanguage/AndroidBilingualAphasiaTest/blob/master/cook,marquis,achim-2011-aphasia_assessment_on_android_architecture_and_sample_results.pdf?raw=true
@@ -20,6 +27,14 @@ The audience of this project:
 * open source programmers
 * researchers who program, or have a programmer in their team who can adapt the code to their needs
 
+
+
+The Android Bilingual Aphasia Test Team 
+* Gina Cook - iLanguage Lab LTD, Montréal Canada
+* Émie Dessureault - École de Orthophonie et Audiologie, Université de Montréal
+* Catherine Gervais - Département de Psychologie, Université de Montréal
+* Alexandra Marquis - École de Orthophonie et Audiologie, Université de Montréal
+* Kim Dan Nguyen - École de Orthophonie et Audiologie, Université de Montréal
 
 You will probably be interested in another project, which is a WebApp that extracts and analyzes touch, eye gaze and audio data using Open Source software. It runs on any laptop that has Chrome, Firefox or Safari (its HTML5).
 https://github.com/iLanguage/OPrimeAdministrator
