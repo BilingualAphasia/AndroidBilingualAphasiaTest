@@ -39,8 +39,10 @@ The Android Bilingual Aphasia Test Team
 Contact us
 * https://docs.google.com/spreadsheet/viewform?formkey=dGpiRDhreGpmTFBmQ2FUTVVjVlhESHc6MQ
 * Leave us notes, comments, feedback, suggestions, virtual cookies in our issue tracker https://github.com/iLanguage/AndroidBilingualAphasiaTest/issues?milestone=6&state=closed
-You will probably be interested in another project, which is a WebApp that extracts and analyzes touch, eye gaze and audio data using Open Source software. It runs on any laptop that has Chrome, Firefox or Safari (its HTML5).
-https://github.com/iLanguage/OPrimeAdministrator
+
+
+If you are interested in the Bilingual Aphasia Test, you might also be interested in another project, which is a WebApp that extracts and analyzes touch, eye gaze and audio data using Open Source software. It runs on any laptop that has Chrome, Firefox or Safari (its HTML5).
+https://github.com/iLanguage/OPrimeAdministrator and the BilingualAphasiaTestScorer, which can turn a spread sheet into a patient profile. It is also an HTML5 WebApp http://ilanguage.github.com/BilingualAphasiaTestScorer/index.html
 
 The next steps:
 
