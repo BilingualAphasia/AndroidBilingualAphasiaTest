@@ -264,19 +264,91 @@ public class BilingualAphasiaTest extends Application {
 
 		stimuli.add(new Stimulus(R.drawable.s042));
 		stimuli.add(new Stimulus(R.drawable.s043));
+		
 		stimuli.add(new Stimulus(R.drawable.s044));
+		stimuli.add(new Stimulus(R.drawable.s044));
+		stimuli.add(new Stimulus(R.drawable.s044));
+		stimuli.add(new Stimulus(R.drawable.s044));
+		stimuli.add(new Stimulus(R.drawable.s044));
+		
 		stimuli.add(new Stimulus(R.drawable.s045));
+		stimuli.add(new Stimulus(R.drawable.s045));
+		stimuli.add(new Stimulus(R.drawable.s045));
+		stimuli.add(new Stimulus(R.drawable.s045));
+		stimuli.add(new Stimulus(R.drawable.s045));
+		stimuli.add(new Stimulus(R.drawable.s045));
+		
 		stimuli.add(new Stimulus(R.drawable.s046));
+		stimuli.add(new Stimulus(R.drawable.s046));
+		stimuli.add(new Stimulus(R.drawable.s046));
+		stimuli.add(new Stimulus(R.drawable.s046));
+		
 		stimuli.add(new Stimulus(R.drawable.s047));
+		stimuli.add(new Stimulus(R.drawable.s047));
+		stimuli.add(new Stimulus(R.drawable.s047));
+		stimuli.add(new Stimulus(R.drawable.s047));
+		stimuli.add(new Stimulus(R.drawable.s047));
+		stimuli.add(new Stimulus(R.drawable.s047));
+		stimuli.add(new Stimulus(R.drawable.s047));
+		stimuli.add(new Stimulus(R.drawable.s047));
+		
 		stimuli.add(new Stimulus(R.drawable.s048));
+		stimuli.add(new Stimulus(R.drawable.s048));
+		stimuli.add(new Stimulus(R.drawable.s048));
+		stimuli.add(new Stimulus(R.drawable.s048));
+		stimuli.add(new Stimulus(R.drawable.s048));
+		stimuli.add(new Stimulus(R.drawable.s048));
+		stimuli.add(new Stimulus(R.drawable.s048));
+		stimuli.add(new Stimulus(R.drawable.s048));
+		
 		stimuli.add(new Stimulus(R.drawable.s049));
+		stimuli.add(new Stimulus(R.drawable.s049));
+		stimuli.add(new Stimulus(R.drawable.s049));
+		stimuli.add(new Stimulus(R.drawable.s049));
+		stimuli.add(new Stimulus(R.drawable.s049));
+		stimuli.add(new Stimulus(R.drawable.s049));
+		stimuli.add(new Stimulus(R.drawable.s049));
+		stimuli.add(new Stimulus(R.drawable.s049));
+		
 		stimuli.add(new Stimulus(R.drawable.s050));
+		stimuli.add(new Stimulus(R.drawable.s050));
+		stimuli.add(new Stimulus(R.drawable.s050));
+		stimuli.add(new Stimulus(R.drawable.s050));
+		stimuli.add(new Stimulus(R.drawable.s050));
+		stimuli.add(new Stimulus(R.drawable.s050));
+		
 		stimuli.add(new Stimulus(R.drawable.s051));
+		stimuli.add(new Stimulus(R.drawable.s051));
+		stimuli.add(new Stimulus(R.drawable.s051));
+		stimuli.add(new Stimulus(R.drawable.s051));
+		
 		stimuli.add(new Stimulus(R.drawable.s052));
+		stimuli.add(new Stimulus(R.drawable.s052));
+		stimuli.add(new Stimulus(R.drawable.s052));
+		stimuli.add(new Stimulus(R.drawable.s052));
+		stimuli.add(new Stimulus(R.drawable.s052));
+		stimuli.add(new Stimulus(R.drawable.s052));
+		
 		stimuli.add(new Stimulus(R.drawable.s053));
+		stimuli.add(new Stimulus(R.drawable.s053));
+		stimuli.add(new Stimulus(R.drawable.s053));
+		stimuli.add(new Stimulus(R.drawable.s053));
+		
 		stimuli.add(new Stimulus(R.drawable.s054));
+		stimuli.add(new Stimulus(R.drawable.s054));
+		stimuli.add(new Stimulus(R.drawable.s054));
+		stimuli.add(new Stimulus(R.drawable.s054));
+		
 		stimuli.add(new Stimulus(R.drawable.s055));
+		stimuli.add(new Stimulus(R.drawable.s055));
+		stimuli.add(new Stimulus(R.drawable.s055));
+		stimuli.add(new Stimulus(R.drawable.s055));
+		
 		stimuli.add(new Stimulus(R.drawable.s056));
+		stimuli.add(new Stimulus(R.drawable.s056));
+		stimuli.add(new Stimulus(R.drawable.s056));
+		stimuli.add(new Stimulus(R.drawable.s056));
+		
 		stimuli.add(new Stimulus(R.drawable.s057));
 		stimuli.add(new Stimulus(R.drawable.s058));
 		stimuli.add(new Stimulus(R.drawable.s059));
