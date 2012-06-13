@@ -1,12 +1,12 @@
 How to install:
-* If you have an Android, click on this link https://play.google.com/store/apps/details?id=ca.ilanguage.bilingualaphasiatest
+* https://play.google.com/store/apps/details?id=ca.ilanguage.bilingualaphasiatest
 
 User Guide: 
 * https://github.com/iLanguage/AndroidBilingualAphasiaTest/blob/master/documentation/UserGuide.doc?raw=true
 
-
 Screenshots:
 * https://github.com/iLanguage/AndroidBilingualAphasiaTest/tree/master/documentation
+
 
 
 This is code which was used give the eBAT pdfs (http://www.mcgill.ca/linguistics/research/bat/ a collection of over 50 Bilingual Assessments for Aphasia made open and free by Dr. Paradis and his collaborators)  "eyes and ears" for the Bilingual Aphasia Test Android app (Cook, Marquis, Achim 2011 presented at The Academy of Aphasia 2011 - Montreal)). To know more about the architecture you can look at the diagram for the Android section in this pdf: 
@@ -22,7 +22,7 @@ You can think of this as the Participant's side of the project.  The tool has th
 
 There are some WACHME YouTube Videos http://www.youtube.com/playlist?list=PLF468B25FFEF8EAF9 to show what this project does. The project will also be on the Android Market when we think it is ready for random users (ie, after we have WATCHMEs which tell the user how to use it).
 
-The audience of this project:
+The audience of this page:
 
 * open source programmers
 * researchers who program, or have a programmer in their team who can adapt the code to their needs
@@ -36,6 +36,9 @@ The Android Bilingual Aphasia Test Team
 * Alexandra Marquis - École de Orthophonie et Audiologie, Université de Montréal
 * Kim Dan Nguyen - École de Orthophonie et Audiologie, Université de Montréal
 
+Contact us
+* https://docs.google.com/spreadsheet/viewform?formkey=dGpiRDhreGpmTFBmQ2FUTVVjVlhESHc6MQ
+* Leave us notes, comments, feedback, suggestions, virtual cookies in our issue tracker https://github.com/iLanguage/AndroidBilingualAphasiaTest/issues?milestone=6&state=closed
 You will probably be interested in another project, which is a WebApp that extracts and analyzes touch, eye gaze and audio data using Open Source software. It runs on any laptop that has Chrome, Firefox or Safari (its HTML5).
 https://github.com/iLanguage/OPrimeAdministrator
 
