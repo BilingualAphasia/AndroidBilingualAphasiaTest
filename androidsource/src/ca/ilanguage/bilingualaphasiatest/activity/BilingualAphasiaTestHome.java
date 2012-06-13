@@ -426,7 +426,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		case R.id.issue_tracker:
 
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-					Uri.parse("http://code.google.com/p/aublog/issues/entry"));
+					Uri.parse("https://docs.google.com/spreadsheet/viewform?formkey=dGpiRDhreGpmTFBmQ2FUTVVjVlhESHc6MQ"));
 			startActivity(browserIntent);
 			return true;
 		default:
