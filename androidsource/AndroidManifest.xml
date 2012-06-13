@@ -26,7 +26,7 @@
 
     <application
         android:name=".content.BilingualAphasiaTest"
-        android:icon="@drawable/ic_oprime"
+        android:icon="@drawable/ic_bat"
         android:label="@string/app_name" >
         <activity
             android:name=".activity.BilingualAphasiaTestHome"
