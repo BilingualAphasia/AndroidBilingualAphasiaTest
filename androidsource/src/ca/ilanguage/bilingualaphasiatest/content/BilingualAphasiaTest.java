@@ -224,6 +224,15 @@ public class BilingualAphasiaTest extends Application {
 	}
 
 	private void addStimuli() {
+		
+
+		/*
+		 * SubExperiment 2: Spontaneous speech is a timer task of 5 minutes
+		 */
+		ArrayList<Stimulus> stimuli = new ArrayList<Stimulus>();
+		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids, "5 minutes"));
+		experiments.get(bat).getSubExperiments().get(2).setStimuli(stimuli);
+		stimuli = null;
 
 		/*
 		 * SubExperiment 6: Verbal Auditory Comprehension uses 2 images per
@@ -260,7 +269,7 @@ public class BilingualAphasiaTest extends Application {
 		/*
 		 * SubExperiment 7: Syntactic Comprehension
 		 */
-		ArrayList<Stimulus> stimuli = new ArrayList<Stimulus>();
+		stimuli = new ArrayList<Stimulus>();
 
 		stimuli.add(new Stimulus(R.drawable.s042, "Begin"));
 		stimuli.add(new Stimulus(R.drawable.s043, "Practice"));
