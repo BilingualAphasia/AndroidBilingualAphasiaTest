@@ -97,7 +97,7 @@ public class BilingualAphasiaTestHome extends Activity {
 					// "Launching subexperiment "+mCurrentSubex,
 					// Toast.LENGTH_LONG).show();
 					Intent intent;
-					if (mCurrentSubex == 2 || mCurrentSubex == 30) {
+					if (mCurrentSubex == 2 || mCurrentSubex == 15 || mCurrentSubex == 30) {
 						intent = new Intent(
 								OPrime.INTENT_START_STOP_WATCH_SUB_EXPERIMENT);
 					} else if (mCurrentSubex == 6 || mCurrentSubex == 28

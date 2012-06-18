@@ -370,8 +370,18 @@ public class BilingualAphasiaTest extends Application {
 		experiments.get(bat).getSubExperiments().get(7).setStimuli(stimuli);
 		stimuli = null;
 
+		
 		/*
-		 * SubExperiment 21: Description of a cartoon
+		 * SubExperiment 15: Verbal Fluency is a timer task of 1 minute
+		 */
+		stimuli = new ArrayList<Stimulus>();
+		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids, "1 minute"));
+		experiments.get(bat).getSubExperiments().get(15).setStimuli(stimuli);
+		stimuli = null;
+		
+		/*
+		 * SubExperiment 21: Description of a cartoon, could try putting a timer
+		 * of suggested 2 minutes on it but that would distract the patient.
 		 */
 		stimuli = new ArrayList<Stimulus>();
 //		stimuli.add(new Stimulus(R.drawable.s073, ""));
@@ -380,6 +390,7 @@ public class BilingualAphasiaTest extends Application {
 		experiments.get(bat).getSubExperiments().get(21).setStimuli(stimuli);
 		stimuli = null;
 
+		
 		/*
 		 * SubExperiment 24: Reading
 		 */
@@ -453,6 +464,13 @@ public class BilingualAphasiaTest extends Application {
 
 		experiments.get(bat).getSubExperiments().get(29).setStimuli(twostimuli);
 
+		/*
+		 * SubExperiment 30: Writing is a timer task of 5 minutes
+		 */
+		stimuli = new ArrayList<Stimulus>();
+		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids, "5 minutes"));
+		experiments.get(bat).getSubExperiments().get(30).setStimuli(stimuli);
+		stimuli = null;
 	}
 
 }
