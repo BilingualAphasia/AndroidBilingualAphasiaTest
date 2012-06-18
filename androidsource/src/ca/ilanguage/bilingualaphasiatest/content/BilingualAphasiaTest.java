@@ -231,28 +231,28 @@ public class BilingualAphasiaTest extends Application {
 		 */
 		ArrayList<TwoImageStimulus> twostimuli = new ArrayList<TwoImageStimulus>();
 
-		twostimuli.add(new TwoImageStimulus(R.drawable.s073, R.drawable.s002));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s003, R.drawable.s004));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s005, R.drawable.s006));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s007, R.drawable.s008));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s009, R.drawable.s010));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s011, R.drawable.s012));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s013, R.drawable.s014));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s015, R.drawable.s016));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s017, R.drawable.s018));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s019, R.drawable.s020));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s021, R.drawable.s022));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s023, R.drawable.s024));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s025, R.drawable.s026));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s027, R.drawable.s028));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s029, R.drawable.s030));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s031, R.drawable.s032));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s033, R.drawable.s034));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s035, R.drawable.s036));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s037, R.drawable.s038));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s039, R.drawable.s040));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s073, R.drawable.s002, "Begin"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s003, R.drawable.s004, "Practice"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s005, R.drawable.s006, "48"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s007, R.drawable.s008, "49"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s009, R.drawable.s010, "50"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s011, R.drawable.s012, "51"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s013, R.drawable.s014, "52"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s015, R.drawable.s016, "53"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s017, R.drawable.s018, "54"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s019, R.drawable.s020, "55"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s021, R.drawable.s022, "56"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s023, R.drawable.s024, "57"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s025, R.drawable.s026, "58"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s027, R.drawable.s028, "59"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s029, R.drawable.s030, "60"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s031, R.drawable.s032, "61"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s033, R.drawable.s034, "62"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s035, R.drawable.s036, "63"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s037, R.drawable.s038, "64"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s039, R.drawable.s040, "65"));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s041,
-				R.drawable.androids_experimenter_kids));
+				R.drawable.end, "End"));
 
 		experiments.get(bat).getSubExperiments().get(6).setStimuli(twostimuli);
 		twostimuli = null;
@@ -262,110 +262,110 @@ public class BilingualAphasiaTest extends Application {
 		 */
 		ArrayList<Stimulus> stimuli = new ArrayList<Stimulus>();
 
-		stimuli.add(new Stimulus(R.drawable.s042));
-		stimuli.add(new Stimulus(R.drawable.s043));
+		stimuli.add(new Stimulus(R.drawable.s042, "Begin"));
+		stimuli.add(new Stimulus(R.drawable.s043, "Practice"));
 		
-		stimuli.add(new Stimulus(R.drawable.s044));
-		stimuli.add(new Stimulus(R.drawable.s044));
-		stimuli.add(new Stimulus(R.drawable.s044));
-		stimuli.add(new Stimulus(R.drawable.s044));
-		stimuli.add(new Stimulus(R.drawable.s044));
+		stimuli.add(new Stimulus(R.drawable.s044, "66"));
+		stimuli.add(new Stimulus(R.drawable.s044, "67"));
+		stimuli.add(new Stimulus(R.drawable.s044, "68"));
+		stimuli.add(new Stimulus(R.drawable.s044, "69"));
+		stimuli.add(new Stimulus(R.drawable.s044, "70"));
 		
-		stimuli.add(new Stimulus(R.drawable.s045));
-		stimuli.add(new Stimulus(R.drawable.s045));
-		stimuli.add(new Stimulus(R.drawable.s045));
-		stimuli.add(new Stimulus(R.drawable.s045));
-		stimuli.add(new Stimulus(R.drawable.s045));
-		stimuli.add(new Stimulus(R.drawable.s045));
+		stimuli.add(new Stimulus(R.drawable.s045, "71"));
+		stimuli.add(new Stimulus(R.drawable.s045, "72"));
+		stimuli.add(new Stimulus(R.drawable.s045, "73"));
+		stimuli.add(new Stimulus(R.drawable.s045, "74"));
+		stimuli.add(new Stimulus(R.drawable.s045, "75"));
+		stimuli.add(new Stimulus(R.drawable.s045, "76"));
 		
-		stimuli.add(new Stimulus(R.drawable.s046));
-		stimuli.add(new Stimulus(R.drawable.s046));
-		stimuli.add(new Stimulus(R.drawable.s046));
-		stimuli.add(new Stimulus(R.drawable.s046));
+		stimuli.add(new Stimulus(R.drawable.s046, "77"));
+		stimuli.add(new Stimulus(R.drawable.s046, "78"));
+		stimuli.add(new Stimulus(R.drawable.s046, "79"));
+		stimuli.add(new Stimulus(R.drawable.s046, "80"));
 		
-		stimuli.add(new Stimulus(R.drawable.s047));
-		stimuli.add(new Stimulus(R.drawable.s047));
-		stimuli.add(new Stimulus(R.drawable.s047));
-		stimuli.add(new Stimulus(R.drawable.s047));
-		stimuli.add(new Stimulus(R.drawable.s047));
-		stimuli.add(new Stimulus(R.drawable.s047));
-		stimuli.add(new Stimulus(R.drawable.s047));
-		stimuli.add(new Stimulus(R.drawable.s047));
+		stimuli.add(new Stimulus(R.drawable.s047, "81"));
+		stimuli.add(new Stimulus(R.drawable.s047, "82"));
+		stimuli.add(new Stimulus(R.drawable.s047, "83"));
+		stimuli.add(new Stimulus(R.drawable.s047, "84"));
+		stimuli.add(new Stimulus(R.drawable.s047, "85"));
+		stimuli.add(new Stimulus(R.drawable.s047, "86"));
+		stimuli.add(new Stimulus(R.drawable.s047, "87"));
+		stimuli.add(new Stimulus(R.drawable.s047, "88"));
 		
-		stimuli.add(new Stimulus(R.drawable.s048));
-		stimuli.add(new Stimulus(R.drawable.s048));
-		stimuli.add(new Stimulus(R.drawable.s048));
-		stimuli.add(new Stimulus(R.drawable.s048));
-		stimuli.add(new Stimulus(R.drawable.s048));
-		stimuli.add(new Stimulus(R.drawable.s048));
-		stimuli.add(new Stimulus(R.drawable.s048));
-		stimuli.add(new Stimulus(R.drawable.s048));
+		stimuli.add(new Stimulus(R.drawable.s048, "89"));
+		stimuli.add(new Stimulus(R.drawable.s048, "90"));
+		stimuli.add(new Stimulus(R.drawable.s048, "91"));
+		stimuli.add(new Stimulus(R.drawable.s048, "92"));
+		stimuli.add(new Stimulus(R.drawable.s048, "93"));
+		stimuli.add(new Stimulus(R.drawable.s048, "94"));
+		stimuli.add(new Stimulus(R.drawable.s048, "95"));
+		stimuli.add(new Stimulus(R.drawable.s048, "96"));
 		
-		stimuli.add(new Stimulus(R.drawable.s049));
-		stimuli.add(new Stimulus(R.drawable.s049));
-		stimuli.add(new Stimulus(R.drawable.s049));
-		stimuli.add(new Stimulus(R.drawable.s049));
-		stimuli.add(new Stimulus(R.drawable.s049));
-		stimuli.add(new Stimulus(R.drawable.s049));
-		stimuli.add(new Stimulus(R.drawable.s049));
-		stimuli.add(new Stimulus(R.drawable.s049));
+		stimuli.add(new Stimulus(R.drawable.s049, "97"));
+		stimuli.add(new Stimulus(R.drawable.s049, "98"));
+		stimuli.add(new Stimulus(R.drawable.s049, "99"));
+		stimuli.add(new Stimulus(R.drawable.s049, "100"));
+		stimuli.add(new Stimulus(R.drawable.s049, "101"));
+		stimuli.add(new Stimulus(R.drawable.s049, "102"));
+		stimuli.add(new Stimulus(R.drawable.s049, "103"));
+		stimuli.add(new Stimulus(R.drawable.s049, "104"));
 		
-		stimuli.add(new Stimulus(R.drawable.s050));
-		stimuli.add(new Stimulus(R.drawable.s050));
-		stimuli.add(new Stimulus(R.drawable.s050));
-		stimuli.add(new Stimulus(R.drawable.s050));
-		stimuli.add(new Stimulus(R.drawable.s050));
-		stimuli.add(new Stimulus(R.drawable.s050));
+		stimuli.add(new Stimulus(R.drawable.s050, "105"));
+		stimuli.add(new Stimulus(R.drawable.s050, "106"));
+		stimuli.add(new Stimulus(R.drawable.s050, "107"));
+		stimuli.add(new Stimulus(R.drawable.s050, "108"));
+		stimuli.add(new Stimulus(R.drawable.s050, "109"));
+		stimuli.add(new Stimulus(R.drawable.s050, "110"));
 		
-		stimuli.add(new Stimulus(R.drawable.s051));
-		stimuli.add(new Stimulus(R.drawable.s051));
-		stimuli.add(new Stimulus(R.drawable.s051));
-		stimuli.add(new Stimulus(R.drawable.s051));
+		stimuli.add(new Stimulus(R.drawable.s051, "111"));
+		stimuli.add(new Stimulus(R.drawable.s051, "112"));
+		stimuli.add(new Stimulus(R.drawable.s051, "113"));
+		stimuli.add(new Stimulus(R.drawable.s051, "114"));
 		
-		stimuli.add(new Stimulus(R.drawable.s052));
-		stimuli.add(new Stimulus(R.drawable.s052));
-		stimuli.add(new Stimulus(R.drawable.s052));
-		stimuli.add(new Stimulus(R.drawable.s052));
-		stimuli.add(new Stimulus(R.drawable.s052));
-		stimuli.add(new Stimulus(R.drawable.s052));
+		stimuli.add(new Stimulus(R.drawable.s052, "115"));
+		stimuli.add(new Stimulus(R.drawable.s052, "116"));
+		stimuli.add(new Stimulus(R.drawable.s052, "117"));
+		stimuli.add(new Stimulus(R.drawable.s052, "118"));
+		stimuli.add(new Stimulus(R.drawable.s052, "119"));
+		stimuli.add(new Stimulus(R.drawable.s052, "120"));
 		
-		stimuli.add(new Stimulus(R.drawable.s053));
-		stimuli.add(new Stimulus(R.drawable.s053));
-		stimuli.add(new Stimulus(R.drawable.s053));
-		stimuli.add(new Stimulus(R.drawable.s053));
+		stimuli.add(new Stimulus(R.drawable.s053, "121"));
+		stimuli.add(new Stimulus(R.drawable.s053, "122"));
+		stimuli.add(new Stimulus(R.drawable.s053, "123"));
+		stimuli.add(new Stimulus(R.drawable.s053, "124"));
 		
-		stimuli.add(new Stimulus(R.drawable.s054));
-		stimuli.add(new Stimulus(R.drawable.s054));
-		stimuli.add(new Stimulus(R.drawable.s054));
-		stimuli.add(new Stimulus(R.drawable.s054));
+		stimuli.add(new Stimulus(R.drawable.s054, "125"));
+		stimuli.add(new Stimulus(R.drawable.s054, "126"));
+		stimuli.add(new Stimulus(R.drawable.s054, "127"));
+		stimuli.add(new Stimulus(R.drawable.s054, "128"));
 		
-		stimuli.add(new Stimulus(R.drawable.s055));
-		stimuli.add(new Stimulus(R.drawable.s055));
-		stimuli.add(new Stimulus(R.drawable.s055));
-		stimuli.add(new Stimulus(R.drawable.s055));
+		stimuli.add(new Stimulus(R.drawable.s055, "129"));
+		stimuli.add(new Stimulus(R.drawable.s055, "130"));
+		stimuli.add(new Stimulus(R.drawable.s055, "131"));
+		stimuli.add(new Stimulus(R.drawable.s055, "132"));
 		
-		stimuli.add(new Stimulus(R.drawable.s056));
-		stimuli.add(new Stimulus(R.drawable.s056));
-		stimuli.add(new Stimulus(R.drawable.s056));
-		stimuli.add(new Stimulus(R.drawable.s056));
+		stimuli.add(new Stimulus(R.drawable.s056, "133"));
+		stimuli.add(new Stimulus(R.drawable.s056, "134"));
+		stimuli.add(new Stimulus(R.drawable.s056, "135"));
+		stimuli.add(new Stimulus(R.drawable.s056, "136"));
 		
-		stimuli.add(new Stimulus(R.drawable.s057));
-		stimuli.add(new Stimulus(R.drawable.s058));
-		stimuli.add(new Stimulus(R.drawable.s059));
-		stimuli.add(new Stimulus(R.drawable.s060));
-		stimuli.add(new Stimulus(R.drawable.s061));
-		stimuli.add(new Stimulus(R.drawable.s062));
-		stimuli.add(new Stimulus(R.drawable.s063));
-		stimuli.add(new Stimulus(R.drawable.s064));
-		stimuli.add(new Stimulus(R.drawable.s065));
-		stimuli.add(new Stimulus(R.drawable.s066));
-		stimuli.add(new Stimulus(R.drawable.s067));
-		stimuli.add(new Stimulus(R.drawable.s068));
-		stimuli.add(new Stimulus(R.drawable.s069));
-		stimuli.add(new Stimulus(R.drawable.s070));
-		stimuli.add(new Stimulus(R.drawable.s071));
-		stimuli.add(new Stimulus(R.drawable.s072));
-		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
+		stimuli.add(new Stimulus(R.drawable.s057, "137"));
+		stimuli.add(new Stimulus(R.drawable.s058, "138"));
+		stimuli.add(new Stimulus(R.drawable.s059, "139"));
+		stimuli.add(new Stimulus(R.drawable.s060, "140"));
+		stimuli.add(new Stimulus(R.drawable.s061, "141"));
+		stimuli.add(new Stimulus(R.drawable.s062, "142"));
+		stimuli.add(new Stimulus(R.drawable.s063, "143"));
+		stimuli.add(new Stimulus(R.drawable.s064, "144"));
+		stimuli.add(new Stimulus(R.drawable.s065, "145"));
+		stimuli.add(new Stimulus(R.drawable.s066, "146"));
+		stimuli.add(new Stimulus(R.drawable.s067, "147"));
+		stimuli.add(new Stimulus(R.drawable.s068, "148"));
+		stimuli.add(new Stimulus(R.drawable.s069, "149"));
+		stimuli.add(new Stimulus(R.drawable.s070, "150"));
+		stimuli.add(new Stimulus(R.drawable.s071, "151"));
+		stimuli.add(new Stimulus(R.drawable.s072, "152"));
+		stimuli.add(new Stimulus(R.drawable.end, "End"));
 
 		experiments.get(bat).getSubExperiments().get(7).setStimuli(stimuli);
 		stimuli = null;
@@ -374,9 +374,9 @@ public class BilingualAphasiaTest extends Application {
 		 * SubExperiment 21: Description of a cartoon
 		 */
 		stimuli = new ArrayList<Stimulus>();
-//		stimuli.add(new Stimulus(R.drawable.s073));
-		stimuli.add(new Stimulus(R.drawable.s074));
-		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
+//		stimuli.add(new Stimulus(R.drawable.s073, ""));
+		stimuli.add(new Stimulus(R.drawable.s074, "344"));
+		stimuli.add(new Stimulus(R.drawable.end, "End"));
 		experiments.get(bat).getSubExperiments().get(21).setStimuli(stimuli);
 		stimuli = null;
 
@@ -384,16 +384,16 @@ public class BilingualAphasiaTest extends Application {
 		 * SubExperiment 24: Reading
 		 */
 		stimuli = new ArrayList<Stimulus>();
-//		stimuli.add(new Stimulus(R.drawable.s073));
-		stimuli.add(new Stimulus(R.drawable.s075));
-		stimuli.add(new Stimulus(R.drawable.s076));
-		stimuli.add(new Stimulus(R.drawable.s077));
-		stimuli.add(new Stimulus(R.drawable.s078));
-		stimuli.add(new Stimulus(R.drawable.s079));
-		stimuli.add(new Stimulus(R.drawable.s080));
-		stimuli.add(new Stimulus(R.drawable.s081));
-		stimuli.add(new Stimulus(R.drawable.s082));
-		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
+//		stimuli.add(new Stimulus(R.drawable.s073, ""));
+		stimuli.add(new Stimulus(R.drawable.s075, "367-371"));
+		stimuli.add(new Stimulus(R.drawable.s076, "372-376"));
+		stimuli.add(new Stimulus(R.drawable.s077, "377-378"));
+		stimuli.add(new Stimulus(R.drawable.s078, "379-380"));
+		stimuli.add(new Stimulus(R.drawable.s079, "381-382"));
+		stimuli.add(new Stimulus(R.drawable.s080, "383-384"));
+		stimuli.add(new Stimulus(R.drawable.s081, "385-386"));
+		stimuli.add(new Stimulus(R.drawable.s082, "387"));
+		stimuli.add(new Stimulus(R.drawable.end, "End"));
 		experiments.get(bat).getSubExperiments().get(24).setStimuli(stimuli);
 		stimuli = null;
 
@@ -401,9 +401,9 @@ public class BilingualAphasiaTest extends Application {
 		 * SubExperiment 25: Copying
 		 */
 		stimuli = new ArrayList<Stimulus>();
-//		stimuli.add(new Stimulus(R.drawable.s073));
-		stimuli.add(new Stimulus(R.drawable.s083));
-		stimuli.add(new Stimulus(R.drawable.androids_experimenter_kids));
+//		stimuli.add(new Stimulus(R.drawable.s073, ""));
+		stimuli.add(new Stimulus(R.drawable.s083, "393-397"));
+		stimuli.add(new Stimulus(R.drawable.end, "End"));
 		experiments.get(bat).getSubExperiments().get(25).setStimuli(stimuli);
 		stimuli = null;
 
@@ -414,19 +414,19 @@ public class BilingualAphasiaTest extends Application {
 
 		twostimuli = new ArrayList<TwoImageStimulus>();
 
-		twostimuli.add(new TwoImageStimulus(R.drawable.s073, R.drawable.s084));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s085, R.drawable.s086));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s087, R.drawable.s088));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s089, R.drawable.s090));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s091, R.drawable.s092));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s093, R.drawable.s094));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s095, R.drawable.s096));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s097, R.drawable.s098));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s099, R.drawable.s100));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s101, R.drawable.s102));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s103, R.drawable.s104));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s073, R.drawable.s084, "Begin"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s085, R.drawable.s086, "408"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s087, R.drawable.s088, "409"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s089, R.drawable.s090, "410"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s091, R.drawable.s092, "411"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s093, R.drawable.s094, "412"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s095, R.drawable.s096, "413"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s097, R.drawable.s098, "414"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s099, R.drawable.s100, "415"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s101, R.drawable.s102, "416"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s103, R.drawable.s104, "417"));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s041,
-				R.drawable.androids_experimenter_kids));
+				R.drawable.end, "End"));
 
 		experiments.get(bat).getSubExperiments().get(28).setStimuli(twostimuli);
 
@@ -437,19 +437,19 @@ public class BilingualAphasiaTest extends Application {
 		twostimuli = null;
 		twostimuli = new ArrayList<TwoImageStimulus>();
 
-		twostimuli.add(new TwoImageStimulus(R.drawable.s105, R.drawable.s106));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s107, R.drawable.s108));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s109, R.drawable.s110));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s111, R.drawable.s112));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s113, R.drawable.s114));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s115, R.drawable.s116));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s117, R.drawable.s118));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s119, R.drawable.s120));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s121, R.drawable.s122));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s123, R.drawable.s124));
-		twostimuli.add(new TwoImageStimulus(R.drawable.s125, R.drawable.s126));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s105, R.drawable.s106, "Begin"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s107, R.drawable.s108, "418"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s109, R.drawable.s110, "419"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s111, R.drawable.s112, "420"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s113, R.drawable.s114, "421"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s115, R.drawable.s116, "422"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s117, R.drawable.s118, "423"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s119, R.drawable.s120, "424"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s121, R.drawable.s122, "425"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s123, R.drawable.s124, "426"));
+		twostimuli.add(new TwoImageStimulus(R.drawable.s125, R.drawable.s126, "427"));
 		twostimuli.add(new TwoImageStimulus(R.drawable.s041,
-				R.drawable.androids_experimenter_kids));
+				R.drawable.end, "End"));
 
 		experiments.get(bat).getSubExperiments().get(29).setStimuli(twostimuli);
 
