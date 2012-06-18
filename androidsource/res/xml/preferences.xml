@@ -110,7 +110,7 @@
         android:title="User Guide" >
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="https://github.com/iLanguage/AndroidBilingualAphasiaTest/blob/master/documentation/UserGuide.doc?raw=true" />
+            android:data="https://github.com/iLanguage/AndroidBilingualAphasiaTest/blob/master/documentation/UserGuide.pdf?raw=true" />
     </PreferenceScreen>
     <PreferenceScreen
         android:summary="You can use the BAT Scorer to enter the participant&apos;s responses and get a patient profile."
