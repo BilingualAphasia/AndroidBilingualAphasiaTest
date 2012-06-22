@@ -83,7 +83,8 @@
         <item>Serbian српски</item>
         <item>Slovenian slovenski</item>
         <item>Somali Soomaaliga</item>
-        <item>Spanish español</item>
+        <item>Spanish (Mexico) español</item>
+        <item>Spanish (Spain) español</item>
         <item>Swahili Kiswahili</item>
         <item>Swedish svenska</item>
         <item>Tagalog ᜏᜒᜃᜅ᜔ ᜆᜄᜎᜓᜄ᜔</item>
@@ -152,6 +153,7 @@
         <item>sl</item>
         <item>so</item>
         <item>es</item>
+        <item>es-rES</item>
         <item>sw</item>
         <item>sv</item>
         <item>tl</item>
