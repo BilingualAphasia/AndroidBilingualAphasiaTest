@@ -446,12 +446,18 @@ public class BilingualAphasiaTestHome extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		tracker.trackEvent(app.getExperiment().getParticipant().getCode(), // Category
-				"Exit", // Action
-				"Exit : " + System.currentTimeMillis() + " : ", // Label
-				(int) System.currentTimeMillis()); // Value
-		tracker.stop();// Stop the tracker when it is no longer needed.
-
+		try{
+			tracker.trackEvent(app.getExperiment().getParticipant().getCode(), // Category
+					"Exit", // Action
+					"Exit : " + System.currentTimeMillis() + " : ", // Label
+					(int) System.currentTimeMillis()); // Value
+			tracker.stop();// Stop the tracker when it is no longer needed.
+		}catch(Exception e){
+			Log.e(TAG,
+					"There was an error trying to get participant codes from the experiment. " +
+					"Perhaps the experiemnt never began. this error was first seen on " +
+					"Android market June 23 2012 8:27 am.");
+		}
 		super.onDestroy();
 	}
 
