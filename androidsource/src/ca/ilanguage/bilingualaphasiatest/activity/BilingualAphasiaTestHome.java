@@ -246,8 +246,8 @@ public class BilingualAphasiaTestHome extends Activity {
 			app.createNewExperiment(lang);
 		}
 		app.getExperiment().setParticipant(p);
-		Toast.makeText(getApplicationContext(), p.toCSVPrivateString(),
-				Toast.LENGTH_LONG).show();
+//		Toast.makeText(getApplicationContext(), p.toCSVPrivateString(),
+//				Toast.LENGTH_LONG).show();
 
 	}
 
@@ -259,7 +259,7 @@ public class BilingualAphasiaTestHome extends Activity {
 		Intent intent;
 		intent = new Intent(OPrime.INTENT_START_VIDEO_RECORDING);
 		intent.putExtra(VideoRecorder.EXTRA_VIDEO_QUALITY,
-				VideoRecorder.DEFAULT_DEBUGGING_QUALITY);
+				VideoRecorder.DEFAULT_HIGH_QUALITY);
 		intent.putExtra(VideoRecorder.EXTRA_USE_FRONT_FACING_CAMERA, true);
 		String mDateString = (String) android.text.format.DateFormat.format(
 				"yyyy-MM-dd_kk_mm",
