@@ -50,8 +50,8 @@
         <activity
             android:name="ca.ilanguage.oprime.activity.SubExperiment"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/app_name"
-             >
+            android:exported="false"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="ca.ilanguage.oprime.intent.action.START_SUB_EXPERIMENT" />
 
@@ -61,8 +61,8 @@
         <activity
             android:name="ca.ilanguage.oprime.activity.TwoImageSubExperiment"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/app_name"
-             >
+            android:exported="false"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="ca.ilanguage.oprime.intent.action.START_TWO_IMAGE_SUB_EXPERIMENT" />
 
@@ -72,8 +72,8 @@
         <activity
             android:name="ca.ilanguage.oprime.activity.StopWatchSubExperiment"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/app_name"
-             >
+            android:exported="false"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="ca.ilanguage.oprime.intent.action.START_STOP_WATCH_SUB_EXPERIMENT" />
 
@@ -83,6 +83,7 @@
         <activity
             android:name="ca.ilanguage.oprime.datacollection.VideoRecorder"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
             <intent-filter>
@@ -93,6 +94,7 @@
         </activity>
         <activity
             android:name="ca.ilanguage.oprime.datacollection.TakePicture"
+            android:exported="false"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="ca.ilanguage.oprime.intent.action.TAKE_PICTURE" />

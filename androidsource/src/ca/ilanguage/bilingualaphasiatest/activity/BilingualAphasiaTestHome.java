@@ -73,6 +73,21 @@ public class BilingualAphasiaTestHome extends Activity {
 
 	}
 
+	@Override
+	protected void onResume() {
+		SharedPreferences prefs = getSharedPreferences(
+				BilingualAphasiaTest.PREFERENCE_NAME, MODE_PRIVATE);
+		String lang = prefs.getString(
+				BilingualAphasiaTest.PREFERENCE_EXPERIMENT_LANGUAGE, "en");
+		if (lang.equals(app.getLanguage().getLanguage())) {
+			// do nothing if they didnt change the languge
+		} else {
+			app.createNewExperiment(lang);
+			initExperiment();
+		}
+		super.onResume();
+	}
+
 	public class JavaScriptInterface {
 
 		Context mContext;
