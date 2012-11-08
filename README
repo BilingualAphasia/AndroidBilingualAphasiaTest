@@ -16,7 +16,7 @@ https://github.com/iLanguage/AndroidBilingualAphasiaTest/blob/master/cook,marqui
 You can think of this as the Participant's side of the project.  The tool has three functions
 
 1. Record audio video and touch for each subsection of the BAT
-2. Enter participant first and last name, autogenerate the participant code etc
+2. Enter participant's id, it will autogenerate the participant code etc
 3. Backup results to a laptop by wifi after the experiment, and replay participant result videos 
 
 
