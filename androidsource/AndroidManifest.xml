@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.ilanguage.bilingualaphasiatest"
     android:installLocation="preferExternal"
-    android:versionCode="7"
-    android:versionName="2.1.1" >
+    android:versionCode="9"
+    android:versionName="2.2.1" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="10" />
+        android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.STORAGE" />
@@ -29,21 +29,16 @@
         <activity
             android:name=".activity.BilingualAphasiaTestHome"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activity.BATParticipantActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".activity.ParticipantDetails"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="ca.ilanguage.oprime.storybook.StoryBookSubExperiment"
-            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="ca.ilanguage.oprime.activity.SubExperiment"
@@ -102,18 +97,8 @@
         </activity>
 
         <service android:name="ca.ilanguage.oprime.datacollection.SubExperimentToJson" >
-            <intent-filter>
-                <action android:name="ca.ilanguage.oprime.intent.action.SAVE_SUB_EXPERIMENT_JSON" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </service>
         <service android:name="ca.ilanguage.oprime.datacollection.AudioRecorder" >
-            <intent-filter>
-                <action android:name="ca.ilanguage.oprime.intent.action.START_AUDIO_RECORDING_SERVICE" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </service>
     </application>
 

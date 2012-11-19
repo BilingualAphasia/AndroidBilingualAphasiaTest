@@ -297,7 +297,7 @@ var buttonLabels;
 var menuShape = "arc"; //arc or circle
 
 function isNativeAndroidApp() {
-	return /BilingualAphasiaTest\/[0-9\.]+$/.test(navigator.userAgent);
+	return navigator.userAgent.indexOf("OfflineAndroidApp") > -1;
 }
 if (isNativeAndroidApp()) {
 	window.pressButton = function(id,label) {
