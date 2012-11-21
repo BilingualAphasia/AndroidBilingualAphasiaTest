@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- TODO change the bilingual aphasia test code to use the normal oprime user agent instead of this -->
-    <string name="user_agent_suffix">BilingualAphasiaTest/2.0</string>
     <string name="app_name">Bilingual Aphasia Test</string>
     <string name="preference_choose_language_summary">You can choose any of the availiable BAT languages, not all of them are included in this app but if you need them, we can add them.</string>
     <string name="preference_user_guide_summary">Click on this link to download 
