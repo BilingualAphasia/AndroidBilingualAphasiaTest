@@ -27,7 +27,7 @@ import ca.ilanguage.bilingualaphasiatest.R;
  */
 public class BilingualAphasiaTest extends OPrimeApp {
   public static final String TAG = "BilingualAphasiaTest";
-  public static final boolean D = true;
+  public static final boolean D = false;
   public static final String DEFAULT_OUTPUT_DIRECTORY = "/sdcard/BilingualAphasiaTest/";
   public static final String PREFERENCE_NAME = "BilingualAphasiaPrefs";
 
