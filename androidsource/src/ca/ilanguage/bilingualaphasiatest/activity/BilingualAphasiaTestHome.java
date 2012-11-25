@@ -5,9 +5,8 @@ import java.util.Locale;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import ca.ilanguage.oprime.R;
-import ca.ilanguage.oprime.content.ExperimentJavaScriptInterface;
 import ca.ilanguage.oprime.content.OPrime;
-import ca.ilanguage.oprime.content.OPrimeApp;
+import ca.ilanguage.bilingualaphasiatest.content.BATJavaScriptInterface;
 import ca.ilanguage.bilingualaphasiatest.content.BilingualAphasiaTest;
 import ca.ilanguage.oprime.activity.HTML5GameActivity;
 import ca.ilanguage.oprime.content.SubExperimentBlock;
@@ -20,17 +19,15 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class BilingualAphasiaTestHome extends HTML5GameActivity {
-  protected BilingualAphasiaTest BATapp;
   protected String mOutputDir = BilingualAphasiaTest.DEFAULT_OUTPUT_DIRECTORY;
-
+  protected BilingualAphasiaTest BATapp;
   GoogleAnalyticsTracker tracker;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
-    this.app = (BilingualAphasiaTest) getApplication();
     this.BATapp = (BilingualAphasiaTest) getApplication();
-    ((BilingualAphasiaTest) getApplication()).setOutputDir(mOutputDir);
-    ((OPrimeApp) getApplication()).setOutputDir(mOutputDir);
+    this.setApp((BilingualAphasiaTest) getApplication());
+    this.app.setOutputDir(mOutputDir);
     super.onCreate(savedInstanceState);
   }
 
@@ -40,11 +37,9 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
     D = BilingualAphasiaTest.isD();
     mOutputDir = BilingualAphasiaTest.DEFAULT_OUTPUT_DIRECTORY;
     mInitialAppServerUrl = "file:///android_asset/bilingual_aphasia_test_home.html";
-    mJavaScriptInterface = new ExperimentJavaScriptInterface(D, TAG,
-        mOutputDir, getApplicationContext(), this, "");
+    mJavaScriptInterface = new BATJavaScriptInterface(D, TAG, mOutputDir,
+        getApplicationContext(), this, "");
     mJavaScriptInterface.setContext(this);
-
-    this.BATapp = (BilingualAphasiaTest) getApplication();
 
     tracker = GoogleAnalyticsTracker.getInstance();
     // Start the tracker in 20 sec interval dispatch mode...
@@ -60,16 +55,16 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
         Log.d(TAG,
             "BilingualAphasiaTestHome was asked to prepare the experiment.");
       }
-      SharedPreferences prefs = getSharedPreferences(OPrimeApp.PREFERENCE_NAME,
-          MODE_PRIVATE);
-      String lang = prefs.getString(OPrimeApp.PREFERENCE_EXPERIMENT_LANGUAGE,
-          "");
+      SharedPreferences prefs = getSharedPreferences(
+          BilingualAphasiaTest.PREFERENCE_NAME, MODE_PRIVATE);
+      String lang = prefs.getString(
+          BilingualAphasiaTest.PREFERENCE_EXPERIMENT_LANGUAGE, "");
       boolean autoAdvanceStimuliOnTouch = prefs.getBoolean(
-          OPrimeApp.PREFERENCE_EXPERIMENT_AUTO_ADVANCE_ON_TOUCH, false);
-      ((OPrimeApp) this.getApplication())
-          .setAutoAdvanceStimuliOnTouch(autoAdvanceStimuliOnTouch);
-      if (BATapp.getLanguage().getLanguage().equals(lang)
-          && BATapp.getExperiment() != null) {
+          BilingualAphasiaTest.PREFERENCE_EXPERIMENT_AUTO_ADVANCE_ON_TOUCH,
+          false);
+      app.setAutoAdvanceStimuliOnTouch(autoAdvanceStimuliOnTouch);
+      if (app.getLanguage().getLanguage().equals(lang)
+          && app.getExperiment() != null) {
         // do nothing if they didn't change the language
         if (D) {
           Log.d(TAG,
@@ -78,7 +73,7 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
         }
       } else {
         if (lang == null) {
-          lang = BATapp.getLanguage().getLanguage();
+          lang = app.getLanguage().getLanguage();
           if (D) {
             Log.d(TAG,
                 "The Language was null, setting it to the tablets default language "
@@ -88,27 +83,22 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
         if (D) {
           Log.d(TAG, "Preparing the experiment for " + lang);
         }
-        BATapp.createNewExperiment(lang, autoAdvanceStimuliOnTouch);
+        app.createNewExperiment(lang, autoAdvanceStimuliOnTouch);
         initExperiment();
       }
     }
   }
 
   @Override
-  protected void getParticipantDetails(OPrimeApp app) {
-    super.getParticipantDetails(this.BATapp);
-  }
-
-  @Override
   protected void initExperiment() {
-    getParticipantDetails(this.BATapp);
+    getParticipantDetails();
     mWebView.loadUrl("file:///android_asset/bilingual_aphasia_test_home.html");
   }
 
   @Override
   protected void onDestroy() {
     try {
-      tracker.trackEvent(BATapp.getExperiment().getParticipant().getCode(), // Category
+      tracker.trackEvent(app.getExperiment().getParticipant().getCode(), // Category
           "Exit", // Action
           "Exit : " + System.currentTimeMillis() + " : ", // Label
           (int) System.currentTimeMillis()); // Value
@@ -126,7 +116,7 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
   @Override
   protected void trackCompletedExperiment(SubExperimentBlock completedExp) {
     tracker.trackEvent(
-        BATapp.getExperiment().getParticipant().getCode(), // Category
+        app.getExperiment().getParticipant().getCode(), // Category
         "SubExperiment", // Action
         completedExp.getTitle() + " in "
             + (new Locale(completedExp.getLanguage())).getDisplayLanguage()
@@ -185,8 +175,8 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
     return BATapp;
   }
 
-  public void setApp(BilingualAphasiaTest BATapp) {
-    this.BATapp = BATapp;
+  public void setApp(BilingualAphasiaTest app) {
+    this.app = app;
   }
 
 }
