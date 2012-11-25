@@ -9,7 +9,11 @@
             android:key="experimentlanguage"
             android:summary="@string/preference_choose_language_summary"
             android:title="@string/preference_choose_language_title" />
-
+  <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="autoAdvanceStimuliOnTouch"
+            android:summary="If the user touches the image, the experiment will auto advance to the next stimuli. Use this only if your patient/participant has steady hands or if you are using the BAT as a psycholinguistics experiment."
+            android:title="Auto-advance on touch" />
         <!--
     public static final String PREFERENCE_NAME = "BilingualAphasiaPrefs";
     public static final String PREFERENCE_PARTICIPANT_ID = "participantId";

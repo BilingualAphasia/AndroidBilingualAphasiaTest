@@ -33,7 +33,7 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
     ((OPrimeApp) getApplication()).setOutputDir(mOutputDir);
     super.onCreate(savedInstanceState);
   }
-  
+
   @Override
   protected void setUpVariables() {
     TAG = BilingualAphasiaTest.getTag();
@@ -64,6 +64,10 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
           MODE_PRIVATE);
       String lang = prefs.getString(OPrimeApp.PREFERENCE_EXPERIMENT_LANGUAGE,
           "");
+      boolean autoAdvanceStimuliOnTouch = prefs.getBoolean(
+          OPrimeApp.PREFERENCE_EXPERIMENT_AUTO_ADVANCE_ON_TOUCH, false);
+      ((OPrimeApp) this.getApplication())
+          .setAutoAdvanceStimuliOnTouch(autoAdvanceStimuliOnTouch);
       if (BATapp.getLanguage().getLanguage().equals(lang)
           && BATapp.getExperiment() != null) {
         // do nothing if they didn't change the language
@@ -84,7 +88,7 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
         if (D) {
           Log.d(TAG, "Preparing the experiment for " + lang);
         }
-        BATapp.createNewExperiment(lang);
+        BATapp.createNewExperiment(lang, autoAdvanceStimuliOnTouch);
         initExperiment();
       }
     }

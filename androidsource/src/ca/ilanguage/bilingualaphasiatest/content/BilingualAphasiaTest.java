@@ -253,6 +253,8 @@ public class BilingualAphasiaTest extends OPrimeApp {
     stimuli.add(new Stimulus(R.drawable.end, "End"));
     mExperiments.get(mCurrentExperiment).getSubExperiments().get(21)
         .setStimuli(stimuli);
+    /* let the user touch the image, never auto advance the stimuli for this subex even if the settings say you should*/
+    mExperiments.get(mCurrentExperiment).getSubExperiments().get(21).setAutoAdvanceStimuliOnTouchIsPossible(false);
     stimuli = null;
 
     /*
