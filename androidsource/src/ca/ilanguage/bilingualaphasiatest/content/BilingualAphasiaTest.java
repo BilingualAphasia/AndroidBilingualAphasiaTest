@@ -27,7 +27,7 @@ import ca.ilanguage.bilingualaphasiatest.R;
  */
 public class BilingualAphasiaTest extends OPrimeApp {
   public static final String TAG = "BilingualAphasiaTest";
-  public static final boolean D = true;
+  public static final boolean D = false;
   public static final String DEFAULT_OUTPUT_DIRECTORY = "/sdcard/BilingualAphasiaTest/";
   public static final String PREFERENCE_NAME = "BilingualAphasiaPrefs";
 
@@ -106,11 +106,11 @@ public class BilingualAphasiaTest extends OPrimeApp {
     mExperiments.get(mCurrentExperiment).getSubExperiments().get(6)
         .setStimuli(twostimuli);
     mExperiments
-        .get(mCurrentExperiment)
-        .getSubExperiments()
-        .get(6)
-        .setIntentToCallThisSubExperiment(
-            OPrime.INTENT_START_TWO_IMAGE_SUB_EXPERIMENT);
+    .get(mCurrentExperiment)
+    .getSubExperiments()
+    .get(6)
+    .setIntentToCallThisSubExperiment(
+        OPrime.INTENT_START_TWO_IMAGE_SUB_EXPERIMENT);
     twostimuli = null;
 
     /*
@@ -236,11 +236,11 @@ public class BilingualAphasiaTest extends OPrimeApp {
     mExperiments.get(mCurrentExperiment).getSubExperiments().get(15)
         .setStimuli(stimuli);
     mExperiments
-        .get(mCurrentExperiment)
-        .getSubExperiments()
-        .get(15)
-        .setIntentToCallThisSubExperiment(
-            OPrime.INTENT_START_STOP_WATCH_SUB_EXPERIMENT);
+    .get(mCurrentExperiment)
+    .getSubExperiments()
+    .get(15)
+    .setIntentToCallThisSubExperiment(
+        OPrime.INTENT_START_STOP_WATCH_SUB_EXPERIMENT);
     stimuli = null;
 
     /*
@@ -253,12 +253,8 @@ public class BilingualAphasiaTest extends OPrimeApp {
     stimuli.add(new Stimulus(R.drawable.end, "End"));
     mExperiments.get(mCurrentExperiment).getSubExperiments().get(21)
         .setStimuli(stimuli);
-    /*
-     * let the user touch the image, never auto advance the stimuli for this
-     * subex even if the settings say you should
-     */
-    mExperiments.get(mCurrentExperiment).getSubExperiments().get(21)
-        .setAutoAdvanceStimuliOnTouchIsPossible(false);
+    /* let the user touch the image, never auto advance the stimuli for this subex even if the settings say you should*/
+    mExperiments.get(mCurrentExperiment).getSubExperiments().get(21).setAutoAdvanceStimuliOnTouchIsPossible(false);
     stimuli = null;
 
     /*
@@ -288,23 +284,35 @@ public class BilingualAphasiaTest extends OPrimeApp {
     stimuli.add(new Stimulus(R.drawable.end, "End"));
     mExperiments.get(mCurrentExperiment).getSubExperiments().get(25)
         .setStimuli(stimuli);
-    mExperiments.get(mCurrentExperiment).getSubExperiments().get(25)
-        .setIntentToCallAfterThisSubExperiment(OPrime.INTENT_TAKE_PICTURE);
-
+    mExperiments
+    .get(mCurrentExperiment)
+    .getSubExperiments()
+    .get(25)
+    .setIntentToCallAfterThisSubExperiment(
+        OPrime.INTENT_TAKE_PICTURE);
+    
     stimuli = null;
-
+    
     /*
      * SubExperiment 26: xxxx
      */
-    mExperiments.get(mCurrentExperiment).getSubExperiments().get(26)
-        .setIntentToCallAfterThisSubExperiment(OPrime.INTENT_TAKE_PICTURE);
-
+    mExperiments
+    .get(mCurrentExperiment)
+    .getSubExperiments()
+    .get(26)
+    .setIntentToCallAfterThisSubExperiment(
+        OPrime.INTENT_TAKE_PICTURE);
+    
     /*
      * SubExperiment 27: xxxx
      */
-    mExperiments.get(mCurrentExperiment).getSubExperiments().get(27)
-        .setIntentToCallAfterThisSubExperiment(OPrime.INTENT_TAKE_PICTURE);
-
+    mExperiments
+    .get(mCurrentExperiment)
+    .getSubExperiments()
+    .get(27)
+    .setIntentToCallAfterThisSubExperiment(
+        OPrime.INTENT_TAKE_PICTURE);
+    
     /*
      * SubExperiment 28: Reading words for comprehension uses 2 images per
      * stimuli.
@@ -340,11 +348,11 @@ public class BilingualAphasiaTest extends OPrimeApp {
     mExperiments.get(mCurrentExperiment).getSubExperiments().get(28)
         .setStimuli(twostimuli);
     mExperiments
-        .get(mCurrentExperiment)
-        .getSubExperiments()
-        .get(28)
-        .setIntentToCallThisSubExperiment(
-            OPrime.INTENT_START_TWO_IMAGE_SUB_EXPERIMENT);
+    .get(mCurrentExperiment)
+    .getSubExperiments()
+    .get(28)
+    .setIntentToCallThisSubExperiment(
+        OPrime.INTENT_START_TWO_IMAGE_SUB_EXPERIMENT);
 
     /*
      * SubExperiment 29: Reading sentences for comprehension uses 2 images per
@@ -381,11 +389,11 @@ public class BilingualAphasiaTest extends OPrimeApp {
     mExperiments.get(mCurrentExperiment).getSubExperiments().get(29)
         .setStimuli(twostimuli);
     mExperiments
-        .get(mCurrentExperiment)
-        .getSubExperiments()
-        .get(29)
-        .setIntentToCallThisSubExperiment(
-            OPrime.INTENT_START_TWO_IMAGE_SUB_EXPERIMENT);
+    .get(mCurrentExperiment)
+    .getSubExperiments()
+    .get(29)
+    .setIntentToCallThisSubExperiment(
+        OPrime.INTENT_START_TWO_IMAGE_SUB_EXPERIMENT);
 
     /*
      * SubExperiment 30: Writing is a timer task of 5 minutes
@@ -396,14 +404,18 @@ public class BilingualAphasiaTest extends OPrimeApp {
     mExperiments.get(mCurrentExperiment).getSubExperiments().get(30)
         .setStimuli(stimuli);
     mExperiments
-        .get(mCurrentExperiment)
-        .getSubExperiments()
-        .get(30)
-        .setIntentToCallThisSubExperiment(
-            OPrime.INTENT_START_STOP_WATCH_SUB_EXPERIMENT);
-    mExperiments.get(mCurrentExperiment).getSubExperiments().get(30)
-        .setIntentToCallAfterThisSubExperiment(OPrime.INTENT_TAKE_PICTURE);
-
+    .get(mCurrentExperiment)
+    .getSubExperiments()
+    .get(30)
+    .setIntentToCallThisSubExperiment(
+        OPrime.INTENT_START_STOP_WATCH_SUB_EXPERIMENT);
+    mExperiments
+    .get(mCurrentExperiment)
+    .getSubExperiments()
+    .get(30)
+    .setIntentToCallAfterThisSubExperiment(
+        OPrime.INTENT_TAKE_PICTURE);
+    
     stimuli = null;
   }
 
