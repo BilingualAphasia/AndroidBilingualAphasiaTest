@@ -8,9 +8,8 @@
          data collection in a clinical or research context as well as how you can use this app, or adapt it (and/or it\'s codebase) to make your own experiments or patient training materials for Android smart phones or touch tablets.  </string>
     <string name="preference_about_title">About Android BAT</string>
     <string name="preference_about_summary">The AndroidBAT gives \'eyes,\' \'ears,\' and \'skin,\' to the BAT stimuli books. It\'s Androidification was supported by 
-    iLanguage Lab ltd, an OpenSource Fieldlinguistics company in Montreal, Canada.\n 
-    Programming: Gina Cook &amp; Kim Dan Nguyen\n Logo: Émie Dessureault &amp; Alexandra Marquis\n
-    User Guide: Émie Dessureault &amp; Alexandra Marquis</string>
+    iLanguage Lab ltd, an OpenSource Fieldlinguistics company in Montreal, Canada. The Android BAT project began in February 2011 when Gina and Alexandra decided combine their expertise to make it easier to run experiments/collect language data in real world contexts. \n
+    Programming: Gina Cook &amp; Kim Dan Nguyen; User Guide: Émie Dessureault &amp; Alexandra Marquis;  Logo: Émie Dessureault &amp; Alexandra Marquis </string>
     <string name="preference_visit_site">McGill BAT website</string>
     <string name="preference_visit_site_summary">You must download the evaluator\'s PDF from the McGill BAT site which provides the instructions on how to administer the Bilingual Aphasia Test. Click this link to download the PDFs on this tablet.</string>
     <string name="preference_thanks_summary">Special thanks to Dr. Paradis and the Bilingual Aphasia Test community,
@@ -20,5 +19,8 @@
     Android Montreal, Javascript Montreal 
     and all the Open Source developers whose code, comments and feedback which directly or indirectly
     contributed to making this project possible!</string>
+    <string name="preference_licence_summary">The BAT design and stimuli are copyright their original
+    authors. The code which powers this app is using OPrime: Open Experimentation for Android which is released under 
+    the Apache 2.0 License. Free to modify the code to your needs! Click here to see the code.</string>
 
 </resources>

@@ -11,6 +11,8 @@ import ca.ilanguage.oprime.content.OPrimeApp;
 import ca.ilanguage.bilingualaphasiatest.content.BilingualAphasiaTest;
 import ca.ilanguage.oprime.activity.HTML5GameActivity;
 import ca.ilanguage.oprime.content.SubExperimentBlock;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -89,6 +91,51 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
           Log.d(TAG, "Preparing the experiment for " + lang);
         }
         BATapp.createNewExperiment(lang, autoAdvanceStimuliOnTouch);
+
+        /*
+         * Let the user know if the language is not there.
+         */
+        String availibleLanguages = "el,es,es-rES,fr,iu,iw,kn,ru";
+        if (availibleLanguages.contains(lang)) {
+          // do nothing, this language is supported
+        } else {
+
+          Locale templocale = new Locale(lang);
+
+          new AlertDialog.Builder(this)
+              .setTitle(
+                  templocale.getDisplayLanguage()
+                      + " stimuli is not in this App")
+              .setMessage(
+                  " We have only put ~8 BAT languages in the app (English, French, Spanish, Inuktitut, Hebrew, Russian, Kannada, Greek). Please contact us to request "
+                      + templocale.getDisplayLanguage()
+                      + " if you need it. Click OK to contact us. \n\nClick Cancel to choose another language.")
+              .setPositiveButton(android.R.string.ok,
+                  new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                      /*
+                       * Open a browser to the contact us page.
+                       */
+                      Intent browserIntent = new Intent(
+                          Intent.ACTION_VIEW,
+                          Uri.parse("https://docs.google.com/spreadsheet/viewform?formkey=dGpiRDhreGpmTFBmQ2FUTVVjVlhESHc6MQ"));
+                      startActivity(browserIntent);
+
+                      return;
+                    }
+                  })
+              .setNegativeButton("Cancel",
+                  new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                      Intent i = new Intent(getBaseContext(), BATParticipantActivity.class);
+                      startActivity(i);
+                      finish();
+                      dialog.cancel();
+                    }
+                  }).setCancelable(true).create().show();
+        }
+
         initExperiment();
       }
     }
