@@ -95,18 +95,18 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
         /*
          * Let the user know if the language is not there.
          */
-        String availibleLanguages = "el,es,es-rES,fr,iu,iw,kn,ru";
+        String availibleLanguages = "en,el,es,es-rES,fr,iu,iw,kn,ru";
         if (availibleLanguages.contains(lang)) {
           // do nothing, this language is supported
         } else {
           Locale templocale = new Locale(lang);
           new AlertDialog.Builder(this)
               .setTitle(
-                  templocale.getDisplayLanguage()
+                  templocale.getDisplayLanguage(new Locale(lang))
                       + " stimuli are not currently in this App")
               .setMessage(
                   " We have only put ~8 BAT languages in the app (English, French, Spanish, Inuktitut, Hebrew, Russian, Kannada, Greek). Please contact us to request "
-                      + templocale.getDisplayLanguage()
+                      + templocale.getDisplayLanguage(new Locale(lang))
                       + " if you need it. Click OK to contact us. \n\nClick Cancel to choose another language.")
               .setPositiveButton(android.R.string.ok,
                   new AlertDialog.OnClickListener() {
@@ -140,11 +140,13 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
         final String finallang = lang;
         final boolean finalautoAdvanceStimuliOnTouch = autoAdvanceStimuliOnTouch;
         new AlertDialog.Builder(this)
-            .setTitle("Load BAT?")
+            .setTitle(
+                "Load " + templocale.getDisplayLanguage(new Locale(finallang))
+                    + "?")
             .setMessage(
                 "Do you want to load the "
-                    + templocale.getDisplayLanguage()
-                    + " stimuli - auto-advance stimuli: "
+                    + templocale.getDisplayLanguage(new Locale(finallang))
+                    + " stimuli - auto-advance: "
                     + finalautoAdvanceStimuliOnTouch
                     + " \n\n(Your previous sub experiments have all been saved to the SDCard, you may switch between languages at any time.)")
             .setPositiveButton(android.R.string.ok,
