@@ -54,10 +54,11 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
   }
 
   @Override
-  protected void checkIfNeedToPrepareExperiment() {
+  protected void checkIfNeedToPrepareExperiment(
+      boolean activtySaysToPrepareExperiment) {
     boolean prepareExperiment = getIntent().getExtras().getBoolean(
         OPrime.EXTRA_PLEASE_PREPARE_EXPERIMENT, false);
-    if (prepareExperiment) {
+    if (prepareExperiment || activtySaysToPrepareExperiment) {
       if (D) {
         Log.d(TAG,
             "BilingualAphasiaTestHome was asked to prepare the experiment.");
@@ -68,8 +69,8 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
           "");
       boolean autoAdvanceStimuliOnTouch = prefs.getBoolean(
           OPrimeApp.PREFERENCE_EXPERIMENT_AUTO_ADVANCE_ON_TOUCH, false);
-      ((OPrimeApp) this.getApplication())
-          .setAutoAdvanceStimuliOnTouch(autoAdvanceStimuliOnTouch);
+      // ((OPrimeApp) this.getApplication())
+      // .setAutoAdvanceStimuliOnTouch(autoAdvanceStimuliOnTouch);
       if (BATapp.getLanguage().getLanguage().equals(lang)
           && BATapp.getExperiment() != null) {
         // do nothing if they didn't change the language
@@ -90,7 +91,6 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
         if (D) {
           Log.d(TAG, "Preparing the experiment for " + lang);
         }
-        BATapp.createNewExperiment(lang, autoAdvanceStimuliOnTouch);
 
         /*
          * Let the user know if the language is not there.
@@ -99,13 +99,11 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
         if (availibleLanguages.contains(lang)) {
           // do nothing, this language is supported
         } else {
-
           Locale templocale = new Locale(lang);
-
           new AlertDialog.Builder(this)
               .setTitle(
                   templocale.getDisplayLanguage()
-                      + " stimuli is not in this App")
+                      + " stimuli are not currently in this App")
               .setMessage(
                   " We have only put ~8 BAT languages in the app (English, French, Spanish, Inuktitut, Hebrew, Russian, Kannada, Greek). Please contact us to request "
                       + templocale.getDisplayLanguage()
@@ -125,18 +123,45 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
                       return;
                     }
                   })
-              .setNegativeButton("Cancel",
+              .setNegativeButton(android.R.string.cancel,
                   new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                      Intent i = new Intent(getBaseContext(), BATParticipantActivity.class);
+                      Intent i = new Intent(getBaseContext(),
+                          BATParticipantActivity.class);
+                      i.putExtra(OPrime.EXTRA_PLEASE_PREPARE_EXPERIMENT, true);
                       startActivity(i);
-                      finish();
                       dialog.cancel();
                     }
                   }).setCancelable(true).create().show();
+          // dont create experiment until user decides what to do
+          return;
         }
-
-        initExperiment();
+        Locale templocale = new Locale(lang);
+        final String finallang = lang;
+        final boolean finalautoAdvanceStimuliOnTouch = autoAdvanceStimuliOnTouch;
+        new AlertDialog.Builder(this)
+            .setTitle("Load BAT?")
+            .setMessage(
+                "Do you want to load the "
+                    + templocale.getDisplayLanguage()
+                    + " stimuli - auto-advance stimuli: "
+                    + finalautoAdvanceStimuliOnTouch
+                    + " \n\n(Your previous sub experiments have all been saved to the SDCard, you may switch between languages at any time.)")
+            .setPositiveButton(android.R.string.ok,
+                new AlertDialog.OnClickListener() {
+                  public void onClick(DialogInterface dialog, int which) {
+                    BATapp.createNewExperiment(finallang,
+                        finalautoAdvanceStimuliOnTouch);
+                    initExperiment();
+                    return;
+                  }
+                })
+            .setNegativeButton(android.R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                  public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                  }
+                }).setCancelable(true).create().show();
       }
     }
   }
@@ -187,10 +212,12 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.open_settings) {
       Intent i = new Intent(getBaseContext(), BATParticipantActivity.class);
-      startActivity(i);
+      i.putExtra(OPrime.EXTRA_PLEASE_PREPARE_EXPERIMENT, true);
+      startActivityForResult(i, OPrime.SWITCH_LANGUAGE);
       return true;
     } else if (item.getItemId() == R.id.language_settings) {
       Intent inte = new Intent(getBaseContext(), BATParticipantActivity.class);
+      inte.putExtra(OPrime.EXTRA_PLEASE_PREPARE_EXPERIMENT, true);
       startActivityForResult(inte, OPrime.SWITCH_LANGUAGE);
       return true;
     } else if (item.getItemId() == R.id.result_folder) {
