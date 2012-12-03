@@ -5,5 +5,6 @@
     <string name="experiment_title">Test de l\'aphasie chez les bilingues</string>
     <string name="experiment_ready_message">L\'expérience est prête</string>
     <string name="experiment_start_instructions">Touchez Commencer pour prendre l\'histoire du participant</string>
-    
+    <string name="bat_test_download_url">http://www.mcgill.ca/linguistics/sites/mcgill.ca.linguistics/files/french_bat.pdf</string>
+
 </resources>

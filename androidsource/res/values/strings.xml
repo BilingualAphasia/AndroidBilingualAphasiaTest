@@ -22,5 +22,6 @@
     <string name="preference_licence_summary">The BAT design and stimuli are copyright their original
     authors. The code which powers this app is using OPrime: Open Experimentation for Android which is released under 
     the Apache 2.0 License. Free to modify the code to your needs! Click here to see the code.</string>
+    <string name="bat_test_download_url">http://www.mcgill.ca/linguistics/sites/mcgill.ca.linguistics/files/english_bat.pdf</string>
 
 </resources>

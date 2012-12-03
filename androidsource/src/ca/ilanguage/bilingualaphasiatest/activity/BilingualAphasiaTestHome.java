@@ -222,6 +222,19 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
       inte.putExtra(OPrime.EXTRA_PLEASE_PREPARE_EXPERIMENT, true);
       startActivityForResult(inte, OPrime.SWITCH_LANGUAGE);
       return true;
+    } else if (item.getItemId() == R.id.open_bat_pdf) {
+      // Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+      // Uri.parse(getString(R.string.bat_test_download_url)));
+      // startActivity(browserIntent);
+
+      String googleDocsUrl = "http://docs.google.com/viewer?url=";
+
+      Intent intent = new Intent(Intent.ACTION_VIEW);
+      intent.setDataAndType(
+          Uri.parse(googleDocsUrl + getString(R.string.bat_test_download_url)),
+          "text/html");
+      startActivity(intent);
+      return true;
     } else if (item.getItemId() == R.id.result_folder) {
       final boolean fileManagerAvailable = isIntentAvailable(this,
           "org.openintents.action.PICK_FILE");

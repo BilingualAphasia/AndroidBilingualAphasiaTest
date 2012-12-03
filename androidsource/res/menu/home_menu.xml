@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<!--
+     Copyright (C) 2008 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,15 +15,22 @@
      limitations under the License.
 -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item android:id="@+id/open_settings"
-        android:title="Settings" />
-    <item android:id="@+id/language_settings"
-        android:title="Languages" />
-    <item android:id="@+id/issue_tracker"
-        android:title="Bugs" />
-    <item android:id="@+id/result_folder"
-        android:title="View Results Files" />      
+    <item
+        android:id="@+id/open_bat_pdf"
+        android:title="View BAT Test Questions"/>
+    <item
+        android:id="@+id/result_folder"
+        android:title="View Results Files"/>
+    <item
+        android:id="@+id/open_settings"
+        android:title="Settings"/>
+    <item
+        android:id="@+id/language_settings"
+        android:title="Languages"/>
+    <item
+        android:id="@+id/issue_tracker"
+        android:title="Report Bugs"/>
 
 </menu>
