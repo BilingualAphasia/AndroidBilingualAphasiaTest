@@ -95,7 +95,7 @@ public class BilingualAphasiaTestHome extends HTML5GameActivity {
         /*
          * Let the user know if the language is not there.
          */
-        String availibleLanguages = "en,el,es,es-rES,fr,iu,iw,kn,ru";
+        String availibleLanguages = "en,el,es,es-ES,fr,iu,iw,kn,ru";
         if (availibleLanguages.contains(lang)) {
           // do nothing, this language is supported
         } else {
